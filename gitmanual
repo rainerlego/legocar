@@ -1,19 +1,28 @@
-
 Git repo Kurzanleitung:
 
->>>ACHTUNG:
-nach dem clonen von dem pepo eines anderen users müsst ihr eure origin remote ändern
-dazu "git remote remove origin" oder so ähnlich
-und dann "git remote add origin <url für euer eigenes (leeres) girhub public repo>"
+1. Bei github einen account erstellen
+2. Bei github ein repo erstellen
+3. Dieses repo clonen
+4. Alle remotes der anderen Leute hinzufügen
+
+3. Eigenes repo clonen:
+  git clone <url>
+
+	Als url gibt's 2 optionen:
+	 * https: man muss sich bei jedem upload mit username + pwd authentifizieren
+	 * git@github...: man hinterlegt bei github (unter settings->ssh keys) den öffentlichen teil eines ssh-schlüssels
 
 
->>>Remote url liste:
+4. Remotes hinzufügen
 (bitte alle remotes per "remote add <name> <url>" hinzufügen)
-
 rainer:
   git@github.com:rainerlego/legocar.git
 christian:
   git@github.com:christianlego/legocar.git
+
+Also:
+  git remote add rainer git@github.com:rainerlego/legocar.git
+  git remote add christian git@github.com:christianlego/legocar.git
 
 
 >>>wichtige dateien:

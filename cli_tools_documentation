@@ -11,3 +11,18 @@ Programmieren:
 % quartus_pgm -c 1 -m JTAG -o p';'cartest.sof
 Achtung: eigentlich dem programm soll die option "-o p;file.sof" übergeben werden die '' um den ; werden für shell benötigt
 
+
+
+##################################################################
+software compilen:
+##################################################################
+die von nios2-ide erzeugten makefiles funktionieren anscheinend
+also einfach environmentvatiablen setzen (siehe environment.sh script) und im source code ordner make aufrufen
+
+
+
+##################################################################
+nios2 software auf hardware system übertragen
+##################################################################
+
+TODO

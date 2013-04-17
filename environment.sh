@@ -12,6 +12,10 @@ case `hostname` in
     ALTERADIR=/home/xtremely/altera
     ALTERAVERSION=12.1sp1
 		;;
+	"idefix" )
+    ALTERADIR=/home/dragon/altera
+    ALTERAVERSION=12.1sp1
+		;;
 	* )
 		echo "unknown hostname please edit file"
 		exit 0

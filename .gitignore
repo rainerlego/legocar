@@ -1,0 +1,6 @@
+.*.swp
+.*.swo
+*.o
+*.elf
+*/output_files/*
+*/db/*

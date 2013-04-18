@@ -1,0 +1,13 @@
+
+##################################################################
+hardware (.sof file) -> FPGA:
+##################################################################
+~/altera/12.1sp1/quartus/bin% ./quartus_pgm
+
+% quartus_pgm -l   => list devices
+  cable name ist dann entweder 1 oder USB-Blaster [1-2]
+
+Programmieren:
+% quartus_pgm -c 1 -m JTAG -o p';'cartest.sof
+Achtung: eigentlich dem programm soll die option "-o p;file.sof" übergeben werden die '' um den ; werden für shell benötigt
+

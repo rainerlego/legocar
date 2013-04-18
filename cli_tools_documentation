@@ -34,5 +34,11 @@ Beispiel: % nios2-bsp-create-settings --settings carbsp/settings.bsp --type hal 
 ##################################################################
 nios2 software auf hardware system übertragen
 ##################################################################
+nios2-download --go <elf file>
 
+##################################################################
+usart debugging output bekommen
+##################################################################
 TODO
+
+

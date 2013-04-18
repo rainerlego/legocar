@@ -18,6 +18,9 @@ case `hostname` in
 		;;
 esac
 
+#quartos rootdir
+export QUARTUS_ROOTDIR=$ALTERADIR/$ALTERAVERSION/quartus
+
 #quartos binaries
 export PATH=$PATH:$ALTERADIR/$ALTERAVERSION/quartus/bin
 

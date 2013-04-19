@@ -19,11 +19,14 @@ rainer:
   git@github.com:rainerlego/legocar.git
 christian:
   git@github.com:christianlego/legocar.git
+wenwen:
+  https://github.com/callalilychen/legocar.git
+  git@github.com:callalilychen/legocar.git
 
 Also:
   git remote add rainer git@github.com:rainerlego/legocar.git
   git remote add christian git@github.com:christianlego/legocar.git
-
+  git remote add wenwen git@github.com:callalilychen/legocar.git
 
 >>>wichtige dateien:
 .gitignore:

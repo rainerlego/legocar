@@ -1,0 +1,10 @@
+*.map
+*.objdump
+helloworld/software/carbsp/*
+.*.swp
+.*.swo
+*.o
+*.elf
+*/output_files/*
+*/db/*
+*/incremental_db/*

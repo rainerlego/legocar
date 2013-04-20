@@ -1,0 +1,69 @@
+Git repo Kurzanleitung:
+
+1. Bei github einen account erstellen
+2. Bei github ein repo erstellen
+3. Dieses repo clonen
+4. Alle remotes der anderen Leute hinzufügen
+
+3. Eigenes repo clonen:
+  git clone <url>
+
+	Als url gibt's 2 optionen:
+	 * https: man muss sich bei jedem upload mit username + pwd authentifizieren
+	 * git@github...: man hinterlegt bei github (unter settings->ssh keys) den öffentlichen teil eines ssh-schlüssels
+
+
+4. Remotes hinzufügen
+(bitte alle remotes per "remote add <name> <url>" hinzufügen)
+rainer:
+  git@github.com:rainerlego/legocar.git
+christian:
+  git@github.com:christianlego/legocar.git
+wenwen:
+  https://github.com/callalilychen/legocar.git
+  git@github.com:callalilychen/legocar.git
+
+Also:
+  git remote add rainer git@github.com:rainerlego/legocar.git
+  git remote add christian git@github.com:christianlego/legocar.git
+  git remote add wenwen git@github.com:callalilychen/legocar.git
+
+>>>wichtige dateien:
+.gitignore:
+  dateien die nicht ins repo aufgenommen werden
+  hier am besten so temporäre files wie editor swap files
+  oder binaries reinschreiben
+.git/config
+  git konfiguration. sollte man im normalfall nciht ändern müssen
+  wenn man die befehle für git kennt.
+
+>>>Basic commands:
+git add <file> => file zum repo hinzufügen
+  git add main.c
+git commit -a => alle änderungen aufnehmen
+git checkout <branchname> => branch wechseln
+  git checkout programmertest
+git push  => änderungen auf public repo (dein github account) hochladen
+git fetch -a  => alle änderung der eingetragenen remotes abholen
+git merge <branch1> <branch2>  => branch1 in branch2 mergen
+  git merge christianlego/master master
+git remote add <username> <url> => repository von anderen user "abbonieren"
+  git remote add rainerlego git@github.com:rainerlego/legocar.git
+
+>>>Workflow:
+
+- mit "git fetch -a" änderungen der anderen abholen
+- mit "gitk -a" oder ähnlicher gui oder cli tools anschauen
+  was die anderen gemacht haben
+- gewünschte änderungen mit "git merge remotebranch master"
+  in lokales repo einbinden
+- mit "git push" ststus des public repos updaten
+
+- weiter programmieren
+
+- hinzugefügte dateien mit "git add <file>" ins repo aufnehmen
+- änderungen (möglichst oft) per git commit ins lokale repo
+  committen
+- commits per "git push" auf public repo hochladen (damit andere
+  sehen können)
+

@@ -1,0 +1,137 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: ip-generate --project-directory=/home/rainer/uni10/praktikum_robotik/cartest/ --output-directory=/home/rainer/uni10/praktikum_robotik/cartest/qsys_design/ --report-file=bsf:/home/rainer/uni10/praktikum_robotik/cartest/qsys_design.bsf --system-info=DEVICE_FAMILY="Cyclone IV E" --system-info=DEVICE=EP4CE22F17C6 --system-info=DEVICE_SPEEDGRADE=6 --component-file=/home/rainer/uni10/praktikum_robotik/cartest/qsys_design.qsys
+Progress: Loading cartest/qsys_design.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 12.1]
+Progress: Parameterizing module clk_0
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 12.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Adding nios2_qsys_0 [altera_nios2_qsys 12.1]
+Progress: Parameterizing module nios2_qsys_0
+Progress: Adding jtag_uart_0 [altera_avalon_jtag_uart 12.1]
+Progress: Parameterizing module jtag_uart_0
+Progress: Adding timer_0 [altera_avalon_timer 12.1]
+Progress: Parameterizing module timer_0
+Progress: Adding sysid_qsys_0 [altera_avalon_sysid_qsys 12.1]
+Progress: Parameterizing module sysid_qsys_0
+Progress: Adding led_pio [altera_avalon_pio 12.1]
+Progress: Parameterizing module led_pio
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: qsys_design.onchip_memory2_0: Memory will be initialized from onchip_memory2_0.hex
+Info: qsys_design.sysid_qsys_0: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: qsys_design.sysid_qsys_0: Time stamp will be automatically updated when this component is generated.
+Info: ip-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: ip-generate --project-directory=/home/rainer/uni10/praktikum_robotik/cartest/ --output-directory=/home/rainer/uni10/praktikum_robotik/cartest/qsys_design/synthesis/ --file-set=QUARTUS_SYNTH --report-file=sopcinfo:/home/rainer/uni10/praktikum_robotik/cartest/qsys_design.sopcinfo --report-file=html:/home/rainer/uni10/praktikum_robotik/cartest/qsys_design.html --report-file=qip:/home/rainer/uni10/praktikum_robotik/cartest/qsys_design/synthesis/qsys_design.qip --report-file=cmp:/home/rainer/uni10/praktikum_robotik/cartest/qsys_design.cmp --system-info=DEVICE_FAMILY="Cyclone IV E" --system-info=DEVICE=EP4CE22F17C6 --system-info=DEVICE_SPEEDGRADE=6 --component-file=/home/rainer/uni10/praktikum_robotik/cartest/qsys_design.qsys
+Progress: Loading cartest/qsys_design.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 12.1]
+Progress: Parameterizing module clk_0
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 12.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Adding nios2_qsys_0 [altera_nios2_qsys 12.1]
+Progress: Parameterizing module nios2_qsys_0
+Progress: Adding jtag_uart_0 [altera_avalon_jtag_uart 12.1]
+Progress: Parameterizing module jtag_uart_0
+Progress: Adding timer_0 [altera_avalon_timer 12.1]
+Progress: Parameterizing module timer_0
+Progress: Adding sysid_qsys_0 [altera_avalon_sysid_qsys 12.1]
+Progress: Parameterizing module sysid_qsys_0
+Progress: Adding led_pio [altera_avalon_pio 12.1]
+Progress: Parameterizing module led_pio
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: qsys_design.onchip_memory2_0: Memory will be initialized from onchip_memory2_0.hex
+Info: qsys_design.sysid_qsys_0: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: qsys_design.sysid_qsys_0: Time stamp will be automatically updated when this component is generated.
+Info: qsys_design: Generating qsys_design "qsys_design" for QUARTUS_SYNTH
+Info: pipeline_bridge_swap_transform: After transform: 7 modules, 22 connections
+Info: No custom instruction connections, skipping transform 
+Info: merlin_translator_transform: After transform: 15 modules, 46 connections
+Info: merlin_domain_transform: After transform: 30 modules, 124 connections
+Info: merlin_router_transform: After transform: 38 modules, 148 connections
+Info: reset_adaptation_transform: After transform: 39 modules, 150 connections
+Info: merlin_network_to_switch_transform: After transform: 54 modules, 182 connections
+Info: merlin_interrupt_mapper_transform: After transform: 55 modules, 185 connections
+Info: Starting classic module elaboration.
+"/home/rainer/altera/12.1sp1/quartus/linux/jre/bin/java" -Xmx512M -classpath "/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/sopc_builder.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/PinAssigner.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/sopc_wizard.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"/home/rainer/altera/12.1sp1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpath/tmp/alt5811_2418090303097014333.dir/0001_sopclgen  --no_splash --refresh /tmp/alt5811_2418090303097014333.dir/0001_sopclgen/yysystem.v --quartus_dir="/home/rainer/altera/12.1sp1/quartus" --sopc_perl="/home/rainer/altera/12.1sp1/quartus/linux/perl" --sopc_lib_path="++/home/rainer/altera/12.1sp1/quartus/../ip/altera/sopc_builder_ip+/home/rainer/altera/12.1sp1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: /home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_builder --classic --generate /tmp/alt5811_2418090303097014333.dir/0001_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"/home/rainer/altera/12.1sp1/quartus//linux/jre/bin/java" -Xmx512M -classpath "/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_builder.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/PinAssigner.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_wizard.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"/home/rainer/altera/12.1sp1/quartus//sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpath/tmp/alt5811_2418090303097014333.dir/0001_sopclgen  --generate /tmp/alt5811_2418090303097014333.dir/0001_sopclgen/yysystem.v --quartus_dir="/home/rainer/altera/12.1sp1/quartus/" --sopc_perl="/home/rainer/altera/12.1sp1/quartus//linux/perl" --sopc_lib_path="++/home/rainer/altera/12.1sp1/quartus//../ip/altera/sopc_builder_ip+/home/rainer/altera/12.1sp1/quartus//../ip/altera/nios2_ip"
+.
+# 2013.04.16 23:20:12 (*) Success: sopc_builder finished.
+Info: onchip_memory2_0: "qsys_design" instantiated altera_avalon_onchip_memory2 "onchip_memory2_0"
+Info: nios2_qsys_0: Starting RTL generation for module 'qsys_design_nios2_qsys_0'
+Info: nios2_qsys_0:   Generation command is [exec /home/rainer/altera/12.1sp1/quartus/../ip/altera/nios2_ip/altera_nios2/eperl -I /home/rainer/altera/12.1sp1/quartus/common/ip/altera/common/perl/5.8.3 -I /home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/europa -I /home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/perl_lib -I /home/rainer/altera/12.1sp1/quartus/sopc_builder/bin -I /home/rainer/altera/12.1sp1/quartus/../ip/altera/nios2_ip/altera_nios2/cpu_lib -I /home/rainer/altera/12.1sp1/quartus/../ip/altera/nios2_ip/altera_nios2/nios_lib -I /home/rainer/altera/12.1sp1/quartus/../ip/altera/nios2_ip/altera_nios2 -I /home/rainer/altera/12.1sp1/quartus/../ip/altera/nios2_ip/altera_nios2 -- /home/rainer/altera/12.1sp1/quartus/../ip/altera/nios2_ip/altera_nios2/generate_rtl.epl --name=qsys_design_nios2_qsys_0 --dir=/tmp/alt5811_2418090303097014333.dir/0002_nios2_qsys_0_gen/ --quartus_dir=/home/rainer/altera/12.1sp1/quartus --verilog --config=/tmp/alt5811_2418090303097014333.dir/0002_nios2_qsys_0_gen//qsys_design_nios2_qsys_0_processor_configuration.pl  --do_build_sim=0    --bogus  ]
+Info: nios2_qsys_0: # 2013.04.16 23:20:14 (*) Starting Nios II generation
+Info: nios2_qsys_0: # 2013.04.16 23:20:14 (*)   Checking for plaintext license.
+Info: nios2_qsys_0: # 2013.04.16 23:20:15 (*)   Couldn't query license setup in Quartus directory /home/rainer/altera/12.1sp1/quartus
+Info: nios2_qsys_0: # 2013.04.16 23:20:15 (*)   Defaulting to contents of LM_LICENSE_FILE environment variable
+Info: nios2_qsys_0: # 2013.04.16 23:20:15 (*)   LM_LICENSE_FILE environment variable is empty
+Info: nios2_qsys_0: # 2013.04.16 23:20:15 (*)   Plaintext license not found.
+Info: nios2_qsys_0: # 2013.04.16 23:20:15 (*)   No license required to generate encrypted Nios II/e.
+Info: nios2_qsys_0: # 2013.04.16 23:20:15 (*)   Elaborating CPU configuration settings
+Info: nios2_qsys_0: # 2013.04.16 23:20:15 (*)   Creating all objects for CPU
+Info: nios2_qsys_0: # 2013.04.16 23:20:17 (*)   Generating RTL from CPU objects
+Info: nios2_qsys_0: # 2013.04.16 23:20:17 (*)   Creating plain-text RTL
+Info: nios2_qsys_0: # 2013.04.16 23:20:20 (*) Done Nios II generation
+Info: nios2_qsys_0: Done RTL generation for module 'qsys_design_nios2_qsys_0'
+Info: nios2_qsys_0: "qsys_design" instantiated altera_nios2_qsys "nios2_qsys_0"
+Info: Starting classic module elaboration.
+"/home/rainer/altera/12.1sp1/quartus/linux/jre/bin/java" -Xmx512M -classpath "/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/sopc_builder.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/PinAssigner.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/sopc_wizard.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"/home/rainer/altera/12.1sp1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpath/tmp/alt5811_2418090303097014333.dir/0003_sopclgen  --no_splash --refresh /tmp/alt5811_2418090303097014333.dir/0003_sopclgen/yysystem.v --quartus_dir="/home/rainer/altera/12.1sp1/quartus" --sopc_perl="/home/rainer/altera/12.1sp1/quartus/linux/perl" --sopc_lib_path="++/home/rainer/altera/12.1sp1/quartus/../ip/altera/sopc_builder_ip+/home/rainer/altera/12.1sp1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: /home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_builder --classic --generate /tmp/alt5811_2418090303097014333.dir/0003_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"/home/rainer/altera/12.1sp1/quartus//linux/jre/bin/java" -Xmx512M -classpath "/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_builder.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/PinAssigner.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_wizard.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"/home/rainer/altera/12.1sp1/quartus//sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpath/tmp/alt5811_2418090303097014333.dir/0003_sopclgen  --generate /tmp/alt5811_2418090303097014333.dir/0003_sopclgen/yysystem.v --quartus_dir="/home/rainer/altera/12.1sp1/quartus/" --sopc_perl="/home/rainer/altera/12.1sp1/quartus//linux/perl" --sopc_lib_path="++/home/rainer/altera/12.1sp1/quartus//../ip/altera/sopc_builder_ip+/home/rainer/altera/12.1sp1/quartus//../ip/altera/nios2_ip"
+.
+# 2013.04.16 23:20:26 (*) Success: sopc_builder finished.
+Info: jtag_uart_0: "qsys_design" instantiated altera_avalon_jtag_uart "jtag_uart_0"
+Info: Starting classic module elaboration.
+"/home/rainer/altera/12.1sp1/quartus/linux/jre/bin/java" -Xmx512M -classpath "/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/sopc_builder.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/PinAssigner.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/sopc_wizard.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"/home/rainer/altera/12.1sp1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpath/tmp/alt5811_2418090303097014333.dir/0004_sopclgen  --no_splash --refresh /tmp/alt5811_2418090303097014333.dir/0004_sopclgen/yysystem.v --quartus_dir="/home/rainer/altera/12.1sp1/quartus" --sopc_perl="/home/rainer/altera/12.1sp1/quartus/linux/perl" --sopc_lib_path="++/home/rainer/altera/12.1sp1/quartus/../ip/altera/sopc_builder_ip+/home/rainer/altera/12.1sp1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: /home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_builder --classic --generate /tmp/alt5811_2418090303097014333.dir/0004_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"/home/rainer/altera/12.1sp1/quartus//linux/jre/bin/java" -Xmx512M -classpath "/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_builder.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/PinAssigner.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_wizard.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"/home/rainer/altera/12.1sp1/quartus//sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpath/tmp/alt5811_2418090303097014333.dir/0004_sopclgen  --generate /tmp/alt5811_2418090303097014333.dir/0004_sopclgen/yysystem.v --quartus_dir="/home/rainer/altera/12.1sp1/quartus/" --sopc_perl="/home/rainer/altera/12.1sp1/quartus//linux/perl" --sopc_lib_path="++/home/rainer/altera/12.1sp1/quartus//../ip/altera/sopc_builder_ip+/home/rainer/altera/12.1sp1/quartus//../ip/altera/nios2_ip"
+.
+# 2013.04.16 23:20:31 (*) Success: sopc_builder finished.
+Info: timer_0: "qsys_design" instantiated altera_avalon_timer "timer_0"
+Info: sysid_qsys_0: "qsys_design" instantiated altera_avalon_sysid_qsys "sysid_qsys_0"
+Info: Starting classic module elaboration.
+"/home/rainer/altera/12.1sp1/quartus/linux/jre/bin/java" -Xmx512M -classpath "/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/sopc_builder.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/PinAssigner.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/sopc_wizard.jar:/home/rainer/altera/12.1sp1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"/home/rainer/altera/12.1sp1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpath/tmp/alt5811_2418090303097014333.dir/0006_sopclgen  --no_splash --refresh /tmp/alt5811_2418090303097014333.dir/0006_sopclgen/yysystem.v --quartus_dir="/home/rainer/altera/12.1sp1/quartus" --sopc_perl="/home/rainer/altera/12.1sp1/quartus/linux/perl" --sopc_lib_path="++/home/rainer/altera/12.1sp1/quartus/../ip/altera/sopc_builder_ip+/home/rainer/altera/12.1sp1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: /home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_builder --classic --generate /tmp/alt5811_2418090303097014333.dir/0006_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"/home/rainer/altera/12.1sp1/quartus//linux/jre/bin/java" -Xmx512M -classpath "/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_builder.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/PinAssigner.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/sopc_wizard.jar:/home/rainer/altera/12.1sp1/quartus//sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"/home/rainer/altera/12.1sp1/quartus//sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpath/tmp/alt5811_2418090303097014333.dir/0006_sopclgen  --generate /tmp/alt5811_2418090303097014333.dir/0006_sopclgen/yysystem.v --quartus_dir="/home/rainer/altera/12.1sp1/quartus/" --sopc_perl="/home/rainer/altera/12.1sp1/quartus//linux/perl" --sopc_lib_path="++/home/rainer/altera/12.1sp1/quartus//../ip/altera/sopc_builder_ip+/home/rainer/altera/12.1sp1/quartus//../ip/altera/nios2_ip"
+.
+# 2013.04.16 23:20:37 (*) Success: sopc_builder finished.
+Info: led_pio: "qsys_design" instantiated altera_avalon_pio "led_pio"
+Info: nios2_qsys_0_instruction_master_translator: "qsys_design" instantiated altera_merlin_master_translator "nios2_qsys_0_instruction_master_translator"
+Info: nios2_qsys_0_jtag_debug_module_translator: "qsys_design" instantiated altera_merlin_slave_translator "nios2_qsys_0_jtag_debug_module_translator"
+Info: nios2_qsys_0_instruction_master_translator_avalon_universal_master_0_agent: "qsys_design" instantiated altera_merlin_master_agent "nios2_qsys_0_instruction_master_translator_avalon_universal_master_0_agent"
+Info: nios2_qsys_0_jtag_debug_module_translator_avalon_universal_slave_0_agent: "qsys_design" instantiated altera_merlin_slave_agent "nios2_qsys_0_jtag_debug_module_translator_avalon_universal_slave_0_agent"
+Info: nios2_qsys_0_jtag_debug_module_translator_avalon_universal_slave_0_agent_rsp_fifo: "qsys_design" instantiated altera_avalon_sc_fifo "nios2_qsys_0_jtag_debug_module_translator_avalon_universal_slave_0_agent_rsp_fifo"
+Info: addr_router: "qsys_design" instantiated altera_merlin_router "addr_router"
+Info: addr_router_001: "qsys_design" instantiated altera_merlin_router "addr_router_001"
+Info: id_router: "qsys_design" instantiated altera_merlin_router "id_router"
+Info: id_router_002: "qsys_design" instantiated altera_merlin_router "id_router_002"
+Info: rst_controller: "qsys_design" instantiated altera_reset_controller "rst_controller"
+Info: cmd_xbar_demux: "qsys_design" instantiated altera_merlin_demultiplexer "cmd_xbar_demux"
+Info: cmd_xbar_demux_001: "qsys_design" instantiated altera_merlin_demultiplexer "cmd_xbar_demux_001"
+Info: cmd_xbar_mux: "qsys_design" instantiated altera_merlin_multiplexer "cmd_xbar_mux"
+Info: rsp_xbar_demux_002: "qsys_design" instantiated altera_merlin_demultiplexer "rsp_xbar_demux_002"
+Info: rsp_xbar_mux: "qsys_design" instantiated altera_merlin_multiplexer "rsp_xbar_mux"
+Info: Reusing file /home/rainer/uni10/praktikum_robotik/cartest/qsys_design/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_xbar_mux_001: "qsys_design" instantiated altera_merlin_multiplexer "rsp_xbar_mux_001"
+Info: Reusing file /home/rainer/uni10/praktikum_robotik/cartest/qsys_design/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: irq_mapper: "qsys_design" instantiated altera_irq_mapper "irq_mapper"
+Info: qsys_design: Done qsys_design" with 24 modules, 74 files, 1367357 bytes
+Info: ip-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

@@ -1,0 +1,43 @@
+
+##################################################################
+hardware (.sof file) -> FPGA:
+##################################################################
+~/altera/12.1sp1/quartus/bin% ./quartus_pgm
+
+% quartus_pgm -l   => list devices
+  cable name ist dann entweder 1 oder USB-Blaster [1-2]
+
+Programmieren:
+% quartus_pgm -c 1 -m JTAG -o p';'cartest.sof
+Achtung: eigentlich dem programm soll die option "-o p;file.sof" übergeben werden die '' um den ; werden für shell benötigt
+
+
+
+##################################################################
+software compilen:
+##################################################################
+die von nios2-ide erzeugten makefiles funktionieren anscheinend
+also einfach environmentvatiablen setzen (siehe environment.sh script) und im source code ordner
+  %make
+aufrufen
+sobald die hardware geändert oder neu generiert wurde muss das BoardSupportPackage neu generiert werden:
+falls vorher schon ein bsp existiert hat kann man dieses einfach aktualisieren mit:
+  % nios2-bsp-generate-files --settings <settings.bsp> --bsp-dir <bspdir>
+Beispiel: % nios2-bsp-generate-files --settings carbsp/settings.bsp --bsp-dir carbsp
+falls noch kein bsp exisitert muss erst eine settings.bsp angelegt werden: (untested)
+  % nios2-bsp-create-settings --settings <settings.bsp> --type <OS name> --sopc <filename>
+type ist bei uns anscheinend hal
+Beispiel: % nios2-bsp-create-settings --settings carbsp/settings.bsp --type hal --sopc ../qsys_design.sopcinfo
+
+
+
+##################################################################
+nios2 software auf hardware system übertragen
+##################################################################
+nios2-download --go <elf file>
+
+##################################################################
+usart debugging output bekommen
+##################################################################
+nios2-terminal
+

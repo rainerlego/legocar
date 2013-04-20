@@ -11,3 +11,4 @@ helloworld/software/carbsp/*
 */output_files/*
 */db/*
 */incremental_db/*
+*.rpt

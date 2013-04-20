@@ -6,6 +6,8 @@ helloworld/software/carbsp/*
 .*.swo
 *.o
 *.elf
+*.d
+*.exe
 */output_files/*
 */db/*
 */incremental_db/*

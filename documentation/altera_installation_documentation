@@ -1,4 +1,8 @@
 
+Was zu installieren ist, steht im 1. Tutorial:
+  - Quartus II Web Edition (Free) (includes Nios2SBT)
+	- Cyclone IV E in the Device Families category
+
 ---------------
 eclipse-nios2 braucht 32bit gtk
 

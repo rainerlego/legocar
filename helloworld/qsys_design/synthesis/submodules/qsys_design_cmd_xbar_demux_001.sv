@@ -28,7 +28,7 @@
 // ------------------------------------------
 // Generation parameters:
 //   output_name:         qsys_design_cmd_xbar_demux_001
-//   ST_DATA_W:           90
+//   ST_DATA_W:           91
 //   ST_CHANNEL_W:        6
 //   NUM_OUTPUTS:         6
 //   VALID_WIDTH:         1
@@ -46,7 +46,7 @@ module qsys_design_cmd_xbar_demux_001
     // Sink
     // -------------------
     input  [1-1      : 0]   sink_valid,
-    input  [90-1    : 0]   sink_data, // ST_DATA_W=90
+    input  [91-1    : 0]   sink_data, // ST_DATA_W=91
     input  [6-1 : 0]   sink_channel, // ST_CHANNEL_W=6
     input                         sink_startofpacket,
     input                         sink_endofpacket,
@@ -56,42 +56,42 @@ module qsys_design_cmd_xbar_demux_001
     // Sources 
     // -------------------
     output reg                      src0_valid,
-    output reg [90-1    : 0] src0_data, // ST_DATA_W=90
+    output reg [91-1    : 0] src0_data, // ST_DATA_W=91
     output reg [6-1 : 0] src0_channel, // ST_CHANNEL_W=6
     output reg                      src0_startofpacket,
     output reg                      src0_endofpacket,
     input                           src0_ready,
 
     output reg                      src1_valid,
-    output reg [90-1    : 0] src1_data, // ST_DATA_W=90
+    output reg [91-1    : 0] src1_data, // ST_DATA_W=91
     output reg [6-1 : 0] src1_channel, // ST_CHANNEL_W=6
     output reg                      src1_startofpacket,
     output reg                      src1_endofpacket,
     input                           src1_ready,
 
     output reg                      src2_valid,
-    output reg [90-1    : 0] src2_data, // ST_DATA_W=90
+    output reg [91-1    : 0] src2_data, // ST_DATA_W=91
     output reg [6-1 : 0] src2_channel, // ST_CHANNEL_W=6
     output reg                      src2_startofpacket,
     output reg                      src2_endofpacket,
     input                           src2_ready,
 
     output reg                      src3_valid,
-    output reg [90-1    : 0] src3_data, // ST_DATA_W=90
+    output reg [91-1    : 0] src3_data, // ST_DATA_W=91
     output reg [6-1 : 0] src3_channel, // ST_CHANNEL_W=6
     output reg                      src3_startofpacket,
     output reg                      src3_endofpacket,
     input                           src3_ready,
 
     output reg                      src4_valid,
-    output reg [90-1    : 0] src4_data, // ST_DATA_W=90
+    output reg [91-1    : 0] src4_data, // ST_DATA_W=91
     output reg [6-1 : 0] src4_channel, // ST_CHANNEL_W=6
     output reg                      src4_startofpacket,
     output reg                      src4_endofpacket,
     input                           src4_ready,
 
     output reg                      src5_valid,
-    output reg [90-1    : 0] src5_data, // ST_DATA_W=90
+    output reg [91-1    : 0] src5_data, // ST_DATA_W=91
     output reg [6-1 : 0] src5_channel, // ST_CHANNEL_W=6
     output reg                      src5_startofpacket,
     output reg                      src5_endofpacket,

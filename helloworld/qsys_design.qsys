@@ -6,14 +6,17 @@
    version="1.0"
    description=""
    tags=""
-   categories="" />
+   categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
+   element $${FILENAME}
+   {
+   }
    element jtag_uart_0.avalon_jtag_slave
    {
       datum baseAddress
       {
-         value = "69680";
+         value = "135216";
          type = "String";
       }
    }
@@ -29,7 +32,7 @@
    {
       datum baseAddress
       {
-         value = "69688";
+         value = "135224";
          type = "String";
       }
    }
@@ -37,7 +40,7 @@
    {
       datum baseAddress
       {
-         value = "67584";
+         value = "133120";
          type = "String";
       }
    }
@@ -77,7 +80,7 @@
    {
       datum baseAddress
       {
-         value = "69632";
+         value = "135168";
          type = "String";
       }
    }
@@ -85,7 +88,7 @@
    {
       datum baseAddress
       {
-         value = "32768";
+         value = "65536";
          type = "String";
       }
    }
@@ -93,7 +96,7 @@
    {
       datum baseAddress
       {
-         value = "69664";
+         value = "135200";
          type = "String";
       }
    }
@@ -125,10 +128,10 @@
  <parameter name="globalResetBus" value="false" />
  <parameter name="hdlLanguage" value="VERILOG" />
  <parameter name="maxAdditionalLatency" value="1" />
- <parameter name="projectName" value="" />
+ <parameter name="projectName" value="cartest.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1366127776418" />
+ <parameter name="timeStamp" value="1366475868413" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
@@ -158,7 +161,7 @@
   <parameter name="initMemContent" value="true" />
   <parameter name="initializationFileName" value="onchip_memory2_0" />
   <parameter name="instanceID" value="NONE" />
-  <parameter name="memorySize" value="20480" />
+  <parameter name="memorySize" value="40480" />
   <parameter name="readDuringWriteMode" value="DONT_CARE" />
   <parameter name="simAllowMRAMContentsFile" value="false" />
   <parameter name="simMemInitOnlyFilename" value="0" />
@@ -258,8 +261,8 @@
   <parameter name="regfile_ramBlockType" value="Automatic" />
   <parameter name="mmu_ramBlockType" value="Automatic" />
   <parameter name="bht_ramBlockType" value="Automatic" />
-  <parameter name="instAddrWidth" value="17" />
-  <parameter name="dataAddrWidth" value="17" />
+  <parameter name="instAddrWidth" value="18" />
+  <parameter name="dataAddrWidth" value="18" />
   <parameter name="tightlyCoupledDataMaster0AddrWidth" value="1" />
   <parameter name="tightlyCoupledDataMaster1AddrWidth" value="1" />
   <parameter name="tightlyCoupledDataMaster2AddrWidth" value="1" />
@@ -268,8 +271,8 @@
   <parameter name="tightlyCoupledInstructionMaster1AddrWidth" value="1" />
   <parameter name="tightlyCoupledInstructionMaster2AddrWidth" value="1" />
   <parameter name="tightlyCoupledInstructionMaster3AddrWidth" value="1" />
-  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x8000' end='0xD000' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x10800' end='0x11000' /></address-map>]]></parameter>
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x8000' end='0xD000' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x10800' end='0x11000' /><slave name='timer_0.s1' start='0x11000' end='0x11020' /><slave name='led_pio.s1' start='0x11020' end='0x11030' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x11030' end='0x11038' /><slave name='sysid_qsys_0.control_slave' start='0x11038' end='0x11040' /></address-map>]]></parameter>
+  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x10000' end='0x19E20' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x20800' end='0x21000' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x10000' end='0x19E20' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x20800' end='0x21000' /><slave name='timer_0.s1' start='0x21000' end='0x21020' /><slave name='led_pio.s1' start='0x21020' end='0x21030' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x21030' end='0x21038' /><slave name='sysid_qsys_0.control_slave' start='0x21038' end='0x21040' /></address-map>]]></parameter>
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="deviceFamilyName" value="Cyclone IV E" />
   <parameter name="internalIrqMaskSystemInfo" value="65538" />
@@ -344,7 +347,7 @@
    start="nios2_qsys_0.instruction_master"
    end="nios2_qsys_0.jtag_debug_module">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010800" />
+  <parameter name="baseAddress" value="0x00020800" />
  </connection>
  <connection
    kind="avalon"
@@ -352,7 +355,7 @@
    start="nios2_qsys_0.data_master"
    end="nios2_qsys_0.jtag_debug_module">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010800" />
+  <parameter name="baseAddress" value="0x00020800" />
  </connection>
  <connection
    kind="clock"
@@ -376,7 +379,7 @@
    start="nios2_qsys_0.data_master"
    end="onchip_memory2_0.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x8000" />
+  <parameter name="baseAddress" value="0x00010000" />
  </connection>
  <connection
    kind="avalon"
@@ -384,7 +387,7 @@
    start="nios2_qsys_0.instruction_master"
    end="onchip_memory2_0.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x8000" />
+  <parameter name="baseAddress" value="0x00010000" />
  </connection>
  <connection kind="clock" version="12.1" start="clk_0.clk" end="jtag_uart_0.clk" />
  <connection
@@ -404,7 +407,7 @@
    start="nios2_qsys_0.data_master"
    end="timer_0.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011000" />
+  <parameter name="baseAddress" value="0x00021000" />
  </connection>
  <connection kind="clock" version="12.1" start="clk_0.clk" end="sysid_qsys_0.clk" />
  <connection
@@ -418,7 +421,7 @@
    start="nios2_qsys_0.data_master"
    end="sysid_qsys_0.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011038" />
+  <parameter name="baseAddress" value="0x00021038" />
  </connection>
  <connection kind="clock" version="12.1" start="clk_0.clk" end="led_pio.clk" />
  <connection
@@ -432,7 +435,7 @@
    start="nios2_qsys_0.data_master"
    end="led_pio.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011020" />
+  <parameter name="baseAddress" value="0x00021020" />
  </connection>
  <connection
    kind="interrupt"
@@ -454,6 +457,6 @@
    start="nios2_qsys_0.data_master"
    end="jtag_uart_0.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011030" />
+  <parameter name="baseAddress" value="0x00021030" />
  </connection>
 </system>

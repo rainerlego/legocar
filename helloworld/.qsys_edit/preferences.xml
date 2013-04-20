@@ -14,7 +14,6 @@
    <frequency preferredWidth="179" />
   </columns>
  </clocktable>
- <library
-   expandedCategories="Library/Peripherals/Debug and Performance,Library/Peripherals/Microcontroller Peripherals,Library/Embedded Processors,Project,Library,Library/Peripherals,Library/Interface Protocols" />
- <window width="918" height="1005" x="0" y="32" />
+ <library expandedCategories="Project,Library" />
+ <window width="918" height="1005" x="0" y="52" />
 </preferences>

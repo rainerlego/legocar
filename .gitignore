@@ -1,6 +1,7 @@
 *.map
 *.objdump
 helloworld/software/carbsp/*
+!settings.bsp
 .*.swp
 .*.swo
 *.o

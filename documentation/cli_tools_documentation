@@ -41,3 +41,32 @@ usart debugging output bekommen
 ##################################################################
 nios2-terminal
 
+
+
+bsp das erste mal generieren:
+	nios2-bsp hal ./carbsp ../qsys_design.sopcinfo
+
+nach jedem anpassen von settings.bsp:
+	nios2-bsp-generate-files --settings=carbsp/settings.bsp --bsp-dir=./carbsp/
+
+software generieren
+	cd helloworld
+	nios2-app-generate-makefile --bsp-dir ../carbsp --elf-name blubb --src-dir .
+
+
+
+qsys-editor
+		 .qsys  .sopc
+	generate
+   .bsf
+
+quartus
+	compile
+
+
+analysis & synthesis
+assignments -> pin planner
+
+wenn man was am qsys-design ändert:
+danach immer neu generieren: (im generate-tab im qsys-editor)
+danach auf die komponente rechtsklick->update symbol or block

@@ -70,3 +70,17 @@ assignments -> pin planner
 wenn man was am qsys-design ändert:
 danach immer neu generieren: (im generate-tab im qsys-editor)
 danach auf die komponente rechtsklick->update symbol or block
+
+
+
+Falls die software nicht compiled weil sich der linker über
+irgendwelche speicherbereiche beschwert:
+
+- small libc verwenden (einstellen in settings.bsp)
+- on-fpga-memory vergrößern
+- danach nicht vergessen:
+   * das qsys-ding neu generieren (tab "generate")... been there, done
+     that... ;)
+   * das quartus-ding neu compilen
+   * die bsp updaten
+

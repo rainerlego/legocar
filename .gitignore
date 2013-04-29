@@ -1,7 +1,15 @@
+*.map
+*.objdump
+helloworld/software/carbsp/*
+**/carbsp/*
+!settings.bsp
 .*.swp
 .*.swo
 *.o
 *.elf
+*.d
+*.exe
 */output_files/*
 */db/*
 */incremental_db/*
+*.rpt

@@ -6,6 +6,7 @@ helloworld/software/carbsp/*
 .*.swp
 .*.swo
 *.o
+*.bin
 *.elf
 *.d
 *.exe

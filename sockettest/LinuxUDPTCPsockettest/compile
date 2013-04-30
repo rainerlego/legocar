@@ -1,0 +1,4 @@
+#!/bin/bash
+gcc server.c -lpthread -o server.bin
+gcc client.c -o clientudp.bin
+gcc clienttcp.c -o clienttcp.bin

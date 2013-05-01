@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2012-jan-04)-stable date = Wed 01 May 2013 04:45:57 PM CEST
+Cmp-Mod V01 Created by CvPcb (2012-jan-04)-stable date = Wed 01 May 2013 07:09:24 PM CEST
 
 BeginCmp
 TimeStamp = /51802A5D;
@@ -211,17 +211,17 @@ IdModule  = Big_Array3;
 EndCmp
 
 BeginCmp
+TimeStamp = /51814B69;
+Reference = K11;
+ValeurCmp = I2C;
+IdModule  = Big_Array3;
+EndCmp
+
+BeginCmp
 TimeStamp = /51802F91;
 Reference = P1;
 ValeurCmp = PROG;
 IdModule  = BIG_pin_array_3x2;
-EndCmp
-
-BeginCmp
-TimeStamp = /518032FC;
-Reference = P2;
-ValeurCmp = I2C;
-IdModule  = PinArray2_big;
 EndCmp
 
 BeginCmp

@@ -1,4 +1,4 @@
-# EESchema Netlist Version 1.1 created  Wed 01 May 2013 07:19:28 PM CEST
+# EESchema Netlist Version 1.1 created  Wed 01 May 2013 09:56:50 PM CEST
 (
  ( /51814C79 $noname  X1 12MHz {Lib=CRYSTAL}
   (    1 N-000034 )
@@ -23,9 +23,9 @@
   (    2 GND )
  )
  ( /5180C945 $noname  Q1 IRFZ24N {Lib=MOS_N}
-  (    D /SDrain )
-  (    G /SOnOff )
-  (    S GND )
+  (    1 /SOnOff )
+  (    2 /SDrain )
+  (    3 GND )
  )
  ( /51803C7F $noname  D5 LED {Lib=LED}
   (    1 N-000029 )
@@ -462,7 +462,7 @@ Net 21 "GND" "GND"
  C5 2
  C2 1
  D5 2
- Q1 S
+ Q1 3
  P1 2
  C4 2
  C3 2
@@ -494,7 +494,7 @@ Net 29 "" ""
  D5 1
 Net 30 "/SOnOff" "SOnOff"
  IC1 14
- Q1 G
+ Q1 1
 Net 31 "/SDrain" "SDrain"
  K1 3
  K3 3
@@ -512,7 +512,7 @@ Net 31 "/SDrain" "SDrain"
  C13 2
  C12 2
  P3 1
- Q1 D
+ Q1 2
  C8 2
  C14 2
 Net 32 "/SCL" "SCL"

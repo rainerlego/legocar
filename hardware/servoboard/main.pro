@@ -1,6 +1,6 @@
-update=Wed 01 May 2013 04:31:16 PM CEST
+update=Wed 01 May 2013 04:44:28 PM CEST
 version=1
-last_client=kicad
+last_client=pcbnew
 [eeschema]
 version=1
 LibDir=
@@ -63,6 +63,13 @@ LibName27=opto
 LibName28=atmel
 LibName29=contrib
 LibName30=valves
+[general]
+version=1
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms
 [pcbnew]
 version=1
 PadDrlX=320
@@ -79,8 +86,9 @@ DrawLar=150
 EdgeLar=150
 TxtLar=120
 MSegLar=150
-LastNetListRead=
+LastNetListRead=main.net
 [pcbnew/libraries]
+LibDir=
 LibName1=sockets
 LibName2=connect
 LibName3=discret
@@ -96,15 +104,8 @@ LibName12=BIG_Pin_Array_2
 LibName13=BIG_Pin_Array_3
 LibName14=BIG_Pin_Array_3x2
 LibName15=crystal
-LibName16=LED-3MM_bigfoot
-LibName17=LeiterplattenKlemme2_5RM
-LibName18=LeiterplattenKlemme3_5RM
-LibName19=TO220_VERT_IGBT_Bigfoot
-LibDir=
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms
-[general]
-version=1
+LibName16=LeiterplattenKlemme2_5RM
+LibName17=LeiterplattenKlemme3_5RM
+LibName18=TO220_VERT_IGBT_Bigfoot
+LibName19=LED-3MM_bigfoot
+LibName20=LeiterplattenKlemme3_35RM

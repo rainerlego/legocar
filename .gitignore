@@ -14,3 +14,11 @@ helloworld/software/carbsp/*
 */db/*
 */incremental_db/*
 *.rpt
+*.eep
+*.elf
+*.hex
+*.lss
+*.lst
+*.map
+*.o
+*.sym

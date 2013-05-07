@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2012-jan-04)-stable date = Wed 01 May 2013 07:09:24 PM CEST
+Cmp-Mod V01 Created by CvPcb (2013-mar-30)-stable date = Tue 07 May 2013 01:09:07 PM CEST
 
 BeginCmp
 TimeStamp = /51802A5D;
@@ -94,6 +94,34 @@ EndCmp
 BeginCmp
 TimeStamp = /51803C3B;
 Reference = C14;
+ValeurCmp = 100nF;
+IdModule  = SM0603_Capa;
+EndCmp
+
+BeginCmp
+TimeStamp = /5188C766;
+Reference = C15;
+ValeurCmp = 100nF;
+IdModule  = SM0603_Capa;
+EndCmp
+
+BeginCmp
+TimeStamp = /5188C760;
+Reference = C16;
+ValeurCmp = 100nF;
+IdModule  = SM0603_Capa;
+EndCmp
+
+BeginCmp
+TimeStamp = /5188C75A;
+Reference = C17;
+ValeurCmp = 100nF;
+IdModule  = SM0603_Capa;
+EndCmp
+
+BeginCmp
+TimeStamp = /5188C76C;
+Reference = C18;
 ValeurCmp = 100nF;
 IdModule  = SM0603_Capa;
 EndCmp
@@ -218,6 +246,20 @@ IdModule  = Big_Array3;
 EndCmp
 
 BeginCmp
+TimeStamp = /5188CC3C;
+Reference = K12;
+ValeurCmp = JPSel;
+IdModule  = Big_Array3;
+EndCmp
+
+BeginCmp
+TimeStamp = /5188E952;
+Reference = K13;
+ValeurCmp = I2CBIG;
+IdModule  = LeiterplattenKlemme3_5RM;
+EndCmp
+
+BeginCmp
 TimeStamp = /51802F91;
 Reference = P1;
 ValeurCmp = PROG;
@@ -232,7 +274,7 @@ IdModule  = PinArray2_big;
 EndCmp
 
 BeginCmp
-TimeStamp = /5180C945;
+TimeStamp = /5188DBDD;
 Reference = Q1;
 ValeurCmp = IRFZ24N;
 IdModule  = TO220_VERT_IGBT_Bigfoot;
@@ -288,7 +330,14 @@ IdModule  = SM0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /51802A54;
+TimeStamp = /5188D728;
+Reference = U1;
+ValeurCmp = 7805_CORRECT_PINS;
+IdModule  = TO220_VERT_IGBT_Bigfoot;
+EndCmp
+
+BeginCmp
+TimeStamp = /51814C79;
 Reference = X1;
 ValeurCmp = 12MHz;
 IdModule  = crystal-SM49;

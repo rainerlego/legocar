@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 07 May 2013 01:08:31 PM CEST
+EESchema Schematic File Version 2  date Tue 07 May 2013 11:36:32 PM CEST
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -1469,4 +1469,17 @@ Wire Wire Line
 Wire Wire Line
 	9400 3000 9500 3000
 Connection ~ 9200 3500
+$Comp
+L GND #PWR?
+U 1 1 51897642
+P 2750 3050
+F 0 "#PWR?" H 2750 3050 30  0001 C CNN
+F 1 "GND" H 2750 2980 30  0001 C CNN
+F 2 "" H 2750 3050 60  0001 C CNN
+F 3 "" H 2750 3050 60  0001 C CNN
+	1    2750 3050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 3050 2750 2900
 $EndSCHEMATC

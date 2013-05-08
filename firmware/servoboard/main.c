@@ -218,6 +218,7 @@ void twi_handle(){
           recvstate = RECVangular2; //next data byte will be the lsbs of angular
           break;
         case RECVangular2:
+          //FIXME: am i shifting right here (8bit vs 16 bit??) hope i am not losing bits here
           servos_angular[servo_waiting_for_data] = (((uint16_t)angularh)<<8) | (uint16_t)data_complete;
 
           recvstate = RECVcommand; //next data byte will be a command

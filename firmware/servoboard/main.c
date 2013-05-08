@@ -16,6 +16,7 @@
 
 #define servos_on PORTB|=(1<<PB0)
 #define servos_off PORTB&=~(1<<PB0)
+#define check_servo_power PORTB&(1<<PB0)
 
 #define TWIADDR (1<<TWA0) //adresse für i2c slave
 #define TWIPREAMBLE 255
@@ -34,6 +35,7 @@
 
 #define CMD_SERVO 0
 #define CMD_LED 1
+#define CMD_SERVOSonoff 2
 
 #define MILLISECONDBASE 8000
 
@@ -120,6 +122,8 @@ void servo_init(){
   current_servo = 8; //start with dummy servo... next one will be servo0 
   pulsetime = 20000; //simulate, that the previous pulse was complete
 
+  servos_off; //servos have no power supply enabled
+
   TCNT1 = 0; //reset timer
   OCR1A = 4000; //next pulse will start in 1ms
   TCCR1B = (1<<CS10); //prescaler 1 start timer
@@ -186,33 +190,44 @@ void twi_handle(){
               if(data_complete&(1<<4)==0){ //led ausschalten
                 switch(data_complete<<5){
                   case 0:
-                    led_controlled_by_user = 1;
+                    led_controlled_by_user |= (1<<0);
                     led1_aus;
                     break;
                   case 1:
-                    led_controlled_by_user = 2;
+                    led_controlled_by_user |= (1<<1);
                     led2_aus;
                     break;
                   case 2:
+                    led_controlled_by_user |= (1<<2);
                     led3_aus;
                     break;
                 }
               }else{
                 switch(data_complete<<5){
                   case 0:
-                    led_controlled_by_user = 1;
+                    led_controlled_by_user |= (1<<0);
                     led1_an;
                     break;
                   case 1:
-                    led_controlled_by_user = 2;
+                    led_controlled_by_user |= (1<<1);
                     led2_an;
                     break;
                   case 2:
+                    led_controlled_by_user |= (1<<2);
                     led3_an;
                     break;
                 }
               }
               twistate = TWISTATE_standby; //goback to standby mode awaiting new transmission (recvstate should stay untouched)
+              break;
+            case CMD_SERVOSonoff:
+              if(data_complete&(1<<4)==0){ //servos ausschalten
+                servos_off;
+              }else{
+                servos_on;
+              }
+              
+              break;
           }
           break;
         case RECVangular:
@@ -247,17 +262,11 @@ ISR(TWI_vect){ //TWI interrupt handler //FIXME: what happens if i can not read d
 
 //used for clearing leds
 ISR(TIMER0_OVF_vect){ //32ms at 8MHz
-  switch (led_controlled_by_user){
-    case 0:
-      led1_aus;
-      led2_aus;
-      break;
-    case 1:
-      led2_aus;
-      break;
-    case 2:
-      led1_aus;
-      break;
+  if((led_controlled_by_user & (1<<0))==0 ){
+    led1_aus;
+  }
+  if((led_controlled_by_user & (1<<1))==0 ){
+    led2_aus;
   }
 }
 
@@ -320,7 +329,8 @@ int main (void)
   timer_init;
   i2cinit();
   
-  servo_init();
+  servo_init(); //this will initialize servo control, but power supply of all servos will be disabled for safety reasons. first set the correct angulars of all servos over twi and issue a servo power up afterwards (CMD_SERVOSonoff)
+
   sei();  //enable global interrupts
 	while (1) { 
   
@@ -328,17 +338,24 @@ int main (void)
     twi_handle();
 
     //handle status leds
-    if(twi_activity == 1 && led_controlled_by_user!=1){
+    if(twi_activity == 1 && (led_controlled_by_user & (1<<0))==0 ){
       led1_an;
       //configure timer0 to clear the leds for us
       TCNT0 = 0;
       TCCR0 = (1<<CS02) | (1<<CS00); //8bit timer0 prescaler to 1024
     }
-    if(twi_dataactivity == 1 && led_controlled_by_user!=2){
+    if(twi_dataactivity == 1 && (led_controlled_by_user & (1<<1))==0 ){
       led2_an;
       //configure timer0 to clear the leds for us
       TCNT0 = 0;
       TCCR0 = (1<<CS02) | (1<<CS00); //8bit timer0 prescaler to 1024
+    }
+    if( (led_controlled_by_user & (1<<2)) == 0 ){
+      if(check_servo_power !=0){
+        led3_an;
+      }else{
+        led3_aus;
+      }
     }
 
 

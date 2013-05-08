@@ -99,7 +99,7 @@ void twi_handle(){
               recvstate = RECVangular; //we expect angular to be transmitted as the next byte
               break;
             case CMD_LED: //control LED
-              if(data_complete&(1<<4)==0){ //led ausschalten
+              if((data_complete&(1<<4))==0){ //led ausschalten
                 switch(data_complete<<5){
                   case 0:
                     led_controlled_by_user |= (1<<0);
@@ -133,7 +133,7 @@ void twi_handle(){
               twistate = TWISTATE_standby; //goback to standby mode awaiting new transmission (recvstate should stay untouched)
               break;
             case CMD_SERVOSonoff:
-              if(data_complete&(1<<4)==0){ //servos ausschalten
+              if((data_complete&(1<<4))==0){ //servos ausschalten
                 servos_off;
               }else{
                 servos_on;

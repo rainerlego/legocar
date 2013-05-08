@@ -1,6 +1,6 @@
 #include "servo.h"
 uint16_t servos_angular[8];
-uint8_t * servoports[8+1]; //+1 for dummy servo
+volatile uint8_t * servoports[8+1]; //+1 for dummy servo
 uint8_t servopins[8+1]; //+1 for dummy servo
 uint8_t current_servo;
 uint16_t pulsetime;

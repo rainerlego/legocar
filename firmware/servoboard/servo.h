@@ -6,7 +6,7 @@
 
 #define servos_on PORTB|=(1<<PB0)
 #define servos_off PORTB&=~(1<<PB0)
-#define check_servo_power PORTB&(1<<PB0)
+#define check_servo_power (PORTB&(1<<PB0))
 
 #define MILLISECONDBASE 8000
 

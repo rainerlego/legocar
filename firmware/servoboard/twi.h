@@ -30,6 +30,6 @@ extern uint8_t twi_activity;
 extern uint8_t twi_dataactivity;
 
 void i2cinit(void);
-void twi_handle(void);
+void twi_handle(uint8_t data);
 
 #endif

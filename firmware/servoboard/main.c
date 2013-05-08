@@ -20,7 +20,7 @@ int main (void)
   sei();  //enable global interrupts
 	while (1) { 
     //try to read data from twi buffer:
-    twi_handle();
+    //twi_handle();
     
     //handle status leds
     led_update();

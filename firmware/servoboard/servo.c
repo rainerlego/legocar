@@ -54,7 +54,7 @@ void servo_init(){
   
   TIMSK |= (1<<OCIE1A); //enable compare match (A) interrupt for Timer1 (16bit)
   TCNT1 = 0; //reset timer
-  OCR1A = 4000; //next pulse will start in 1ms
+  OCR1A = 4000; //next pulse will start in 0.5ms. This is just a random time interval.
   TCCR1B = (1<<CS10); //prescaler 1 start timer
 }
 
@@ -71,21 +71,21 @@ ISR(TIMER1_COMPA_vect){
   current_servo = (current_servo + 1) % (8+1); //one dummy servo for 20ms correction
 
   if(current_servo!=8){ //real servo
-    sei();//disable interrupts //FIXME: can interrupts happen here at all?
+    cli();//disable interrupts //FIXME: can interrupts happen here at all?
     OCR1A = MILLISECONDBASE + servos_angular[current_servo];
-    cli();//re enable interrupts
+    sei();//re enable interrupts
     pulsetime+=OCR1A/8;
     
     //start pulse of next servo:
     *servoports[current_servo] |= (1<<servopins[current_servo]);
   }else{ //dummy servo will fill up time to 20ms
       uint16_t timeremaining = (20000-pulsetime);
-      if(timeremaining<8192){ //dummy servo can compensate remaining time
+      if(timeremaining<=(0xffff/8)){ //dummy servo can compensate remaining time
         OCR1A = timeremaining*8;
         pulsetime = 0;
       }else{
         OCR1A = 0xffff;
-        pulsetime+=8191;
+        pulsetime+=0xffff/8;
         current_servo = 7; //next time we will have a dummy servo again :)
       }
   }

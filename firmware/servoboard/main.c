@@ -148,8 +148,12 @@ void i2cinit(){
 // 2nd Packet: Command (4 msb) + Extention (4 lsb)
 // optional following packets: command specific
 
-//2nd packet should not contain preamble or escape sequence
-//packets 3 and following can contain preamble and escape sequence, when escaped correctly.
+//packets (not preamble) should not contain preamble
+//if packet (not preamble) is preamble (255) or escape (254) a follow up packet is expected, whose content is aded to the first packet modulo 256
+//ATTENTION: if preamble is sent as data package result might be corrupt if original preamble was missed. hence is is recommended never to send preamble as data package
+//example: packet1=254 packet2=1  => new packet will be 255
+//example2: packet1=254 packet2=0 => new packet will be 254
+//example3: packet1=254 packet2=2 => new packet will be 1
 
 
 void twi_handle(){

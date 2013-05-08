@@ -26,21 +26,8 @@
 #define CMD_LED 1
 #define CMD_SERVOSonoff 2
 
-uint8_t twi_activity;
-uint8_t twi_dataactivity;
-
-uint8_t twi_data_buffer[TWIBUFFERSIZE];
-uint8_t twi_buffer_nr;  //next read index for buffer
-uint8_t twi_buffer_nw;  //next write index for buffer
-uint8_t twi_buffer_empty;
-
-uint8_t twistate = TWISTATE_standby;
-uint8_t recvstate = RECVcommand;
-uint8_t data_complete;
-
-uint8_t angularh;
-uint8_t servo_waiting_for_data;
-
+extern uint8_t twi_activity;
+extern uint8_t twi_dataactivity;
 
 void i2cinit(void);
 void twi_handle(void);

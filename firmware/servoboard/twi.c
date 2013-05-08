@@ -1,5 +1,20 @@
 #include "twi.h"
 
+uint8_t twi_activity;
+uint8_t twi_dataactivity;
+
+uint8_t twi_data_buffer[TWIBUFFERSIZE];
+uint8_t twi_buffer_nr;  //next read index for buffer
+uint8_t twi_buffer_nw;  //next write index for buffer
+uint8_t twi_buffer_empty;
+
+uint8_t twistate = TWISTATE_standby;
+uint8_t recvstate = RECVcommand;
+uint8_t data_complete;
+
+uint8_t angularh;
+uint8_t servo_waiting_for_data;
+
 void buffer_write(uint8_t data); //if executed on full buffer, data will be dropped
 uint8_t buffer_read(void); //should NOT BE CALLED IF BUFFER IS EMPTY!!!
 

@@ -1,5 +1,7 @@
 #include "led.h"
 
+uint8_t led_controlled_by_user;
+
 void led_init(){
   //configure pins for leds as output
   DDRD |= (1<<PD2) |(1<<PD3) |(1<<PD4);  //LED 1,2,3 und S7, S8

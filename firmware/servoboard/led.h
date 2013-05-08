@@ -14,7 +14,7 @@
 #define led2_an PORTD&=~(1<<PD3)
 #define led3_an PORTD&=~(1<<PD4)
 
-uint8_t led_controlled_by_user;
+extern uint8_t led_controlled_by_user;
 
 void led_init(void);
 void led_update(void);

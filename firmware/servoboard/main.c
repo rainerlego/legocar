@@ -58,8 +58,8 @@ uint8_t led_controlled_by_user = 0;
 uint16_t servos_angular[8];
 uint8_t * servoports[8+1]; //+1 for dummy servo
 uint8_t servopins[8+1]; //+1 for dummy servo
-uint8_t current_servo = 7;
-uint16_t pulsetime = 0;
+uint8_t current_servo;
+uint16_t pulsetime;
 
 void buffer_write(uint8_t data){ //if executed on full buffer, data will be dropped
   uint8_t nw_new = (twi_buffer_nw+1)%TWIBUFFERSIZE;
@@ -156,6 +156,7 @@ void twi_handle(){
   if(twi_buffer_empty == 1){
     return;
   }
+  //FIXME: kann buffer_read unterbrochen werden (insbesondere von buffer_write)?? ich denke schon... nciht sicher
   uint8_t data = buffer_read();
   switch (twistate){
     case TWISTATE_standby:

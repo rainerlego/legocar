@@ -64,6 +64,7 @@ ISR(TWI_vect){ //TWI interrupt handler //FIXME: what happens if i can not read d
     //buffer_write(TWDR); //daten in buffer schreiben
     twi_handle(TWDR);
   }
+  TWCR &= ~(1<<TWINT);
 }
 
 //Protocol description:

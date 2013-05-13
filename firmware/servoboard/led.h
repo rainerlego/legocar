@@ -13,6 +13,8 @@
 #define led1_an PORTD&=~(1<<PD2)
 #define led2_an PORTD&=~(1<<PD3)
 #define led3_an PORTD&=~(1<<PD4)
+#define led1_toggle PORTD = PORTD ^ (1<<PD2)
+#define led2_toggle PORTD = PORTD ^ (1<<PD3)
 
 extern uint8_t led_controlled_by_user;
 

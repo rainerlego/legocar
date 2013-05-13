@@ -14,6 +14,7 @@
 #define TWIESC_is_escape 2
 
 #define TWIBUFFERSIZE 16
+#define TWITRANSMITBUFFERSIZE 16
 
 #define TWISTATE_standby 0
 #define TWISTATE_waitfordata 1

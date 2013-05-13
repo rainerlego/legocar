@@ -9,6 +9,25 @@ uint8_t data_complete;
 uint8_t angularh;
 uint8_t servo_waiting_for_data;
 
+uint8_t twi_transmit_buffer_index = 0;
+uint8_t twi_transmit_buffer[TWITRANSMITBUFFERSIZE];
+
+uint8_t add_to_transmit_buffer(uint8_t data){
+  if(twi_transmit_buffer_index >= TWITRANSMITBUFFERSIZE){ //buffer is full -> drop data
+    return 0;
+  }
+  twi_transmit_buffer[twi_transmit_buffer_index]=data;
+  twi_transmit_buffer_index++;
+  return 1;
+}
+
+uint8_t get_from_transmit_buffer(){
+  if(twi_transmit_buffer_index>0){
+    twi_transmit_buffer_index--;
+  }
+  return twi_transmit_buffer[twi_transmit_buffer_index];
+}
+
 /*
 uint8_t twi_data_buffer[TWIBUFFERSIZE];
 uint8_t twi_buffer_nr;  //next read index for buffer
@@ -40,8 +59,6 @@ uint8_t buffer_read(){ //should NOT BE CALLED IF BUFFER IS EMPTY!!!
   return twi_data_buffer[nr_old];
 }
 */
-#define led1_toggle PORTD = PORTD ^ (1<<PD2)
-#define led2_toggle PORTD = PORTD ^ (1<<PD3)
 
 void i2cinit(){
   /*
@@ -60,14 +77,22 @@ void i2cinit(){
 
 //TODO: evtl das "wir sind zu langsam" implementieren
 ISR(TWI_vect){ //TWI interrupt handler //FIXME: what happens if i can not read data fast enough?
-  led1_toggle;
+  //led1_toggle;
   uint8_t status = TWSR;
   twi_activity = 1;
-  if(status == 0x80 || status == 0x90){ //daten empfangen an eigene adresse oder an general address
-    led2_toggle;
-    twi_dataactivity = 1;
-    //buffer_write(TWDR); //daten in buffer schreiben
-    twi_handle(TWDR);
+  switch (status){
+    case 0x80:
+    case 0x90: //daten empfangen an eigene adresse oder an general address
+      //led2_toggle;
+      twi_dataactivity = 1;
+      //buffer_write(TWDR); //daten in buffer schreiben
+      twi_handle(TWDR);
+      break;
+    case 0xA8:
+    case 0xB0:
+    case 0xB8: //data was requested from master => give him some data :)
+      TWDR = get_from_transmit_buffer();
+  }
   }
   TWCR |= (1<<TWINT);
 }

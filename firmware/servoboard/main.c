@@ -31,7 +31,7 @@ int main (void)
     //twi_handle();
     
     //handle status leds
-    //led_update();
+    led_update();
 
 	}
 }

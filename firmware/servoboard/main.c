@@ -16,6 +16,7 @@ int main (void)
   led_init();
   i2cinit();
   servo_init(); //this will initialize servo control, but power supply of all servos will be disabled for safety reasons. first set the correct angulars of all servos over twi and issue a servo power up afterwards (CMD_SERVOSonoff)
+  //NOTE: Servo power control can be overridden by the jumper near the mosfet (jumper plugged in = override)
 
   led1_an;
   _delay_ms(500);
@@ -27,8 +28,6 @@ int main (void)
   led2_aus;
   sei();  //enable global interrupts
 	while (1) { 
-    //try to read data from twi buffer:
-    //twi_handle();
     
     //handle status leds
     led_update();

@@ -28,44 +28,7 @@ uint8_t get_from_transmit_buffer(){
   return twi_transmit_buffer[twi_transmit_buffer_index];
 }
 
-/*
-uint8_t twi_data_buffer[TWIBUFFERSIZE];
-uint8_t twi_buffer_nr;  //next read index for buffer
-uint8_t twi_buffer_nw;  //next write index for buffer
-uint8_t twi_buffer_empty;
-void buffer_write(uint8_t data); //if executed on full buffer, data will be dropped
-uint8_t buffer_read(void); //should NOT BE CALLED IF BUFFER IS EMPTY!!!
-*/
-
-/*
-void buffer_write(uint8_t data){ //if executed on full buffer, data will be dropped
-  uint8_t nw_new = (twi_buffer_nw+1)%TWIBUFFERSIZE;
-  if(nw_new!=twi_buffer_nr){ //buffer is not full
-    twi_data_buffer[twi_buffer_nw]=data; //write data
-    twi_buffer_nw = nw_new; //configure buffer for next byte
-
-    twi_buffer_empty = 0;
-  }
-}
-
-
-//FIXME: wir sollten nie gleichzeitig lesen und schreiben
-uint8_t buffer_read(){ //should NOT BE CALLED IF BUFFER IS EMPTY!!!
-  uint8_t nr_old = twi_buffer_nr;
-  twi_buffer_nr = (twi_buffer_nr+1)%TWIBUFFERSIZE;
-  if(twi_buffer_nr == twi_buffer_nw ){
-    twi_buffer_empty = 1; //we will read the last emelent in buffer now!
-  }
-  return twi_data_buffer[nr_old];
-}
-*/
-
 void i2cinit(){
-  /*
-  twi_buffer_nr = 0;
-  twi_buffer_nw = 0;
-  twi_buffer_empty = 1;
-  */
   TWAR = TWIADDR; //slave adresse setzen
   TWAR |= (1<<TWGCE); //wir wollen general calls auch akzeptieren
 
@@ -75,8 +38,7 @@ void i2cinit(){
   TWCR &= ~(1<<TWINT);
 }
 
-//TODO: evtl das "wir sind zu langsam" implementieren
-ISR(TWI_vect){ //TWI interrupt handler //FIXME: what happens if i can not read data fast enough?
+ISR(TWI_vect){
   //led1_toggle;
   uint8_t status = TWSR;
   twi_activity = 1;
@@ -187,12 +149,10 @@ void twi_handle(uint8_t data){
     case RECVangular:
       //receive the msbs of angular
       angularh = data_complete;
-      //servos_angular[servo_waiting_for_data] = data_complete;
 
       recvstate = RECVangular2; //next data byte will be the lsbs of angular
       break;
     case RECVangular2:
-      //FIXME: am i shifting right here (8bit vs 16 bit??) hope i am not losing bits here
       servos_angular[servo_waiting_for_data] = (((uint16_t)angularh)<<8) | (uint16_t)data_complete;
 
       recvstate = RECVcommand; //next data byte will be a command

@@ -40,6 +40,8 @@ uint8_t buffer_read(){ //should NOT BE CALLED IF BUFFER IS EMPTY!!!
   return twi_data_buffer[nr_old];
 }
 */
+#define led1_toggle PORTD = PORTD ^ (1<<PD2)
+#define led2_toggle PORTD = PORTD ^ (1<<PD3)
 
 void i2cinit(){
   /*
@@ -53,18 +55,21 @@ void i2cinit(){
   TWCR  = (1<<TWIE); //enable twi interrupt generation
   TWCR |= (1<<TWEA); //sende acks wenn daten an mich adressiert sind
   TWCR |= (1<<TWEN); //ENABLE TWI
+  TWCR &= ~(1<<TWINT);
 }
 
 //TODO: evtl das "wir sind zu langsam" implementieren
 ISR(TWI_vect){ //TWI interrupt handler //FIXME: what happens if i can not read data fast enough?
+  led1_toggle;
   uint8_t status = TWSR;
   twi_activity = 1;
   if(status == 0x80 || status == 0x90){ //daten empfangen an eigene adresse oder an general address
+    led2_toggle;
     twi_dataactivity = 1;
     //buffer_write(TWDR); //daten in buffer schreiben
     twi_handle(TWDR);
   }
-  TWCR &= ~(1<<TWINT);
+  TWCR |= (1<<TWINT);
 }
 
 //Protocol description:

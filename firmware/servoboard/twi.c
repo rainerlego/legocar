@@ -63,13 +63,99 @@ ISR(TWI_vect){
 // 1st Packet: Preamble
 // 2nd Packet: Command (4 msb) + Extention (4 lsb)
 // optional following packets: command specific
+//
+// Transmission format:
+// 11111111 CCCCeeee dddddddd ...
+// preamble com ext  data
 
-//packets (not preamble) should not contain preamble
-//if packet (not preamble) is preamble (255) or escape (254) a follow up packet is expected, whose content is aded to the first packet modulo 256
-//ATTENTION: if preamble is sent as data package result might be corrupt if original preamble was missed. hence is is recommended never to send preamble as data package
+
+//packets (not preamble) should NOT contain preamble
+//if a escape (254) packet is received, a follow up packet is expected, whose content is added to the first packet modulo 256
+//ATTENTION: if preamble is sent as data package the current transmission is reset and a new command is expected as next packet
 //example: packet1=254 packet2=1  => new packet will be 255
 //example2: packet1=254 packet2=0 => new packet will be 254
 //example3: packet1=254 packet2=2 => new packet will be 1
+
+//Available commands:
+//
+// - CMD_SERVO (0)
+//  Description:
+//    Sets 16 bit angular value of specific servo
+//  Parameters:
+//    4 bit
+//      ServoID. Allowed values: 0-7
+//    8 bit (follow up 1)
+//      Most significant bits of the servo angular
+//    8 bit (follow up 2)
+//      Least significant bits of the servo angular
+//  Note:
+//    The save range of angular values is 0 to 8000
+//  Example:
+//    0xff 0x05 0x01 0x23
+//    Servo #5 will be set to position 0x0123
+//
+// - CMD_LED (1)
+//  Description:
+//    Controls the three onboard LEDs. By default the onboard LEDs are controlled
+//    by hardware to display TWI bus activity and servo power state. Once a LED
+//    receives a command from TWI control is handed over to the user for this
+//    (and only this) LED.
+//  Parameters:
+//    1 bit
+//      Switch the LED on (1) or off (0)
+//    3 bit
+//      LED ID. Allowed values: 0-2
+//  Example:
+//    0xff 0x10
+//    LED #2 (the third LED) will be switched on (0x10 = 0b1010)
+//    
+// - CMD_SERVOonoff (2)
+//  Description:
+//    Enable/disable powersupply of ALL servos. Can be overridden by the jumper
+//    near the mosfet on the board. (jumper present -> servos always powered)
+//  Parameters:
+//    4 bit
+//      power off (0) or "power on" (1-255)
+//  Example:
+//    0xff 0x21
+//    Power ON
+//
+// - CMD_RESET_TRANSMIT_BUFFER (3)
+//  Description:
+//    Resets the Transmit buffer to empty
+//  Parameters:
+//    none
+//  Example:
+//    0xff 0x30
+//
+// - CMD_GET_SERVO (4)
+//  Description:
+//    Put the 16 bit angular value of the selected servo into the transmit buffer.
+//    Order: First MSB then LSB
+//  Parameters:
+//    4 bit
+//      Servo ID (allowed values: 0-7)
+//  Example:
+//    0xff 0x43
+//    Angular value of servo #3 will be written to transmit buffer
+//
+// - CMD_GET_LEDS (5)
+//  Description:
+//    Write the status of the three onboard LEDs to the transmit buffer. One byte
+//    is written to the buffer. The three least significant bits represent the state
+//    of the leds (1 = on, 0 = off) LED #0 = Bit0 (lsb), #1 = Bit1, #2 = Bit2. 
+//  Parameters:
+//    none
+//  Example:
+//    0xff 0x50
+//
+// - CMD_GET_SERVOonoff (6)
+//  Description:
+//    8 bit to buffer: 1 when power on, 0 when power not on
+//  Parameters:
+//    none
+//  Example:
+//    0xff 0x60
 
 
 void twi_handle(uint8_t data){
@@ -160,7 +246,7 @@ void twi_handle(uint8_t data){
           add_to_transmit_buffer(check_servo_power!=0);
           break;
         case CMD_GET_LEDS:
-          add_to_transmit_buffer( (PORTD & ((1<<PD2)|(1<<PD3)|(1<<PD4)) ) >> PD2  ); //last 3 bits represent the three leds
+          add_to_transmit_buffer( ~((PORTD & ((1<<PD2)|(1<<PD3)|(1<<PD4)) ) >> PD2)  ); //last 3 bits now represent the three leds
           break;
       }
       break;

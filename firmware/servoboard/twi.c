@@ -100,7 +100,7 @@ void twi_handle(uint8_t data){
     case RECVcommand: //data wird interpretiert als command
       switch(data_complete & (0xf<<4)){
         case CMD_SERVO: //control servo
-          servo_waiting_for_data = (data_complete<<4); //FIXME: memory leak!!!
+          servo_waiting_for_data = (data_complete<<4)%8;
           recvstate = RECVangular; //we expect angular to be transmitted as the next byte
           break;
         case CMD_LED: //control LED

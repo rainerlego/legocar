@@ -55,7 +55,7 @@ ISR(TWI_vect){
     case 0xB8: //data was requested from master => give him some data :)
       TWDR = get_from_transmit_buffer();
   }
-  }
+  
   TWCR |= (1<<TWINT);
 }
 
@@ -100,7 +100,7 @@ void twi_handle(uint8_t data){
     case RECVcommand: //data wird interpretiert als command
       switch(data_complete & (0xf<<4)){
         case CMD_SERVO: //control servo
-          servo_waiting_for_data = (data_complete<<4);
+          servo_waiting_for_data = (data_complete<<4); //FIXME: memory leak!!!
           recvstate = RECVangular; //we expect angular to be transmitted as the next byte
           break;
         case CMD_LED: //control LED
@@ -143,6 +143,24 @@ void twi_handle(uint8_t data){
             servos_on;
           }
           
+          break;
+        
+        //handle transmit requests:
+        case CMD_RESET_TRANSMIT_BUFFER:
+          twi_transmit_buffer_index =0;
+          break;
+        case CMD_GET_SERVO:
+          {
+            uint16_t tmp =  servos_angular[(data_complete<<4)%8];
+            add_to_transmit_buffer((uint8_t)tmp);
+            add_to_transmit_buffer((uint8_t)(tmp<<8));
+          }
+          break;
+        case CMD_GET_SERVOonoff:
+          add_to_transmit_buffer(check_servo_power!=0);
+          break;
+        case CMD_GET_LEDS:
+          add_to_transmit_buffer( (PORTD & ((1<<PD2)|(1<<PD3)|(1<<PD4)) ) >> PD2  ); //last 3 bits represent the three leds
           break;
       }
       break;

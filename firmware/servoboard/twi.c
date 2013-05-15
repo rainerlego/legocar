@@ -191,7 +191,7 @@ void twi_handle(uint8_t data){
           recvstate = RECVangular; //we expect angular to be transmitted as the next byte
           break;
         case CMD_LED: //control LED
-					led_controlled_by_user |= (data_complete & (1<<2|1<<1|1<<0)); //alle leds die in dem command vorkommen werden ab sofort vom "user" bedient und sind abgekoppelt von der "hart verdrahteten" steuerung
+					led_controlled_by_user |= data_complete & ((1<<2|1<<1|1<<0)); //alle leds die in dem command vorkommen werden ab sofort vom "user" bedient und sind abgekoppelt von der "hart verdrahteten" steuerung
 
           if((data_complete&(1<<3))==0){ //anschalten
 						if(data_complete&(1<<0))

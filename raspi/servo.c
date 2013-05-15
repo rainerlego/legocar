@@ -1,5 +1,3 @@
-// Control servo by I2c on Raspberry pi
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <linux/i2c-dev.h>
@@ -11,13 +9,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#define TWI_PREAMBLE 0xff
-#define CMD_SERVO 0
-#define SERVOBOARD_ADDR 0x02
-#define SERVOBOARD_I2C_CHARDEV "/dev/i2c-0"
-
-#define LOWBYTE(v) ((unsigned char) (v))
-#define HIGHBYTE(v) ((unsigned char)(((unsigned int) (v)) >> 8))
+#include "servo.h"
 
 //fd ist global
 //damit wir das nicht immer mitschleppen müssen
@@ -70,7 +62,7 @@ int servoboard_setservo ( uint8_t servoNr, uint16_t servoPos )
   return 0;
 }
 
-int main(int argc, char **argv)
+void servoboard_testservos()
 {
   if ( servoboard_open ( SERVOBOARD_I2C_CHARDEV, SERVOBOARD_ADDR ) )
   {

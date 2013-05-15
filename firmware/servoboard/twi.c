@@ -101,10 +101,11 @@ ISR(TWI_vect){
 //    receives a command from TWI control is handed over to the user for this
 //    (and only this) LED.
 //  Parameters:
-//    1 bit
+//    1 bit (msb)
 //      Switch the LED on (1) or off (0)
-//    3 bit
-//      LED ID. Allowed values: 0-2
+//    3 bit (lsbs)
+//      The LEDs corresponding to the bits, which are set, will now be controlled by the user
+//      Additionally, they will be set on or off depending on the value of the msb of the 4-bit extenstion 
 //  Example:
 //    0xff 0x10
 //    LED #2 (the third LED) will be switched on (0x10 = 0b1010)
@@ -190,37 +191,23 @@ void twi_handle(uint8_t data){
           recvstate = RECVangular; //we expect angular to be transmitted as the next byte
           break;
         case CMD_LED: //control LED
-          if((data_complete&(1<<4))==0){ //led ausschalten
-            switch(data_complete<<5){
-              case 0:
-                led_controlled_by_user |= (1<<0);
-                led1_aus;
-                break;
-              case 1:
-                led_controlled_by_user |= (1<<1);
-                led2_aus;
-                break;
-              case 2:
-                led_controlled_by_user |= (1<<2);
-                led3_aus;
-                break;
-            }
-          }else{
-            switch(data_complete<<5){
-              case 0:
-                led_controlled_by_user |= (1<<0);
-                led1_an;
-                break;
-              case 1:
-                led_controlled_by_user |= (1<<1);
-                led2_an;
-                break;
-              case 2:
-                led_controlled_by_user |= (1<<2);
-                led3_an;
-                break;
-            }
-          }
+					led_controlled_by_user |= (data_complete & (1<<2|1<<1|1<<0)); //alle leds die in dem command vorkommen werden ab sofort vom "user" bedient und sind abgekoppelt von der "hart verdrahteten" steuerung
+
+          if((data_complete&(1<<3))==0){ //anschalten
+						if(data_complete&(1<<0))
+							led1_aus;
+						if(data_complete&(1<<1))
+							led2_aus;
+						if(data_complete&(1<<2))
+							led3_aus;
+          } else { //ausschalten
+						if(data_complete&(1<<0))
+							led1_an;
+						if(data_complete&(1<<1))
+							led2_an;
+						if(data_complete&(1<<2))
+							led3_an;
+					}
           break;
         case CMD_SERVOSonoff:
           if((data_complete&(1<<4))==0){ //servos ausschalten

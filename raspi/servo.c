@@ -20,12 +20,12 @@ void moveServo(int servoPos);
 
 int fd;														// File descrition
 char *fileName = "/dev/i2c-0";								// Name of the port we will be using
-int  address = 0x61;										// address of the SD21 shifted right one bit
+int  address = 0x02;										// address of the servo board
 unsigned char buf[10];										// Buffer for data being read/ written on the i2c bus
 
 int main(int argc, char **argv)
 {
-	printf("**** SD21 test program ****\n");
+	printf("**** Servo test program ****\n");
 	
 	if ((fd = open(fileName, O_RDWR)) < 0) {					// Open port for reading and writing
 		printf("Failed to open i2c port\n");
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 
 	
 	printf("Moving servo left\n");								// Move the servo
-	moveServo(0,0);											// Value passed to move servo is a time in uS. 1000 being 1000uS or 1mS.
+	moveServo(0,0);											    // Value passed to move servo is a time in uS. 1000 being 1000uS or 1mS.
 	sleep(2);													// pause to allow time for servo to move.
 	printf("Moving servo centre\n");
 	moveServo(0,4000);
@@ -61,8 +61,8 @@ int moveServo(uint8_t servoNr, uint16_t servoPos) {
         return -1;
     
     buf[0] = TWI_PREAMBLE;
-	buf[1] = (CMD_SERVO<<4) | (servoNr & 0xf);													// Start of position settings for first servo.
-	buf[2] = HIGHBYTE(servoPos);									// seperate the high and low bytes. Macros for this are at top of file.
+	buf[1] = (CMD_SERVO<<4) | (servoNr & 0xf);					 // Start of position settings for first servo.
+	buf[2] = HIGHBYTE(servoPos);                                 // seperate the high and low bytes. Macros for this are at top of file.
 	buf[3] = LOWBYTE(servoPos);
 	
 	if ((write(fd, buf, 4)) != 4) {

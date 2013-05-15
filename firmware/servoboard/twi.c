@@ -257,12 +257,19 @@ void twi_handle(uint8_t data){
       recvstate = RECVangular2; //next data byte will be the lsbs of angular
       break;
     case RECVangular2:
-      servos_angular[servo_waiting_for_data] = (((uint16_t)angularh)<<8) | (uint16_t)data_complete;
+      {
+	uint16_t speed = ((uint16_t)angularh)<<8 | (uint16_t)data_complete;
+      // TODO: Put this in a define 
+      if (speed > 8000) {
+	speed = 8000;
+      }
+      servos_angular[servo_waiting_for_data] = speed;
 
       recvstate = RECVcommand; //next data byte will be a command
       break;
-  }//switch recvstate
-
+      
+      }//switch recvstate
+  }
   data_complete = 0;
 }
 

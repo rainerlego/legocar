@@ -185,7 +185,7 @@ void twi_handle(uint8_t data){
   //here we have collected 8 bit of data
   switch (recvstate){
     case RECVcommand: //data wird interpretiert als command
-      switch(data_complete & (0xf<<4)){
+      switch((data_complete & (0xf0))>>4 ){
         case CMD_SERVO: //control servo
           servo_waiting_for_data = data_complete & (0xff);
           recvstate = RECVangular; //we expect angular to be transmitted as the next byte
@@ -193,14 +193,14 @@ void twi_handle(uint8_t data){
         case CMD_LED: //control LED
 					led_controlled_by_user |= data_complete & ((1<<2|1<<1|1<<0)); //alle leds die in dem command vorkommen werden ab sofort vom "user" bedient und sind abgekoppelt von der "hart verdrahteten" steuerung
 
-          if((data_complete&(1<<3))==0){ //anschalten
+          if((data_complete&(1<<3))==0){ //ausschalten
 						if(data_complete&(1<<0))
 							led1_aus;
 						if(data_complete&(1<<1))
 							led2_aus;
 						if(data_complete&(1<<2))
 							led3_aus;
-          } else { //ausschalten
+          } else { //einschalten
 						if(data_complete&(1<<0))
 							led1_an;
 						if(data_complete&(1<<1))

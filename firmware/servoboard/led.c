@@ -24,12 +24,14 @@ ISR(TIMER0_OVF_vect){ //32ms at 8MHz
 void led_update(){
   if( (twi_activity == 1)  && ( ( led_controlled_by_user & (1<<0) ) == 0 )  ){
     led1_an;
+    twi_activity = 0;
     //configure timer0 to clear the leds for us
     TCNT0 = 0;
     TCCR0 = (1<<CS02) | (1<<CS00); //8bit timer0 prescaler to 1024
   }
   if( (twi_dataactivity == 1) && ( (led_controlled_by_user & (1<<1)) == 0) ){
     led2_an;
+    twi_dataactivity = 0;
     //configure timer0 to clear the leds for us
     TCNT0 = 0;
     TCCR0 = (1<<CS02) | (1<<CS00); //8bit timer0 prescaler to 1024

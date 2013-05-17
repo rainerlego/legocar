@@ -40,8 +40,8 @@ void i2cinit(){
 
 ISR(TWI_vect){
   //led1_toggle;
-  uint8_t status = TWSR;
   twi_activity = 1;
+  uint8_t status = TWSR;
   switch (status){
     case 0x80:
     case 0x90: //daten empfangen an eigene adresse oder an general address
@@ -54,6 +54,10 @@ ISR(TWI_vect){
     case 0xB0:
     case 0xB8: //data was requested from master => give him some data :)
       TWDR = get_from_transmit_buffer();
+      break;
+    default:
+      TWDR = 0xbc;
+
   }
   
   TWCR |= (1<<TWINT);
@@ -246,9 +250,8 @@ void twi_handle(uint8_t data){
     case RECVangular2:
       {
 	uint16_t speed = ((uint16_t)angularh)<<8 | (uint16_t)data_complete;
-      // TODO: Put this in a define 
-      if (speed > 8000) {
-	speed = 8000;
+      if (speed > SERVO_MAX_VALUE) {
+        speed = SERVO_MAX_VALUE;
       }
       servos_angular[servo_waiting_for_data] = speed;
 

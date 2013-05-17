@@ -69,8 +69,9 @@ ISR(TWI_vect){
 // optional following packets: command specific
 //
 // Transmission format:
-// 11111111 CCCCeeee dddddddd ...
-// preamble com ext  data
+// H      L   H      L   H      L
+// 11111111   CCCCeeee   dddddddd ...
+// preamble   com  ext   data
 
 
 //packets (not preamble) should NOT contain preamble
@@ -86,7 +87,7 @@ ISR(TWI_vect){
 //  Description:
 //    Sets 16 bit angular value of specific servo
 //  Parameters:
-//    4 bit
+//    4 bit (extension)
 //      ServoID. Allowed values: 0-7
 //    8 bit (follow up 1)
 //      Most significant bits of the servo angular
@@ -119,7 +120,7 @@ ISR(TWI_vect){
 //    Enable/disable powersupply of ALL servos. Can be overridden by the jumper
 //    near the mosfet on the board. (jumper present -> servos always powered)
 //  Parameters:
-//    4 bit
+//    4 bit (extension)
 //      power off (0) or "power on" (1-255)
 //  Example:
 //    0xff 0x21
@@ -138,7 +139,7 @@ ISR(TWI_vect){
 //    Put the 16 bit angular value of the selected servo into the transmit buffer.
 //    Order: First MSB then LSB
 //  Parameters:
-//    4 bit
+//    4 bit (extension)
 //      Servo ID (allowed values: 0-7)
 //  Example:
 //    0xff 0x43
@@ -191,7 +192,7 @@ void twi_handle(uint8_t data){
     case RECVcommand: //data wird interpretiert als command
       switch((data_complete & (0xf0))>>4 ){
         case CMD_SERVO: //control servo
-          servo_waiting_for_data = data_complete & (0xff);
+          servo_waiting_for_data = data_complete & (0x0f);
           recvstate = RECVangular; //we expect angular to be transmitted as the next byte
           break;
         case CMD_LED: //control LED

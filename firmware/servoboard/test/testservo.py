@@ -11,13 +11,15 @@ s.write("1\n")
 s.flush()
 print s.read(1024)
 
-i = int(sys.argv[1]);
+i = int(sys.argv[2]);
 
 print(str(i) + "\n" )
 s.write("[")
 s.write("0x02,")
 s.write("0xff,")
-s.write("0x01,")
+s.write("0x0");
+s.write(sys.argv[1]);
+s.write(",")
 s.write(str(i / 256))
 s.write(",")
 s.write(str(i % 256))

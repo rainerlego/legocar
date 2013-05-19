@@ -29,8 +29,8 @@ bool MyArea::on_timeout(int i){
   //
   double steeringstep = M_PI/500.0;
   double max_steer = M_PI/8.0;
-  double max_accel = 1*m/s/s;
-  double accelstep = 0.01;
+  double max_accel = 10.0*m/s/s;
+  double accelstep = 0.05;
   if(key_up){
     myCar.accel+=accelstep;
     if(myCar.accel > max_accel){
@@ -67,7 +67,7 @@ MyArea::~MyArea()
 
 bool 	MyArea::on_key_release_event (GdkEventKey*event){
 
-  std::cout << " key release\n";
+  //std::cout << " key release\n";
   switch(event->keyval){
     case 65363:
       key_right = false;
@@ -87,7 +87,7 @@ bool 	MyArea::on_key_release_event (GdkEventKey*event){
 
 bool 	MyArea::on_key_press_event (GdkEventKey*event){
 
-  std::cout << " key press " << event->keyval <<"\n";
+  //std::cout << " key press " << event->keyval <<"\n";
   switch(event->keyval){
     case 65363:
       key_right = true;

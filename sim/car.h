@@ -13,7 +13,6 @@ public:
   double width;
   vect2 pos_back;
   double speed;
-  double set_speed;
   double accel;
   double steering;
   vect2 direction;

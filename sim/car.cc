@@ -5,15 +5,14 @@
 Car::Car(){
   pos_back.x =3.0*m;
   pos_back.y =3.0*m;
-  steering = 2.0;
+  steering = M_PI/2;
   length = 0.4*m;
-  speed = 0.1*m/s;
-  set_speed = 0.4*m/s;
+  speed = 0.0*m/s;
   width = 0.2*m;
-  direction.x = 0.5;
-  direction.y = 0.3;
+  direction.x = 0.9;
+  direction.y = 0.0;
   direction.norm();
-  friction_coef = 0.1/s;
+  friction_coef = 2.0/s;
   accel = 0.0*m/s/s;
 }
 
@@ -38,17 +37,16 @@ void Car::move(double time){
   if(steering<M_PI/2+e && steering > M_PI/2-e ){
     //std::cout << " steering angular too small!!\n";
     pos_back = pos_back + (direction * range);
-    return;
+  }else{
+  
+    vect2 M = get_center_of_rotation();
+
+    vect2 C = (pos_back - M).get_rotated(range/getR());
+
+    pos_back = M + C;
+    
+    direction = direction.get_rotated(range/getR());
   }
-  
-  vect2 M = get_center_of_rotation();
-
-  vect2 C = (pos_back - M).get_rotated(range/getR());
-
-  pos_back = M + C;
-  
-  direction = direction.get_rotated(range/getR());
-
   double speednew = speed + accel*time -speed*time*friction_coef;
   speed = speednew;
   

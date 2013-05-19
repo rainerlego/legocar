@@ -10,15 +10,51 @@ MyArea::MyArea()
 {
   add_events(Gdk::BUTTON_PRESS_MASK );
   add_events(Gdk::KEY_PRESS_MASK );
+  add_events(Gdk::KEY_RELEASE_MASK );
+  set_can_focus(true);
   sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this,&MyArea::on_timeout), 0);
   sigc::connection myConnection = Glib::signal_timeout().connect(my_slot, 10);
 
+
+  key_left = false;
+  key_right = false;
+  key_up = false;
+  key_down = false;
 }
 
 bool MyArea::on_timeout(int i){
   //std::cout << " timer\n";
   //myCar.move(100*ms);
   //on_draw();
+  //
+  double steeringstep = M_PI/500.0;
+  double max_steer = M_PI/8.0;
+  double max_accel = 1*m/s/s;
+  double accelstep = 0.01;
+  if(key_up){
+    myCar.accel+=accelstep;
+    if(myCar.accel > max_accel){
+      myCar.accel = max_accel;
+    }
+  }
+  if(key_down){
+    myCar.accel-=accelstep;
+    if(myCar.accel < -max_accel){
+      myCar.accel = -max_accel;
+    }
+  }
+  if(key_left){
+    myCar.steering+=steeringstep;
+    if(myCar.steering > M_PI/2.0+ max_steer){
+      myCar.steering = M_PI/2.0 + max_steer;
+    }
+  }
+  if(key_right){
+    myCar.steering-=steeringstep;
+    if(myCar.steering < M_PI/2.0-max_steer){
+      myCar.steering = M_PI/2.0 - max_steer;
+    }
+  }
   myCar.move(10*ms);
   queue_draw();
 
@@ -29,11 +65,49 @@ MyArea::~MyArea()
 {
 }
 
+bool 	MyArea::on_key_release_event (GdkEventKey*event){
+
+  std::cout << " key release\n";
+  switch(event->keyval){
+    case 65363:
+      key_right = false;
+      break;
+    case 65361:
+      key_left = false;
+      break;
+    case 65362:
+      key_up = false;
+      break;
+    case 65364:
+      key_down = false;
+      break;
+  }
+  return false;
+}
+
+bool 	MyArea::on_key_press_event (GdkEventKey*event){
+
+  std::cout << " key press " << event->keyval <<"\n";
+  switch(event->keyval){
+    case 65363:
+      key_right = true;
+      break;
+    case 65361:
+      key_left = true;
+      break;
+    case 65362:
+      key_up = true;
+      break;
+    case 65364:
+      key_down = true;
+      break;
+  }
+  return false;
+}
+
 bool 	MyArea::on_button_press_event (GdkEventButton*event){
 
   std::cout << " button press\n";
-  myCar.move(100*ms);
-  queue_draw();
   return false;
 }
 
@@ -74,7 +148,6 @@ void MyArea::draw_car(const Cairo::RefPtr<Cairo::Context>& cr){
   cr->set_source_rgb(0.0, 0.0, 0.6);
   cr->move_to(back.x, back.y);
   cr->line_to(front.x, front.y);
-  cr->stroke();
 
   //std::cout << myCamera.scale(myCar.width) << "\n";
 
@@ -86,6 +159,30 @@ void MyArea::draw_car(const Cairo::RefPtr<Cairo::Context>& cr){
   cr->line_to(front.x, front.y);
   cr->move_to(tempv.x, tempv.y);
   cr->line_to(front.x, front.y);
+  cr->stroke();
+
+  cr->set_source_rgb(0.6, 0.0, 0.0);
+  vect2 frontaxis = myCar.direction.get_rotated(-myCar.steering);
+  vect2 leftwheel = front + frontaxis*myCamera.scale(myCar.width/2.0);
+  vect2 rightwheel = front - frontaxis*myCamera.scale(myCar.width/2.0);
+  cr->move_to(leftwheel.x, leftwheel.y);
+  cr->line_to(rightwheel.x, rightwheel.y);
+
+  vect2 frontwheel = myCar.direction.get_rotated(- (myCar.steering + M_PI/2.0));
+  frontwheel = frontwheel * myCamera.scale(5*cm);
+  vect2 fwf = leftwheel + frontwheel;
+  vect2 fwb = leftwheel - frontwheel;
+  cr->move_to(fwf.x, fwf.y);
+  cr->line_to(fwb.x, fwb.y);
+  fwf = rightwheel + frontwheel;
+  fwb = rightwheel - frontwheel;
+  cr->move_to(fwf.x, fwf.y);
+  cr->line_to(fwb.x, fwb.y);
+  
+  //vect2 M = myCamera.transform(myCar.get_center_of_rotation());
+
+  //cr->move_to(back.x, back.y);
+  //cr->line_to(M.x, M.y);
 
   cr->stroke();
   

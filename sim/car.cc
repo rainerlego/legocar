@@ -1,9 +1,10 @@
 #include "car.h"
 #include <cmath>
+#include <iostream>
 
 Car::Car(){
-  pos_back.x =1.0*m;
-  pos_back.y =1.0*m;
+  pos_back.x =3.0*m;
+  pos_back.y =3.0*m;
   steering = 2.0;
   length = 0.4*m;
   speed = 0.1*m/s;
@@ -13,7 +14,7 @@ Car::Car(){
   direction.y = 0.3;
   direction.norm();
   friction_coef = 0.1/s;
-  accel = 0.4*m/s/s;
+  accel = 0.0*m/s/s;
 }
 
 Car::~Car(){
@@ -29,9 +30,16 @@ vect2 Car::get_pos_front(void){
   return result;
 }
 void Car::move(double time){
-
+  double e = M_PI/400;
   //http://www.wolframalpha.com/input/?i=integrate+%28%28a*x%2Bv%29%2F%281%2Br*x%29+dx%29
   double range = ( (friction_coef*speed - accel)*log(friction_coef * time + 1) + accel*friction_coef*time )/ (friction_coef*friction_coef);
+    //std::cout << " accel: " << accel <<" m/s^2\n";
+    //std::cout << " steering: " << steering/(M_PI/2) <<"\n";
+  if(steering<M_PI/2+e && steering > M_PI/2-e ){
+    //std::cout << " steering angular too small!!\n";
+    pos_back = pos_back + (direction * range);
+    return;
+  }
   
   vect2 M = get_center_of_rotation();
 
@@ -50,7 +58,7 @@ void Car::move(double time){
 
 vect2 Car::get_center_of_rotation(void){
   if(steering<M_PI/2){
-    return direction.getOrth() * getR() + pos_back;
+    return direction.getOrth() * (-getR()) + pos_back;
   }else if(steering >M_PI/2){
     return direction.getOrth() * (-getR()) + pos_back;
   }else{

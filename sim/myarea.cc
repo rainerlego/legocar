@@ -86,6 +86,18 @@ bool 	MyArea::on_key_release_event (GdkEventKey*event){
     case 65364:
       key_down = false;
       break;
+    case 65307: //esc -> reset
+      myCar.speed = 0.0;
+      myCar.accel = 0.0;
+      myCar.steering = M_PI/2.0;
+      myCar.pos_back.x = 3.0*m;
+      myCar.pos_back.y = 3.0*m;
+      myCar.direction.x = 0.9;
+      myCar.direction.y = 0.0;
+      myCar.direction.norm();
+      break;
+    case 32: //spacebar -> motor off
+      myCar.accel = 0.0;
   }
   return false;
 }

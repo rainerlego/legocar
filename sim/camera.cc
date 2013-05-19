@@ -3,7 +3,7 @@
 Camera::Camera(){
   pos.x = 0.0; 
   pos.y = 0.0; 
-  ppm = 20;
+  ppm = 80;
 }
 Camera::~Camera(){
 
@@ -15,4 +15,9 @@ vect2 Camera::transform (vect2 point){
   result.x = point.x*ppm-pos.x;
   result.y = point.y*ppm-pos.y;
   return result;
+}
+
+
+double Camera::scale (double val){
+  return ppm*val;
 }

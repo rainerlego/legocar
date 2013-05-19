@@ -20,9 +20,30 @@ vect2 vect2::operator*(const double rhs){
   result.y = y*rhs;
   return result;
 }
+vect2 vect2::operator-(const vect2 rhs){
+  vect2 result;
+  result.x = -rhs.x + x;
+  result.y = -rhs.y +y;
+  return result;
+}
 vect2 vect2::operator+(const vect2 rhs){
   vect2 result;
   result.x = rhs.x + x;
   result.y = rhs.y +y;
+  return result;
+}
+
+vect2 vect2::getOrth(){
+  vect2 result;
+  result.x = y;
+  result.y = -x;
+  result.norm();
+  return result;
+}
+
+vect2 vect2::get_rotated(double angular){
+  vect2 result;
+  result.x = x *cos(angular) - y*sin(angular);
+  result.y = x*sin(angular) + y*cos(angular);
   return result;
 }

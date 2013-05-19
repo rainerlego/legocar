@@ -10,6 +10,7 @@ public:
   ~Camera();
   vect2 pos;
   vect2 transform (vect2 pos);
+  double scale (double val);
 protected:
 };
 

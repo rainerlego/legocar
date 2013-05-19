@@ -18,6 +18,9 @@ protected:
   //Override default signal handler:
   virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
   void draw_car(const Cairo::RefPtr<Cairo::Context>& cr);
+
+  bool 	on_button_press_event (GdkEventButton*event);
+  bool on_timeout(int i);
 };
 
 #endif // GTKMM_EXAMPLE_MYAREA_H

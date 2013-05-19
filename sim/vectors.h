@@ -11,6 +11,9 @@ public:
   void norm(void);
   vect2 operator*(const double rhs);
   vect2 operator+(const vect2 rhs);
+  vect2 operator-(const vect2 rhs);
+  vect2 getOrth();
+  vect2 get_rotated(double angular);
 };
 
 #endif

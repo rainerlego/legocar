@@ -21,6 +21,8 @@ protected:
   bool key_up;
   bool key_down;
 
+  double time;
+
   //Override default signal handler:
   virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
   void draw_car(const Cairo::RefPtr<Cairo::Context>& cr);

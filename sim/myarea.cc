@@ -5,6 +5,8 @@
 #include "units.h"
 #include <map>
 #include <gtkmm.h>
+#include <string>
+#include <sstream>
 
 MyArea::MyArea()
 {
@@ -20,6 +22,8 @@ MyArea::MyArea()
   key_right = false;
   key_up = false;
   key_down = false;
+
+  time = 0;
 }
 
 bool MyArea::on_timeout(int i){
@@ -27,6 +31,7 @@ bool MyArea::on_timeout(int i){
   //myCar.move(100*ms);
   //on_draw();
   //
+  time += 10*ms;
   double steeringstep = M_PI/500.0;
   double max_steer = M_PI/8.0;
   double max_accel = 10.0*m/s/s;
@@ -127,12 +132,37 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   double scalelength = myCamera.scale(1.0*m);
   cr->set_source_rgb(0.4, 0.0, 0.0);
   cr->set_line_width(2.0);
-  cr->move_to(10.0,10.0);
-  cr->line_to(10.0+scalelength,10.0);
+  cr->move_to(10.0,height-10.0);
+  cr->line_to(10.0+scalelength,height - 10.0);
   cr->stroke();
   // draw red lines out from the center of the window
  
-  
+  Cairo::RefPtr<Cairo::ToyFontFace> font =
+    Cairo::ToyFontFace::create("Bitstream Charter",
+                               Cairo::FONT_SLANT_NORMAL,
+                               Cairo::FONT_WEIGHT_NORMAL);
+  cr->set_font_face(font);
+  cr->set_font_size(8.0);
+
+  cr->move_to(10.0,10.0);
+  std::stringstream sspeed;
+  sspeed << "speed: " << myCar.speed/(km/h) << "km/h = " << myCar.speed/(m/s) << " m/s";
+  cr->show_text(sspeed.str());
+
+  cr->move_to(10.0,20.0);
+  std::stringstream sacc;
+  sacc << "engine acceleration: " << myCar.accel/(m/s/s) << " m/s^2";
+  cr->show_text(sacc.str());
+
+  cr->move_to(10.0,30.0);
+  std::stringstream sheading;
+  sheading << "steering: " << (myCar.steering-M_PI/2.0)*360.0/(2.0*M_PI) << " deg";
+  cr->show_text(sheading.str());
+
+  cr->move_to(10.0,40.0);
+  std::stringstream stime;
+  stime << "simulation time: " << time/s << " s";
+  cr->show_text(stime.str());
 
   draw_car(cr);
 

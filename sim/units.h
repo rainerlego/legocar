@@ -3,7 +3,9 @@
 
 #define m 1.0
 #define s 1.0
-#define ms 1.0e-3*m
-#define cm 0.01*m
+#define ms 1.0e-3
+#define cm 0.01
+#define km 1000.0
+#define h 3600.0
 
 #endif

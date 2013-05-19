@@ -40,8 +40,8 @@ void i2cinit(){
 
 ISR(TWI_vect){
   //led1_toggle;
-  uint8_t status = TWSR;
   twi_activity = 1;
+  uint8_t status = TWSR;
   switch (status){
     case 0x80:
     case 0x90: //daten empfangen an eigene adresse oder an general address
@@ -54,6 +54,10 @@ ISR(TWI_vect){
     case 0xB0:
     case 0xB8: //data was requested from master => give him some data :)
       TWDR = get_from_transmit_buffer();
+      break;
+    default:
+      TWDR = 0xbc;
+
   }
   
   TWCR |= (1<<TWINT);
@@ -65,8 +69,9 @@ ISR(TWI_vect){
 // optional following packets: command specific
 //
 // Transmission format:
-// 11111111 CCCCeeee dddddddd ...
-// preamble com ext  data
+// H      L   H      L   H      L
+// 11111111   CCCCeeee   dddddddd ...
+// preamble   com  ext   data
 
 
 //packets (not preamble) should NOT contain preamble
@@ -82,7 +87,7 @@ ISR(TWI_vect){
 //  Description:
 //    Sets 16 bit angular value of specific servo
 //  Parameters:
-//    4 bit
+//    4 bit (extension)
 //      ServoID. Allowed values: 0-7
 //    8 bit (follow up 1)
 //      Most significant bits of the servo angular
@@ -101,10 +106,11 @@ ISR(TWI_vect){
 //    receives a command from TWI control is handed over to the user for this
 //    (and only this) LED.
 //  Parameters:
-//    1 bit
+//    1 bit (msb)
 //      Switch the LED on (1) or off (0)
-//    3 bit
-//      LED ID. Allowed values: 0-2
+//    3 bit (lsbs)
+//      The LEDs corresponding to the bits, which are set, will now be controlled by the user
+//      Additionally, they will be set on or off depending on the value of the msb of the 4-bit extenstion 
 //  Example:
 //    0xff 0x10
 //    LED #2 (the third LED) will be switched on (0x10 = 0b1010)
@@ -114,7 +120,7 @@ ISR(TWI_vect){
 //    Enable/disable powersupply of ALL servos. Can be overridden by the jumper
 //    near the mosfet on the board. (jumper present -> servos always powered)
 //  Parameters:
-//    4 bit
+//    4 bit (extension)
 //      power off (0) or "power on" (1-255)
 //  Example:
 //    0xff 0x21
@@ -133,7 +139,7 @@ ISR(TWI_vect){
 //    Put the 16 bit angular value of the selected servo into the transmit buffer.
 //    Order: First MSB then LSB
 //  Parameters:
-//    4 bit
+//    4 bit (extension)
 //      Servo ID (allowed values: 0-7)
 //  Example:
 //    0xff 0x43
@@ -184,43 +190,29 @@ void twi_handle(uint8_t data){
   //here we have collected 8 bit of data
   switch (recvstate){
     case RECVcommand: //data wird interpretiert als command
-      switch(data_complete & (0xf<<4)){
+      switch((data_complete & (0xf0))>>4 ){
         case CMD_SERVO: //control servo
-          servo_waiting_for_data = (data_complete<<4)%8;
+          servo_waiting_for_data = data_complete & (0x0f);
           recvstate = RECVangular; //we expect angular to be transmitted as the next byte
           break;
         case CMD_LED: //control LED
-          if((data_complete&(1<<4))==0){ //led ausschalten
-            switch(data_complete<<5){
-              case 0:
-                led_controlled_by_user |= (1<<0);
-                led1_aus;
-                break;
-              case 1:
-                led_controlled_by_user |= (1<<1);
-                led2_aus;
-                break;
-              case 2:
-                led_controlled_by_user |= (1<<2);
-                led3_aus;
-                break;
-            }
-          }else{
-            switch(data_complete<<5){
-              case 0:
-                led_controlled_by_user |= (1<<0);
-                led1_an;
-                break;
-              case 1:
-                led_controlled_by_user |= (1<<1);
-                led2_an;
-                break;
-              case 2:
-                led_controlled_by_user |= (1<<2);
-                led3_an;
-                break;
-            }
-          }
+					led_controlled_by_user |= data_complete & ((1<<2|1<<1|1<<0)); //alle leds die in dem command vorkommen werden ab sofort vom "user" bedient und sind abgekoppelt von der "hart verdrahteten" steuerung
+
+          if((data_complete&(1<<3))==0){ //ausschalten
+						if(data_complete&(1<<0))
+							led1_aus;
+						if(data_complete&(1<<1))
+							led2_aus;
+						if(data_complete&(1<<2))
+							led3_aus;
+          } else { //einschalten
+						if(data_complete&(1<<0))
+							led1_an;
+						if(data_complete&(1<<1))
+							led2_an;
+						if(data_complete&(1<<2))
+							led3_an;
+					}
           break;
         case CMD_SERVOSonoff:
           if((data_complete&(1<<4))==0){ //servos ausschalten
@@ -259,9 +251,8 @@ void twi_handle(uint8_t data){
     case RECVangular2:
       {
 	uint16_t speed = ((uint16_t)angularh)<<8 | (uint16_t)data_complete;
-      // TODO: Put this in a define 
-      if (speed > 8000) {
-	speed = 8000;
+      if (speed > SERVO_MAX_VALUE) {
+        speed = SERVO_MAX_VALUE;
       }
       servos_angular[servo_waiting_for_data] = speed;
 

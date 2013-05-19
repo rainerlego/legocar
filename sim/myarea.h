@@ -30,6 +30,7 @@ protected:
   bool 	on_button_press_event (GdkEventButton*event);
   bool 	on_key_press_event (GdkEventKey*event);
   bool 	on_key_release_event (GdkEventKey*event);
+  bool 	on_scroll_event (GdkEventScroll*event);
 
   bool on_timeout(int i);
 };

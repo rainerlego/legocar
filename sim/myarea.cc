@@ -10,6 +10,7 @@
 
 MyArea::MyArea()
 {
+  add_events(Gdk::SCROLL_MASK );
   add_events(Gdk::BUTTON_PRESS_MASK );
   add_events(Gdk::KEY_PRESS_MASK );
   add_events(Gdk::KEY_RELEASE_MASK );
@@ -98,6 +99,19 @@ bool 	MyArea::on_key_release_event (GdkEventKey*event){
       break;
     case 32: //spacebar -> motor off
       myCar.accel = 0.0;
+      break;
+    case 119: //w
+      myCamera.pos.y -= myCamera.scale_to_m(myCamera.height/2.0);
+      break;
+    case 115: //s
+      myCamera.pos.y += myCamera.scale_to_m(myCamera.height/2.0);
+      break;
+    case 97: //a
+      myCamera.pos.x -= myCamera.scale_to_m(myCamera.width/2.0);
+      break;
+    case 100: //d
+      myCamera.pos.x += myCamera.scale_to_m(myCamera.width/2.0);
+      break;
   }
   return false;
 }
@@ -122,9 +136,20 @@ bool 	MyArea::on_key_press_event (GdkEventKey*event){
   return false;
 }
 
+bool 	MyArea::on_scroll_event (GdkEventScroll*event){
+
+  //std::cout << " scroll " << event->direction << "\n";
+  if(event->direction == 1){
+    myCamera.set_ppm(myCamera.ppm/1.5);
+  }else{
+    myCamera.set_ppm(myCamera.ppm*1.5);
+  }
+  return false;
+}
+
 bool 	MyArea::on_button_press_event (GdkEventButton*event){
 
-  std::cout << " button press\n";
+  std::cout << " button press " << event->button << "\n";
   return false;
 }
 
@@ -134,7 +159,7 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   Gtk::Allocation allocation = get_allocation();
   const int width = allocation.get_width();
   const int height = allocation.get_height();
-
+  myCamera.set_geometry(width, height);
   // coordinates for the center of the window
   int xc, yc;
   xc = width / 2;

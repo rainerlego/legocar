@@ -1,6 +1,5 @@
 package com.legocar.testingversion.utils;
 
-import com.legocar.testingversion.communication.TCPClient;
 import com.legocar.testingversion.communication.UDPClient;
 
 public class CommunicationUtils {

@@ -24,8 +24,8 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080031;
-        public static final int buttonStart=0x7f080030;
+        public static final int action_settings=0x7f080032;
+        public static final int buttonStart=0x7f080031;
         public static final int carAddressHeader=0x7f08000e;
         public static final int carIP=0x7f080011;
         public static final int carIPLabel=0x7f080010;
@@ -34,7 +34,7 @@ public final class R {
         public static final int defaultMessageDelay=0x7f08001b;
         public static final int emptyText1=0x7f08000d;
         public static final int emptyText2=0x7f080016;
-        public static final int emptyText3=0x7f08002e;
+        public static final int emptyText3=0x7f08002f;
         public static final int middlePower=0x7f08001d;
         public static final int middlePowerValue=0x7f08001e;
         public static final int middleSteering=0x7f080023;
@@ -42,23 +42,24 @@ public final class R {
         public static final int minMessageDelay=0x7f08001a;
         public static final int offsetPower=0x7f080020;
         public static final int offsetPowerValue=0x7f080021;
-        public static final int offsetSteering=0x7f080025;
-        public static final int offsetSteeringValue=0x7f080026;
-        public static final int powerServo=0x7f080028;
-        public static final int powerServoValue=0x7f080029;
+        public static final int offsetSteering=0x7f080026;
+        public static final int offsetSteeringValue=0x7f080027;
+        public static final int powerServo=0x7f080029;
+        public static final int powerServoValue=0x7f08002a;
         public static final int range_setting=0x7f080018;
         public static final int scrollView=0x7f080009;
         public static final int speedView=0x7f080000;
-        public static final int steeringServo=0x7f08002b;
-        public static final int steeringServoValue=0x7f08002c;
+        public static final int steeringServo=0x7f08002c;
+        public static final int steeringServoValue=0x7f08002d;
         public static final int steeringView=0x7f080008;
         public static final int tableLayout=0x7f08000a;
         public static final int tableLayout2=0x7f080001;
         public static final int tableRow1=0x7f080002;
-        public static final int tableRow11=0x7f080027;
-        public static final int tableRow12=0x7f08002a;
-        public static final int tableRow13_0=0x7f08002d;
-        public static final int tableRow14=0x7f08002f;
+        public static final int tableRow10=0x7f080025;
+        public static final int tableRow11=0x7f080028;
+        public static final int tableRow12=0x7f08002b;
+        public static final int tableRow13_0=0x7f08002e;
+        public static final int tableRow14=0x7f080030;
         public static final int tableRow1_0=0x7f08000c;
         public static final int tableRow2=0x7f080005;
         public static final int tableRow3=0x7f08000f;

@@ -5,6 +5,7 @@
 #include "tcpserver.h"
 #include "wiimote.h"
 #include "servo.h"
+#include "config.h"
 
 void *wii_thread(void * v)
 {
@@ -14,23 +15,23 @@ void *wii_thread(void * v)
 int main()
 {
   struct tcpserver ts;
-
   pthread_t wiit;
 
-  servoboard_init();
-  servoboard_open();
+  servo_init();
+  if ( servo_open() )
+  {
+    printf("E: main: could not open servo interface. Exiting...\n" );
+    return -1;
+  }
 
   if( pthread_create( &wiit , NULL ,  wii_thread , NULL) < 0)
   {
-    perror("could not create wii thread\n");
-    return 1;
+    perror("E: main: could not create wii thread\n");
+    return -1;
   }
 
-
-  ts.port = 5567;
-  printf ( "main: before ts start\n" );
+  ts.port = SERVER_PORT;
   tcpserver_start ( &ts );
-  printf ( "main: after ts start\n" );
 
   return 0;
 }

@@ -1,9 +1,9 @@
 #include<stdio.h>
-#include<string.h>	//strlen
-#include<stdlib.h>	//strlen
+#include<string.h>  //strlen
+#include<stdlib.h>  //strlen
 #include<sys/socket.h>
-#include<arpa/inet.h>	//inet_addr
-#include<unistd.h>	//write
+#include<arpa/inet.h>  //inet_addr
+#include<unistd.h>  //write
 
 #include<pthread.h> //for threading , link with lpthread
 
@@ -86,7 +86,7 @@ void parse_stack ( struct cconn * cc )
                 &&  parse_servo_value ( cc->s[3], cc->l[3], &v )
                )
             {
-              servoboard_setservo ( ch, v );
+              servo_setservo ( ch, v );
               retlen = snprintf ( ret, 200, "ok servo set %d %d \n", ch, v );
             }
           }
@@ -101,7 +101,7 @@ void parse_stack ( struct cconn * cc )
             if (   parse_servo_onoff ( cc->s[2], cc->l[2], &onoff )
                 && parse_servo_value ( cc->s[3], cc->l[3], &mask ) )
             {
-              servoboard_setleds ( onoff, mask );
+              servo_setleds ( onoff, mask );
               retlen = snprintf ( ret, 200, "ok servo led %d %d \n", onoff, mask );
             }
           }
@@ -152,12 +152,12 @@ void addc ( struct cconn * cc, char c )
 void *connection_handler(void * cconn)
 {
   struct cconn * cc = (struct cconn*) cconn;
-	//int sock = *(int*)socket_desc;
+  //int sock = *(int*)socket_desc;
   char c;
   int ret;
   int br;
-	
-	//write(sock , message , strlen(message));
+  
+  //write(sock , message , strlen(message));
 
   reset_stack ( cc );
 
@@ -167,84 +167,71 @@ void *connection_handler(void * cconn)
     addc ( cc, c );
   } 
 
-  printf ( "read: %d\n", br );
-
+  printf("N: tcpserver: client disconnected\n" );
 
   close ( cc->fd );
-	free(cc);
-	
-	return 0;
+  free(cc);
+  
+  return 0;
 }
 
 int tcpserver_start ( struct tcpserver * ts )
 {
-	int socket_desc , new_socket , c , *new_sock;
-	struct sockaddr_in server , client;
-	char *message;
+  int socket_desc , new_socket , c , *new_sock;
+  struct sockaddr_in server , client;
+  char *message;
 
   struct cconn * newcc;
-	
-	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
-	if (socket_desc == -1)
-	{
-		printf("Could not create socket");
+  
+  socket_desc = socket(AF_INET , SOCK_STREAM , 0);
+  if (socket_desc == -1)
+  {
+    printf("E: tcpserver: Could not create socket");
     return -1;
-	}
-	
-	//Prepare the sockaddr_in structure
-	server.sin_family = AF_INET;
-	server.sin_addr.s_addr = INADDR_ANY;
-	server.sin_port = htons( ts->port );
-	
-	//Bind
-	if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0)
-	{
-		puts("bind failed");
-		return -1;
-	}
-	puts("bind done");
-	
-	//Listen
-	listen(socket_desc , 3);
-	
-	//Accept and incoming connection
-	puts("Waiting for incoming connections...");
-	c = sizeof(struct sockaddr_in);
-	while( (new_socket = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
-	{
-		puts("Connection accepted");
-		
-		//Reply to the client
-		//message = "Hello Client , I have received your connection. And now I will assign a handler for you\n";
-		//write(new_socket , message , strlen(message));
-		
-		pthread_t sniffer_thread;
-    /*
-		new_sock = malloc(1);
-		*new_sock = new_socket;
-    */
+  }
+  
+  //Prepare the sockaddr_in structure
+  server.sin_family = AF_INET;
+  server.sin_addr.s_addr = INADDR_ANY;
+  server.sin_port = htons( ts->port );
+  
+  //Bind
+  if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0)
+  {
+    puts("E: tcpserver: bind failed");
+    return -1;
+  }
+  
+  //Listen
+  listen(socket_desc , 3);
+
+	printf ("N: tcpserver: I'm listening on port %d\n", ts->port );
+  
+  c = sizeof(struct sockaddr_in);
+  while( (new_socket = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
+  {
+    
+    pthread_t sniffer_thread;
 
     newcc = (struct cconn*)malloc ( sizeof(struct cconn) );
     newcc->fd = new_socket;
-		
-		if( pthread_create( &sniffer_thread , NULL ,  connection_handler , (void*) newcc) < 0)
-		{
-			perror("could not create thread");
-			return 1;
-		}
-		
-		//Now join the thread , so that we dont terminate before the thread
-		//pthread_join( sniffer_thread , NULL);
-		puts("Handler assigned");
-	}
-	
-	if (new_socket<0)
-	{
-		perror("accept failed");
-		return -1;
-	}
-	
-	return 0;
+    
+    if( pthread_create( &sniffer_thread , NULL ,  connection_handler , (void*) newcc) < 0)
+    {
+      perror("E: tcpserver: Could not create thread for incoming connection");
+      return 1;
+    }
+    
+    puts("N: tcpserver: Connection accepted");
+  }
+  
+  if (new_socket<0)
+  {
+    perror("E: tcpserver: accept failed");
+    return -1;
+  }
+  
+  return 0;
 }
 
 

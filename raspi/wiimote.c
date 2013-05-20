@@ -71,7 +71,7 @@ int wii_open()
 int wii_close()
 {
   if (cwiid_close(wiimote)) {
-    fprintf(stderr, "Error on wiimote disconnect\n");
+    fprintf(stderr, "E: wii: Error on wiimote disconnect\n");
     return -1;
   }
   return 0;

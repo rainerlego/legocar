@@ -1,3 +1,5 @@
+*.class
+*.dex
 *.map
 *.objdump
 helloworld/software/carbsp/*

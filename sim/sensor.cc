@@ -6,7 +6,7 @@
 
 Sensor::Sensor(){
   angular = 2.0*M_PI*45.0/360.0/2.0;
-  range = 3.0*m;
+  range = 6.0*m;
   angular_resolution = 100;
 
   angular_per_slot = angular*2.0/(double)angular_resolution;

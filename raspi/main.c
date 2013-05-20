@@ -15,22 +15,23 @@ void *wii_thread(void * v)
 int main()
 {
   struct tcpserver ts;
-
   pthread_t wiit;
 
   servo_init();
-  servo_open();
+  if ( servo_open() )
+  {
+    printf("E: main: could not open servo interface. Exiting...\n" );
+    return -1;
+  }
 
   if( pthread_create( &wiit , NULL ,  wii_thread , NULL) < 0)
   {
-    perror("could not create wii thread\n");
-    return 1;
+    perror("E: main: could not create wii thread\n");
+    return -1;
   }
 
   ts.port = SERVER_PORT;
-  printf ( "main: before ts start\n" );
   tcpserver_start ( &ts );
-  printf ( "main: after ts start\n" );
 
   return 0;
 }

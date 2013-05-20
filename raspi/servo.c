@@ -24,26 +24,24 @@ int servo_init()
 int servo_open()
 {
 #if SERVO_M == SERVO_BOARD
-	printf ("i2c");
-	return servoboard_open();
+  return servoboard_open();
 #elif SERVO_M == SERVO_SIM
-	printf ("sim");
-	return servosim_open();
+  return servosim_open();
 #endif
 }
 
 void servo_close()
 {
 #if SERVO_M == SERVO_BOARD
-	servoboard_close();
+  servoboard_close();
 #elif SERVO_M == SERVO_SIM
-	servosim_close();
+  servosim_close();
 #endif
 }
 
 int servo_setservo ( uint8_t servoNr, uint16_t servoPos )
 {
-	int ret;
+  int ret;
 
   if ( (servoPos < 0) || (servoPos > 8000 ) ) {
     printf ( "E: Servo: servoPos (%d) out of range\n", servoPos );
@@ -56,9 +54,9 @@ int servo_setservo ( uint8_t servoNr, uint16_t servoPos )
 
   pthread_mutex_lock ( &servo_mutex );
 #if SERVO_M == SERVO_BOARD
-	ret = servoboard_setservo(servoNr, servoPos);
+  ret = servoboard_setservo(servoNr, servoPos);
 #elif SERVO_M == SERVO_SIM
-	ret = servosim_setservo(servoNr, servoPos);
+  ret = servosim_setservo(servoNr, servoPos);
 #endif
   pthread_mutex_unlock ( &servo_mutex );
 
@@ -67,13 +65,26 @@ int servo_setservo ( uint8_t servoNr, uint16_t servoPos )
 
 int servo_setleds ( uint8_t onoff, uint8_t leds )
 {
-	int ret;
+  int ret;
+
+  if ( onoff < 0 || onoff > 1 )
+  {
+    printf ( "E: Servo: setled: onoff wrong: %d\n", onoff );
+    return -1;
+  }
+
+  if ( leds < 0 || leds > (int)((1<<0)|(1<<1)|(1<<2)) )
+  {
+    printf ( "E: Servo: setled: mask wrong: %d\n", leds );
+    return -1;
+  }
+
 
   pthread_mutex_lock ( &servo_mutex );
 #if SERVO_M == SERVO_BOARD
-	ret = servoboard_setleds(onoff, leds);
+  ret = servoboard_setleds(onoff, leds);
 #elif SERVO_M == SERVO_SIM
-	ret = servosim_setleds(onoff, leds);
+  ret = servosim_setleds(onoff, leds);
 #endif
   pthread_mutex_unlock ( &servo_mutex );
 

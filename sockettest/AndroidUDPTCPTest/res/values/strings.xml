@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TestingVersion</string>
+    <string name="app_name">Our Car</string>
     <string name="action_settings">Settings</string>
-    <string name="praktikum">Lego car praktikum!</string>
+    <string name="title">Let us drive our car!</string>
     <string name="edit_message">Enter a Message</string>
-    <string name="inputHeader">To send massage: </string>
     <string name="sendUDP">Send by UDP</string>
     <string name="sendTCP">Send by TCP</string>
+    <string name="carAddressHeader">Set the address of our car: </string>
+    <string name="carIPLabel">IP:</string>
+    <string name="carPortLabel">Port:</string>
+    <string name="defaultIP">10.0.1.5</string>
+    <string name="defaultPort">8584</string>
+    <string name="startDriving">Drive Now</string>
+    <string name="title_activity_driving">Driving</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="steering">Steering:  </string>
+    <string name="power">Power:  </string>
+    <string name="defaultValue">00.00%</string>
+    
+    <string name="range_setting">Range Settings:</string>
+    <string name="middlePower">Power Middle Value: </string>
+    <string name="offsetPower">Power Offset: </string>
+    <string name="middleSteering">Steering Middle Value: </string>
+    <string name="offsetSteering">Steering Offset: </string>
+    <string name="defaultMiddleValue">4000</string>
+    <string name="defaultOffsetValue">3000</string>
+    <string name="powerServo">Power Servo Nr.: </string>
+    <string name="steeringServo">Steering Servo Nr.:</string>
+    <string name="defaultPowerServo">0</string>
+    <string name="defaultSteeringServo">1</string>
+    <string name="minMessageDelay">Minimum Message Delay: </string>
+    <string name="defaultMessageDelay">50</string>
+    <string name="empty"> </string>
     
 </resources>

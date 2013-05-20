@@ -19,6 +19,11 @@ MyArea::MyArea()
   sigc::connection myConnection = Glib::signal_timeout().connect(my_slot, 10);
 
 
+  //attach sensor to car:
+  mySensor.myMap = &myMap;
+  mySensor.myCar = &myCar;
+
+
   key_left = false;
   key_right = false;
   key_up = false;
@@ -33,6 +38,7 @@ bool MyArea::on_timeout(int i){
   //on_draw();
   //
   time += 10*ms;
+  mySensor.scan();
   double steeringstep = M_PI/500.0;
   double max_steer = M_PI/8.0;
   double max_accel = 10.0*m/s/s;
@@ -261,6 +267,17 @@ void MyArea::draw_car(const Cairo::RefPtr<Cairo::Context>& cr){
   cr->move_to(fwf.x, fwf.y);
   cr->line_to(fwb.x, fwb.y);
   
+  //draw sensor:
+
+  cr->set_source_rgb(0.6, 0.0, 0.0);
+  vect2 s1 = front + myCar.direction.get_rotated(mySensor.angular) * myCamera.scale(mySensor.range);
+  vect2 s2 = front + myCar.direction.get_rotated(-mySensor.angular) * myCamera.scale(mySensor.range);
+  cr->move_to(front.x, front.y);
+  cr->line_to(s1.x, s1.y);
+  cr->move_to(front.x, front.y);
+  cr->line_to(s2.x, s2.y);
+
+
   //vect2 M = myCamera.transform(myCar.get_center_of_rotation());
 
   //cr->move_to(back.x, back.y);

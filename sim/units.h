@@ -7,5 +7,6 @@
 #define cm 0.01
 #define km 1000.0
 #define h 3600.0
+#define deg 2.0*M_PI/360.0
 
 #endif

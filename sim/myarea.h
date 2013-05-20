@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "car.h"
 #include "map.h"
+#include "sensor.h"
 
 class MyArea : public Gtk::DrawingArea
 {
@@ -15,6 +16,7 @@ public:
   Camera myCamera;
   Car myCar;
   Map myMap;
+  Sensor mySensor;
 
 protected:
 

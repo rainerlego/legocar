@@ -86,7 +86,7 @@ void parse_stack ( struct cconn * cc )
                 &&  parse_servo_value ( cc->s[3], cc->l[3], &v )
                )
             {
-              servoboard_setservo ( ch, v );
+              servo_setservo ( ch, v );
               retlen = snprintf ( ret, 200, "ok servo set %d %d \n", ch, v );
             }
           }
@@ -101,7 +101,7 @@ void parse_stack ( struct cconn * cc )
             if (   parse_servo_onoff ( cc->s[2], cc->l[2], &onoff )
                 && parse_servo_value ( cc->s[3], cc->l[3], &mask ) )
             {
-              servoboard_setleds ( onoff, mask );
+              servo_setleds ( onoff, mask );
               retlen = snprintf ( ret, 200, "ok servo led %d %d \n", onoff, mask );
             }
           }

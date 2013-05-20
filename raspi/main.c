@@ -5,6 +5,7 @@
 #include "tcpserver.h"
 #include "wiimote.h"
 #include "servo.h"
+#include "config.h"
 
 void *wii_thread(void * v)
 {
@@ -26,8 +27,7 @@ int main()
     return 1;
   }
 
-
-  ts.port = 5567;
+  ts.port = SERVER_PORT;
   printf ( "main: before ts start\n" );
   tcpserver_start ( &ts );
   printf ( "main: after ts start\n" );

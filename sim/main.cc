@@ -3,6 +3,7 @@
 #include <gtkmm/window.h>
 
 #include "config.h"
+#include "global.h"
 #include "tcpserver.h"
 
 void *tcp_thread(void * v)
@@ -20,6 +21,8 @@ int main(int argc, char** argv)
   win.set_title("DrawingArea");
 
   pthread_t tcpthread;
+
+  global_ctrl = CTRL_USER;
 
   MyArea area;
   win.add(area);

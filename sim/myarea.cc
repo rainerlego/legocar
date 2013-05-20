@@ -8,6 +8,8 @@
 #include <string>
 #include <sstream>
 
+#include "global.h"
+
 MyArea::MyArea()
 {
   add_events(Gdk::SCROLL_MASK );
@@ -50,30 +52,34 @@ bool MyArea::on_timeout(int i){
   double max_steer = M_PI/8.0;
   double max_accel = 10.0*m/s/s;
   double accelstep = 0.05;
-  if(key_up){
-    myCar.accel+=accelstep;
-    if(myCar.accel > max_accel){
-      myCar.accel = max_accel;
-    }
-  }
-  if(key_down){
-    myCar.accel-=accelstep;
-    if(myCar.accel < -max_accel){
-      myCar.accel = -max_accel;
-    }
-  }
-  if(key_left){
-    myCar.steering+=steeringstep;
-    if(myCar.steering > M_PI/2.0+ max_steer){
-      myCar.steering = M_PI/2.0 + max_steer;
-    }
-  }
-  if(key_right){
-    myCar.steering-=steeringstep;
-    if(myCar.steering < M_PI/2.0-max_steer){
-      myCar.steering = M_PI/2.0 - max_steer;
-    }
-  }
+
+	if ( global_ctrl == CTRL_USER )
+	{
+		if(key_up){
+			myCar.accel+=accelstep;
+			if(myCar.accel > max_accel){
+				myCar.accel = max_accel;
+			}
+		}
+		if(key_down){
+			myCar.accel-=accelstep;
+			if(myCar.accel < -max_accel){
+				myCar.accel = -max_accel;
+			}
+		}
+		if(key_left){
+			myCar.steering+=steeringstep;
+			if(myCar.steering > M_PI/2.0+ max_steer){
+				myCar.steering = M_PI/2.0 + max_steer;
+			}
+		}
+		if(key_right){
+			myCar.steering-=steeringstep;
+			if(myCar.steering < M_PI/2.0-max_steer){
+				myCar.steering = M_PI/2.0 - max_steer;
+			}
+		}
+	}
   myCar.move(10*ms);
   queue_draw();
 
@@ -86,7 +92,7 @@ MyArea::~MyArea()
 
 bool 	MyArea::on_key_release_event (GdkEventKey*event){
 
-  //std::cout << " key release\n";
+	//printf("key up: %d\n", event->keyval);
   switch(event->keyval){
     case 65363:
       key_right = false;
@@ -125,6 +131,9 @@ bool 	MyArea::on_key_release_event (GdkEventKey*event){
     case 100: //d
       myCamera.pos.x += myCamera.scale_to_m(myCamera.width/2.0);
       break;
+		case 99: //c
+			global_ctrl_switch();
+			break;
   }
   return false;
 }
@@ -213,6 +222,18 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   std::stringstream stime;
   stime << "simulation time: " << time/s << " s";
   cr->show_text(stime.str());
+
+  cr->move_to(10.0,50.0);
+  std::stringstream sctrl;
+	if ( global_ctrl == CTRL_USER )
+	{
+		cr->set_source_rgb(0.4, 0.0, 0.0);
+		sctrl << "Control: user";
+	} else {
+		cr->set_source_rgb(0.0, 0.0, 0.4);
+		sctrl << "Control: TCP";
+	}
+  cr->show_text(sctrl.str());
 
   draw_map(cr);
   draw_car(cr);

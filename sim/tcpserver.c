@@ -7,6 +7,7 @@
 
 #include<pthread.h> //for threading , link with lpthread
 
+#include "global.h"
 #include "tcpserver.h"
 
 int parse_servo_value ( char * s, int l, int * v )

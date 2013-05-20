@@ -61,6 +61,7 @@ void Sensor::scan(){
         //distance_stop = obst_left.abs();
       }
       int ii;
+      distance_start = (obst_left + (obst_right-obst_left)*0.5).abs();
       //std::cout << "ang_start: " << ang_start << " ang_stop: " << ang_stop << "\n";
       //std::cout << "ang_start: " << (int)(ang_start/angular_per_slot) << " ang_stop: " << (int)(ang_stop/angular_per_slot) << "\n";
       for(ii= (int) (ang_start/angular_per_slot); ii< (int)(ang_stop/angular_per_slot) ; ii++){

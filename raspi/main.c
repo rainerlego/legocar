@@ -18,8 +18,8 @@ int main()
 
   pthread_t wiit;
 
-  servoboard_init();
-  servoboard_open();
+  servo_init();
+  servo_open();
 
   if( pthread_create( &wiit , NULL ,  wii_thread , NULL) < 0)
   {

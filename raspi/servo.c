@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include "config.h"
 #include "servo.h"
 #include "servoboard.h"
 #include "servosim.h"
@@ -23,8 +24,10 @@ int servo_init()
 int servo_open()
 {
 #if SERVO_M == SERVO_BOARD
+	printf ("i2c");
 	return servoboard_open();
 #elif SERVO_M == SERVO_SIM
+	printf ("sim");
 	return servosim_open();
 #endif
 }
@@ -34,6 +37,7 @@ void servo_close()
 #if SERVO_M == SERVO_BOARD
 	servoboard_close();
 #elif SERVO_M == SERVO_SIM
+	servosim_close();
 #endif
 }
 

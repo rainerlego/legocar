@@ -9,5 +9,7 @@
 
 
 
-//Port for tcp client to connect to simulation program
+//IP of simulation program
+#define SIM_IP "10.0.0.132"
+//TCP port of simulation program
 #define SIM_PORT 8584

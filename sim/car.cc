@@ -71,4 +71,12 @@ double Car::getR(void){
   return tan(steering)*length;
 }
 
+void Car::set_steering_servo ( int servo )
+{
+	steering = steer_mid - steer_max*(((double)servo-4000)/4000.0);
+}
+
+void Car::set_accel_servo ( int servo )
+{
+}
 

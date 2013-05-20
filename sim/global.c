@@ -3,8 +3,10 @@
 #include<stdlib.h>  //strlen
 
 #include "global.h"
+#include "myarea.h"
 
 int global_ctrl;
+MyArea * global_area;
 
 void global_ctrl_switch()
 {

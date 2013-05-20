@@ -49,34 +49,32 @@ bool MyArea::on_timeout(int i){
   //
   time += 10*ms;
   double steeringstep = M_PI/500.0;
-  double max_steer = M_PI/8.0;
-  double max_accel = 10.0*m/s/s;
   double accelstep = 0.05;
 
 	if ( global_ctrl == CTRL_USER )
 	{
 		if(key_up){
 			myCar.accel+=accelstep;
-			if(myCar.accel > max_accel){
-				myCar.accel = max_accel;
+			if(myCar.accel > accel_max){
+				myCar.accel = accel_max;
 			}
 		}
 		if(key_down){
 			myCar.accel-=accelstep;
-			if(myCar.accel < -max_accel){
-				myCar.accel = -max_accel;
+			if(myCar.accel < -accel_max){
+				myCar.accel = -accel_max;
 			}
 		}
 		if(key_left){
 			myCar.steering+=steeringstep;
-			if(myCar.steering > M_PI/2.0+ max_steer){
-				myCar.steering = M_PI/2.0 + max_steer;
+			if(myCar.steering > steer_mid + steer_max){
+				myCar.steering = steer_mid + steer_max;
 			}
 		}
 		if(key_right){
 			myCar.steering-=steeringstep;
-			if(myCar.steering < M_PI/2.0-max_steer){
-				myCar.steering = M_PI/2.0 - max_steer;
+			if(myCar.steering < steer_mid - steer_max){
+				myCar.steering = steer_mid - steer_max;
 			}
 		}
 	}

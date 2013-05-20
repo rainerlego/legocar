@@ -9,30 +9,32 @@
 
 #include "global.h"
 #include "tcpserver.h"
+#include "car.h"
+#include "myarea.h"
 
-int parse_servo_value ( char * s, int l, int * v )
+int parse_servo_value ( char * str, int l, int * v )
 {
   if ( l <= 0 )
     return 0;
 
-  *v = atoi ( s );
+  *v = atoi ( str );
   return 1;
 }
 
-int parse_servo_onoff ( char * s, int l, int * v )
+int parse_servo_onoff ( char * str, int l, int * v )
 {
   if ( l <= 0 )
     return 0;
 
-  if (   ( 0==strncmp ( s, "on", l ) )
-      || ( 0==strncmp ( s, "1", l ) )   )
+  if (   ( 0==strncmp ( str, "on", l ) )
+      || ( 0==strncmp ( str, "1", l ) )   )
   {
     *v = 1;
     return 1;
   }
 
-  if (   ( 0==strncmp ( s, "off", l ) )
-      || ( 0==strncmp ( s, "0", l ) )   )
+  if (   ( 0==strncmp ( str, "off", l ) )
+      || ( 0==strncmp ( str, "0", l ) )   )
   {
     *v = 0;
     return 1;
@@ -86,7 +88,18 @@ void parse_stack ( struct cconn * cc )
                 &&  parse_servo_value ( cc->speicher[3], cc->l[3], &v )
                )
             {
-              //servo_setservo ( ch, v );
+							if (global_ctrl == CTRL_TCP )
+							{
+								switch ( ch )
+								{
+									case 0:
+										global_area->myCar.set_accel_servo(v);
+										break;
+									case 1:
+										global_area->myCar.set_steering_servo(v);
+										break;
+								}
+							}
               retlen = snprintf ( ret, 200, "ok servo set %d %d \n", ch, v );
             }
           }

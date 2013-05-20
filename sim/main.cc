@@ -24,9 +24,11 @@ int main(int argc, char** argv)
 
   global_ctrl = CTRL_USER;
 
-  MyArea area;
-  win.add(area);
-  area.show();
+	MyArea larea;
+	global_area = &larea;
+
+  win.add(larea);
+  larea.show();
 
   if( pthread_create( &tcpthread , NULL ,  tcp_thread , NULL) < 0)
   {

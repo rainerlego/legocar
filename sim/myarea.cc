@@ -17,6 +17,8 @@ MyArea::MyArea()
   set_can_focus(true);
   sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this,&MyArea::on_timeout), 0);
   sigc::connection myConnection = Glib::signal_timeout().connect(my_slot, 10);
+  sigc::slot<bool> my_slot2 = sigc::bind(sigc::mem_fun(*this,&MyArea::on_timeout2), 0);
+  sigc::connection myConnection2 = Glib::signal_timeout().connect(my_slot2, 100);
 
 
   //attach sensor to car:
@@ -32,13 +34,18 @@ MyArea::MyArea()
   time = 0;
 }
 
+bool MyArea::on_timeout2(int i){
+  mySensor.scan();
+
+  
+  return true;
+}
 bool MyArea::on_timeout(int i){
   //std::cout << " timer\n";
   //myCar.move(100*ms);
   //on_draw();
   //
   time += 10*ms;
-  mySensor.scan();
   double steeringstep = M_PI/500.0;
   double max_steer = M_PI/8.0;
   double max_accel = 10.0*m/s/s;
@@ -209,8 +216,26 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
   draw_map(cr);
   draw_car(cr);
+  draw_sensordata(cr);
 
   return true;
+}
+
+
+void MyArea::draw_sensordata(const Cairo::RefPtr<Cairo::Context>& cr){
+  cr->set_line_width(2.0);
+  cr->set_source_rgb(0.0, 0.4, 0.0);
+  double posx = 200.0;
+  double posy = 10.0;
+  double height = 300.0;
+  double spacing = 3.0;
+  int i;
+  for(i=0;i<mySensor.angular_resolution;i++){
+    cr->move_to(posx + (double)i *spacing, posy);
+    cr->line_to(posx + (double)i *spacing, posy + (mySensor.range-mySensor.data[i])*height/mySensor.range );
+  }
+  cr->stroke();
+  
 }
 
 void MyArea::draw_map(const Cairo::RefPtr<Cairo::Context>& cr){

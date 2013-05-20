@@ -50,7 +50,7 @@ public abstract class ControlView extends View{
 			lastTimeMillis = currentTimeMillis;
 
 			if(display!=null){
-				display.setText(String.format("%.02f", 1-percentage)+"%");
+				display.setText(String.format("%.02f", percentage)+"%");
 			}
 			if(tClient!=null){
 

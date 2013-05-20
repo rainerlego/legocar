@@ -13,12 +13,47 @@ public class MainActivity extends Activity {
 
 	public static Setting settings;
 
+	EditText ipText;
+	EditText portText;
+	EditText defaultMessageDelay;
+	EditText powerMiddleValueText;
+	EditText powerOffsetText;
+	EditText steeringMiddleValueText;
+	EditText steeringOffsetText;
+	EditText powerServoText;
+	EditText steeringServoText;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		settings = new Setting();
 	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		
+		ipText = (EditText) findViewById(R.id.carIP);
+		portText = (EditText) findViewById(R.id.carPort);
+		defaultMessageDelay = (EditText) findViewById(R.id.defaultMessageDelay);
+		powerMiddleValueText = (EditText) findViewById(R.id.middlePowerValue);
+		powerOffsetText = (EditText) findViewById(R.id.offsetPowerValue);
+		steeringMiddleValueText = (EditText) findViewById(R.id.middleSteeringValue);
+		steeringOffsetText = (EditText) findViewById(R.id.offsetSteeringValue);
+		powerServoText = (EditText) findViewById(R.id.powerServoValue);
+		steeringServoText = (EditText) findViewById(R.id.steeringServoValue);
+		
+		ipText.setText(Setting.ip);
+		portText.setText(Setting.port+"");
+		defaultMessageDelay.setText(Setting.defaultMessageDelay+"");
+		powerMiddleValueText.setText(Setting.powerMiddleValue+"");
+		powerOffsetText.setText(Setting.powerOffset+"");
+		steeringMiddleValueText.setText(Setting.steeringMiddleValue+"");
+		steeringOffsetText.setText(Setting.steeringOffset+"");
+		powerServoText.setText(Setting.powerServo+"");
+		steeringServoText.setText(Setting.steeringServo+"");
+	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -49,16 +84,16 @@ public class MainActivity extends Activity {
 	}
 
 	private void setup() {
-		EditText ipText = (EditText) findViewById(R.id.carIP);
-		EditText portText = (EditText) findViewById(R.id.carPort);
-		EditText defaultMessageDelay = (EditText) findViewById(R.id.defaultMessageDelay);
-		EditText powerMiddleValueText = (EditText) findViewById(R.id.middlePowerValue);
-		EditText powerOffsetText = (EditText) findViewById(R.id.offsetPowerValue);
-		EditText steeringMiddleValueText = (EditText) findViewById(R.id.middleSteeringValue);
-		EditText steeringOffsetText = (EditText) findViewById(R.id.offsetSteeringValue);
-		EditText powerServoText = (EditText) findViewById(R.id.powerServoValue);
-		EditText steeringServoText = (EditText) findViewById(R.id.steeringServoValue);
-		
+		//		EditText ipText = (EditText) findViewById(R.id.carIP);
+		//		EditText portText = (EditText) findViewById(R.id.carPort);
+		//		EditText defaultMessageDelay = (EditText) findViewById(R.id.defaultMessageDelay);
+		//		EditText powerMiddleValueText = (EditText) findViewById(R.id.middlePowerValue);
+		//		EditText powerOffsetText = (EditText) findViewById(R.id.offsetPowerValue);
+		//		EditText steeringMiddleValueText = (EditText) findViewById(R.id.middleSteeringValue);
+		//		EditText steeringOffsetText = (EditText) findViewById(R.id.offsetSteeringValue);
+		//		EditText powerServoText = (EditText) findViewById(R.id.powerServoValue);
+		//		EditText steeringServoText = (EditText) findViewById(R.id.steeringServoValue);
+
 		String ip = ipText.getText().toString();
 		String port = portText.getText().toString();
 		String defaultMessageDelayValue = defaultMessageDelay.getText().toString(); 

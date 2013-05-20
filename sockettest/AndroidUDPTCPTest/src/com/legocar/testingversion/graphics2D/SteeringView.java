@@ -30,7 +30,10 @@ public class SteeringView extends ControlView{
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+		//FIXME
+	    canvas.rotate((float) (getPercentage()/2.0), getCanvasWidth()/2, getCanvasHeight()/2);
 		// Draw car
+	    
 		float left = 0;
 		float right = getCanvasWidth();
 		float top = getCanvasHeight()/2;	
@@ -44,8 +47,8 @@ public class SteeringView extends ControlView{
 		path.lineTo(right, top);
 		path.close();
 		canvas.drawPath(path, paint);
-		//FIXME
-	    canvas.rotate((float) (getPercentage()/2.0));
+		
+	    
 	}
 	
 }

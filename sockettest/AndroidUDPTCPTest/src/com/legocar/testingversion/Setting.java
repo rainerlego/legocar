@@ -1,59 +1,59 @@
 package com.legocar.testingversion;
 
 public class Setting {
-	protected String ip;
-	protected int port;
-	protected int powerMiddleValue;
-	protected int powerOffset;
-	protected int steeringMiddleValue;
-	protected int steeringOffset;
-	protected int powerServo;
-	protected int steeringServo;
-	protected int defaultMessageDelay;
+	protected static String ip = "10.0.1.5";
+	protected static int port = 8584;
+	protected static int powerMiddleValue = 4000;
+	protected static int powerOffset = 2000;
+	protected static int steeringMiddleValue = 4000;
+	protected static int steeringOffset = 2000;
+	protected static int powerServo =0;
+	protected static int steeringServo = 1;
+	protected static int defaultMessageDelay = 100;
 	
 	public Setting() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public Setting(String ip, String port, String defaultMessageDelay){
-		this();
-		this.ip=ip;
-		this.port=Integer.valueOf(port);
-		this.defaultMessageDelay = Integer.valueOf(defaultMessageDelay);
-	}
-
-	public Setting(String powerMiddleValue, String powerOffset, String steeringMiddleValue, String steeringOffset, String powerServo, String steeringServo){
-		this();
-		this.powerMiddleValue=Integer.valueOf(powerMiddleValue);
-		this.powerOffset=Integer.valueOf(powerOffset);
-		this.steeringMiddleValue=Integer.valueOf(steeringMiddleValue);
-		this.steeringOffset=Integer.valueOf(steeringOffset);
-		this.powerServo = Integer.valueOf(powerServo);
-		this.steeringServo = Integer.valueOf(steeringServo);
-	}
-
-	public Setting(String ip, String port, String defaultMessageDelay, String powerMiddleValue, String powerOffset, String steeringMiddleValue, String steeringOffset, String powerServo, String steeringServo){
-		this(powerMiddleValue, powerOffset, steeringMiddleValue, steeringOffset, powerServo, steeringServo);
-		this.ip=ip;
-		this.port=Integer.valueOf(port);
-		this.defaultMessageDelay = Integer.valueOf(defaultMessageDelay);
-
-	}
+//
+//	public Setting(String ip, String port, String defaultMessageDelay){
+//		this();
+//		Setting.ip=ip;
+//		Setting.port=Integer.valueOf(port);
+//		Setting.defaultMessageDelay = Integer.valueOf(defaultMessageDelay);
+//	}
+//
+//	public Setting(String powerMiddleValue, String powerOffset, String steeringMiddleValue, String steeringOffset, String powerServo, String steeringServo){
+//		this();
+//		Setting.powerMiddleValue=Integer.valueOf(powerMiddleValue);
+//		Setting.powerOffset=Integer.valueOf(powerOffset);
+//		Setting.steeringMiddleValue=Integer.valueOf(steeringMiddleValue);
+//		Setting.steeringOffset=Integer.valueOf(steeringOffset);
+//		Setting.powerServo = Integer.valueOf(powerServo);
+//		Setting.steeringServo = Integer.valueOf(steeringServo);
+//	}
+//
+//	public Setting(String ip, String port, String defaultMessageDelay, String powerMiddleValue, String powerOffset, String steeringMiddleValue, String steeringOffset, String powerServo, String steeringServo){
+//		this(powerMiddleValue, powerOffset, steeringMiddleValue, steeringOffset, powerServo, steeringServo);
+//		Setting.ip=ip;
+//		Setting.port=Integer.valueOf(port);
+//		Setting.defaultMessageDelay = Integer.valueOf(defaultMessageDelay);
+//
+//	}
 
 
 	public void set(String ip, String port, String defaultMessageDelay){
-		this.ip=ip;
-		this.port=Integer.valueOf(port);
-		this.defaultMessageDelay = Integer.valueOf(defaultMessageDelay);
+		Setting.ip=ip;
+		Setting.port=Integer.valueOf(port);
+		Setting.defaultMessageDelay = Integer.valueOf(defaultMessageDelay);
 	}
 
 	public void set(String powerMiddleValue, String powerOffset, String steeringMiddleValue, String steeringOffset, String powerServo, String steeringServo){
-		this.powerMiddleValue=Integer.valueOf(powerMiddleValue);
-		this.powerOffset=Integer.valueOf(powerOffset);
-		this.steeringMiddleValue=Integer.valueOf(steeringMiddleValue);
-		this.steeringOffset=Integer.valueOf(steeringOffset);
-		this.powerServo = Integer.valueOf(powerServo);
-		this.steeringServo = Integer.valueOf(steeringServo);
+		Setting.powerMiddleValue=Integer.valueOf(powerMiddleValue);
+		Setting.powerOffset=Integer.valueOf(powerOffset);
+		Setting.steeringMiddleValue=Integer.valueOf(steeringMiddleValue);
+		Setting.steeringOffset=Integer.valueOf(steeringOffset);
+		Setting.powerServo = Integer.valueOf(powerServo);
+		Setting.steeringServo = Integer.valueOf(steeringServo);
 	}
 
 	public void set(String ip, String port, String defaultMessageDelay, String powerMiddleValue, String powerOffset, String steeringMiddleValue, String steeringOffset, String powerServo, String steeringServo){

@@ -105,9 +105,7 @@
                 android:layout_height="wrap_content"
                 android:ems="5"
                 android:inputType="text"
-                android:text="@string/defaultIP" >
-
-                <requestFocus />
+                android:text="" >
             </EditText>
         </TableRow>
 
@@ -128,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:ems="5"
                 android:inputType="number"
-                android:text="@string/defaultPort" >
+                android:text="" >
             </EditText>
         </TableRow>
 
@@ -174,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:ems="5"
                 android:inputType="number"
-                android:text="@string/defaultMessageDelay" />
+                android:text="" />
         </TableRow>
 
         <TableRow
@@ -194,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:ems="5"
                 android:inputType="number"
-                android:text="@string/defaultMiddleValue" />
+                android:text="" />
         </TableRow>
 
         <TableRow
@@ -214,7 +212,7 @@
                 android:layout_height="wrap_content"
                 android:ems="5"
                 android:inputType="number"
-                android:text="@string/defaultOffsetValue" />
+                android:text="" />
         </TableRow>
 
         <TableRow
@@ -234,7 +232,7 @@
                 android:layout_height="wrap_content"
                 android:ems="5"
                 android:inputType="number"
-                android:text="@string/defaultMiddleValue" />
+                android:text="" />
         </TableRow>
 
         <TableRow
@@ -254,7 +252,7 @@
                 android:layout_height="wrap_content"
                 android:ems="5"
                 android:inputType="number"
-                android:text="@string/defaultOffsetValue" />
+                android:text="" />
         </TableRow>
 
         <TableRow
@@ -274,7 +272,7 @@
                 android:layout_height="wrap_content"
                 android:ems="5"
                 android:inputType="number"
-                android:text="@string/defaultPowerServo" />
+                android:text="" />
         </TableRow>
 
         <TableRow
@@ -294,7 +292,7 @@
                 android:layout_height="wrap_content"
                 android:ems="5"
                 android:inputType="number"
-                android:text="@string/defaultSteeringServo" />
+                android:text="" />
         </TableRow>
 
         <TableRow

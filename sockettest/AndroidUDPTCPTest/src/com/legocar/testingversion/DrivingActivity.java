@@ -150,7 +150,7 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 	    if(Math.abs(angular)>Math.PI/4){
 	    	return;
 	    }
-	    steeringView.updatePercentage((float) (400*angular/Math.PI));
+	    steeringView.updatePercentage((float) (-400*angular/Math.PI));
 		    
 	}
 

@@ -114,7 +114,12 @@ void parse_stack ( struct cconn * cc )
             if (   parse_servo_onoff ( cc->speicher[2], cc->l[2], &onoff )
                 && parse_servo_value ( cc->speicher[3], cc->l[3], &mask ) )
             {
-              //servo_setleds ( onoff, mask );
+							if(onoff)
+							{
+								global_area->leds |= mask & ((1<<0)|(1<<1)|(1<<2));
+							} else {
+								global_area->leds &= ~(mask & ((1<<0)|(1<<1)|(1<<2)));
+							}
               retlen = snprintf ( ret, 200, "ok servo led %d %d \n", onoff, mask );
             }
           }

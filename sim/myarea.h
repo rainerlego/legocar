@@ -17,6 +17,7 @@ public:
   Car myCar;
   Map myMap;
   Sensor mySensor;
+	int leds;
 
 protected:
 

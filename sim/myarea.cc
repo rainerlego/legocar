@@ -34,6 +34,8 @@ MyArea::MyArea()
   key_down = false;
 
   time = 0;
+
+  leds = 0;
 }
 
 bool MyArea::on_timeout2(int i){
@@ -51,33 +53,33 @@ bool MyArea::on_timeout(int i){
   double steeringstep = M_PI/500.0;
   double accelstep = 0.05;
 
-	if ( global_ctrl == CTRL_USER )
-	{
-		if(key_up){
-			myCar.accel+=accelstep;
-			if(myCar.accel > accel_max){
-				myCar.accel = accel_max;
-			}
-		}
-		if(key_down){
-			myCar.accel-=accelstep;
-			if(myCar.accel < -accel_max){
-				myCar.accel = -accel_max;
-			}
-		}
-		if(key_left){
-			myCar.steering+=steeringstep;
-			if(myCar.steering > steer_mid + steer_max){
-				myCar.steering = steer_mid + steer_max;
-			}
-		}
-		if(key_right){
-			myCar.steering-=steeringstep;
-			if(myCar.steering < steer_mid - steer_max){
-				myCar.steering = steer_mid - steer_max;
-			}
-		}
-	}
+  if ( global_ctrl == CTRL_USER )
+  {
+    if(key_up){
+      myCar.accel+=accelstep;
+      if(myCar.accel > accel_max){
+        myCar.accel = accel_max;
+      }
+    }
+    if(key_down){
+      myCar.accel-=accelstep;
+      if(myCar.accel < -accel_max){
+        myCar.accel = -accel_max;
+      }
+    }
+    if(key_left){
+      myCar.steering+=steeringstep;
+      if(myCar.steering > steer_mid + steer_max){
+        myCar.steering = steer_mid + steer_max;
+      }
+    }
+    if(key_right){
+      myCar.steering-=steeringstep;
+      if(myCar.steering < steer_mid - steer_max){
+        myCar.steering = steer_mid - steer_max;
+      }
+    }
+  }
   myCar.move(10*ms);
   queue_draw();
 
@@ -88,9 +90,9 @@ MyArea::~MyArea()
 {
 }
 
-bool 	MyArea::on_key_release_event (GdkEventKey*event){
+bool   MyArea::on_key_release_event (GdkEventKey*event){
 
-	//printf("key up: %d\n", event->keyval);
+  //printf("key up: %d\n", event->keyval);
   switch(event->keyval){
     case 65363:
       key_right = false;
@@ -129,14 +131,14 @@ bool 	MyArea::on_key_release_event (GdkEventKey*event){
     case 100: //d
       myCamera.pos.x += myCamera.scale_to_m(myCamera.width/2.0);
       break;
-		case 99: //c
-			global_ctrl_switch();
-			break;
+    case 99: //c
+      global_ctrl_switch();
+      break;
   }
   return false;
 }
 
-bool 	MyArea::on_key_press_event (GdkEventKey*event){
+bool   MyArea::on_key_press_event (GdkEventKey*event){
 
   //std::cout << " key press " << event->keyval <<"\n";
   switch(event->keyval){
@@ -156,7 +158,7 @@ bool 	MyArea::on_key_press_event (GdkEventKey*event){
   return false;
 }
 
-bool 	MyArea::on_scroll_event (GdkEventScroll*event){
+bool   MyArea::on_scroll_event (GdkEventScroll*event){
 
   //std::cout << " scroll " << event->direction << "\n";
   if(event->direction == 1){
@@ -167,7 +169,7 @@ bool 	MyArea::on_scroll_event (GdkEventScroll*event){
   return false;
 }
 
-bool 	MyArea::on_button_press_event (GdkEventButton*event){
+bool   MyArea::on_button_press_event (GdkEventButton*event){
 
   std::cout << " button press " << event->button << "\n";
   return false;
@@ -223,15 +225,39 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
   cr->move_to(10.0,50.0);
   std::stringstream sctrl;
-	if ( global_ctrl == CTRL_USER )
-	{
-		cr->set_source_rgb(0.4, 0.0, 0.0);
-		sctrl << "Control: user";
-	} else {
-		cr->set_source_rgb(0.0, 0.0, 0.4);
-		sctrl << "Control: TCP";
-	}
+  if ( global_ctrl == CTRL_USER )
+  {
+    cr->set_source_rgb(0.4, 0.0, 0.0);
+    sctrl << "Control: user";
+  } else {
+    cr->set_source_rgb(0.0, 0.0, 0.4);
+    sctrl << "Control: TCP";
+  }
   cr->show_text(sctrl.str());
+
+  cr->move_to(10.0,60.0);
+  cr->set_source_rgb(0.4, 0.0, 0.0);
+  std::stringstream sleds;
+  sleds << "Leds: " << leds;
+  cr->show_text(sleds.str());
+
+  for(int i=0;i<3;i++)
+  {
+    int ix,iy;
+    ix=48+i*12;
+    iy=57;
+    cr->move_to(ix,iy);
+    if ( leds & (1<<i) )
+    {
+      cr->set_source_rgb(0.0, 0.8, 0.0);
+      cr->arc(ix,iy, 4, 0.0, 2 * M_PI);
+      cr->fill();
+    } else {
+      cr->set_source_rgb(0.4, 0.4, 0.4);
+      cr->arc(ix,iy, 4, 0.0, 2 * M_PI);
+      cr->fill();
+    }
+  }
 
   draw_map(cr);
   draw_car(cr);

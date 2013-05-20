@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "car.h"
 #include "map.h"
+#include "sensor.h"
 
 class MyArea : public Gtk::DrawingArea
 {
@@ -15,6 +16,7 @@ public:
   Camera myCamera;
   Car myCar;
   Map myMap;
+  Sensor mySensor;
 
 protected:
 
@@ -29,12 +31,14 @@ protected:
   virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
   void draw_car(const Cairo::RefPtr<Cairo::Context>& cr);
   void draw_map(const Cairo::RefPtr<Cairo::Context>& cr);
+  void draw_sensordata(const Cairo::RefPtr<Cairo::Context>& cr);
 
   bool 	on_button_press_event (GdkEventButton*event);
   bool 	on_key_press_event (GdkEventKey*event);
   bool 	on_key_release_event (GdkEventKey*event);
   bool 	on_scroll_event (GdkEventScroll*event);
 
+  bool on_timeout2(int i);
   bool on_timeout(int i);
 };
 

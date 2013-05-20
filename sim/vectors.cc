@@ -8,11 +8,21 @@ vect2::vect2(){
 vect2::~vect2(){
 
 }
+vect2 vect2::get_norm(void){
+  double abs = sqrt(x*x+y*y);
+  vect2 result;
+  result.x = x/abs;
+  result.y = y/abs;
+  return result;
+}
 
 void vect2::norm(void){
   double abs = sqrt(x*x+y*y);
   x/=abs;
   y/=abs;
+}
+double vect2::operator*(const vect2 rhs){
+  return rhs.x*x + rhs.y*y;
 }
 vect2 vect2::operator*(const double rhs){
   vect2 result;
@@ -46,4 +56,8 @@ vect2 vect2::get_rotated(double angular){
   result.x = x *cos(angular) - y*sin(angular);
   result.y = x*sin(angular) + y*cos(angular);
   return result;
+}
+
+double vect2::abs(){
+  return sqrt(x*x+y*y);
 }

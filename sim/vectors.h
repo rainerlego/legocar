@@ -9,11 +9,14 @@ public:
   double x;
   double y;
   void norm(void);
+  vect2 get_norm(void);
+  double operator*(const vect2 rhs);
   vect2 operator*(const double rhs);
   vect2 operator+(const vect2 rhs);
   vect2 operator-(const vect2 rhs);
   vect2 getOrth();
   vect2 get_rotated(double angular);
+  double abs();
 };
 
 #endif

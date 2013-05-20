@@ -49,17 +49,16 @@ void Sensor::scan(){
       double ang_start;
       double distance_start;
       double ang_stop;
-      double distance_stop;
       if(angular_left < angular_right){
         ang_start = angular_left + angular;
         distance_start = obst_left.abs();
         ang_stop = angular_right + angular;
-        distance_stop = obst_right.abs();
+        //distance_stop = obst_right.abs();
       }else{
         ang_start = angular_right + angular;
         distance_start = obst_right.abs();
         ang_stop = angular_left + angular;
-        distance_stop = obst_left.abs();
+        //distance_stop = obst_left.abs();
       }
       int ii;
       //std::cout << "ang_start: " << ang_start << " ang_stop: " << ang_stop << "\n";
@@ -67,10 +66,10 @@ void Sensor::scan(){
       for(ii= (int) (ang_start/angular_per_slot); ii< (int)(ang_stop/angular_per_slot) ; ii++){
         if(ii>=0 && ii<angular_resolution){
           
-          double value = distance_start + (distance_stop - distance_start) * ((double)ii * angular_per_slot )/(ang_stop - ang_start);
+          //double value = distance_start + (distance_stop - distance_start) * ((double)ii * angular_per_slot )/(ang_stop - ang_start);
           //std::cout << "i = "
-          if(value< data[ii]){
-            data[ii] = value;
+          if(distance_start< data[ii]){
+            data[ii] = distance_start;
           }
         }
       }

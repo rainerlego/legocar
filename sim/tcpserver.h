@@ -10,7 +10,7 @@ struct tcpserver {
 
 struct cconn {
   int fd;
-  char s[TSMP][TSMPL];
+  char speicher[TSMP][TSMPL];
   int l[TSMP];
   int curp;
   int curpp;

@@ -49,7 +49,7 @@ void reset_stack ( struct cconn * cc )
     cc->l[i] = 0;
 
     for ( ii=0;ii<TSMPL;ii++ )
-      cc->s[i][ii] = ' ';
+      cc->speicher[i][ii] = ' ';
   }
 
   cc->curp = 0;
@@ -65,24 +65,24 @@ void parse_stack ( struct cconn * cc )
 
   if ( cc->curp>=1 )
   {
-    if ( 0==strncmp ( cc->s[0], "help", 4 ) )
+    if ( 0==strncmp ( cc->speicher[0], "help", 4 ) )
     {
       retlen = snprintf ( ret, 200, "Available commands:\n   servo set <channel> <value>\n   servo led <onoff> <mask>\n" );
     }
 
-    if ( 0==strncmp ( cc->s[0], "servo", 5 ) )
+    if ( 0==strncmp ( cc->speicher[0], "servo", 5 ) )
     {
 
       if ( cc->curp>=2 )
       {
-        if ( 0==strncmp(cc->s[1], "set", 3) )
+        if ( 0==strncmp(cc->speicher[1], "set", 3) )
         {
           if ( cc->curp>=4 )
           {
             int v;
             int ch;
-            if (    parse_servo_value ( cc->s[2], cc->l[2], &ch  )
-                &&  parse_servo_value ( cc->s[3], cc->l[3], &v )
+            if (    parse_servo_value ( cc->speicher[2], cc->l[2], &ch  )
+                &&  parse_servo_value ( cc->speicher[3], cc->l[3], &v )
                )
             {
               //servo_setservo ( ch, v );
@@ -91,14 +91,14 @@ void parse_stack ( struct cconn * cc )
           }
         } //servo
 
-        if ( 0==strncmp(cc->s[1], "led", 3) )
+        if ( 0==strncmp(cc->speicher[1], "led", 3) )
         {
           if ( cc->curp>=4 )
           {
             int mask;
             int onoff;
-            if (   parse_servo_onoff ( cc->s[2], cc->l[2], &onoff )
-                && parse_servo_value ( cc->s[3], cc->l[3], &mask ) )
+            if (   parse_servo_onoff ( cc->speicher[2], cc->l[2], &onoff )
+                && parse_servo_value ( cc->speicher[3], cc->l[3], &mask ) )
             {
               //servo_setleds ( onoff, mask );
               retlen = snprintf ( ret, 200, "ok servo led %d %d \n", onoff, mask );
@@ -140,7 +140,7 @@ void addc ( struct cconn * cc, char c )
   } else {
     if ( cc->curpp < (TSMPL-1) )
     {
-      cc->s[cc->curp][cc->curpp] = c;
+      cc->speicher[cc->curp][cc->curpp] = c;
       cc->curpp++;
     }
   }

@@ -8,19 +8,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DrivingActivity" >
 
-    <com.legocar.testingversion.graphics2D.SpeedView
-        android:id="@+id/speedView"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true" />
-
     <TableLayout
-        android:id="@+id/tableLayout2"
+        android:id="@+id/displayTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp" >
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
 
         <TableRow
             android:id="@+id/tableRow1"
@@ -63,12 +56,19 @@
         </TableRow>
     </TableLayout>
 
+    <com.legocar.testingversion.graphics2D.SpeedView
+        android:id="@+id/speedView"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true" 
+        android:layout_marginLeft="10dp"/>
+
     <com.legocar.testingversion.graphics2D.SteeringView
         android:id="@+id/steeringView"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:layout_alignRight="@+id/tableLayout2"
-        android:layout_below="@+id/tableLayout2"
-        android:layout_marginTop="80dp" />
+        android:layout_width="200dp"
+        android:layout_height="400dp"
+        android:layout_centerVertical="true"
+       android:layout_alignParentLeft="true"/>
 
 </RelativeLayout>

@@ -32,6 +32,7 @@ public final class R {
         public static final int carPort=0x7f080014;
         public static final int carPortLabel=0x7f080013;
         public static final int defaultMessageDelay=0x7f08001b;
+        public static final int displayTable=0x7f080000;
         public static final int emptyText1=0x7f08000d;
         public static final int emptyText2=0x7f080016;
         public static final int emptyText3=0x7f08002f;
@@ -48,20 +49,19 @@ public final class R {
         public static final int powerServoValue=0x7f08002a;
         public static final int range_setting=0x7f080018;
         public static final int scrollView=0x7f080009;
-        public static final int speedView=0x7f080000;
+        public static final int speedView=0x7f080007;
         public static final int steeringServo=0x7f08002c;
         public static final int steeringServoValue=0x7f08002d;
         public static final int steeringView=0x7f080008;
         public static final int tableLayout=0x7f08000a;
-        public static final int tableLayout2=0x7f080001;
-        public static final int tableRow1=0x7f080002;
+        public static final int tableRow1=0x7f080001;
         public static final int tableRow10=0x7f080025;
         public static final int tableRow11=0x7f080028;
         public static final int tableRow12=0x7f08002b;
         public static final int tableRow13_0=0x7f08002e;
         public static final int tableRow14=0x7f080030;
         public static final int tableRow1_0=0x7f08000c;
-        public static final int tableRow2=0x7f080005;
+        public static final int tableRow2=0x7f080004;
         public static final int tableRow3=0x7f08000f;
         public static final int tableRow4=0x7f080012;
         public static final int tableRow4_0=0x7f080015;
@@ -70,10 +70,10 @@ public final class R {
         public static final int tableRow7=0x7f08001c;
         public static final int tableRow8=0x7f08001f;
         public static final int tableRow9=0x7f080022;
-        public static final int textViewPower=0x7f080003;
-        public static final int textViewPowerValue=0x7f080004;
-        public static final int textViewSteering=0x7f080006;
-        public static final int textViewSteeringValue=0x7f080007;
+        public static final int textViewPower=0x7f080002;
+        public static final int textViewPowerValue=0x7f080003;
+        public static final int textViewSteering=0x7f080005;
+        public static final int textViewSteeringValue=0x7f080006;
         public static final int title=0x7f08000b;
     }
     public static final class layout {

@@ -144,13 +144,16 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 		float[] values = event.values;
 	    // Movement
 	    float x = values[0];
-	    float z = values[2];
-	    double angular = Math.atan(x/z);
+	    float y = values[1];
+	    double angular = -Math.atan(y/x);
 	    Log.i("Steering", angular+"");
-	    if(Math.abs(angular)>Math.PI/4){
-	    	return;
+	    if(angular>Math.PI/4){
+	    	steeringView.updatePercentage((float)-100.0);
+	    }else if(angular<-Math.PI/4){
+	    	steeringView.updatePercentage((float)100.0);	    	
+	    }else{
+	    	steeringView.updatePercentage((float) (-400*angular/Math.PI));
 	    }
-	    steeringView.updatePercentage((float) (-400*angular/Math.PI));
 		    
 	}
 

@@ -20,17 +20,17 @@
     <string name="defaultValue">00.00%</string>
     
     <string name="range_setting">Range Settings:</string>
-    <string name="middlePower">Power Middle Value: </string>
-    <string name="offsetPower">Power Offset: </string>
-    <string name="middleSteering">Steering Middle Value: </string>
-    <string name="offsetSteering">Steering Offset: </string>
+    <string name="middlePower">Power Mid. Val.: </string>
+    <string name="offsetPower">Power Range: </string>
+    <string name="middleSteering">Steering Mid. Val.: </string>
+    <string name="offsetSteering">Steering Range: </string>
     <string name="defaultMiddleValue">4000</string>
     <string name="defaultOffsetValue">3000</string>
     <string name="powerServo">Power Servo Nr.: </string>
     <string name="steeringServo">Steering Servo Nr.:</string>
     <string name="defaultPowerServo">0</string>
     <string name="defaultSteeringServo">1</string>
-    <string name="minMessageDelay">Minimum Message Delay: </string>
+    <string name="minMessageDelay">Min. Msg. Delay: </string>
     <string name="defaultMessageDelay">50</string>
     <string name="empty"> </string>
     

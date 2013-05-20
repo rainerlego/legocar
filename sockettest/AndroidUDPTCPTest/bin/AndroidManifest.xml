@@ -28,7 +28,8 @@
         <activity
             android:name="com.legocar.testingversion.DrivingActivity"
             android:label="@string/title_activity_driving"
-            android:parentActivityName="com.legocar.testingversion.MainActivity" >
+            android:parentActivityName="com.legocar.testingversion.MainActivity" 
+            android:screenOrientation="landscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.legocar.testingversion.MainActivity" />

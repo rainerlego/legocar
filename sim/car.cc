@@ -78,5 +78,6 @@ void Car::set_steering_servo ( int servo )
 
 void Car::set_accel_servo ( int servo )
 {
+	accel = -10.0 * (((double)servo-4000)/4000.0);
 }
 

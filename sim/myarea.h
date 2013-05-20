@@ -5,6 +5,7 @@
 #include "vectors.h"
 #include "camera.h"
 #include "car.h"
+#include "map.h"
 
 class MyArea : public Gtk::DrawingArea
 {
@@ -13,6 +14,7 @@ public:
   virtual ~MyArea();
   Camera myCamera;
   Car myCar;
+  Map myMap;
 
 protected:
 
@@ -26,6 +28,7 @@ protected:
   //Override default signal handler:
   virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
   void draw_car(const Cairo::RefPtr<Cairo::Context>& cr);
+  void draw_map(const Cairo::RefPtr<Cairo::Context>& cr);
 
   bool 	on_button_press_event (GdkEventButton*event);
   bool 	on_key_press_event (GdkEventKey*event);

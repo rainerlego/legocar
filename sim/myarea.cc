@@ -201,11 +201,26 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   stime << "simulation time: " << time/s << " s";
   cr->show_text(stime.str());
 
+  draw_map(cr);
   draw_car(cr);
 
   return true;
 }
 
+void MyArea::draw_map(const Cairo::RefPtr<Cairo::Context>& cr){
+  int i;
+  cr->set_line_width(2.0);
+  cr->set_source_rgb(0.0, 0.4, 0.0);
+  cr->stroke();
+  for(i=0;i<myMap.ocount;i++){
+    vect2 obs = myCamera.transform(myMap.obstacles[i].pos);
+    //cr->move_to(obs.x, obs.y);
+    cr->arc(obs.x, obs.y, myCamera.scale(myMap.obstacles[i].r), 0.0, 2 * M_PI);
+    cr->stroke();
+    
+  }
+
+}
 
 void MyArea::draw_car(const Cairo::RefPtr<Cairo::Context>& cr){
   vect2 back = myCamera.transform(myCar.get_pos_back());

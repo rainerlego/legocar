@@ -9,6 +9,7 @@ public:
   Camera();
   ~Camera();
   vect2 pos; //position in meters
+  vect2 transform_to_m (vect2 pos);
   vect2 transform (vect2 pos);
   vect2 get_center();
   double height;

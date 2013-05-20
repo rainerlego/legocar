@@ -14,8 +14,10 @@ MyArea::MyArea()
 {
   add_events(Gdk::SCROLL_MASK );
   add_events(Gdk::BUTTON_PRESS_MASK );
+  add_events(Gdk::BUTTON_RELEASE_MASK );
   add_events(Gdk::KEY_PRESS_MASK );
   add_events(Gdk::KEY_RELEASE_MASK );
+  add_events(Gdk::POINTER_MOTION_MASK );
   set_can_focus(true);
   sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this,&MyArea::on_timeout), 0);
   sigc::connection myConnection = Glib::signal_timeout().connect(my_slot, 10);
@@ -32,6 +34,8 @@ MyArea::MyArea()
   key_right = false;
   key_up = false;
   key_down = false;
+
+  editing = false;
 
   time = 0;
 
@@ -172,6 +176,41 @@ bool   MyArea::on_scroll_event (GdkEventScroll*event){
 bool   MyArea::on_button_press_event (GdkEventButton*event){
 
   std::cout << " button press " << event->button << "\n";
+  std::cout << " x " << event->x << "\n";
+  std::cout << " y " << event->y << "\n";
+  if(event->button == 1){
+    myMap.ocount++;
+    if(myMap.ocount>20){  //TODO make this configurable
+      myMap.ocount = 20;
+    }
+    vect2 point;
+    point.x = event->x;
+    point.y = event->y;
+    point = myCamera.transform_to_m(point);
+    myMap.obstacles[myMap.ocount-1].pos = point;
+    myMap.obstacles[myMap.ocount-1].r = 0.1*m;
+    editing = true;
+  }
+  return false;
+}
+bool MyArea::on_motion_notify_event(GdkEventMotion*event){
+  if(editing == true){
+    vect2 point;
+    point.x = event->x;
+    point.y = event->y;
+    point = myCamera.transform_to_m(point);
+    myMap.obstacles[myMap.ocount-1].r = (point - myMap.obstacles[myMap.ocount-1].pos).abs();
+  }
+  return false;
+}
+
+bool   MyArea::on_button_release_event (GdkEventButton*event){
+
+  if(event->button==1){
+    //myMap.obstacles[ocount-1].r = 0.0001*m;
+    editing = false;
+    
+  }
   return false;
 }
 

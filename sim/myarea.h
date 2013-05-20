@@ -21,10 +21,13 @@ public:
 
 protected:
 
+  
   bool key_left;
   bool key_right;
   bool key_up;
   bool key_down;
+
+  bool editing;
 
   double time;
 
@@ -38,6 +41,8 @@ protected:
   bool 	on_key_press_event (GdkEventKey*event);
   bool 	on_key_release_event (GdkEventKey*event);
   bool 	on_scroll_event (GdkEventScroll*event);
+  bool on_motion_notify_event(GdkEventMotion*event);
+  bool on_button_release_event (GdkEventButton*event);
 
   bool on_timeout2(int i);
   bool on_timeout(int i);

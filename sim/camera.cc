@@ -10,6 +10,15 @@ Camera::~Camera(){
 
 }
 
+vect2 Camera::transform_to_m (vect2 point){
+  vect2 result;
+  //result.x = point.x*ppm-pos.x*ppm;
+  result.x = (point.x + pos.x*ppm)/ppm;
+  //result.y = point.y*ppm-pos.y*ppm;
+  result.y = (point.y + pos.y*ppm)/ppm;
+  return result;
+}
+
 
 vect2 Camera::transform (vect2 point){
   vect2 result;

@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,50 +8,319 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
+-->
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/praktikum" />
-    
-        <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/packageMessage"
-        android:layout_alignLeft="@+id/packageMessage"
-        android:layout_marginBottom="47dp"
-        android:text="@string/inputHeader" />
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
 
-    <EditText
-        android:id="@+id/packageMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="46dp"
-        android:ems="10"
-        android:hint="@string/edit_message" />
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/buttonUDP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/packageMessage"
-        android:layout_below="@+id/packageMessage"
-        android:layout_marginTop="27dp"
-        android:text="@string/sendUDP" 
-        android:onClick="sendUDPMessage" />
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" >
 
-    <Button
-        android:id="@+id/buttonTCP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonUDP"
-        android:layout_alignBottom="@+id/buttonUDP"
-        android:layout_marginLeft="23dp"
-        android:layout_toRightOf="@+id/buttonUDP"
-        android:text="@string/sendTCP" 
-        android:onClick="sendTCPMessage" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </TableRow>
 
-</RelativeLayout>
+        <TableRow
+            android:id="@+id/tableRow1_0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/emptyText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty" />
+        </TableRow>
+
+        <!--
+      	<Button
+ 	    android:id="@+id/buttonUDP"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_alignParentBottom="true"
+ 	    android:layout_alignParentLeft="true"
+ 	    android:layout_marginBottom="30dp"
+ 	    android:onClick="sendUDPMessage"
+ 	    android:text="@string/sendUDP" />
+
+ 	        <Button
+       android:id="@+id/buttonTCP"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignBaseline="@+id/buttonUDP"
+       android:layout_alignBottom="@+id/buttonUDP"
+       android:layout_marginLeft="23dp"
+       android:layout_toRightOf="@+id/buttonUDP"
+       android:text="@string/sendTCP" 
+       android:onClick="sendTCPMessage" />
+        -->
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/carAddressHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/carAddressHeader"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/carIPLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/carIPLabel" />
+
+            <EditText
+                android:id="@+id/carIP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:inputType="text"
+                android:text="@string/defaultIP" >
+
+                <requestFocus />
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/carPortLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/carPortLabel" />
+
+            <EditText
+                android:id="@+id/carPort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:inputType="number"
+                android:text="@string/defaultPort" >
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4_0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/emptyText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/range_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/range_setting"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/minMessageDelay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minMessageDelay" />
+
+            <EditText
+                android:id="@+id/defaultMessageDelay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:inputType="number"
+                android:text="@string/defaultMessageDelay" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/middlePower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/middlePower" />
+
+            <EditText
+                android:id="@+id/middlePowerValue"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:inputType="number"
+                android:text="@string/defaultMiddleValue" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/offsetPower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/offsetPower" />
+
+            <EditText
+                android:id="@+id/offsetPowerValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:inputType="number"
+                android:text="@string/defaultOffsetValue" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/middleSteering"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/middleSteering" />
+
+            <EditText
+                android:id="@+id/middleSteeringValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:inputType="number"
+                android:text="@string/defaultMiddleValue" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/offsetSteering"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/offsetSteering" />
+
+            <EditText
+                android:id="@+id/offsetSteeringValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:inputType="number"
+                android:text="@string/defaultOffsetValue" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/powerServo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/powerServo" />
+
+            <EditText
+                android:id="@+id/powerServoValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:inputType="number"
+                android:text="@string/defaultPowerServo" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/steeringServo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/steeringServo" />
+
+            <EditText
+                android:id="@+id/steeringServoValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:inputType="number"
+                android:text="@string/defaultSteeringServo" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow13_0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/emptyText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/buttonStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="startDriving"
+                android:text="@string/startDriving" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView> <!-- </RelativeLayout> -->

@@ -17,9 +17,9 @@ public class CommunicationUtils {
     
     /** Called when the user clicks the Send by TCP button */
     public static void sendTCPMessage(String message) {
-    	TCPClient client=new TCPClient(DEFAULTSERVERIP, DEFAULTSERVERPORT);
-        client.setMessage(message);
-        new Thread(client).start();
+//    	TCPClient client=new TCPClient(DEFAULTSERVERIP, DEFAULTSERVERPORT);
+//        client.setMessage(message);
+//        new Thread(client).start();
         
     }
 

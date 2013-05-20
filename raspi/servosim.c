@@ -10,7 +10,8 @@
 
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <netdb.h>
+//#include <netdb.h>
+#include <arpa/inet.h>  //inet_addr
 
 #include "servo.h"
 #include "servosim.h"
@@ -35,14 +36,16 @@ int servosim_open()
   bzero((char *) &serv_addr, sizeof(serv_addr));
 
   serv_addr.sin_family = AF_INET;
-  inet_aton(SIM_IP, &serv_addr.sin_addr.s_addr);
   serv_addr.sin_port = htons(SIM_PORT);
+  inet_aton(SIM_IP, &(serv_addr.sin_addr));
  
   if (connect(fd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0)
   {
     printf ( "E: Servosim: Could not connect to %s:%d\n", SIM_IP, SIM_PORT );
     return -1;
   }
+
+	printf ( "N: Servosim: Connected to %s:%d\n", SIM_IP, SIM_PORT );
 
   return 0;
 }

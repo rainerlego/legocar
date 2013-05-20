@@ -204,6 +204,8 @@ int tcpserver_start ( struct tcpserver * ts )
   
   //Listen
   listen(socket_desc , 3);
+
+	printf ("N: tcpserver: I'm listening on port %d\n", ts->port );
   
   c = sizeof(struct sockaddr_in);
   while( (new_socket = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )

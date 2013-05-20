@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <pthread.h> //for threading , link with lpthread
 
 #include "config.h"
 #include "servo.h"

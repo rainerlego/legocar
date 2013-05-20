@@ -245,17 +245,36 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
 void MyArea::draw_sensordata(const Cairo::RefPtr<Cairo::Context>& cr){
   cr->set_line_width(2.0);
-  cr->set_source_rgb(0.0, 0.4, 0.0);
   double posx = 200.0;
   double posy = 10.0;
-  double height = 300.0;
-  double spacing = 3.0;
+  double height = 200.0;
+  double spacing = 1.5;
+  cr->set_source_rgba(0.4, 0.0, 0.0,0.4);
+  cr->rectangle(posx, posy, posx + spacing * (double)(mySensor.angular_resolution), posy+height);
+  cr->stroke();
+  cr->rectangle(posx, posy, posx + spacing * (double)(mySensor.angular_resolution), posy+height);
+  cr->set_source_rgba(0.4, 0.4, 0.0,0.4);
+  cr->fill();
+  cr->set_source_rgba(0.0, 0.4, 0.0,0.4);
   int i;
   for(i=0;i<mySensor.angular_resolution;i++){
-    cr->move_to(posx + (double)i *spacing, posy);
-    cr->line_to(posx + (double)i *spacing, posy + (mySensor.range-mySensor.data[i])*height/mySensor.range );
+    cr->move_to(posx + (double)i * spacing, posy);
+    cr->line_to(posx + (double)i * spacing, posy + (mySensor.range-mySensor.data[i])*height/mySensor.range );
   }
   cr->stroke();
+
+  cr->set_source_rgb(0.4, 0.0, 0.0);
+  Cairo::RefPtr<Cairo::ToyFontFace> font =
+    Cairo::ToyFontFace::create("Bitstream Charter",
+                               Cairo::FONT_SLANT_NORMAL,
+                               Cairo::FONT_WEIGHT_NORMAL);
+  cr->set_font_face(font);
+  cr->set_font_size(8.0);
+
+  cr->move_to(posx+1,posy+9);
+  std::stringstream sspeed;
+  sspeed << "LASERSCANNER";
+  cr->show_text(sspeed.str());
   
 }
 

@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.annotation.SuppressLint;
@@ -157,6 +158,11 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 		    
 	}
 
+	@Override
+		public boolean onTouchEvent(MotionEvent event) {
+			// Do like in SpeedView
+			return super.onTouchEvent(event);
+		}
 
 	protected void onResume() {
         super.onResume();

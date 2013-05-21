@@ -75,7 +75,7 @@ OPT = s
 
 # Debugging format.
 # Native formats for AVR-GCC's -g are stabs [default], or dwarf-2.
-# AVR (extended) COFF requires stabs, plus an avr-objcopy run.
+#n AVR (extended) COFF requires stabs, plus an avr-objcopy run.
 #DEBUG = stabs
 DEBUG = stabs
 
@@ -109,7 +109,7 @@ CFLAGS = -g$(DEBUG)
 CFLAGS += $(CDEFS) $(CINCS)
 CFLAGS += -O$(OPT)
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
-CFLAGS += -Wall -Wstrict-prototypes
+CFLAGS += -Wall -Wstrict-prototypes -pedantic
 CFLAGS += -Wa,-adhlns=$(<:.c=.lst)
 CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 CFLAGS += $(CSTANDARD)
@@ -179,10 +179,10 @@ LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 # Type: avrdude -c ?
 # to get a full listing.
 #
-AVRDUDE_PROGRAMMER = ponyser
+AVRDUDE_PROGRAMMER = usbtiny
 
 # com1 = serial port. Use lpt1 to connect to parallel port.
-AVRDUDE_PORT = /dev/ttyS0    # programmer connected to serial device
+AVRDUDE_PORT = usb
 
 AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 #AVRDUDE_WRITE_EEPROM = -U eeprom:w:$(TARGET).eep

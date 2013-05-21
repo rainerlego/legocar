@@ -20,7 +20,7 @@ MyArea::MyArea()
   add_events(Gdk::POINTER_MOTION_MASK );
   set_can_focus(true);
   sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this,&MyArea::on_timeout), 0);
-  sigc::connection myConnection = Glib::signal_timeout().connect(my_slot, 10);
+  sigc::connection myConnection = Glib::signal_timeout().connect(my_slot, 20);
   sigc::slot<bool> my_slot2 = sigc::bind(sigc::mem_fun(*this,&MyArea::on_timeout2), 0);
   sigc::connection myConnection2 = Glib::signal_timeout().connect(my_slot2, 100);
 
@@ -53,9 +53,9 @@ bool MyArea::on_timeout(int i){
   //myCar.move(100*ms);
   //on_draw();
   //
-  time += 10*ms;
-  double steeringstep = M_PI/500.0;
-  double accelstep = 0.05;
+  time += 20*ms;
+  double steeringstep = M_PI/250.0;
+  double accelstep = 0.1;
 
   if ( global_ctrl == CTRL_USER )
   {
@@ -84,7 +84,7 @@ bool MyArea::on_timeout(int i){
       }
     }
   }
-  myCar.move(10*ms);
+  myCar.move(20*ms);
   queue_draw();
 
   return true;
@@ -349,9 +349,19 @@ void MyArea::draw_map(const Cairo::RefPtr<Cairo::Context>& cr){
   for(i=0;i<myMap.ocount;i++){
     vect2 obs = myCamera.transform(myMap.obstacles[i].pos);
     //cr->move_to(obs.x, obs.y);
-    cr->arc(obs.x, obs.y, myCamera.scale(myMap.obstacles[i].r), 0.0, 2 * M_PI);
+    cr->arc(obs.x, obs.y, myCamera.scale(myMap.obstacles[i].r), 0.0, 2.0 * M_PI);
+    cr->stroke();
+   
+    vect2 to_obst = myMap.obstacles[i].pos - myCar.get_pos_front();
+    to_obst = to_obst - to_obst.get_norm()*myMap.obstacles[i].r;
+
+    vect2 obst_left = myCamera.transform(myCar.get_pos_front() + to_obst - to_obst.getOrth()*myMap.obstacles[i].r);
+    vect2 obst_right = myCamera.transform(myCar.get_pos_front() + to_obst + to_obst.getOrth()*myMap.obstacles[i].r);
+    cr->move_to(obst_left.x, obst_left.y);
+    cr->line_to(obst_right.x, obst_right.y);
     cr->stroke();
     
+
   }
 
 }

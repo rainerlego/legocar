@@ -103,7 +103,6 @@
                 android:id="@+id/carIP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
                 android:inputType="text"
                 android:text="" >
             </EditText>
@@ -124,7 +123,6 @@
                 android:id="@+id/carPort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
                 android:inputType="number"
                 android:text="" >
             </EditText>
@@ -170,7 +168,6 @@
                 android:id="@+id/defaultMessageDelay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
                 android:inputType="number"
                 android:text="" />
         </TableRow>
@@ -190,7 +187,6 @@
                 android:id="@+id/middlePowerValue"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
-                android:ems="5"
                 android:inputType="number"
                 android:text="" />
         </TableRow>
@@ -210,7 +206,6 @@
                 android:id="@+id/offsetPowerValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
                 android:inputType="number"
                 android:text="" />
         </TableRow>
@@ -230,7 +225,6 @@
                 android:id="@+id/middleSteeringValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="5"
                 android:inputType="number"
                 android:text="" />
         </TableRow>
@@ -250,7 +244,6 @@
                 android:id="@+id/offsetSteeringValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
                 android:inputType="number"
                 android:text="" />
         </TableRow>
@@ -270,7 +263,6 @@
                 android:id="@+id/powerServoValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
                 android:inputType="number"
                 android:text="" />
         </TableRow>
@@ -290,7 +282,6 @@
                 android:id="@+id/steeringServoValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
                 android:inputType="number"
                 android:text="" />
         </TableRow>

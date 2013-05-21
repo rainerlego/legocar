@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 public abstract class ControlView extends View{
 
+	final static protected float LINEWIDTH = (float) 5.0;
+
 	protected float percentage = 0;
 
 	protected TextView display = null;
@@ -65,11 +67,11 @@ public abstract class ControlView extends View{
 	}
 
 	protected float getCanvasWidth(){
-		return (float) getWidth();
+		return (float) (getWidth()-2.0*LINEWIDTH);
 	}
 
 	protected float getCanvasHeight(){
-		return (float) getHeight();
+		return (float) (getHeight()-2.0*LINEWIDTH);
 	}
 
 	public float getPercentage() {

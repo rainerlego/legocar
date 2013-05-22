@@ -7,6 +7,7 @@
 
 #include "servo.h"
 
+int wii_connected;
 cwiid_wiimote_t *wiimote;
 struct cwiid_state state;
 bdaddr_t bdaddr;
@@ -54,8 +55,7 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
         break;
       case CWIID_MESG_ERROR:
         fprintf(stderr, "E: wii: received error, disconnecting...\n");
-        if (cwiid_close(wiimote))
-          fprintf(stderr, "Error on wiimote disconnect\n");
+				wii_close();
         break;
     } //switch msg.type
   } //foreach msg
@@ -96,11 +96,14 @@ int wii_open()
   }
 	printf ("N: wii: reporting enabled\n" );
 
+	wii_connected = 1;
+
   return 0;
 }
 
 int wii_close()
 {
+	wii_connected = 0;
   if (cwiid_close(wiimote)) {
     fprintf(stderr, "E: wii: Error on wiimote disconnect\n");
     return -1;

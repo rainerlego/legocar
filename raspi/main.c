@@ -9,7 +9,13 @@
 
 void *wii_thread(void * v)
 {
-  wii_open();
+	while(1)
+	{
+		if (!wii_connected)
+			wii_open();
+		else
+			sleep(2);
+	}
 }
 
 int main()

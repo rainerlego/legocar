@@ -65,6 +65,7 @@ int wii_open()
 {
   bdaddr = *BDADDR_ANY;
 
+	printf ( "N: wii: trying to find wiimote...\n" );
   if (!(wiimote = cwiid_open(&bdaddr, 0))) {
     fprintf(stderr, "E: wii: Unable to connect to wiimote\n");
     return -1;

@@ -30,11 +30,13 @@ int main()
     return -1;
   }
 
+#if WII_ENABLED == 1
   if( pthread_create( &wiit , NULL ,  wii_thread , NULL) < 0)
   {
     perror("E: main: could not create wii thread\n");
     return -1;
   }
+#endif
 
   ts.port = SERVER_PORT;
   tcpserver_start ( &ts );

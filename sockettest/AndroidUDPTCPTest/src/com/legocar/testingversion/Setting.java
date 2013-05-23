@@ -4,9 +4,9 @@ public class Setting {
 	protected static String ip = "10.0.1.5";
 	protected static int port = 8584;
 	protected static int powerMiddleValue = 4000;
-	protected static int powerOffset = 2000;
+	protected static int powerOffset = 4000;
 	protected static int steeringMiddleValue = 4000;
-	protected static int steeringOffset = 2000;
+	protected static int steeringOffset = 4000;
 	protected static int powerServo =0;
 	protected static int steeringServo = 1;
 	protected static int defaultMessageDelay = 100;

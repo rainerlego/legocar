@@ -44,5 +44,7 @@ int main()
   ts.port = SERVER_PORT;
   tcpserver_start ( &ts );
 
+	printf("E: main: tcpserver returned. This should not happen\n" );
+
   return 0;
 }

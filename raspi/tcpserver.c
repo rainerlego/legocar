@@ -4,6 +4,7 @@
 #include<sys/socket.h>
 #include<arpa/inet.h>  //inet_addr
 #include<unistd.h>  //write
+#include<errno.h>
 
 #include<pthread.h> //for threading , link with lpthread
 
@@ -232,6 +233,7 @@ int tcpserver_start ( struct tcpserver * ts )
   }
 
 	printf ( "E: tcpserver: accept returned %d\n", new_socket );
+	printf ( "              errno: %s\n", strerror(errno) ) ;
 
   return 0;
 }

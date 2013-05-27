@@ -17,8 +17,8 @@
 
 pthread_mutex_t servo_mutex;
 
-struct timeval t1,t2;
 struct timeval tservo1[8], tservo2[8];
+struct timeval t1,t2;
 double diff;
 
 int servo_init()
@@ -61,6 +61,7 @@ int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force )
 
   pthread_mutex_lock ( &servo_mutex );
 
+	/*
   gettimeofday(&t2,NULL);
   diff =  ((t2.tv_sec)*1000000+(t2.tv_usec))
         - ((t1.tv_sec)*1000000+(t1.tv_usec));
@@ -71,12 +72,13 @@ int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force )
   } else {
     printf ( "N: servo: %010.0fus have passed since last write; OK\n", diff );
     gettimeofday(&t1,NULL);
+		*/
 #if SERVO_M == SERVO_BOARD
     ret = servoboard_setservo(servoNr, servoPos);
 #elif SERVO_M == SERVO_SIM
     ret = servosim_setservo(servoNr, servoPos);
 #endif
-  }
+  //}
 
   pthread_mutex_unlock ( &servo_mutex );
 

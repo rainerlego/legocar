@@ -89,7 +89,7 @@ void parse_stack ( struct cconn * cc )
                 &&  parse_servo_value ( cc->s[3], cc->l[3], &v )
                )
             {
-              servo_setservo ( ch, v );
+              servo_setservo ( ch, v, 0 );
               retlen = snprintf ( ret, 200, "ok servo set %d %d \n", ch, v );
 							printf ( "N: tcpserver %d: servo set %d %d\n", tcpseq, ch, v );
 							tcpseq++;
@@ -106,7 +106,7 @@ void parse_stack ( struct cconn * cc )
             if (   parse_servo_onoff ( cc->s[2], cc->l[2], &onoff )
                 && parse_servo_value ( cc->s[3], cc->l[3], &mask ) )
             {
-              servo_setleds ( onoff, mask );
+              servo_setleds ( onoff, mask, 0 );
               retlen = snprintf ( ret, 200, "ok servo led %d %d \n", onoff, mask );
 							printf ( "N: tcpserver %d: servo led %d %d\n", tcpseq, onoff, mask );
 							tcpseq++;

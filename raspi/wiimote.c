@@ -50,8 +50,8 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
 				servo_accel = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_X], 0 );
 				servo_steering = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_Y], 1 );
 				//printf ( "servo: accel: %d, steer: %d\n", servo_accel, servo_steering );
-				servo_setservo ( 0, servo_accel );
-				servo_setservo ( 1, servo_steering );
+				servo_setservo ( 0, servo_accel, 0 );
+				servo_setservo ( 1, servo_steering, 0 );
         break;
       case CWIID_MESG_ERROR:
         fprintf(stderr, "E: wii: received error, disconnecting...\n");

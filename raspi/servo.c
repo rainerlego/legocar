@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <pthread.h> //for threading , link with lpthread
+#include <sys/time.h>
 
 #include "config.h"
 #include "servo.h"
@@ -16,9 +17,14 @@
 
 pthread_mutex_t servo_mutex;
 
+struct timeval t1,t2;
+struct timeval tservo1[8], tservo2[8];
+double diff;
+
 int servo_init()
 {
   pthread_mutex_init ( &servo_mutex, NULL );
+  gettimeofday(&t1,NULL);
   return 0;
 }
 
@@ -40,7 +46,7 @@ void servo_close()
 #endif
 }
 
-int servo_setservo ( uint8_t servoNr, uint16_t servoPos )
+int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force )
 {
   int ret;
 
@@ -54,17 +60,30 @@ int servo_setservo ( uint8_t servoNr, uint16_t servoPos )
   }
 
   pthread_mutex_lock ( &servo_mutex );
+
+  gettimeofday(&t2,NULL);
+  diff =  ((t2.tv_sec)*1000000+(t2.tv_usec))
+        - ((t1.tv_sec)*1000000+(t1.tv_usec));
+
+  if ( (!force) && (diff < 100000) )
+  {
+    printf ( "N: servo: Only %010.0fus have passed since last write; Ignoring this command\n", diff );
+  } else {
+    printf ( "N: servo: %010.0fus have passed since last write; OK\n", diff );
+    gettimeofday(&t1,NULL);
 #if SERVO_M == SERVO_BOARD
-  ret = servoboard_setservo(servoNr, servoPos);
+    ret = servoboard_setservo(servoNr, servoPos);
 #elif SERVO_M == SERVO_SIM
-  ret = servosim_setservo(servoNr, servoPos);
+    ret = servosim_setservo(servoNr, servoPos);
 #endif
+  }
+
   pthread_mutex_unlock ( &servo_mutex );
 
   return ret;
 }
 
-int servo_setleds ( uint8_t onoff, uint8_t leds )
+int servo_setleds ( uint8_t onoff, uint8_t leds, int force )
 {
   int ret;
 
@@ -101,16 +120,16 @@ void servo_testservos()
   }
 
   printf("Moving servo left\n");
-  servo_setservo(0,0);
+  servo_setservo(0,0,0);
   sleep(2);
   printf("Moving servo centre\n");
-  servo_setservo(0,4000);
+  servo_setservo(0,4000,0);
   sleep(2);
   printf("Moving servo right\n");
-  servo_setservo(0,8000);
+  servo_setservo(0,8000,0);
   sleep(2);
   printf("Moving servo centre\n");
-  servo_setservo(0,4000);
+  servo_setservo(0,4000,0);
   
   servo_close();
 }

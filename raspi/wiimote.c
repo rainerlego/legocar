@@ -6,6 +6,7 @@
 #include <cwiid.h>
 
 #include "servo.h"
+#include "wiimote.h"
 
 int wii_connected;
 cwiid_wiimote_t *wiimote;
@@ -14,6 +15,8 @@ bdaddr_t bdaddr;
 
 struct timeval t1,t2;
 double diff;
+
+int accmode;
 
 int wii_to_servo ( double wii, int invert )
 {
@@ -38,6 +41,7 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
   int i, j;
   int valid_source;
   int servo_steering, servo_accel;
+  unsigned int btn;
 
   for (i=0; i < mesg_count; i++)
   {
@@ -46,7 +50,47 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
         printf("Status Report: battery=%d\n", mesg[i].status_mesg.battery);
         break;
       case CWIID_MESG_BTN:
-        printf("Button Report: %.4X\n", mesg[i].btn_mesg.buttons);
+        //printf("Button Report: %.4X\n", mesg[i].btn_mesg.buttons);
+        btn = mesg[i].btn_mesg.buttons;
+
+        if ( btn & CWIID_BTN_A )
+        {
+          if ( accmode == WII_ACCMODE_TILT )
+          {
+            accmode = WII_ACCMODE_BTN;
+            cwiid_set_led(wiimote, 0x02);
+          } else {
+            accmode = WII_ACCMODE_TILT;
+            cwiid_set_led(wiimote, 0x01);
+          }
+        }
+
+        if ( accmode == WII_ACCMODE_BTN )
+        {
+          if ( (btn & CWIID_BTN_1) && (btn &CWIID_BTN_2) )
+          {
+            servo_setservo ( 0, 7000, 0 );
+            //printf ( "AB\n" );
+          } else {
+            if ( btn & (CWIID_BTN_2) )
+            {
+              //printf ( "B\n" );
+              servo_setservo ( 0, 8000, 0 );
+            } else if ( btn & (CWIID_BTN_1) ) {
+              //printf ( "A\n" );
+              servo_setservo ( 0, 5500, 0 );
+            } else {
+              if ( btn & CWIID_BTN_LEFT)
+              {
+                servo_setservo ( 0, 2000, 0 );
+              } else {
+                //printf ( "0\n" );
+                servo_setservo ( 0, 4000, 0 );
+              }
+            }
+          }
+        }
+
         break;
       case CWIID_MESG_ACC:
         //printf("Acc Report: x=%d, y=%d, z=%d\n", mesg[i].acc_mesg.acc[CWIID_X], mesg[i].acc_mesg.acc[CWIID_Y], mesg[i].acc_mesg.acc[CWIID_Z]);
@@ -63,7 +107,8 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
           servo_accel = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_X], 0 );
           servo_steering = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_Y], 1 );
           //printf ( "servo: accel: %d, steer: %d\n", servo_accel, servo_steering );
-          servo_setservo ( 0, servo_accel, 0 );
+          if ( accmode == WII_ACCMODE_TILT )
+            servo_setservo ( 0, servo_accel, 0 );
           servo_setservo ( 1, servo_steering, 0 );
         }
         break;
@@ -79,6 +124,9 @@ int wii_open()
 {
   bdaddr = *BDADDR_ANY;
 
+  accmode = WII_ACCMODE_BTN;
+  gettimeofday(&t1,NULL);
+
   printf ( "N: wii: trying to find wiimote...\n" );
   if (!(wiimote = cwiid_open(&bdaddr, 0))) {
     fprintf(stderr, "E: wii: Unable to connect to wiimote\n");
@@ -91,7 +139,7 @@ int wii_open()
     return -1;
   }
   printf ("N: wii: callback\n" );
-  if (cwiid_set_led(wiimote, 0x05)) {
+  if (cwiid_set_led(wiimote, 0x02)) {
     fprintf(stderr, "Error setting LEDs \n");
     cwiid_close(wiimote);
     return -1;
@@ -113,7 +161,6 @@ int wii_open()
 
   wii_connected = 1;
 
-  gettimeofday(&t1,NULL);
 
   return 0;
 }

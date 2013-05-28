@@ -44,6 +44,10 @@ public abstract class ControlView extends View{
 
 
 	public void updatePercentage(float percentage){
+		updatePercentage(percentage, true);
+	}
+	
+	public void updatePercentage(float percentage, boolean direction){
 		setPercentage(percentage);
 		invalidate();
 
@@ -57,7 +61,7 @@ public abstract class ControlView extends View{
 			if(tClient!=null){
 
 				try {
-					tClient.sendMessage(getServoControlMessage(servo, middleValue, offset, percentage));
+					tClient.sendMessage(getServoControlMessage(servo, middleValue, offset, direction? percentage: -1.0*percentage));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -1,8 +1,8 @@
 package com.legocar.testingversion;
 
 public class Setting {
-	protected static String ip = "10.0.1.5";
-	protected static int port = 8584;
+	protected static String ip = "10.0.0.203";
+	protected static int port = 5567;
 	protected static int powerMiddleValue = 4000;
 	protected static int powerOffset = 4000;
 	protected static int steeringMiddleValue = 4000;

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.annotation.SuppressLint;
@@ -32,6 +33,13 @@ public class DrivingActivity extends Activity implements SensorEventListener{
   
   private TCPClient tClient;
   
+  private double zero = 0.0;
+  
+  private double realAngular=0.0;
+  
+  private boolean direction=true;
+
+  
   Setting settings;
   
   SpeedView speedView;
@@ -41,7 +49,6 @@ public class DrivingActivity extends Activity implements SensorEventListener{
   SteeringView steeringView;
   
   TextView steeringText;
-  
 
 	@SuppressLint("NewApi")
 	@Override
@@ -56,49 +63,13 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 	    gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		
 	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		new TCPConnectTask().execute(tClient);
-		startControl();		
-	}
 	
 	@Override
-	protected void onStop() {
-		super.onStop();
-		try {
-			tClient.stop();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		protected void onStop() {
+			// TODO Auto-generated method stub
+			super.onStop();
 		}
-	}
-	
-	private void startControl() {
-		Log.i("TODO", "startControl");
-		//Speed control
-	    speedView = (SpeedView) findViewById(R.id.speedView);	    
-	    speedText = (TextView) findViewById(R.id.textViewPowerValue);
-	    setupConnection(speedView, speedText, ServoType.POWER);	    
 
-	    //Steering control
-	    steeringView = (SteeringView) findViewById(R.id.steeringView);
-	    steeringText = (TextView) findViewById(R.id.textViewSteeringValue);
-	    setupConnection(steeringView, steeringText, ServoType.STEERING);
-
-	}
-
-	private void setupConnection(ControlView view, TextView textView, ServoType servo) {
-		view.setDisplay(textView);
-		view.setTClient(tClient);
-		view.setDefaultMessageDelay(settings.getDefaultMessageDelay());
-		
-		view.setMiddleValue(settings.getMiddleValue(servo));
-		view.setOffset(settings.getOffset(servo));
-		view.setServo(settings.getServo(servo));
-		
-	}
 
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
@@ -135,10 +106,7 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 	}
 
 	@Override
-	public void onAccuracyChanged(Sensor arg0, int arg1) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onAccuracyChanged(Sensor arg0, int arg1) {}
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
@@ -146,14 +114,17 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 	    // Movement
 	    float x = values[0];
 	    float y = values[1];
-	    double angular = -Math.atan(y/x);
+	    
+	    //FIXME care
+	    realAngular = Math.atan(y/x);
+	    double angular = realAngular-zero;
 	    Log.i("Steering", angular+"");
 	    if(angular>Math.PI/4){
-	    	steeringView.updatePercentage((float)-100.0);
+	    	getSteeringView().updatePercentage((float)100.0, direction);
 	    }else if(angular<-Math.PI/4){
-	    	steeringView.updatePercentage((float)100.0);	    	
+	    	getSteeringView().updatePercentage((float)-100.0, direction);	    	
 	    }else{
-	    	steeringView.updatePercentage((float) (-400*angular/Math.PI));
+	    	getSteeringView().updatePercentage((float) (400*angular/Math.PI), direction);
 	    }
 		    
 	}
@@ -163,15 +134,83 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 			// Do like in SpeedView
 			return super.onTouchEvent(event);
 		}
-
-	protected void onResume() {
-        super.onResume();
-        sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_FASTEST);
-    }
-
-    protected void onPause() {
-        super.onPause();
-        sensorManager.unregisterListener(this);
-    }
     
+    /** Called when the user clicks the Send by reset steering button */
+	public void steeringReset(View view) {
+		zero=realAngular;
+		getSteeringView().updatePercentage((float) 0.0);
+	}
+	
+	/** Called when the user clicks the Send by start button */
+	public void start(View view) {
+        sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_FASTEST);
+
+        new TCPConnectTask().execute(tClient);
+		startControl();	
+        
+		getSpeedView().updatePercentage(0);
+		getSteeringView().updatePercentage((float) 0.0);
+
+	}
+
+	/** Called when the user clicks the Send by stop button */
+	public void stop(View view) {	
+		stop();
+	}
+	
+	private void stop(){
+		getSpeedView().updatePercentage(0);
+		getSteeringView().updatePercentage((float) 0.0);
+
+		try {
+			tClient.stop();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sensorManager.unregisterListener(this);
+		realAngular = 0.0;
+	}
+
+	private void startControl() {
+		Log.i("TODO", "startControl");
+		//Speed control
+	    speedText = (TextView) findViewById(R.id.textViewPowerValue);
+	    setupConnection(getSpeedView(), speedText, ServoType.POWER);	    
+
+	    //Steering control
+	    steeringText = (TextView) findViewById(R.id.textViewSteeringValue);
+	    setupConnection(getSteeringView(), steeringText, ServoType.STEERING);   
+	}
+
+	private void setupConnection(ControlView view, TextView textView, ServoType servo) {	
+		view.setDisplay(textView);
+		view.setTClient(tClient);
+		view.setDefaultMessageDelay(settings.getDefaultMessageDelay());
+		
+		view.setMiddleValue(settings.getMiddleValue(servo));
+		view.setOffset(settings.getOffset(servo));
+		view.setServo(settings.getServo(servo));
+	}
+	
+	private SteeringView getSteeringView(){
+		if (steeringView==null){
+		    steeringView = (SteeringView) findViewById(R.id.steeringView);
+		}
+		return steeringView;
+	}
+	
+	private SpeedView getSpeedView(){
+		if (speedView==null){
+			speedView = (SpeedView) findViewById(R.id.speedView);
+		}
+		
+		return speedView;
+	}
+	
+	/** Called when the user clicks the Send by direction button */
+	public void changeDirection(View view) {	
+		direction=!direction;
+	}
 }

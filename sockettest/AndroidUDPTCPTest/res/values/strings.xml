@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Our Car</string>
+    <string name="app_name">CarController</string>
     <string name="action_settings">Settings</string>
-    <string name="title">Let us drive our car!</string>
+    <string name="title">Let us drive the car!</string>
     <string name="edit_message">Enter a Message</string>
     <string name="sendUDP">Send by UDP</string>
     <string name="sendTCP">Send by TCP</string>
     <string name="carAddressHeader">Set the address of our car: </string>
     <string name="carIPLabel">IP:</string>
+    <string name="carIPSummary">IP address of to controlled car</string>
     <string name="carPortLabel">Port:</string>
     <string name="defaultIP">10.0.1.5</string>
     <string name="defaultPort">8584</string>
     <string name="startDriving">Drive Now</string>
     <string name="title_activity_driving">Driving</string>
     <string name="hello_world">Hello world!</string>
-    <string name="steering">Steering:  </string>
-    <string name="power">Power:  </string>
+    <string name="steeringLabel">Steering:  </string>
+    <string name="powerLabel">Power:  </string>
     <string name="defaultValue">00.00%</string>
     
     <string name="range_setting">Range Settings:</string>
@@ -33,5 +34,12 @@
     <string name="minMessageDelay">Min. Msg. Delay: </string>
     <string name="defaultMessageDelay">50</string>
     <string name="empty"> </string>
+    
+    <string name="power">Power</string>
+    <string name="steering">Steering</string>
+    <string name="stop">Stop!</string>
+    <string name="start">Start!</string>
+    <string name="direction">Direction</string>
+    <string name="zero">Zero</string>
     
 </resources>

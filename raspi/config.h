@@ -10,6 +10,9 @@
 
 
 //IP of simulation program
-#define SIM_IP "10.0.0.132"
+#define SIM_IP "10.0.0.140"
 //TCP port of simulation program
 #define SIM_PORT 8584
+
+
+#define WII_ENABLED 1

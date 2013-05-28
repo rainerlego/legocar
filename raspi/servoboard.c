@@ -24,6 +24,8 @@ int servoboard_init()
 
 int servoboard_open()
 {
+	printf ( "N: Servo: I will use I2C to send servo commands to %02x via %s\n", SERVOBOARD_ADDR, SERVOBOARD_I2C_CHARDEV );
+
   if ((fd = open(SERVOBOARD_I2C_CHARDEV, O_RDWR)) < 0) {
     printf("E: Servoboard: Failed to open i2c port\n");
     return -1;

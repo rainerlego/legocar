@@ -3,8 +3,8 @@
 #define TWI_PREAMBLE 0xff
 #define CMD_SERVO 0
 #define CMD_LED 1
-#define SERVOBOARD_ADDR 0x02
-#define SERVOBOARD_I2C_CHARDEV "/dev/i2c-0"
+#define SERVOBOARD_ADDR 0x03
+#define SERVOBOARD_I2C_CHARDEV "/dev/i2c-1"
 
 #define LOWBYTE(v) ((unsigned char) (v))
 #define HIGHBYTE(v) ((unsigned char)(((unsigned int) (v)) >> 8))

@@ -27,8 +27,25 @@ int main (void)
   led1_aus;
   led2_aus;
   sei();  //enable global interrupts
+
+  longcount = 0;
+  TCCR2 = (1<<CS22) | (1<<CS21) | (1<<CS20); // servo watchdog prescaler 1024
+
 	while (1) { 
-    
+    if(TCNT2>100){ // >=0.0128s
+      TCNT2 = 0;
+      longcount++;
+      if(longcount>40){ //>=0.512 s
+        longcount = 0;
+        uint8_t i;
+        //reset servos
+        for(i = 0; i<8; i++){
+          servos_angular[i] = 4000;
+        }
+
+      }
+
+    }
     //handle status leds
     led_update();
 

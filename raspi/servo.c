@@ -68,6 +68,18 @@ int servo_getperm ( int src, int port )
   pthread_mutex_unlock ( &servo_mutex );
 }
 
+void servo_ping()
+{
+  pthread_mutex_lock ( &servo_mutex );
+#if SERVO_M == SERVO_BOARD
+  printf ( "N: Servo: ping\n" );
+  servoboard_ping();
+#elif SERVO_M == SERVO_SIM
+  printf ( "N: Servosim: ping\n" );
+#endif
+  pthread_mutex_unlock ( &servo_mutex );
+}
+
 int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force, int src, int port )
 {
   int ret;

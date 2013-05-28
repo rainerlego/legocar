@@ -1,6 +1,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h> //for threading , link with lpthread
 
 #include <bluetooth/bluetooth.h>
 #include <cwiid.h>
@@ -17,6 +18,36 @@ struct timeval t1,t2;
 double diff;
 
 int accmode;
+
+unsigned int wii_watchdog;
+pthread_t wiitping;
+
+void *wii_thread_ping(void * v)
+{
+  struct cwiid_state s;
+	while(1)
+	{
+		wii_watchdog++;
+		if (wii_watchdog>400)
+		{
+			wii_watchdog = 0;
+			if (wii_connected)
+      {
+        //r = cwiid_get_state(wiimote,&s);
+          servo_ping();
+      }
+		}
+    usleep(1000);
+	}
+}
+
+void wii_start_ping_thread()
+{
+  if( pthread_create( &wiitping , NULL ,  wii_thread_ping , NULL) < 0)
+  {
+    perror("E: wii: could not create ping thread\n");
+  }
+}
 
 int wii_to_servo ( double wii, int invert )
 {
@@ -45,6 +76,7 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
 
   for (i=0; i < mesg_count; i++)
   {
+    //printf ( "wii msg%d\n", mesg[i].type );
     switch (mesg[i].type) {
       case CWIID_MESG_STATUS:
         printf("Status Report: battery=%d\n", mesg[i].status_mesg.battery);
@@ -57,6 +89,7 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
 				{
 					printf ("wii: get perm\n" );
 					servo_getperm ( SERVO_PERM_WII, 0 );
+          wii_watchdog = 0;
 				}
 
         if ( btn & CWIID_BTN_A )
@@ -76,22 +109,27 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
           if ( (btn & CWIID_BTN_1) && (btn &CWIID_BTN_2) )
           {
             servo_setservo ( 0, 7000, 0, SERVO_PERM_WII, 0 );
+            wii_watchdog = 0;
             //printf ( "AB\n" );
           } else {
             if ( btn & (CWIID_BTN_2) )
             {
               //printf ( "B\n" );
               servo_setservo ( 0, 8000, 0, SERVO_PERM_WII, 0 );
+              wii_watchdog = 0;
             } else if ( btn & (CWIID_BTN_1) ) {
               //printf ( "A\n" );
               servo_setservo ( 0, 5500, 0, SERVO_PERM_WII, 0 );
+              wii_watchdog = 0;
             } else {
               if ( btn & CWIID_BTN_LEFT)
               {
                 servo_setservo ( 0, 2000, 0, SERVO_PERM_WII, 0 );
+                wii_watchdog = 0;
               } else {
                 //printf ( "0\n" );
                 servo_setservo ( 0, 4000, 0, SERVO_PERM_WII, 0 );
+                wii_watchdog = 0;
               }
             }
           }
@@ -114,11 +152,19 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
           servo_steering = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_Y], 1 );
           //printf ( "servo: accel: %d, steer: %d\n", servo_accel, servo_steering );
           if ( accmode == WII_ACCMODE_TILT )
+          {
             servo_setservo ( 0, servo_accel, 0, SERVO_PERM_WII, 0 );
+            wii_watchdog = 0;
+          }
           servo_setservo ( 1, servo_steering, 0, SERVO_PERM_WII, 0 );
+          wii_watchdog = 0;
         }
         break;
       case CWIID_MESG_ERROR:
+        wii_connected = 0;
+        //reset servos
+        servo_setservo ( 0, 4000, 0, SERVO_PERM_WII, 0 );
+        servo_setservo ( 1, 4000, 0, SERVO_PERM_WII, 0 );
         fprintf(stderr, "E: wii: received error, disconnecting...\n");
         wii_close();
         break;

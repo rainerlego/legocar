@@ -39,6 +39,7 @@ int main()
     perror("E: main: could not create wii thread\n");
     return -1;
   }
+	//wii_start_ping_thread();
 #endif
 
   ts.port = SERVER_PORT;

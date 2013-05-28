@@ -44,6 +44,22 @@ void servoboard_close()
   close(fd);
 }
 
+int servoboard_ping()
+{
+  unsigned char buf[2];
+
+  buf[0] = TWI_PREAMBLE;
+  buf[1] = CMD_PING;
+
+
+  if ((twisend(buf, 2)) != 2) {
+    printf("E: Servoboard: Could not write specified amount of bytes to i2c chardev\n");
+    return -1;
+  }
+
+  return 0;
+}
+
 int servoboard_setservo ( uint8_t servoNr, uint16_t servoPos )
 {
   unsigned char buf[4];
@@ -53,7 +69,7 @@ int servoboard_setservo ( uint8_t servoNr, uint16_t servoPos )
   buf[2] = HIGHBYTE(servoPos);
   buf[3] = LOWBYTE(servoPos);
   
-  if ((write(fd, buf, 4)) != 4) {
+  if ((twisend(buf, 4)) != 4) {
     printf("E: Servoboard: Could not write specified amount of bytes to i2c chardev\n");
     return -1;
   }
@@ -68,14 +84,19 @@ int servoboard_setleds ( uint8_t onoff, uint8_t leds )
   buf[0] = TWI_PREAMBLE;
   buf[1] = 0;
 
-  buf[1] = leds & ((1<<2)|(1<<1)|(1<<0));
+  buf[1] = (CMD_LED<<4) | (leds & ((1<<2)|(1<<1)|(1<<0)));
   if ( onoff )
     buf[1] |= (1<<3);
   
-  if ((write(fd, buf, 2)) != 2) {
+  if ((twisend(buf, 2)) != 2) {
     printf("E: Servoboard: Could not write specified amount of bytes to i2c chardev\n");
     return -1;
   }
 
   return 0;
+}
+
+int twisend ( char*buf, int len )
+{
+  return write(fd,buf,len);
 }

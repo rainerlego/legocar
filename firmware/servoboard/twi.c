@@ -197,23 +197,23 @@ void twi_handle(uint8_t data){
           recvstate = RECVangular; //we expect angular to be transmitted as the next byte
           break;
         case CMD_LED: //control LED
-					led_controlled_by_user |= data_complete & ((1<<2|1<<1|1<<0)); //alle leds die in dem command vorkommen werden ab sofort vom "user" bedient und sind abgekoppelt von der "hart verdrahteten" steuerung
+          led_controlled_by_user |= data_complete & ((1<<2|1<<1|1<<0)); //alle leds die in dem command vorkommen werden ab sofort vom "user" bedient und sind abgekoppelt von der "hart verdrahteten" steuerung
 
           if((data_complete&(1<<3))==0){ //ausschalten
-						if(data_complete&(1<<0))
-							led1_aus;
-						if(data_complete&(1<<1))
-							led2_aus;
-						if(data_complete&(1<<2))
-							led3_aus;
+            if(data_complete&(1<<0))
+              led1_aus;
+            if(data_complete&(1<<1))
+              led2_aus;
+            if(data_complete&(1<<2))
+              led3_aus;
           } else { //einschalten
-						if(data_complete&(1<<0))
-							led1_an;
-						if(data_complete&(1<<1))
-							led2_an;
-						if(data_complete&(1<<2))
-							led3_an;
-					}
+            if(data_complete&(1<<0))
+              led1_an;
+            if(data_complete&(1<<1))
+              led2_an;
+            if(data_complete&(1<<2))
+              led3_an;
+          }
           break;
         case CMD_SERVOSonoff:
           if((data_complete&(1<<4))==0){ //servos ausschalten
@@ -251,17 +251,16 @@ void twi_handle(uint8_t data){
       break;
     case RECVangular2:
       {
-	uint16_t speed = ((uint16_t)angularh)<<8 | (uint16_t)data_complete;
-      if (speed > SERVO_MAX_VALUE) {
-        speed = SERVO_MAX_VALUE;
-      }
-      servos_angular[servo_waiting_for_data] = speed;
+        uint16_t speed = ((uint16_t)angularh)<<8 | (uint16_t)data_complete;
+        if (speed > SERVO_MAX_VALUE) {
+          speed = SERVO_MAX_VALUE;
+        }
+        servos_angular[servo_waiting_for_data] = speed;
 
-      recvstate = RECVcommand; //next data byte will be a command
-      break;
-      
-      }//switch recvstate
-  }
+        recvstate = RECVcommand; //next data byte will be a command
+        break;
+      }//scope wird gebraucht für deklaration von lokaler variable speed
+  }//switch recvstate
   data_complete = 0;
 }
 

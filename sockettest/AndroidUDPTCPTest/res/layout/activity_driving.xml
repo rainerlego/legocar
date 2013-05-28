@@ -12,7 +12,7 @@
         android:id="@+id/displayTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/ButtonStart"
         android:layout_centerVertical="true" >
 
         <TableRow
@@ -24,7 +24,7 @@
                 android:id="@+id/textViewPower"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/power"
+                android:text="@string/powerLabel"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -44,7 +44,7 @@
                 android:id="@+id/textViewSteering"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/steering"
+                android:text="@string/steeringLabel"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -70,5 +70,43 @@
         android:layout_height="400dp"
         android:layout_centerVertical="true"
        android:layout_alignParentLeft="true"/>
+
+    <Button
+        android:id="@+id/ButtonStart"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/steeringView"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/steeringView"
+        android:onClick="start"
+        android:text="@string/start" />
+
+    <Button
+        android:id="@+id/buttonStop"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/steeringView"
+        android:layout_alignLeft="@+id/ButtonStart"
+        android:layout_marginBottom="20dp"
+        android:onClick="stop"
+        android:text="@string/stop" />
+
+    <Button
+        android:id="@+id/ButtonDirection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/steeringView"
+        android:layout_alignLeft="@+id/steeringView"
+        android:onClick="changeDirection"
+        android:text="@string/direction" />
+
+    <Button
+        android:id="@+id/buttonZero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/steeringView"
+        android:layout_toRightOf="@+id/ButtonDirection"
+        android:onClick="steeringReset"
+        android:text="@string/zero" />
 
 </RelativeLayout>

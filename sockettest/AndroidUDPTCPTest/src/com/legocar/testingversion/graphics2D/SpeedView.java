@@ -60,14 +60,8 @@ public class SpeedView extends ControlView{
 		final float y=event.getY()-LINEWIDTH;
 		//TODO
 		Log.i("TouchEvent", "y " +y);
-
-		switch (action) {
-		case MotionEvent.ACTION_DOWN:
-			if(canSlide(y)){
-				return false;
-			}
-			break;
-		case MotionEvent.ACTION_MOVE:
+		
+		if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE){
 			if(y<0){
 				updatePercentage((float) 100.0);
 			}else if(y>getCanvasHeight()){
@@ -75,23 +69,40 @@ public class SpeedView extends ControlView{
 			}else {
 				updatePercentage((float) (100.0*(1.0-2.0*y/getCanvasHeight())));
 			}
-			break;
-		case MotionEvent.ACTION_UP:
-			if(canSlide(y)){
-				return false;
-			}
-			if(y<0){
-				updatePercentage((float) 100.0);
-			}else if(y>getCanvasHeight()){
-				updatePercentage((float) 0.0);
-			}else {
-				updatePercentage((float) (100.0*(1.0-2.0*y/getCanvasHeight())));
-			}
-			break;
-		default:
-			return false;
+			return true;
 		}
-		return true;	
+
+//		switch (action) {
+//		case MotionEvent.ACTION_DOWN:
+//			if(canSlide(y)){
+//				return false;
+//			}
+//			break;
+//		case MotionEvent.ACTION_MOVE:
+//			if(y<0){
+//				updatePercentage((float) 100.0);
+//			}else if(y>getCanvasHeight()){
+//				updatePercentage((float) 0.0);
+//			}else {
+//				updatePercentage((float) (100.0*(1.0-2.0*y/getCanvasHeight())));
+//			}
+//			break;
+//		case MotionEvent.ACTION_UP:
+//			if(canSlide(y)){
+//				return false;
+//			}
+//			if(y<0){
+//				updatePercentage((float) 100.0);
+//			}else if(y>getCanvasHeight()){
+//				updatePercentage((float) 0.0);
+//			}else {
+//				updatePercentage((float) (100.0*(1.0-2.0*y/getCanvasHeight())));
+//			}
+//			break;
+//		default:
+//			return false;
+//		}
+		return false;	
 	}
 
 }

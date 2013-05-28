@@ -21,8 +21,12 @@ struct timeval tservo1[8], tservo2[8];
 struct timeval t1,t2;
 double diff;
 
+int perm_src, perm_port;
+
 int servo_init()
 {
+	perm_src = SERVO_PERM_TCP;
+	perm_port = 123;
   pthread_mutex_init ( &servo_mutex, NULL );
   gettimeofday(&t1,NULL);
   return 0;
@@ -46,9 +50,33 @@ void servo_close()
 #endif
 }
 
-int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force )
+int servo_checkperm ( int src, int port )
+{
+	if ( (perm_src == src) && (perm_port == port) )
+	{
+		return 0;
+	} else {
+		return -1;
+	}
+}
+
+int servo_getperm ( int src, int port )
+{
+  pthread_mutex_lock ( &servo_mutex );
+	perm_src = src;
+	perm_port = port;
+  pthread_mutex_unlock ( &servo_mutex );
+}
+
+int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force, int src, int port )
 {
   int ret;
+
+	if ( servo_checkperm ( src, port ) )
+	{
+		printf ( "W: Servo: noperm\n" );
+		return -1;
+	}
 
   if ( (servoPos < 0) || (servoPos > 8000 ) ) {
     printf ( "E: Servo: servoPos (%d) out of range\n", servoPos );
@@ -85,9 +113,15 @@ int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force )
   return ret;
 }
 
-int servo_setleds ( uint8_t onoff, uint8_t leds, int force )
+int servo_setleds ( uint8_t onoff, uint8_t leds, int force, int src, int port )
 {
   int ret;
+
+	if ( servo_checkperm ( src, port ) )
+	{
+		printf ( "W: Servo: noperm\n" );
+		return -1;
+	}
 
   if ( onoff < 0 || onoff > 1 )
   {
@@ -121,6 +155,7 @@ void servo_testservos()
     exit(-1);
   }
 
+	/*
   printf("Moving servo left\n");
   servo_setservo(0,0,0);
   sleep(2);
@@ -132,6 +167,7 @@ void servo_testservos()
   sleep(2);
   printf("Moving servo centre\n");
   servo_setservo(0,4000,0);
+	*/
   
   servo_close();
 }

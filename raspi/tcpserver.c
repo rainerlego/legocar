@@ -76,9 +76,16 @@ void parse_stack ( struct cconn * cc )
 
     if ( 0==strncmp ( cc->s[0], "servo", 5 ) )
     {
-
       if ( cc->curp>=2 )
       {
+        if ( 0==strncmp(cc->s[1], "getperm", 3) )
+        {
+					servo_getperm ( SERVO_PERM_TCP, ntohs(cc->sin.sin_port) );
+					retlen = snprintf ( ret, 200, "ok servo getperm\n" );
+					printf ( "N: tcpserver %d: servo getperm\n", tcpseq );
+					tcpseq++;
+        } //perm
+
         if ( 0==strncmp(cc->s[1], "set", 3) )
         {
           if ( cc->curp>=4 )
@@ -89,7 +96,7 @@ void parse_stack ( struct cconn * cc )
                 &&  parse_servo_value ( cc->s[3], cc->l[3], &v )
                )
             {
-              servo_setservo ( ch, v, 0 );
+              servo_setservo ( ch, v, 0, SERVO_PERM_TCP, ntohs(cc->sin.sin_port) );
               retlen = snprintf ( ret, 200, "ok servo set %d %d \n", ch, v );
 							printf ( "N: tcpserver %d: servo set %d %d\n", tcpseq, ch, v );
 							tcpseq++;
@@ -106,7 +113,7 @@ void parse_stack ( struct cconn * cc )
             if (   parse_servo_onoff ( cc->s[2], cc->l[2], &onoff )
                 && parse_servo_value ( cc->s[3], cc->l[3], &mask ) )
             {
-              servo_setleds ( onoff, mask, 0 );
+              servo_setleds ( onoff, mask, 0, SERVO_PERM_TCP, ntohs(cc->sin.sin_port) );
               retlen = snprintf ( ret, 200, "ok servo led %d %d \n", onoff, mask );
 							printf ( "N: tcpserver %d: servo led %d %d\n", tcpseq, onoff, mask );
 							tcpseq++;
@@ -189,6 +196,11 @@ int tcpserver_start ( struct tcpserver * ts )
   char *message;
 
   struct cconn * newcc;
+
+	socklen_t tmpsocklen;
+	tmpsocklen = sizeof ( struct sockaddr_in );
+
+	char addrbuf[200];
   
   socket_desc = socket(AF_INET , SOCK_STREAM , 0);
   if (socket_desc == -1)
@@ -222,6 +234,8 @@ int tcpserver_start ( struct tcpserver * ts )
 
     newcc = (struct cconn*)malloc ( sizeof(struct cconn) );
     newcc->fd = new_socket;
+
+		getsockname ( new_socket, (struct sockaddr *) &(newcc->sin), (socklen_t*) &tmpsocklen );
     
     if( pthread_create( &sniffer_thread , NULL ,  connection_handler , (void*) newcc) < 0)
     {
@@ -229,7 +243,7 @@ int tcpserver_start ( struct tcpserver * ts )
       return 1;
     }
     
-    puts("N: tcpserver: Connection accepted");
+    printf("N: tcpserver: Connection accepted from: %s:%d\n", inet_ntop(AF_INET,&(newcc->sin.sin_addr),addrbuf,200), ntohs(newcc->sin.sin_port));
   }
 
 	printf ( "E: tcpserver: accept returned %d\n", new_socket );

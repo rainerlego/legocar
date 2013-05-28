@@ -192,6 +192,8 @@ void twi_handle(uint8_t data){
     case RECVcommand: //data wird interpretiert als command
       longcount = 0; //reset watchdog!
       switch((data_complete & (0xf0))>>4 ){
+        case CMD_PING:
+          break;
         case CMD_SERVO: //control servo
           servo_waiting_for_data = data_complete & (0x0f);
           recvstate = RECVangular; //we expect angular to be transmitted as the next byte

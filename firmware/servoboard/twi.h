@@ -30,6 +30,7 @@
 #define CMD_GET_SERVO 4
 #define CMD_GET_LEDS 5
 #define CMD_GET_SERVOonoff 6
+#define CMD_PING 7
 
 extern uint8_t twi_activity;
 extern uint8_t twi_dataactivity;

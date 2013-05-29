@@ -39,4 +39,6 @@ void twi_handle(uint8_t data);
 uint8_t add_to_transmit_buffer(uint8_t data);
 uint8_t get_from_transmit_buffer(void);
 
+uint8_t longcount;
+
 #endif

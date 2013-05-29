@@ -2,7 +2,7 @@
 #define SERVO_BOARD 1   //use i2c servoboard
 
 //change between simulation and i2c board
-#define SERVO_M SERVO_SIM
+#define SERVO_M SERVO_BOARD
 
 //TCP port for server to accept commands
 #define SERVER_PORT 5567
@@ -15,4 +15,4 @@
 #define SIM_PORT 8584
 
 
-#define WII_ENABLED 1
+#define WII_ENABLED 0

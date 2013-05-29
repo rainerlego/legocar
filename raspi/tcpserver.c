@@ -4,11 +4,14 @@
 #include<sys/socket.h>
 #include<arpa/inet.h>  //inet_addr
 #include<unistd.h>  //write
+#include<errno.h>
 
 #include<pthread.h> //for threading , link with lpthread
 
 #include "tcpserver.h"
 #include "servo.h"
+
+unsigned int tcpseq;
 
 int parse_servo_value ( char * s, int l, int * v )
 {
@@ -88,6 +91,8 @@ void parse_stack ( struct cconn * cc )
             {
               servo_setservo ( ch, v );
               retlen = snprintf ( ret, 200, "ok servo set %d %d \n", ch, v );
+							printf ( "N: tcpserver %d: servo set %d %d\n", tcpseq, ch, v );
+							tcpseq++;
             }
           }
         } //servo
@@ -103,6 +108,8 @@ void parse_stack ( struct cconn * cc )
             {
               servo_setleds ( onoff, mask );
               retlen = snprintf ( ret, 200, "ok servo led %d %d \n", onoff, mask );
+							printf ( "N: tcpserver %d: servo led %d %d\n", tcpseq, onoff, mask );
+							tcpseq++;
             }
           }
         } //led
@@ -224,13 +231,10 @@ int tcpserver_start ( struct tcpserver * ts )
     
     puts("N: tcpserver: Connection accepted");
   }
-  
-  if (new_socket<0)
-  {
-    perror("E: tcpserver: accept failed");
-    return -1;
-  }
-  
+
+	printf ( "E: tcpserver: accept returned %d\n", new_socket );
+	printf ( "              errno: %s\n", strerror(errno) ) ;
+
   return 0;
 }
 

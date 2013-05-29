@@ -12,9 +12,12 @@ void *wii_thread(void * v)
 	while(1)
 	{
 		if (!wii_connected)
-			wii_open();
-		else
+		{
+			if (wii_open())
+				sleep(2);
+		} else {
 			sleep(2);
+		}
 	}
 }
 
@@ -40,6 +43,8 @@ int main()
 
   ts.port = SERVER_PORT;
   tcpserver_start ( &ts );
+
+	printf("E: main: tcpserver returned. This should not happen\n" );
 
   return 0;
 }

@@ -30,6 +30,7 @@
 #define CMD_GET_SERVO 4
 #define CMD_GET_LEDS 5
 #define CMD_GET_SERVOonoff 6
+#define CMD_PING 7
 
 extern uint8_t twi_activity;
 extern uint8_t twi_dataactivity;
@@ -38,5 +39,7 @@ void i2cinit(void);
 void twi_handle(uint8_t data);
 uint8_t add_to_transmit_buffer(uint8_t data);
 uint8_t get_from_transmit_buffer(void);
+
+uint8_t longcount;
 
 #endif

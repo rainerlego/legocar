@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="@string/carAddressHeader" >
+        <EditTextPreference
+                android:title="@string/carIPLabel"
+                android:summary="@string/carIPSummary"
+                android:key="carIP"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

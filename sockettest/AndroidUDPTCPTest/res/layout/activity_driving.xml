@@ -8,19 +8,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DrivingActivity" >
 
-    <com.legocar.testingversion.graphics2D.SpeedView
-        android:id="@+id/speedView"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true" />
-
     <TableLayout
-        android:id="@+id/tableLayout2"
+        android:id="@+id/displayTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp" >
+        android:layout_alignLeft="@+id/ButtonStart"
+        android:layout_centerVertical="true" >
 
         <TableRow
             android:id="@+id/tableRow1"
@@ -31,7 +24,7 @@
                 android:id="@+id/textViewPower"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/power"
+                android:text="@string/powerLabel"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -51,7 +44,7 @@
                 android:id="@+id/textViewSteering"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/steering"
+                android:text="@string/steeringLabel"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -63,12 +56,57 @@
         </TableRow>
     </TableLayout>
 
+    <com.legocar.testingversion.graphics2D.SpeedView
+        android:id="@+id/speedView"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true" 
+        android:layout_marginLeft="10dp"/>
+
     <com.legocar.testingversion.graphics2D.SteeringView
         android:id="@+id/steeringView"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:layout_alignRight="@+id/tableLayout2"
-        android:layout_below="@+id/tableLayout2"
-        android:layout_marginTop="80dp" />
+        android:layout_width="200dp"
+        android:layout_height="400dp"
+        android:layout_centerVertical="true"
+       android:layout_alignParentLeft="true"/>
+
+    <Button
+        android:id="@+id/ButtonStart"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/steeringView"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/steeringView"
+        android:onClick="start"
+        android:text="@string/start" />
+
+    <Button
+        android:id="@+id/buttonStop"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/steeringView"
+        android:layout_alignLeft="@+id/ButtonStart"
+        android:layout_marginBottom="20dp"
+        android:onClick="stop"
+        android:text="@string/stop" />
+
+    <Button
+        android:id="@+id/ButtonDirection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/steeringView"
+        android:layout_alignLeft="@+id/steeringView"
+        android:onClick="changeDirection"
+        android:text="@string/direction" />
+
+    <Button
+        android:id="@+id/buttonZero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/steeringView"
+        android:layout_toRightOf="@+id/ButtonDirection"
+        android:onClick="steeringReset"
+        android:text="@string/zero" />
 
 </RelativeLayout>

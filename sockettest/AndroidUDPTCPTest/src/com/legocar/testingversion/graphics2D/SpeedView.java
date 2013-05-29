@@ -15,7 +15,6 @@ import android.view.MotionEvent;
 public class SpeedView extends ControlView{
 	
 	final static private float TOUCHOFFSET=(float) 32.0;
-	final static private float LINEWIDTH = (float) 5.0;
 
 	
 	public SpeedView(Context context) {
@@ -38,9 +37,9 @@ public class SpeedView extends ControlView{
 	    
 	    // Draw slider
 		float left = LINEWIDTH;
-		float right = getCanvasWidth()-LINEWIDTH;
+		float right = left+ getCanvasWidth();
 		float top = LINEWIDTH;	
-		float bottom =getSliderY();	
+		float bottom =top+getSliderY();	
 	    Paint paint = new Paint();
 	    paint.setColor(Color.WHITE);
 		canvas.drawRect(left, top, right, bottom, paint);
@@ -58,31 +57,52 @@ public class SpeedView extends ControlView{
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		final int action=event.getAction();
-		final float y=event.getY();
+		final float y=event.getY()-LINEWIDTH;
 		//TODO
 		Log.i("TouchEvent", "y " +y);
-
-		switch (action) {
-		case MotionEvent.ACTION_DOWN:
-			if(canSlide(y)){
-				return false;
+		
+		if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE){
+			if(y<0){
+				updatePercentage((float) 100.0);
+			}else if(y>getCanvasHeight()){
+				updatePercentage((float) 0.0);
+			}else {
+				updatePercentage((float) (100.0*(1.0-2.0*y/getCanvasHeight())));
 			}
-			break;
-		case MotionEvent.ACTION_MOVE:
-			if(y<LINEWIDTH || y>getCanvasHeight()-LINEWIDTH){
-				return false;
-			}
-			updatePercentage((float) (100.0*(1.0-2.0*y/getCanvasHeight())));
-			break;
-		case MotionEvent.ACTION_UP:
-			if(canSlide(y) || y<LINEWIDTH || y>getCanvasHeight()-LINEWIDTH){
-				return false;
-			}
-			break;
-		default:
-			return false;
+			return true;
 		}
-		return true;	
+
+//		switch (action) {
+//		case MotionEvent.ACTION_DOWN:
+//			if(canSlide(y)){
+//				return false;
+//			}
+//			break;
+//		case MotionEvent.ACTION_MOVE:
+//			if(y<0){
+//				updatePercentage((float) 100.0);
+//			}else if(y>getCanvasHeight()){
+//				updatePercentage((float) 0.0);
+//			}else {
+//				updatePercentage((float) (100.0*(1.0-2.0*y/getCanvasHeight())));
+//			}
+//			break;
+//		case MotionEvent.ACTION_UP:
+//			if(canSlide(y)){
+//				return false;
+//			}
+//			if(y<0){
+//				updatePercentage((float) 100.0);
+//			}else if(y>getCanvasHeight()){
+//				updatePercentage((float) 0.0);
+//			}else {
+//				updatePercentage((float) (100.0*(1.0-2.0*y/getCanvasHeight())));
+//			}
+//			break;
+//		default:
+//			return false;
+//		}
+		return false;	
 	}
 
 }

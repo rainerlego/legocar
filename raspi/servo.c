@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <pthread.h> //for threading , link with lpthread
+#include <sys/time.h>
 
 #include "config.h"
 #include "servo.h"
@@ -16,9 +17,18 @@
 
 pthread_mutex_t servo_mutex;
 
+struct timeval tservo1[8], tservo2[8];
+struct timeval t1,t2;
+double diff;
+
+int perm_src, perm_port;
+
 int servo_init()
 {
+	perm_src = SERVO_PERM_TCP;
+	perm_port = 123;
   pthread_mutex_init ( &servo_mutex, NULL );
+  gettimeofday(&t1,NULL);
   return 0;
 }
 
@@ -40,9 +50,45 @@ void servo_close()
 #endif
 }
 
-int servo_setservo ( uint8_t servoNr, uint16_t servoPos )
+int servo_checkperm ( int src, int port )
+{
+	if ( (perm_src == src) && (perm_port == port) )
+	{
+		return 0;
+	} else {
+		return -1;
+	}
+}
+
+int servo_getperm ( int src, int port )
+{
+  pthread_mutex_lock ( &servo_mutex );
+	perm_src = src;
+	perm_port = port;
+  pthread_mutex_unlock ( &servo_mutex );
+}
+
+void servo_ping()
+{
+  pthread_mutex_lock ( &servo_mutex );
+#if SERVO_M == SERVO_BOARD
+  printf ( "N: Servo: ping\n" );
+  servoboard_ping();
+#elif SERVO_M == SERVO_SIM
+  printf ( "N: Servosim: ping\n" );
+#endif
+  pthread_mutex_unlock ( &servo_mutex );
+}
+
+int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force, int src, int port )
 {
   int ret;
+
+	if ( servo_checkperm ( src, port ) )
+	{
+		printf ( "W: Servo: noperm\n" );
+		return -1;
+	}
 
   if ( (servoPos < 0) || (servoPos > 8000 ) ) {
     printf ( "E: Servo: servoPos (%d) out of range\n", servoPos );
@@ -54,19 +100,40 @@ int servo_setservo ( uint8_t servoNr, uint16_t servoPos )
   }
 
   pthread_mutex_lock ( &servo_mutex );
+
+	/*
+  gettimeofday(&t2,NULL);
+  diff =  ((t2.tv_sec)*1000000+(t2.tv_usec))
+        - ((t1.tv_sec)*1000000+(t1.tv_usec));
+
+  if ( (!force) && (diff < 100000) )
+  {
+    printf ( "N: servo: Only %010.0fus have passed since last write; Ignoring this command\n", diff );
+  } else {
+    printf ( "N: servo: %010.0fus have passed since last write; OK\n", diff );
+    gettimeofday(&t1,NULL);
+		*/
 #if SERVO_M == SERVO_BOARD
-  ret = servoboard_setservo(servoNr, servoPos);
+    ret = servoboard_setservo(servoNr, servoPos);
 #elif SERVO_M == SERVO_SIM
-  ret = servosim_setservo(servoNr, servoPos);
+    ret = servosim_setservo(servoNr, servoPos);
 #endif
+  //}
+
   pthread_mutex_unlock ( &servo_mutex );
 
   return ret;
 }
 
-int servo_setleds ( uint8_t onoff, uint8_t leds )
+int servo_setleds ( uint8_t onoff, uint8_t leds, int force, int src, int port )
 {
   int ret;
+
+	if ( servo_checkperm ( src, port ) )
+	{
+		printf ( "W: Servo: noperm\n" );
+		return -1;
+	}
 
   if ( onoff < 0 || onoff > 1 )
   {
@@ -100,17 +167,19 @@ void servo_testservos()
     exit(-1);
   }
 
+	/*
   printf("Moving servo left\n");
-  servo_setservo(0,0);
+  servo_setservo(0,0,0);
   sleep(2);
   printf("Moving servo centre\n");
-  servo_setservo(0,4000);
+  servo_setservo(0,4000,0);
   sleep(2);
   printf("Moving servo right\n");
-  servo_setservo(0,8000);
+  servo_setservo(0,8000,0);
   sleep(2);
   printf("Moving servo centre\n");
-  servo_setservo(0,4000);
+  servo_setservo(0,4000,0);
+	*/
   
   servo_close();
 }

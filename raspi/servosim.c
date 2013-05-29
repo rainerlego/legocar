@@ -26,6 +26,8 @@ int servosim_init()
 
 int servosim_open()
 {
+	printf ( "N: Servo: I will use TCP to send servo commands to %s:%d\n", SIM_IP, SIM_PORT );
+
   fd = socket(AF_INET, SOCK_STREAM, 0);
   if (fd < 0)
   {

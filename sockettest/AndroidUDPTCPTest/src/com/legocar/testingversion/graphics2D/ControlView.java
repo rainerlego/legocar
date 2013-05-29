@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 public abstract class ControlView extends View{
 
+	final static protected float LINEWIDTH = (float) 5.0;
+
 	protected float percentage = 0;
 
 	protected TextView display = null;
@@ -42,6 +44,10 @@ public abstract class ControlView extends View{
 
 
 	public void updatePercentage(float percentage){
+		updatePercentage(percentage, true);
+	}
+	
+	public void updatePercentage(float percentage, boolean direction){
 		setPercentage(percentage);
 		invalidate();
 
@@ -55,7 +61,7 @@ public abstract class ControlView extends View{
 			if(tClient!=null){
 
 				try {
-					tClient.sendMessage(getServoControlMessage(servo, middleValue, offset, percentage));
+					tClient.sendMessage(getServoControlMessage(servo, middleValue, offset, direction? percentage: -1.0*percentage));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -65,11 +71,11 @@ public abstract class ControlView extends View{
 	}
 
 	protected float getCanvasWidth(){
-		return (float) getWidth();
+		return (float) (getWidth()-2.0*LINEWIDTH);
 	}
 
 	protected float getCanvasHeight(){
-		return (float) getHeight();
+		return (float) (getHeight()-2.0*LINEWIDTH);
 	}
 
 	public float getPercentage() {

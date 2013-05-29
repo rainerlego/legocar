@@ -34,17 +34,19 @@ public class SteeringView extends ControlView{
 	    canvas.rotate((float) (getPercentage()/2.0), getCanvasWidth()/2, getCanvasHeight()/2);
 		// Draw car
 	    
-		float left = 0;
-		float right = getCanvasWidth();
-		float top = getCanvasHeight()/2;	
-		float bottom = getCanvasHeight();	
+		float left = (float) (getCanvasWidth()/3.0);
+		float right = (float) (2.0*getCanvasWidth()/3.0);
+		float top = (float) (getCanvasHeight()/3.0);	
+		float bottom = (float) (2.0*getCanvasHeight()/3.0);	
+		float middleX = (float) (getCanvasWidth()/2.0);
+		float middleY = (float) (getCanvasHeight()/2.0);
 	    Paint paint = new Paint();
 	    paint.setColor(Color.BLUE);
-		canvas.drawRect(left, top, right, bottom, paint);
+		canvas.drawRect(left, middleY, right, bottom, paint);
 		Path path = new Path();
-		path.moveTo(getCanvasWidth()/2,0);
-		path.lineTo(left, top);
-		path.lineTo(right, top);
+		path.moveTo(middleX,top);
+		path.lineTo(left, middleY);
+		path.lineTo(right, middleY);
 		path.close();
 		canvas.drawPath(path, paint);
 		

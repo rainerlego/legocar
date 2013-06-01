@@ -1,0 +1,241 @@
+Cmp-Mod V01 Created by CvPcb (2013-mar-30)-stable date = Sat 01 Jun 2013 04:29:15 PM CEST
+
+BeginCmp
+TimeStamp = /51A9EA73;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LED-3MM_bigfoot;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EA80;
+Reference = D2;
+ValeurCmp = LED;
+IdModule  = LED-3MM_bigfoot;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9FAF6;
+Reference = K1;
+ValeurCmp = jmp_servo;
+IdModule  = Big_Array3;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9FDD2;
+Reference = K2;
+ValeurCmp = jmp_laser;
+IdModule  = Big_Array3;
+EndCmp
+
+BeginCmp
+TimeStamp = /51AA0AB9;
+Reference = K3;
+ValeurCmp = jmp_laser;
+IdModule  = Big_Array3;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EED6;
+Reference = P1;
+ValeurCmp = 4-8V in;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EECA;
+Reference = P2;
+ValeurCmp = 5V_in;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EED0;
+Reference = P3;
+ValeurCmp = 12V_in;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E75B;
+Reference = P4;
+ValeurCmp = 4-8V in;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E625;
+Reference = P5;
+ValeurCmp = 5V_in;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E648;
+Reference = P6;
+ValeurCmp = 12V_in;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9ED3B;
+Reference = P7;
+ValeurCmp = 5v reserve;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E8A1;
+Reference = P8;
+ValeurCmp = usb_hub;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E6B1;
+Reference = P9;
+ValeurCmp = raspi;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E6BD;
+Reference = P10;
+ValeurCmp = servoL;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E6DD;
+Reference = P11;
+ValeurCmp = encoder;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E6CD;
+Reference = P12;
+ValeurCmp = servo_pow;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E7ED;
+Reference = P13;
+ValeurCmp = Laser;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E6ED;
+Reference = P14;
+ValeurCmp = FPGA;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9ED4A;
+Reference = P15;
+ValeurCmp = 12V reserve;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EEDC;
+Reference = P16;
+ValeurCmp = 5v reserve;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EEE2;
+Reference = P17;
+ValeurCmp = usb_hub;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EEE8;
+Reference = P18;
+ValeurCmp = raspi;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EEEE;
+Reference = P19;
+ValeurCmp = servoL;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EEF4;
+Reference = P20;
+ValeurCmp = encoder;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EEFA;
+Reference = P21;
+ValeurCmp = servo_pow;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EF00;
+Reference = P22;
+ValeurCmp = Laser;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EF06;
+Reference = P23;
+ValeurCmp = FPGA;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EF0C;
+Reference = P24;
+ValeurCmp = 12V reserve;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9FFE7;
+Reference = P25;
+ValeurCmp = switch;
+IdModule  = SwitchBig;
+EndCmp
+
+BeginCmp
+TimeStamp = /51AA0AB3;
+Reference = P26;
+ValeurCmp = 12V reserve;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51AA0AAD;
+Reference = P27;
+ValeurCmp = 12V reserve;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EA88;
+Reference = R1;
+ValeurCmp = R;
+IdModule  = SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9EA95;
+Reference = R2;
+ValeurCmp = R;
+IdModule  = SM0603;
+EndCmp
+
+EndListe

@@ -1,0 +1,143 @@
+Cmp-Mod V01 Created by CvPcb (2013-mar-30)-stable date = Sat 01 Jun 2013 01:41:34 PM CEST
+
+BeginCmp
+TimeStamp = /51A9D876;
+Reference = C1;
+ValeurCmp = 100n;
+IdModule  = SM0603_Capa;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9DA0A;
+Reference = C2;
+ValeurCmp = 100n;
+IdModule  = SM0603_Capa;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E042;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LED-3MM_bigfoot;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9D9B2;
+Reference = D2;
+ValeurCmp = LED;
+IdModule  = LED-3MM_bigfoot;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9DA2D;
+Reference = D3;
+ValeurCmp = LED;
+IdModule  = LED-3MM_bigfoot;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9DA3E;
+Reference = K1;
+ValeurCmp = OUT;
+IdModule  = LeiterplattenKlemme3_35RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9D7C9;
+Reference = K2;
+ValeurCmp = S1_a;
+IdModule  = LeiterplattenKlemme3_35RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9D7D6;
+Reference = K3;
+ValeurCmp = S1_b;
+IdModule  = Big_Array3;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9D9FE;
+Reference = K4;
+ValeurCmp = S2_a;
+IdModule  = LeiterplattenKlemme3_35RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9DA04;
+Reference = K5;
+ValeurCmp = S2_b;
+IdModule  = Big_Array3;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E3CF;
+Reference = K6;
+ValeurCmp = OUT2;
+IdModule  = Big_Array3;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9DB19;
+Reference = P1;
+ValeurCmp = POWER;
+IdModule  = LeiterplattenKlemme2_5RM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E32E;
+Reference = P2;
+ValeurCmp = POWER2;
+IdModule  = PinArray2_big;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9D88D;
+Reference = Q1;
+ValeurCmp = NPN;
+IdModule  = TO92-123;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9DA10;
+Reference = Q2;
+ValeurCmp = NPN;
+IdModule  = TO92-123;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9E048;
+Reference = R1;
+ValeurCmp = 150;
+IdModule  = SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9D9BF;
+Reference = R2;
+ValeurCmp = 150;
+IdModule  = SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9DA33;
+Reference = R3;
+ValeurCmp = 150;
+IdModule  = SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9D980;
+Reference = R4;
+ValeurCmp = 4k7;
+IdModule  = SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A9DA23;
+Reference = R5;
+ValeurCmp = 4k7;
+IdModule  = SM0603;
+EndCmp
+
+EndListe

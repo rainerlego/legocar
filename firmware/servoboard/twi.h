@@ -7,7 +7,7 @@
 #include "led.h" //for controlling leds on twi bus activity
 #include "servo.h" //for writing to servo angular array
 
-#define TWIADDR (1<<TWA0) //adresse für i2c slave
+#define TWIADDR ((1<<TWA0)|(1<<TWA1)) //adresse für i2c slave
 #define TWIPREAMBLE 255
 #define TWIESCAPE 254
 #define TWIESC_is_preamble 1

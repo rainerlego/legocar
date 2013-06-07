@@ -1,4 +1,4 @@
-PCBNEW-BOARD Version 2 date Thu 09 May 2013 05:01:33 PM CEST
+PCBNEW-BOARD Version 2 date Tue 04 Jun 2013 09:09:40 PM CEST
 
 # Created by Pcbnew(2013-mar-30)-stable
 
@@ -21,7 +21,7 @@ $EndGENERAL
 $SHEETDESCR
 Sheet A4 11693 8268
 Title ""
-Date "9 may 2013"
+Date "4 jun 2013"
 Rev ""
 Comp ""
 Comment1 ""
@@ -61,7 +61,7 @@ Pad2MaskClearance 0.254
 SolderMaskMinWidth 0
 AuxiliaryAxisOrg 0 0
 VisibleElements 7FFFFFFF
-PcbPlotParams (pcbplotparams (layerselection 16744449) (usegerberextensions false) (excludeedgelayer true) (linewidth 60) (plotframeref false) (viasonmask false) (mode 1) (useauxorigin false) (hpglpennumber 1) (hpglpenspeed 20) (hpglpendiameter 15) (hpglpenoverlay 0) (psnegative false) (psa4output true) (plotreference true) (plotvalue true) (plotothertext true) (plotinvisibletext false) (padsonsilk false) (subtractmaskfromsilk false) (outputformat 2) (mirror true) (drillshape 1) (scaleselection 1) (outputdirectory ""))
+PcbPlotParams (pcbplotparams (layerselection 1) (usegerberextensions false) (excludeedgelayer true) (linewidth 60) (plotframeref false) (viasonmask false) (mode 1) (useauxorigin false) (hpglpennumber 1) (hpglpenspeed 20) (hpglpendiameter 15) (hpglpenoverlay 0) (psnegative false) (psa4output true) (plotreference true) (plotvalue true) (plotothertext true) (plotinvisibletext false) (padsonsilk false) (subtractmaskfromsilk false) (outputformat 2) (mirror true) (drillshape 1) (scaleselection 1) (outputdirectory ""))
 $EndSETUP
 
 $EQUIPOT

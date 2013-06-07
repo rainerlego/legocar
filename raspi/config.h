@@ -10,7 +10,7 @@
 
 
 //IP of simulation program
-#define SIM_IP "10.0.0.140"
+#define SIM_IP "127.0.0.1"
 //TCP port of simulation program
 #define SIM_PORT 8584
 

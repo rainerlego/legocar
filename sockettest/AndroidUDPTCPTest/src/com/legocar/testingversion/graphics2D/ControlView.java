@@ -42,7 +42,30 @@ public abstract class ControlView extends View{
 		super(context, attrs);
 	}
 
+	public void forceUpdatePercentage(float percentage){
+		forceUpdatePercentage(percentage, true);
+	}
+	
+	public void forceUpdatePercentage(float percentage, boolean direction){
+		setPercentage(percentage);
+		invalidate();
 
+		if(display!=null){
+				display.setText(String.format("%.02f", percentage)+"%");
+			}
+			if(tClient!=null){
+
+				try {
+					tClient.sendMessage(getServoControlMessage(servo, middleValue, offset, direction? percentage: -1.0*percentage));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+	}
+
+	
+	
 	public void updatePercentage(float percentage){
 		updatePercentage(percentage, true);
 	}

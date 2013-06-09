@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.annotation.SuppressLint;
@@ -54,6 +55,7 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		 getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.activity_driving);
 		// Show the Up button in the action bar.
 		setupActionBar();
@@ -70,6 +72,12 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 			super.onStop();
 		}
 
+	@Override
+		protected void onDestroy() {
+			// TODO Auto-generated method stub
+			stop();
+			super.onDestroy();
+		}
 
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.

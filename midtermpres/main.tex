@@ -14,7 +14,7 @@
 \usepackage{amssymb,amsmath}  % use mathematical symbols
 \usepackage{palatino}                  % use palatino as the default font
 \setbeamercovered{transparent}
-
+\setbeamertemplate{navigation symbols}{}
 \begin{document}
 
 % here you define the information that will be displayed in the title/cover page
@@ -352,7 +352,21 @@ Testing GUIs, TCP/UDP/IP Protocols, Hardware
 \end{frame}
 \subsection{FPGA}
 \begin{frame}
-\frametitle{Implementing I2C}
+  \frametitle{Implementation Step}
+  \textbf{Current work:}
+  \begin{itemize}
+  \item Get $I^2C$ to work
+  \item Connect to camera
+  \end{itemize}
+\vspace{2em}
+  \textbf{Future Work:}
+  \begin{itemize}
+  \item Implement Communication protocol for communication with RPi
+  \item Implement laser scanning algorithm
+  \item Implement Obstacle Avoidance
+  \item Implement Traction control?
+  \end{itemize}
+
 \end{frame}
 
 \section{Goals}
@@ -379,3 +393,8 @@ Testing GUIs, TCP/UDP/IP Protocols, Hardware
 
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

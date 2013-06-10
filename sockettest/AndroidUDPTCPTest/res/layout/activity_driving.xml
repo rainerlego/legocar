@@ -9,14 +9,54 @@
     tools:context=".DrivingActivity" >
 
     <TableLayout
-        android:id="@+id/displayTable"
+        android:id="@+id/displayTable2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ButtonStart"
-        android:layout_centerVertical="true" >
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true" >
 
         <TableRow
-            android:id="@+id/tableRow1"
+            android:id="@+id/tableRow21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            
+            <Button
+		        android:id="@+id/ButtonStart"
+		        android:layout_width="240dp"
+                android:layout_height="50dp"
+		        android:layout_span="2"
+		        android:onClick="connet"
+		        android:text="@string/start" />
+            
+            </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            
+            <Button
+		        android:id="@+id/ButtonPerm"
+		        android:layout_width="240dp"
+                android:layout_height="50dp"
+		        android:layout_span="2"
+		        android:onClick="getperm"
+		        android:text="@string/getperm" />          
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >            
+		    <Button
+		        android:id="@+id/buttonStop"
+		        android:layout_width="240dp"
+                android:layout_height="50dp"
+		        android:layout_span="2"
+		        android:onClick="disconnet"
+		        android:text="@string/stop" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
@@ -28,15 +68,15 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
-                android:id="@+id/textViewPowerValue"
-                android:layout_width="wrap_content"
+                android:id="@+id/powerValueTextViewer"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/defaultValue"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow2"
+            android:id="@+id/tableRow24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
@@ -48,65 +88,63 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
-                android:id="@+id/textViewSteeringValue"
-                android:layout_width="wrap_content"
+                android:id="@+id/steeringValueTextView"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/defaultValue"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>
+        
+
     </TableLayout>
 
     <com.legocar.testingversion.graphics2D.SpeedView
         android:id="@+id/speedView"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true" 
         android:layout_marginLeft="10dp"/>
 
-    <com.legocar.testingversion.graphics2D.SteeringView
-        android:id="@+id/steeringView"
-        android:layout_width="200dp"
-        android:layout_height="400dp"
-        android:layout_centerVertical="true"
-       android:layout_alignParentLeft="true"/>
 
-    <Button
-        android:id="@+id/ButtonStart"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/steeringView"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/steeringView"
-        android:onClick="start"
-        android:text="@string/start" />
 
-    <Button
-        android:id="@+id/buttonStop"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignBottom="@+id/steeringView"
-        android:layout_alignLeft="@+id/ButtonStart"
-        android:layout_marginBottom="20dp"
-        android:onClick="stop"
-        android:text="@string/stop" />
-
-    <Button
-        android:id="@+id/ButtonDirection"
+        <TableLayout
+        android:id="@+id/displayTable1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/steeringView"
-        android:layout_alignLeft="@+id/steeringView"
-        android:onClick="changeDirection"
-        android:text="@string/direction" />
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" 
+        android:layout_marginLeft="10dp">
 
-    <Button
-        android:id="@+id/buttonZero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/steeringView"
-        android:layout_toRightOf="@+id/ButtonDirection"
-        android:onClick="steeringReset"
-        android:text="@string/zero" />
+        <TableRow
+            android:id="@+id/tableRow11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+		    
+		    <com.legocar.testingversion.graphics2D.SteeringView
+		        android:id="@+id/steeringView"
+		        android:layout_span="2"
+		        android:layout_width="200dp"
+		        android:layout_height="200dp" />
+		</TableRow>
+		<TableRow 
+		    android:id="@+id/tableRow12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+		    <Button
+		        android:id="@+id/ButtonDirection"
+		        android:layout_width="70dp"
+		        android:layout_height="50dp"
+		        android:onClick="changeDirection"
+		        android:text="@string/direction" />
 
+		    <Button
+		        android:id="@+id/buttonZero"
+		        android:layout_width="95dp"
+		        android:layout_height="50dp"
+		        android:onClick="steeringReset"
+		        android:text="@string/zero" />
+
+		</TableRow>
+</TableLayout>
 </RelativeLayout>

@@ -61,13 +61,24 @@ public class SpeedView extends ControlView{
 		//TODO
 		Log.i("TouchEvent", "y " +y);
 		
-		if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE){
+		if(action == MotionEvent.ACTION_MOVE){
 			if(y<0){
 				updatePercentage((float) 100.0);
 			}else if(y>getCanvasHeight()){
-				updatePercentage((float) 0.0);
+				updatePercentage((float) -100.0);
 			}else {
 				updatePercentage((float) (100.0*(1.0-2.0*y/getCanvasHeight())));
+			}
+			return true;
+		}
+		
+		if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_UP){
+			if(y<0){
+				forceUpdatePercentage((float) 100.0);
+			}else if(y>getCanvasHeight()){
+				forceUpdatePercentage((float) -100.0);
+			}else {
+				forceUpdatePercentage((float) (100.0*(1.0-2.0*y/getCanvasHeight())));
 			}
 			return true;
 		}

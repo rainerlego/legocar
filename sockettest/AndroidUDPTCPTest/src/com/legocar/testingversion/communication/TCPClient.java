@@ -22,6 +22,7 @@ public class TCPClient {
 		this.serverPort= serverPort;
 	}
 	
+	
 	public void sendMessage(String message) throws IOException{
 		try{
 			out.write(message);

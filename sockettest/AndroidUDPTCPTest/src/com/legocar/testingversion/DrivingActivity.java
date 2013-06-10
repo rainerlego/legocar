@@ -150,7 +150,7 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 	}
 	
 	/** Called when the user clicks the Send by start button */
-	public void start(View view) {
+	public void connet(View view) {
         sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_FASTEST);
 
         new TCPConnectTask().execute(tClient);
@@ -160,9 +160,15 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 		getSteeringView().updatePercentage((float) 0.0);
 
 	}
+	
+	/** Called when the user clicks the Send by start button 
+	 * @throws IOException */
+	public void getperm(View view) throws IOException {
+		tClient.sendMessage("servo getperm");
+	}
 
 	/** Called when the user clicks the Send by stop button */
-	public void stop(View view) {	
+	public void disconnet(View view) {	
 		stop();
 	}
 	
@@ -184,11 +190,11 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 	private void startControl() {
 		Log.i("TODO", "startControl");
 		//Speed control
-	    speedText = (TextView) findViewById(R.id.textViewPowerValue);
+	    speedText = (TextView) findViewById(R.id.powerValueTextViewer);
 	    setupConnection(getSpeedView(), speedText, ServoType.POWER);	    
 
 	    //Steering control
-	    steeringText = (TextView) findViewById(R.id.textViewSteeringValue);
+	    steeringText = (TextView) findViewById(R.id.steeringValueTextView);
 	    setupConnection(getSteeringView(), steeringText, ServoType.STEERING);   
 	}
 

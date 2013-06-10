@@ -37,9 +37,10 @@
     
     <string name="power">Power</string>
     <string name="steering">Steering</string>
-    <string name="stop">Stop!</string>
-    <string name="start">Start!</string>
-    <string name="direction">Direction</string>
-    <string name="zero">Zero</string>
+    <string name="stop">Stop&amp;Disconnet!</string>
+    <string name="start">Connet!</string>
+    <string name="getperm">GetPerm!</string>
+    <string name="direction">Flip</string>
+    <string name="zero">SetZero</string>
     
 </resources>

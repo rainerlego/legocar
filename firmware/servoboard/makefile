@@ -179,10 +179,12 @@ LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 # Type: avrdude -c ?
 # to get a full listing.
 #
+#AVRDUDE_PROGRAMMER = ponyser
 AVRDUDE_PROGRAMMER = usbtiny
 
 # com1 = serial port. Use lpt1 to connect to parallel port.
-AVRDUDE_PORT = usb
+#AVRDUDE_PORT = /dev/ttyUSB0    # programmer connected to serial device
+AVRDUDE_PORT = usb   # programmer connected to serial device
 
 AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 #AVRDUDE_WRITE_EEPROM = -U eeprom:w:$(TARGET).eep
@@ -319,10 +321,10 @@ gccversion :
 
 
 boot:
-	../bootloader/client/FBoot-Linux/Linux/bootloader -d /dev/ttyUSB0 -p -r $(TARGET).hex
-	../bootloader/client/FBoot-Linux/Linux/bootloader -d /dev/ttyUSB0 -T -v -r $(TARGET).hex
+	../bootloader/client/FBoot-Linux/Linux/bootloader -d /dev/ttyUSB1 -p -r $(TARGET).hex
+	../bootloader/client/FBoot-Linux/Linux/bootloader -d /dev/ttyUSB1 -T -v -r $(TARGET).hex
 
-# Program the device.  
+# Program the device. 
 program: $(TARGET).hex $(TARGET).eep
 	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
 

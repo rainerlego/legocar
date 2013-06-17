@@ -5,11 +5,11 @@ use ieee.numeric_std.all;
 
 entity i2ctest is
   generic (slave_address: std_logic_vector(6 downto 0) := (others => '0'));
-    port (i2c_scl: inout std_logic;
-          i2c_sda: inout std_logic;
-          CLOCK_50: in std_logic;
-          KEY: in std_logic_vector(3 downto 0)
-          );
+  port (i2c_scl: inout std_logic;
+        i2c_sda: inout std_logic;
+        CLOCK_50: in std_logic;
+        KEY: in std_logic_vector(3 downto 0)
+        );
 end i2ctest;
 
 
@@ -32,17 +32,18 @@ architecture simulate of i2ctest is
       scl       : INOUT  STD_LOGIC);                   --serial clock output of i2c bus
   end component;
   
-  type machine is (reset,preamble,command,firstbyte,secondbyte,final);
+  type machine is (reset,writing,finished);
   signal addr: std_logic_vector(6 downto 0) := slave_address;
   signal data_wr: std_logic_vector(7 downto 0) := (others => '0');
-  signal reset_n: std_logic := '0';
+  signal reset_n: std_logic := '1';
   signal ena: std_logic := '0';
   signal rw: std_logic := '0';
   signal busy: std_logic;
   signal data_rd: std_logic_vector(7 downto 0);
   signal ack_error: std_logic;
   signal state: machine := reset;
-  
+  signal busy_prev: std_logic := '0';
+  signal busy_count: integer := 0;
 begin
   i2c_servoboard: i2c_master
     generic map (bus_clk => 400_000)
@@ -67,40 +68,35 @@ begin
         -- Reset state. Keep i2c_master inactive too.
         when reset =>
           if KEY(0) = '1' then
-            state <= preamble;
-            reset_n <= '1';
-          else
-            reset_n <= '0';
-            state <= reset;
+            state <= writing;
           end if;
         -- Send the preamble (ff)
-        when preamble =>
-          data_wr <= (others => '1');
-          ena <= '1';
-          state <= command;
-        when command =>
-          -- If Data is not yet written, do nothing and stay in command state.
-          -- We have to wait for busy, otherwise the data is not yet written.
-          if busy = '0' then
-            -- Command: Set Servo 0
-            data_wr <= "00000000";
-            state <= firstbyte;
+        when writing =>
+          busy_prev <= busy;
+          if busy_prev = '0' and busy = '1' then
+            busy_count <= busy_count + 1;
           end if;
-        when firstbyte =>
-          if busy = '0' then
-            data_wr <= to_stdlogicvector(bit_vector'x"1f");
-            state <= secondbyte;
-          end if;
-        when secondbyte =>
-          if busy = '0' then
-            data_wr <= to_stdlogicvector(bit_vector'x"40");
-            state <= final;
-          end if;
-        when final =>
-          -- Everything has been written.
-          if busy = '0' then
-            ena <= '0';
-          end if;
+          case busy_count is
+            when 0 =>
+              -- Write preamble
+              data_wr <= to_stdlogicvector(bit_vector'(x"FF"));
+              ena <= '1';
+            when 1 =>
+              -- Set servo 0
+              data_wr <= to_stdlogicvector(bit_vector'(x"00"));
+            when 2 =>
+              data_wr <= to_stdlogicvector(bit_vector'(x"1f"));
+            when 3 =>
+              data_wr <= to_stdlogicvector(bit_vector'(x"40"));
+            when 4 =>
+              ena <= '0';
+              state <= finished;
+            when others =>
+              state <= finished;
+              ena <= '0';
+          end case;
+        when finished =>
+          -- do nothing.
       end case;
     end if;
   end process;

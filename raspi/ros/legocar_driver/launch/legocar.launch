@@ -1,0 +1,22 @@
+<launch>
+ <!-- Wiimote node -->
+   <node respawn="true" pkg="wiimote"  type="wiimote_node.py" name="wii_input" output="screen"/>
+
+ <!-- Axes -->
+  <param name="axis_linear" value="1" type="int"/>
+  <param name="axis_angular" value="0" type="int"/>
+  <param name="scale_linear" value="2" type="double"/>
+  <param name="scale_angular" value="2" type="double"/>
+
+  <node pkg="legocar_wiimote" type="legocar_wiimote_node" name="wii_translator"/>
+
+ <!-- Sonar Node-->
+<!--<node pkg="legocar_sonar" type="legocar_sonar_node" name="sonar"/>-->
+
+ <!-- Motor Driver Node-->
+  <node pkg="legocar_driver" type="legocar_driver_node" name="motordriver"/>
+
+ <!-- Turtlesim Node-->
+  <!--<node pkg="turtlesim" type="turtlesim_node" name="simulator"/>-->
+
+</launch>

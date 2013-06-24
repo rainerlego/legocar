@@ -4,12 +4,16 @@ use ieee.std_logic_arith.all;
 use ieee.numeric_std.all;
 
 entity i2ctest is
-  generic (slave_address: std_logic_vector(6 downto 0) := (others => '0'));
+  generic (
+    slave_address: std_logic_vector(6 downto 0) := (others => '0'));
   port (i2c_scl: inout std_logic;
         i2c_sda: inout std_logic;
         CLOCK_50: in std_logic;
-        KEY: in std_logic_vector(3 downto 0)
-        );
+        start: in std_logic;
+        running: out std_logic;
+        motor: in std_logic_vector(0 to 2);
+        -- Only allow 2 byte arguments
+        speed: in std_logic_vector(0 to 15));
 end i2ctest;
 
 
@@ -31,6 +35,12 @@ architecture simulate of i2ctest is
       sda       : INOUT  STD_LOGIC;                    --serial data output of i2c bus
       scl       : INOUT  STD_LOGIC);                   --serial clock output of i2c bus
   end component;
+
+  component edge_detector
+    port (clock: in std_logic;
+          input: in std_logic;
+          output: out std_logic);
+  end component;        
   
   type machine is (reset,writing,finished);
   signal addr: std_logic_vector(6 downto 0) := slave_address;
@@ -42,8 +52,8 @@ architecture simulate of i2ctest is
   signal data_rd: std_logic_vector(7 downto 0);
   signal ack_error: std_logic;
   signal state: machine := reset;
-  signal busy_prev: std_logic := '0';
   signal busy_count: integer := 0;
+  signal busy_edge: std_logic := '0';
 begin
   i2c_servoboard: i2c_master
     generic map (bus_clk => 400_000)
@@ -59,21 +69,27 @@ begin
       ack_error => ack_error,
       sda => i2c_sda,
       scl => i2c_scl);
+
+  busy_detector: edge_detector
+    port map (
+      clock => CLOCK_50,
+      input => busy,
+      output => busy_edge);
   
   process(CLOCK_50)
   begin
-    -- TODO: Add error transitions.
+    -- TODO: Actually use ack_error.
     if rising_edge(CLOCK_50) then
       case state is
         -- Reset state. Keep i2c_master inactive too.
         when reset =>
-          if KEY(0) = '1' then
+          if start = '1' then
             state <= writing;
+            running <= '1';
           end if;
         -- Send the preamble (ff)
         when writing =>
-          busy_prev <= busy;
-          if busy_prev = '0' and busy = '1' then
+          if busy_edge = '1' then
             busy_count <= busy_count + 1;
           end if;
           case busy_count is
@@ -82,21 +98,19 @@ begin
               data_wr <= to_stdlogicvector(bit_vector'(x"FF"));
               ena <= '1';
             when 1 =>
-              -- Set servo 0
-              data_wr <= to_stdlogicvector(bit_vector'(x"00"));
+              -- Send command
+              data_wr <= to_stdlogicvector(bit_vector'(x"0")) & '0' & motor;
             when 2 =>
-              data_wr <= to_stdlogicvector(bit_vector'(x"1f"));
+              data_wr <= speed(0 to 7);
             when 3 =>
-              data_wr <= to_stdlogicvector(bit_vector'(x"40"));
-            when 4 =>
-              ena <= '0';
-              state <= finished;
+              data_wr <= speed(8 to 15);
             when others =>
               state <= finished;
               ena <= '0';
           end case;
         when finished =>
-          -- do nothing.
+          running <= '0';
+          state <= reset;
       end case;
     end if;
   end process;

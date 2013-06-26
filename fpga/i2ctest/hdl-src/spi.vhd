@@ -9,19 +9,32 @@ entity spislave is
         mosi: in std_logic;
         miso: out std_logic;
         complete: inout std_logic;
-        data: inout std_logic_vector(7 downto 0);)
+        write_buffer: in std_logic_vector(7 downto 0))
+        read_buffer: out std_logic_vector(7 downto 0))
+        data: inout std_logic_vector(8 downto 0))
 end spislave;
 
 architecture spislavearch of spislave is
+  signal count : integer range 0 to 10 :=7;  --start value 7: write-buffer will be written to data
 begin
   process(clk) --clock idle low -> write data on rising edge
   begin
     if cs = '0' then
       if clk = '0' then --falling edge -> toggle
-        data <= data sll 1;
+        data(8 downto 1) <= data(7 downto 0);  -- shift left
+        count:=count+1;
       else              --rising edge -> sample
         data(0) <= mosi;
       end if;
+
+      case count is
+        when 6 => --beim 7. mal shiften: ein komplettes byte wurde empfangen, letztes bit wird ncoh gesendet
+          read_buffer <= data(7 downto 0);
+        when 7 => --beim 8. mal shiften: letztes bit wurde gesendet, empfangene daten wurden in read_buffer geschrieben
+          data(8 downto 1) <= write_buffer;
+          count := 0;
+      end case;
+
     end if;
   end process;
   miso <= data(7);

@@ -9,7 +9,7 @@ entity spislave is
         mosi: in std_logic;
         miso: out std_logic;
         complete: inout std_logic;
-        data: inout std_logic_vector(7 downto 0);)
+        data: inout std_logic_vector(8 downto 0);)
 end spislave;
 
 architecture spislavearch of spislave is

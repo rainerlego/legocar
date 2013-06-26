@@ -16,7 +16,7 @@ end spislave;
 architecture spislavearch of spislave is
 begin
   process(clk) --clock idle low -> write data on rising edge
-  variable count : integer range 0 to 10 :=7;  --start value 7: write-buffer will be written to data
+    variable count : integer range 0 to 10 :=7;  --start value 7: write-buffer will be written to data
   begin
     if cs = '0' then
       if clk = '0' then --falling edge -> toggle
@@ -35,5 +35,5 @@ begin
 
     end if;
   end process;
-  miso <= data(7);
+  miso <= data(8);
 end spislavearch;

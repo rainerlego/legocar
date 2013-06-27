@@ -149,7 +149,7 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
           //printf ( "N: servo: %010.0fus have passed since last write; OK\n", diff );
           gettimeofday(&t1,NULL);
           servo_accel = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_X], 0 );
-          servo_steering = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_Y], 1 );
+          servo_steering = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_Y], 0 );
           //printf ( "servo: accel: %d, steer: %d\n", servo_accel, servo_steering );
           if ( accmode == WII_ACCMODE_TILT )
           {

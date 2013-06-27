@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.annotation.SuppressLint;
@@ -54,6 +55,7 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		 getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.activity_driving);
 		// Show the Up button in the action bar.
 		setupActionBar();
@@ -70,6 +72,12 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 			super.onStop();
 		}
 
+	@Override
+		protected void onDestroy() {
+			// TODO Auto-generated method stub
+			stop();
+			super.onDestroy();
+		}
 
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
@@ -142,7 +150,7 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 	}
 	
 	/** Called when the user clicks the Send by start button */
-	public void start(View view) {
+	public void connet(View view) {
         sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_FASTEST);
 
         new TCPConnectTask().execute(tClient);
@@ -152,9 +160,15 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 		getSteeringView().updatePercentage((float) 0.0);
 
 	}
+	
+	/** Called when the user clicks the Send by start button 
+	 * @throws IOException */
+	public void getperm(View view) throws IOException {
+		tClient.sendMessage("servo getperm");
+	}
 
 	/** Called when the user clicks the Send by stop button */
-	public void stop(View view) {	
+	public void disconnet(View view) {	
 		stop();
 	}
 	
@@ -176,11 +190,11 @@ public class DrivingActivity extends Activity implements SensorEventListener{
 	private void startControl() {
 		Log.i("TODO", "startControl");
 		//Speed control
-	    speedText = (TextView) findViewById(R.id.textViewPowerValue);
+	    speedText = (TextView) findViewById(R.id.powerValueTextViewer);
 	    setupConnection(getSpeedView(), speedText, ServoType.POWER);	    
 
 	    //Steering control
-	    steeringText = (TextView) findViewById(R.id.textViewSteeringValue);
+	    steeringText = (TextView) findViewById(R.id.steeringValueTextView);
 	    setupConnection(getSteeringView(), steeringText, ServoType.STEERING);   
 	}
 

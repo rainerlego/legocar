@@ -1,0 +1,53 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/pi/ros_ws/joystick_drivers/wiimote/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1175119239/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1175119239.dir/build.make CMakeFiles/cmTryCompileExec1175119239.dir/build
+make[1]: Entering directory `/home/pi/ros_ws/joystick_drivers/wiimote/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/pi/ros_ws/joystick_drivers/wiimote/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1175119239.dir/CheckSymbolExists.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec1175119239.dir/CheckSymbolExists.c.o   -c /home/pi/ros_ws/joystick_drivers/wiimote/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec1175119239
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1175119239.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec1175119239.dir/CheckSymbolExists.c.o  -o cmTryCompileExec1175119239 -rdynamic 
+CMakeFiles/cmTryCompileExec1175119239.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x38): undefined reference to `pthread_create'
+collect2: ld returned 1 exit status
+make[1]: Leaving directory `/home/pi/ros_ws/joystick_drivers/wiimote/build/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec1175119239] Error 1
+make: *** [cmTryCompileExec1175119239/fast] Error 2
+
+File /home/pi/ros_ws/joystick_drivers/wiimote/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/pi/ros_ws/joystick_drivers/wiimote/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1872363841/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1872363841.dir/build.make CMakeFiles/cmTryCompileExec1872363841.dir/build
+make[1]: Entering directory `/home/pi/ros_ws/joystick_drivers/wiimote/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/pi/ros_ws/joystick_drivers/wiimote/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1872363841.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec1872363841.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1872363841
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1872363841.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec1872363841.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1872363841 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: ld returned 1 exit status
+make[1]: Leaving directory `/home/pi/ros_ws/joystick_drivers/wiimote/build/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec1872363841] Error 1
+make: *** [cmTryCompileExec1872363841/fast] Error 2
+
+

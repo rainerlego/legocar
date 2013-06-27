@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/pi/ros_ws/joystick_drivers/wiimote/build/devel/setup.sh

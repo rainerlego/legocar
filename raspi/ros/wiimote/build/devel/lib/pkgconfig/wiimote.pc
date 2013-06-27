@@ -1,0 +1,6 @@
+Name: wiimote
+Description: Description of wiimote
+Version: 1.9.10
+Cflags: -I/home/pi/ros_ws/joystick_drivers/wiimote/build/devel/include
+Libs: -L/home/pi/ros_ws/joystick_drivers/wiimote/build/devel/lib 
+Requires: geometry_msgs sensor_msgs std_msgs std_srvs rospy roslib genmsg

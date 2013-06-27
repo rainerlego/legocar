@@ -1,0 +1,6 @@
+Name: wiimote
+Description: Description of wiimote
+Version: 1.9.10
+Cflags: -I/usr/local/include
+Libs: -L/usr/local/lib 
+Requires: geometry_msgs sensor_msgs std_msgs std_srvs rospy roslib genmsg

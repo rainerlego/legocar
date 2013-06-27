@@ -22,6 +22,7 @@ architecture impl of speed_sensor is
   signal edgecount: unsigned(31 downto 0) := (others => '0');
   signal clockcount: unsigned(31 downto 0) := (others => '0');
   signal edge: std_logic;
+  signal state: std_logic := '0';
 begin
 
   dect: edge_detector port map (
@@ -29,7 +30,6 @@ begin
     input => pulse,
     output => edge);
   
-
   process(clk_in)
   begin
     if rising_edge(clk_in) then
@@ -39,8 +39,7 @@ begin
       end if;
       -- One tenth of a second has passed.
       if clockcount = clock_hz_div_10 then
-        -- 4 edges per revolution, divide by 4
-        speed <= "00" & edgecount(31 downto 2);
+        speed <= edgecount;
         edgecount <= conv_unsigned(0,32);
         clockcount <= conv_unsigned(0,32);
       end if;

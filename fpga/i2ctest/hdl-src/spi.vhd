@@ -10,7 +10,8 @@ entity spislave is
         miso: out std_logic;
         write_buffer: in std_logic_vector(7 downto 0);
         read_buffer: out std_logic_vector(7 downto 0);
-        data: inout std_logic_vector(8 downto 0));
+        data: inout std_logic_vector(8 downto 0);
+        complete: inout std_logic);
 end spislave;
 
 architecture spislavearch of spislave is
@@ -27,6 +28,7 @@ begin
               read_buffer <= data(7 downto 0);
             when 7 => --beim 8. mal shiften: letztes bit wurde gesendet, empfangene daten wurden in read_buffer geschrieben
               data(8 downto 1) <= write_buffer;
+              complete <= '1';
               count := 0;
           end case;
       else              --rising edge -> sample

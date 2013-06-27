@@ -14,7 +14,6 @@ ARCHITECTURE impl OF spi_test IS
           miso: out std_logic;
           write_buffer: in std_logic_vector(7 downto 0);
           read_buffer: out std_logic_vector(7 downto 0);
-          data: inout std_logic_vector(8 downto 0);
           complete: inout std_logic);
   END COMPONENT;
 
@@ -25,10 +24,9 @@ ARCHITECTURE impl OF spi_test IS
   SIGNAL amwrite_buffer : std_logic_vector(7 downto 0) := "10110101";
   SIGNAL amread_buffer : std_logic_vector(7 downto 0) := "00000000";
 
-  signal data: std_logic_vector(8 downto 0) := (others => '0');
 
   signal recv: std_logic_vector(7 downto 0) := (others => '0');  signal complete: std_logic := '0';
-  
+  signal towrite: std_logic_vector(15 downto 0) := "0111011101101101";
 BEGIN
   i1 : spislave
     PORT MAP (
@@ -38,69 +36,28 @@ BEGIN
       miso => ammiso,
       write_buffer => amwrite_buffer,
       read_buffer => amread_buffer,
-      data => data,
       complete => complete);
 
   PROCESS                                         
   BEGIN
-    -- One tenth second simulation.
     amcs <= '0';
-    ammosi <= '1'; --s1
-    wait for 10 ns;
-    amclk <= '1';
-    wait for 10 ns;
-    amclk <= '0';
-    wait for 10 ns;
-    amclk <= '1'; --first high clock => sample
-    recv(7) <= ammiso; --b1
-    wait for 10 ns;
-    amclk <= '0';
-    ammosi <= '0'; --s2
-    wait for 10 ns;
-    amclk <= '1';
-    recv(6) <= ammiso; --b2
-    wait for 10 ns;
-    amclk <= '0';
-    ammosi <= '0'; --s3
-    wait for 10 ns;
-    amclk <= '1';
-    recv(7) <= ammiso; --b3
-    wait for 10 ns;
-    amclk <= '0';
-    ammosi <= '0'; --s4
-    wait for 10 ns;
-    amclk <= '1';
-    recv(6) <= ammiso; --b4
-    wait for 10 ns;
-    amclk <= '0';
-    ammosi <= '0'; --s5
-    wait for 10 ns;
-    amclk <= '1';
-    recv(7) <= ammiso; --b5
-    wait for 10 ns;
-    amclk <= '0';
-    ammosi <= '0'; --s6
-    wait for 10 ns;
-    amclk <= '1';
-    recv(6) <= ammiso; --b6
-    wait for 10 ns;
-    amclk <= '0';
-    ammosi <= '0'; --s7
-    wait for 10 ns;
-    amclk <= '1';
-    recv(7) <= ammiso; --b7
-    wait for 10 ns;
-    amclk <= '0';
-    ammosi <= '0'; --s8
-    wait for 10 ns;
-    amclk <= '1';
-    recv(6) <= ammiso; --b8
-    wait for 10 ns;
-    amclk <= '0';
-    ammosi <= '0'; --s9
-
+    for i in 0 to 15 loop
+      ammosi <= towrite(i);
+      wait for 20 ns;
+    end loop;
     WAIT;
   END PROCESS;
 
+
+  process
+  begin
+    for i in 0 to 100 loop
+      amclk <= '1';
+      wait for 10 ns;
+      amclk <= '0';
+      wait for 10 ns;
+    end loop;
+    wait;
+  end process;  
 
 END impl;

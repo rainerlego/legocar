@@ -1,5 +1,6 @@
 LIBRARY ieee;                                               
-USE ieee.std_logic_1164.all;                                
+USE ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
 
 ENTITY i2ctest_vhd_tst IS
 END i2ctest_vhd_tst;
@@ -10,9 +11,9 @@ ARCHITECTURE i2ctest_arch OF i2ctest_vhd_tst IS
   SIGNAL i2c_sda : STD_LOGIC;
   SIGNAL start : STD_LOGIC;
   SIGNAL motor : STD_LOGIC_VECTOR(2 downto 0) := "011";
-  SIGNAL speed : STD_LOGIC_VECTOR(15 downto 0) := x"1f40";
+  SIGNAL speed : unsigned(15 downto 0) := x"1f40";
   SIGNAL running: STD_LOGIC;
-  COMPONENT i2ctest is
+  COMPONENT motor_controller is
     generic (
       slave_address: std_logic_vector(6 downto 0) := (others => '0'));
     port (i2c_scl: inout std_logic;
@@ -20,13 +21,13 @@ ARCHITECTURE i2ctest_arch OF i2ctest_vhd_tst IS
           CLOCK_50: in std_logic;
           motor: in std_logic_vector(0 to 2);
           -- Only allow 2 byte arguments
-          speed: in std_logic_vector(0 to 15);
+          speed: in unsigned(0 to 15);
           start: in std_logic;
           running: out std_logic);
 
   END COMPONENT;
 BEGIN
-  i1 : i2ctest
+  i1 : motor_controller
     PORT MAP (
       CLOCK_50 => CLOCK_50,
       i2c_scl => i2c_scl,

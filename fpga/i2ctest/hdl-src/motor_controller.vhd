@@ -1,9 +1,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
-use ieee.numeric_std.all;
 
-entity i2ctest is
+entity motor_controller is
   generic (
     slave_address: std_logic_vector(6 downto 0) := (others => '0'));
   port (i2c_scl: inout std_logic;
@@ -13,11 +12,11 @@ entity i2ctest is
         running: out std_logic;
         motor: in std_logic_vector(0 to 2);
         -- Only allow 2 byte arguments
-        speed: in std_logic_vector(0 to 15));
-end i2ctest;
+        speed: in unsigned(0 to 15));
+end motor_controller;
 
 
-architecture simulate of i2ctest is
+architecture synth of motor_controller is
   component i2c_master
     GENERIC(
       input_clk : INTEGER := 50_000_000; --input clock speed from user logic in Hz
@@ -42,7 +41,7 @@ architecture simulate of i2ctest is
           output: out std_logic);
   end component;        
   
-  type machine is (reset,writing,finished);
+  type machine is (reset,writing);
   signal addr: std_logic_vector(6 downto 0) := slave_address;
   signal data_wr: std_logic_vector(7 downto 0) := (others => '0');
   signal reset_n: std_logic := '1';
@@ -56,7 +55,7 @@ architecture simulate of i2ctest is
   signal busy_edge: std_logic := '0';
 begin
   i2c_servoboard: i2c_master
-    generic map (bus_clk => 400_000)
+    generic map (bus_clk => 100_000)
     port map(
       clk => CLOCK_50,
       reset_n => reset_n,
@@ -86,6 +85,8 @@ begin
           if start = '1' then
             state <= writing;
             running <= '1';
+          else
+            running <= '0';
           end if;
         -- Send the preamble (ff)
         when writing =>
@@ -101,17 +102,16 @@ begin
               -- Send command
               data_wr <= to_stdlogicvector(bit_vector'(x"0")) & '0' & motor;
             when 2 =>
-              data_wr <= speed(0 to 7);
+              data_wr <= conv_std_logic_vector(speed(0 to 7), 8);
             when 3 =>
-              data_wr <= speed(8 to 15);
+              data_wr <= conv_std_logic_vector(speed(8 to 15), 8);
             when others =>
-              state <= finished;
+              state <= reset;
+              running <= '0';
+              busy_count <= 0;
               ena <= '0';
           end case;
-        when finished =>
-          running <= '0';
-          state <= reset;
       end case;
     end if;
   end process;
-end simulate;
+end synth;

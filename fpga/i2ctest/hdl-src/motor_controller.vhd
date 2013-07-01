@@ -20,7 +20,7 @@ architecture synth of motor_controller is
   component i2c_master
     GENERIC(
       input_clk : INTEGER := 50_000_000; --input clock speed from user logic in Hz
-      bus_clk   : INTEGER := 400_000);   --speed the i2c bus (scl) will run at in Hz
+      bus_clk   : INTEGER := 50_000);   --speed the i2c bus (scl) will run at in Hz
     PORT(
       clk       : IN     STD_LOGIC;                    --system clock
       reset_n   : IN     STD_LOGIC;                    --active low reset
@@ -35,24 +35,18 @@ architecture synth of motor_controller is
       scl       : INOUT  STD_LOGIC);                   --serial clock output of i2c bus
   end component;
 
-  component edge_detector
-    port (clock: in std_logic;
-          input: in std_logic;
-          output: out std_logic);
-  end component;        
-  
   type machine is (reset,writing);
   signal addr: std_logic_vector(6 downto 0) := slave_address;
   signal data_wr: std_logic_vector(7 downto 0) := (others => '0');
-  signal reset_n: std_logic := '1';
+  signal reset_n: std_logic := '0';
   signal ena: std_logic := '0';
   signal rw: std_logic := '0';
   signal busy: std_logic;
   signal data_rd: std_logic_vector(7 downto 0);
   signal ack_error: std_logic;
   signal state: machine := reset;
-  signal busy_count: integer := 0;
-  signal busy_edge: std_logic := '0';
+  signal busy_prev: std_logic;
+
 begin
   i2c_servoboard: i2c_master
     generic map (bus_clk => 100_000)
@@ -69,47 +63,56 @@ begin
       sda => i2c_sda,
       scl => i2c_scl);
 
-  busy_detector: edge_detector
-    port map (
-      clock => CLOCK_50,
-      input => busy,
-      output => busy_edge);
-  
   process(CLOCK_50)
+    variable busy_count: integer := 0;
   begin
     -- TODO: Actually use ack_error.
     if rising_edge(CLOCK_50) then
       case state is
         -- Reset state. Keep i2c_master inactive too.
         when reset =>
+          addr <= slave_address;
+          rw <= '0';
           if start = '1' then
             state <= writing;
             running <= '1';
+            reset_n <= '1';
+            busy_prev <= '1';
           else
             running <= '0';
+            reset_n <= '0';
           end if;
-        -- Send the preamble (ff)
         when writing =>
-          if busy_edge = '1' then
-            busy_count <= busy_count + 1;
+          busy_prev <= busy;
+          if (busy_prev = '0' and busy = '1') then
+            busy_count := busy_count + 1;
           end if;
           case busy_count is
             when 0 =>
-              -- Write preamble
-              data_wr <= to_stdlogicvector(bit_vector'(x"FF"));
-              ena <= '1';
+              if busy = '0' then
+                data_wr <= to_stdlogicvector(bit_vector'(x"FF"));
+                ena <= '1';
+              end if;
             when 1 =>
               -- Send command
-              data_wr <= to_stdlogicvector(bit_vector'(x"0")) & '0' & motor;
+              data_wr <= "00000" & motor;
             when 2 =>
               data_wr <= conv_std_logic_vector(speed(0 to 7), 8);
             when 3 =>
               data_wr <= conv_std_logic_vector(speed(8 to 15), 8);
+            when 4 =>
+              ena <= '0';
+              if busy = '0' then
+                state <= reset;
+                running <= '0';
+                busy_count := 0;
+                busy_prev <= '0';
+              end if;
             when others =>
               state <= reset;
               running <= '0';
-              busy_count <= 0;
-              ena <= '0';
+              busy_count := 0;
+              busy_prev <= '0';
           end case;
       end case;
     end if;

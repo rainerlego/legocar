@@ -33,7 +33,9 @@ architecture synth of toplevel is
 
 begin
   controller: motor_controller
-    generic map (slave_address => "0000001")
+    generic map (
+      slave_address => "0000011"
+    )
     port map (
       CLOCK_50 => CLOCK_50,
       start => start,
@@ -49,14 +51,17 @@ begin
       if running = '0' then
         if KEY(0) = '0' then
           speed <= (others => '0');
+          motor <= "001";
           start <= '1';
           LEDG(0) <= '1';
         elsif KEY(1) = '0' then
           speed <= conv_unsigned(2000, 16);
+          motor <= "001";
           start <= '1';
           LEDG(1) <= '1';
         elsif KEY(2) = '0' then
           speed <= conv_unsigned(4000, 16);
+          motor <= "001";
           start <= '1';
           LEDG(2) <= '1';
         end if;

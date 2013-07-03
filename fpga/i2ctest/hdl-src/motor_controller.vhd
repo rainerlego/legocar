@@ -10,9 +10,9 @@ entity motor_controller is
         CLOCK_50: in std_logic;
         start: in std_logic;
         running: out std_logic;
-        motor: in std_logic_vector(0 to 2);
+        motor: in std_logic_vector(2 downto 0);
         -- Only allow 2 byte arguments
-        speed: in unsigned(0 to 15));
+        speed: in unsigned(15 downto 0));
 end motor_controller;
 
 
@@ -35,17 +35,24 @@ architecture synth of motor_controller is
       scl       : INOUT  STD_LOGIC);                   --serial clock output of i2c bus
   end component;
 
-  type machine is (reset,writing);
+
+  component edge_detector is
+    port (
+      clock  : in  std_logic;
+      input  : in  std_logic;
+      output : out std_logic);
+  end component edge_detector;
+
+  type machine is (reset,started,preamble,command,arg1,arg2,finished);
   signal addr: std_logic_vector(6 downto 0) := slave_address;
   signal data_wr: std_logic_vector(7 downto 0) := (others => '0');
   signal reset_n: std_logic := '0';
   signal ena: std_logic := '0';
   signal rw: std_logic := '0';
   signal busy: std_logic;
-  signal data_rd: std_logic_vector(7 downto 0);
   signal ack_error: std_logic;
   signal state: machine := reset;
-  signal busy_prev: std_logic;
+  signal busy_pulse: std_logic;
 
 begin
   i2c_servoboard: i2c_master
@@ -58,63 +65,83 @@ begin
       rw => rw,
       data_wr => data_wr,
       busy => busy,
-      data_rd => data_rd,
       ack_error => ack_error,
       sda => i2c_sda,
       scl => i2c_scl);
 
-  process(CLOCK_50)
-    variable busy_count: integer := 0;
+  busy_edge: edge_detector
+    port map(CLOCK_50, busy, busy_pulse);
+
+
+  process(CLOCK_50,start, busy)
   begin
-    -- TODO: Actually use ack_error.
     if rising_edge(CLOCK_50) then
       case state is
-        -- Reset state. Keep i2c_master inactive too.
         when reset =>
-          addr <= slave_address;
-          rw <= '0';
           if start = '1' then
-            state <= writing;
-            running <= '1';
-            reset_n <= '1';
-            busy_prev <= '1';
-          else
-            running <= '0';
-            reset_n <= '0';
+            state <= started;
           end if;
-        when writing =>
-          busy_prev <= busy;
-          if (busy_prev = '0' and busy = '1') then
-            busy_count := busy_count + 1;
+        when started =>
+          if busy = '0' then
+            state <= preamble;
           end if;
-          case busy_count is
-            when 0 =>
-              if busy = '0' then
-                data_wr <= to_stdlogicvector(bit_vector'(x"FF"));
-                ena <= '1';
-              end if;
-            when 1 =>
-              -- Send command
-              data_wr <= "00000" & motor;
-            when 2 =>
-              data_wr <= conv_std_logic_vector(speed(0 to 7), 8);
-            when 3 =>
-              data_wr <= conv_std_logic_vector(speed(8 to 15), 8);
-            when 4 =>
-              ena <= '0';
-              if busy = '0' then
-                state <= reset;
-                running <= '0';
-                busy_count := 0;
-                busy_prev <= '0';
-              end if;
-            when others =>
-              state <= reset;
-              running <= '0';
-              busy_count := 0;
-              busy_prev <= '0';
-          end case;
+        when preamble =>
+          if busy_pulse = '1' then
+            state <= command;
+          end if;
+        when command =>
+          if busy_pulse = '1' then
+            state <= arg1;
+          end if;
+        when arg1 =>
+          if busy_pulse = '1' then
+            state <= arg2;
+          end if;
+        when arg2 =>
+          if busy_pulse = '1' then
+            state <= finished;
+          end if;
+        when finished =>
+          if busy = '0' then
+            state <= reset;
+          end if;
       end case;
     end if;
+  end process;
+
+
+  process(state,motor,speed)
+  begin
+    -- TODO: Actually use ack_error.
+    reset_n <= '1';
+    ena <= '0';
+    running <= '1';
+    addr <= (others => '0');
+    rw <= '0';
+    data_wr <= (others => '0');
+    case state is
+      when reset =>
+        running <= '0';
+      when started =>
+        addr <= slave_address;
+      when preamble =>
+        data_wr <= "11111111";
+        ena <= '1';
+        addr <= slave_address;
+      when command =>
+        data_wr <= "00000" & motor;
+        ena <= '1';
+        addr <= slave_address;
+      when arg1 => 
+        data_wr <= conv_std_logic_vector(speed(7 downto 0), 8);
+        ena <= '1';
+        addr <= slave_address;
+      when arg2 => 
+        data_wr <= conv_std_logic_vector(speed(15 downto 8), 8);
+        addr <= slave_address;
+        ena <= '1';
+      when finished =>
+        running <= '0';
+    end case;
   end process;
 end synth;

@@ -2,10 +2,10 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 
-ENTITY i2ctest_vhd_tst IS
-END i2ctest_vhd_tst;
+ENTITY motor_controller_test IS
+END motor_controller_test;
 
-ARCHITECTURE i2ctest_arch OF i2ctest_vhd_tst IS
+ARCHITECTURE motor_controller_test_arch OF motor_controller_test IS
   SIGNAL CLOCK_50 : STD_LOGIC := '0';
   SIGNAL i2c_scl : STD_LOGIC;
   SIGNAL i2c_sda : STD_LOGIC;
@@ -39,9 +39,9 @@ BEGIN
       );
   PROCESS                                         
   BEGIN
-    for i in 0 to 20000 loop
+    for i in 0 to 80000 loop
       CLOCK_50 <= not CLOCK_50;
-      wait for 5 ns;
+      wait for 10 ns;
     end loop;
     WAIT;
   END PROCESS;
@@ -55,4 +55,4 @@ BEGIN
     WAIT;                                                        
   END PROCESS;
 
-END i2ctest_arch;
+END motor_controller_test_arch;

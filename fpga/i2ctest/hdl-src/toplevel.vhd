@@ -3,6 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 
 entity toplevel is
+  generic (
+    debounce_cycles: integer := 25_000_000);
   port (
     KEY: in std_logic_vector(3 downto 0);
     LEDG: out std_logic_vector(8 downto 0) := (others => '0');
@@ -29,11 +31,14 @@ architecture synth of toplevel is
   signal running: std_logic;
   signal motor: std_logic_vector(0 to 2) := (others => '0');
   signal speed: unsigned(0 to 15) := (others => '0');
-
+  signal waitcycles: integer := 0;
 
 begin
+
   controller: motor_controller
-    generic map (slave_address => "0000001")
+    generic map (
+      slave_address => "0000011"
+      )
     port map (
       CLOCK_50 => CLOCK_50,
       start => start,
@@ -47,18 +52,28 @@ begin
   begin
     if rising_edge(CLOCK_50) then
       if running = '0' then
-        if KEY(0) = '0' then
-          speed <= (others => '0');
-          start <= '1';
-          LEDG(0) <= '1';
-        elsif KEY(1) = '0' then
-          speed <= conv_unsigned(2000, 16);
-          start <= '1';
-          LEDG(1) <= '1';
-        elsif KEY(2) = '0' then
-          speed <= conv_unsigned(4000, 16);
-          start <= '1';
-          LEDG(2) <= '1';
+        if waitcycles > 0 then
+          waitcycles <= waitcycles - 1;
+        else 
+          if KEY(0) = '0' then
+            speed <= (others => '0');
+            motor <= "001";
+            start <= '1';
+            LEDG(0) <= '1';
+            waitcycles <= debounce_cycles;
+          elsif KEY(1) = '0' then
+            speed <= conv_unsigned(2000, 16);
+            motor <= "001";
+            start <= '1';
+            LEDG(1) <= '1';
+            waitcycles <= debounce_cycles;
+          elsif KEY(2) = '0' then
+            speed <= conv_unsigned(4000, 16);
+            motor <= "001";
+            start <= '1';
+            LEDG(2) <= '1';
+            waitcycles <= debounce_cycles;
+          end if;
         end if;
       else
         start <= '0';

@@ -115,18 +115,20 @@ int fpga_setleds ( uint8_t onoff, uint8_t leds )
   return 0;
 }
 
-int fpga_setspeed (uint16_t speed )
+int fpga_setspeedv (uint16_t vspeed, uint16_t vsteering )
 {
-    unsigned char rbuf[3];
-    unsigned char wbuf[3];
+    unsigned char rbuf[5];
+    unsigned char wbuf[5];
 
     
     wbuf[0] = CMD_SPEED;
-    wbuf[1] = HIGHBYTE(speed);
-    wbuf[2] = LOWBYTE(speed);
+    wbuf[1] = HIGHBYTE(vspeed);
+    wbuf[2] = LOWBYTE(vspeed);
+    wbuf[3] = HIGHBYTE(vsteering);
+    wbuf[4] = LOWBYTE(vsteering);
     
-    if ((spisend(rbuf,wbuf, 3)) != 3) {
-        printf("E: fpga: Could not write specified amount of bytes to printf chardev\n");
+    if ((spisend(rbuf,wbuf, 5)) != 5) {
+        printf("E: fpga: Could not write specified amount of bytes to spi\n");
         return -1;
     }
     
@@ -161,7 +163,7 @@ int spisend ( char*rbuf, char*wbuf, int len )
 	puts("");
 }
 
-void testservos()
+void fpga_testservos()
 {
     if ( fpga_open() )
     {
@@ -182,8 +184,10 @@ void testservos()
     fpga_close();
 }
 
-int main(int argc, char *argv[])
+/*
+int fpgamain(int argc, char *argv[])
 {
     testservos();
 	return 0;
 }
+*/

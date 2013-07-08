@@ -134,15 +134,28 @@ int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force, int src, int
   return ret;
 }
 
-int servo_setspeedv ( uint16_t vspeed, uint16_t vsteering, int force, int src, int port )
+int tickForAngle(double angle){// angle is in radians
+    return 4000+(int)(angle*5092.95818152);    //max angle between 0.785398163 and -0.785398163 rad == +45 -45 degrees, positive yaw is to the left
+}
+
+int tickForSpeed(double speed){     //speed between 2600 and 8000 in 0-100%
+    
+    return 2600+(int)(speed*54);
+}
+
+int servo_setspeedv ( double speed, double steering, int force, int src, int port )
 {
-  int ret;
+    int ret, i_speed, i_steering;
 
 	if ( servo_checkperm ( src, port ) )
 	{
 		printf ( "W: Servo: noperm\n" );
 		return -1;
 	}
+    
+    i_steering=tickForAngle(steering);
+    //i_speed=tickForSpeed(speed);//bis wir eine gscheides mappping speed->load haben
+    i_speed=(int)speed;
 
 	//TODO check range
 	/*
@@ -157,24 +170,13 @@ int servo_setspeedv ( uint16_t vspeed, uint16_t vsteering, int force, int src, i
 	*/
 
   pthread_mutex_lock ( &servo_mutex );
-
-	/*
-  gettimeofday(&t2,NULL);
-  diff =  ((t2.tv_sec)*1000000+(t2.tv_usec))
-        - ((t1.tv_sec)*1000000+(t1.tv_usec));
-
-  if ( (!force) && (diff < 100000) )
-  {
-    printf ( "N: servo: Only %010.0fus have passed since last write; Ignoring this command\n", diff );
-  } else {
-    printf ( "N: servo: %010.0fus have passed since last write; OK\n", diff );
-    gettimeofday(&t1,NULL);
-		*/
+    
+    
 #if SERVO_M == SERVO_BOARD
     printf ( "not implemented\n");
 		ret = -1;
 #elif SERVO_M == SERVO_FPGA
-    ret = fpga_setspeedv(vspeed, vsteering);
+    ret = fpga_setspeedv(i_speed, i_steering);
 #elif SERVO_M == SERVO_SIM
     //ret = servosim_setservo(servoNr, servoPos);
 		printf ( "not implemented\n" );

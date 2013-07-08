@@ -3,18 +3,22 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 
 entity spislave is
-  port (clk: in std_logic;
+  port (clk_50: in std_logic;
+        clk: in std_logic;
         cs: in std_logic;
         mosi: in std_logic;
         miso: out std_logic;
-        write_buffer: in std_logic_vector(7 downto 0);
-        read_buffer: out std_logic_vector(7 downto 0);
-        complete: inout std_logic := '0');
+        ext_data_receive: out std_logic_vector(7 downto 0);
+        ext_data_write: in std_logic_vector(7 downto 0);
+        ext_event: out std_logic :='0');
 end spislave;
 
 architecture spislavearch of spislave is
   signal count : integer range 0 to 10 := 0;  --start value 7: write-buffer will be written to data
   signal data: std_logic_vector(8 downto 0) := (others => '0');
+  signal write_buffer: std_logic_vector(7 downto 0);
+  signal read_buffer: std_logic_vector(7 downto 0);
+  signal complete: std_logic := '0';
 
 begin
   process(clk) --clock idle low -> write data on rising edge
@@ -34,6 +38,20 @@ begin
         end case;
       elsif rising_edge(clk) then              --rising edge -> sample
         data(0) <= mosi;
+      end if;
+    end if;
+  end process;
+
+  process(clk_50)
+  begin
+    if rising_edge(clk_50) then
+      if complete = '1' then
+        ext_data_receive <= read_buffer;
+        write_buffer <= ext_data_write;
+        ext_event <= '1';
+        complete <= '0';
+      else
+        ext_event <= '0';
       end if;
     end if;
   end process;

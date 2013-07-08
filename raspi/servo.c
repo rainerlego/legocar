@@ -13,6 +13,7 @@
 #include "config.h"
 #include "servo.h"
 #include "servoboard.h"
+#include "fpga_spi.h"
 #include "servosim.h"
 
 pthread_mutex_t servo_mutex;
@@ -36,6 +37,8 @@ int servo_open()
 {
 #if SERVO_M == SERVO_BOARD
   return servoboard_open();
+#elif SERVO_M == SERVO_FPGA
+  return fpga_open();
 #elif SERVO_M == SERVO_SIM
   return servosim_open();
 #endif
@@ -45,6 +48,8 @@ void servo_close()
 {
 #if SERVO_M == SERVO_BOARD
   servoboard_close();
+#elif SERVO_M == SERVO_FPGA
+  fpga_close();
 #elif SERVO_M == SERVO_SIM
   servosim_close();
 #endif
@@ -74,6 +79,8 @@ void servo_ping()
 #if SERVO_M == SERVO_BOARD
   printf ( "N: Servo: ping\n" );
   servoboard_ping();
+#elif SERVO_M == SERVO_FPGA
+	printf ( "N: fpga ping not implemented\n" );
 #elif SERVO_M == SERVO_SIM
   printf ( "N: Servosim: ping\n" );
 #endif
@@ -115,8 +122,63 @@ int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force, int src, int
 		*/
 #if SERVO_M == SERVO_BOARD
     ret = servoboard_setservo(servoNr, servoPos);
+#elif SERVO_M == SERVO_FPGA
+    ret = fpga_setservo(servoNr, servoPos);
 #elif SERVO_M == SERVO_SIM
     ret = servosim_setservo(servoNr, servoPos);
+#endif
+  //}
+
+  pthread_mutex_unlock ( &servo_mutex );
+
+  return ret;
+}
+
+int servo_setspeedv ( uint16_t vspeed, uint16_t vsteering, int force, int src, int port )
+{
+  int ret;
+
+	if ( servo_checkperm ( src, port ) )
+	{
+		printf ( "W: Servo: noperm\n" );
+		return -1;
+	}
+
+	//TODO check range
+	/*
+  if ( (servoPos < 0) || (servoPos > 8000 ) ) {
+    printf ( "E: Servo: servoPos (%d) out of range\n", servoPos );
+    return -1;
+  }
+  if ( ( servoNr < 0) || ( servoNr > 7) ) {
+    printf ( "E: Servo: servoNr (%d) out of range\n", servoNr );
+    return -1;
+  }
+	*/
+
+  pthread_mutex_lock ( &servo_mutex );
+
+	/*
+  gettimeofday(&t2,NULL);
+  diff =  ((t2.tv_sec)*1000000+(t2.tv_usec))
+        - ((t1.tv_sec)*1000000+(t1.tv_usec));
+
+  if ( (!force) && (diff < 100000) )
+  {
+    printf ( "N: servo: Only %010.0fus have passed since last write; Ignoring this command\n", diff );
+  } else {
+    printf ( "N: servo: %010.0fus have passed since last write; OK\n", diff );
+    gettimeofday(&t1,NULL);
+		*/
+#if SERVO_M == SERVO_BOARD
+    printf ( "not implemented\n");
+		ret = -1;
+#elif SERVO_M == SERVO_FPGA
+    ret = fpga_setspeedv(vspeed, vsteering);
+#elif SERVO_M == SERVO_SIM
+    //ret = servosim_setservo(servoNr, servoPos);
+		printf ( "not implemented\n" );
+		ret = -1;
 #endif
   //}
 
@@ -151,6 +213,8 @@ int servo_setleds ( uint8_t onoff, uint8_t leds, int force, int src, int port )
   pthread_mutex_lock ( &servo_mutex );
 #if SERVO_M == SERVO_BOARD
   ret = servoboard_setleds(onoff, leds);
+#elif SERVO_M == SERVO_FPGA
+  ret = fpga_setleds(onoff, leds);
 #elif SERVO_M == SERVO_SIM
   ret = servosim_setleds(onoff, leds);
 #endif

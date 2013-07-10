@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <fcntl.h>
 #include <string.h>
 #include <sys/ioctl.h>
@@ -138,7 +139,14 @@ int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force, int src, int
 }
 
 int tickForDegrees(double angle){
-    return 4000+(int)(angle*8000/90);    //max angle between 0.785398163 and -0.785398163 rad == +45 -45 degrees, positive yaw is to the left
+    int ret=4000+(int)(angle*8000/90);    //max angle between 0.785398163 and -0.785398163 rad == +45 -45 degrees, positive yaw is to the left
+    
+    if (ret>8000)
+        ret=8000;
+    if (ret<0)
+        ret=0;
+    
+    return ret;
 }
 
 int servo_setspeedv ( double speed, double steering, int force, int src, int port )
@@ -156,7 +164,7 @@ int servo_setspeedv ( double speed, double steering, int force, int src, int por
     i_speed= (uint16_t) 1/(speed/wheelCircumference);
     
     //convert the steeringangle from degrees to servoticks
-    i_steering=(uint16_t) tickForDegrees()
+    i_steering=(uint16_t) tickForDegrees(steering);
     
 
 	//TODO check range

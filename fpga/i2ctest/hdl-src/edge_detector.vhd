@@ -1,10 +1,14 @@
 library IEEE;
 use ieee.std_logic_1164.all;
 
+
+-- A is the input, the detector outputs a one-CLK-period pulse on R if A has a
+-- rising edge, and a pulse on F if A has a falling edge.
 entity edge_detector is
-  port (clock: in std_logic;
-        input: in std_logic;
-        output: out std_logic);
+  port (CLK: in std_logic;
+        A: in std_logic;
+        R: out std_logic;
+        F: out std_logic);
 end edge_detector;
 
 
@@ -13,13 +17,14 @@ architecture rtl of edge_detector is
 
 begin
 
-  process(clock)
+  process(CLK)
   begin
-    if rising_edge(clock) then
-      det_reg <= det_reg(det_reg'low) & input;
+    if rising_edge(CLK) then
+      det_reg <= det_reg(det_reg'low) & A;
     end if;
   end process;
 
-  output <= not(det_reg(det_reg'high)) and (det_reg(det_reg'low));
+  R <= not(det_reg(det_reg'high)) and (det_reg(det_reg'low));
+  F <= det_reg(det_reg'high) and not (det_reg(det_reg'low));
 end  rtl;
 

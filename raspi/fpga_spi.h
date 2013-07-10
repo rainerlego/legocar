@@ -3,7 +3,7 @@
 #include "commands.h"
 
 #define FPGA_SPI_DEV "/dev/spidev1.1"
-#define SPI_MODE 0 //könnte falsch sein
+#define SPI_MODE 0
 #define SPI_DELAY 1 //könnte falsch sein
 #define SPI_SPEED_HZ 500000
 #define SPI_BITS_PER_WORD 8

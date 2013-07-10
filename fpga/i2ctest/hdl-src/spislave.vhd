@@ -21,46 +21,63 @@ architecture spislavearch of spislave is
   signal complete: std_logic := '0';
 
 begin
-  process(clk,cs) --clock idle low -> write data on rising edge
+  process(clk,cs,clk_50) --clock idle low -> write data on rising edge
   begin
     --complete <= '0';
-    --if falling_edge(cs) then
-    --  complete <= '1';
-    --end if;
-    if cs = '0' then
+    if falling_edge(cs) then
+      complete <= '1';
+    else
       if falling_edge(clk) then --falling edge -> toggle
-        data(8 downto 1) <= data(7 downto 0);  -- shift left
-        count <= count+1;
-        case count is
-          when 7 => --beim 8. mal shiften: letztes bit wurde gesendet, empfangene daten wurden in read_buffer geschrieben
-            --read_buffer <= data(7 downto 0);
-            --data(8 downto 1) <= write_buffer;
-            complete <= '1';
-            count <= 0;
-          when others =>
-            complete <= '0';
-        -- pass.
-        end case;
+        if cs = '0' then
+          data(8 downto 1) <= data(7 downto 0);  -- shift left
+          count <= count+1;
+          case count is
+            when 7 => --beim 8. mal shiften: letztes bit wurde gesendet, empfangene daten wurden in read_buffer geschrieben
+              --read_buffer <= data(7 downto 0);
+              --data(8 downto 1) <= write_buffer;
+              complete <= '1';
+              count <= 0;
+            when others =>
+              complete <= '0';
+          -- pass.
+          end case;
+        end if;
       elsif rising_edge(clk) then              --rising edge -> sample
-        data(0) <= mosi;
+        if cs = '0' then
+          data(0) <= mosi;
+        end if;
+      else
+        if rising_edge(clk_50) then
+          if complete = '1' then
+            ext_data_receive <= data(7 downto 0);
+            data(8 downto 1) <= ext_data_write;
+            --ext_data_receive <= read_buffer;
+            --write_buffer <= ext_data_write;
+            ext_event <= '1';
+          else
+            ext_event <= '0';
+          end if;
+        end if;
+
       end if;
     end if;
+
   end process;
 
-  process(clk_50)
-  begin
-    if rising_edge(clk_50) then
-      if complete = '1' then
-        ext_data_receive <= data(7 downto 0);
-        data(8 downto 1) <= ext_data_write;
-        --ext_data_receive <= read_buffer;
-        --write_buffer <= ext_data_write;
-        ext_event <= '1';
-      else
-        ext_event <= '0';
-      end if;
-    end if;
-  end process;
+  --process(clk_50)
+  --begin
+  --  if rising_edge(clk_50) then
+  --    if complete = '1' then
+  --      ext_data_receive <= data(7 downto 0);
+  --      data(8 downto 1) <= ext_data_write;
+  --      --ext_data_receive <= read_buffer;
+  --      --write_buffer <= ext_data_write;
+  --      ext_event <= '1';
+  --    else
+  --      ext_event <= '0';
+  --    end if;
+  --  end if;
+  --end process;
 
   miso <= data(8);
   

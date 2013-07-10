@@ -38,9 +38,10 @@ architecture synth of motor_controller is
 
   component edge_detector is
     port (
-      clock  : in  std_logic;
-      input  : in  std_logic;
-      output : out std_logic);
+      CLK  : in  std_logic;
+      A  : in  std_logic;
+      R : out std_logic;
+      F: out std_logic);
   end component edge_detector;
 
   type machine is (reset,started,preamble,command,arg1,arg2,finished);
@@ -70,10 +71,9 @@ begin
       scl => i2c_scl);
 
   busy_edge: edge_detector
-    port map(CLOCK_50, busy, busy_pulse);
+    port map(CLK => CLOCK_50, A => busy, R => busy_pulse);
 
-
-  process(CLOCK_50,start, busy)
+  process(CLOCK_50)
   begin
     if rising_edge(CLOCK_50) then
       case state is
@@ -133,11 +133,11 @@ begin
         ena <= '1';
         addr <= slave_address;
       when arg1 => 
-        data_wr <= conv_std_logic_vector(speed(7 downto 0), 8);
+        data_wr <= conv_std_logic_vector(speed(15 downto 8), 8);
         ena <= '1';
         addr <= slave_address;
       when arg2 => 
-        data_wr <= conv_std_logic_vector(speed(15 downto 8), 8);
+        data_wr <= conv_std_logic_vector(speed(7 downto 0), 8);
         addr <= slave_address;
         ena <= '1';
       when finished =>

@@ -22,6 +22,15 @@ int parse_speed_value ( char * s, int l, int * v )
   return 1;
 }
 
+int parse_double_value ( char * s, int l, double * v )
+{
+    if ( l <= 0 )
+        return 0;
+    
+    *v = atof( s );
+    return 1;
+}
+
 int parse_servo_value ( char * s, int l, int * v )
 {
   if ( l <= 0 )
@@ -91,15 +100,15 @@ void parse_stack ( struct cconn * cc )
         {
           if ( cc->curp>=4 )
           {
-            int vspeed;
-            int vsteering;
-            if (    parse_speed_value ( cc->s[2], cc->l[2], &vspeed  )
-                &&  parse_speed_value ( cc->s[3], cc->l[3], &vsteering  )
+            double speed;
+            double steering;
+            if (    parse_double_value ( cc->s[2], cc->l[2], &speed  )
+                &&  parse_double_value ( cc->s[3], cc->l[3], &steering  )
 								)
             {
-              servo_setspeedv ( vspeed, vsteering, 0, SERVO_PERM_TCP, ntohs(cc->sin.sin_port) );
-              retlen = snprintf ( ret, 200, "ok speedv set %d %d \n", vspeed, vsteering );
-							printf ( "N: tcpserver %d: speedv set %d, %d\n", tcpseq, vspeed, vsteering );
+              servo_setspeedv ( speed, steering, 0, SERVO_PERM_TCP, ntohs(cc->sin.sin_port) );
+              retlen = snprintf ( ret, 200, "ok speedv set %f %f \n", speed, steering );
+							printf ( "N: tcpserver %d: speedv set %f, %f\n", tcpseq, speed, steering );
 							tcpseq++;
             }
           }

@@ -26,7 +26,6 @@ architecture synth of toplevel is
           speed: in unsigned(0 to 15));
   end component;
 
-
   signal start: std_logic := '0';
   signal running: std_logic;
   signal motor: std_logic_vector(0 to 2) := (others => '0');
@@ -62,18 +61,25 @@ begin
             LEDG(0) <= '1';
             waitcycles <= debounce_cycles;
           elsif KEY(1) = '0' then
-            speed <= conv_unsigned(2000, 16);
+            speed <= conv_unsigned(1000, 16);
             motor <= "001";
             start <= '1';
             LEDG(1) <= '1';
             waitcycles <= debounce_cycles;
           elsif KEY(2) = '0' then
-            speed <= conv_unsigned(4000, 16);
+            speed <= conv_unsigned(2000, 16);
+            motor <= "001";
+            start <= '1';
+            LEDG(2) <= '1';
+            waitcycles <= debounce_cycles;
+          elsif KEY(3) = '0' then
+            speed <= conv_unsigned(3000, 16);
             motor <= "001";
             start <= '1';
             LEDG(2) <= '1';
             waitcycles <= debounce_cycles;
           end if;
+
         end if;
       else
         start <= '0';

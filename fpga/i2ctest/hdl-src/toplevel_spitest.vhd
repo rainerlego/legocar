@@ -41,7 +41,6 @@ architecture synth of toplevel_spitest is
   signal waitcycles: integer := 0;
   signal ext_event: std_logic :='0';
   signal ext_data_write: std_logic_vector(7 downto 0) := "11111000";
-  signal my_data_write: std_logic_vector(7 downto 0) := "11001100";
 
 begin
 
@@ -57,15 +56,14 @@ begin
 
   process(CLOCK_50)
   begin
-    if rising_edge(ext_event) then
-      if LEDG(4) = '1' then
-        LEDG(4) <= '0';
-      else
-        LEDG(4) <= '1';
-      end if;
-      ext_data_write <= my_data_write;
-    end if;
     if rising_edge(CLOCK_50) then
+      if rising_edge(ext_event) then
+        if LEDG(4) = '1' then
+          LEDG(4) <= '0';
+        else
+          LEDG(4) <= '1';
+        end if;
+      end if;
       if waitcycles > 0 then
         waitcycles <= waitcycles - 1;
       else 
@@ -76,7 +74,7 @@ begin
             LEDG(1) <= '1';
           end if;
           waitcycles <= debounce_cycles;
-          my_data_write <= "00001111";
+          ext_data_write <= "00001111";
         elsif KEY(1) = '0' then
             if LEDG(2) = '1' then
             LEDG(2) <= '0';
@@ -84,7 +82,7 @@ begin
             LEDG(2) <= '1';
           end if;
           waitcycles <= debounce_cycles;
-          my_data_write <= "10101010";
+          ext_data_write <= "10101010";
         elsif KEY(2) = '0' then
           if LEDG(3) = '1' then
             LEDG(3) <= '0';
@@ -92,7 +90,7 @@ begin
             LEDG(3) <= '1';
           end if;
           waitcycles <= debounce_cycles;
-          my_data_write <= "11101110";
+          ext_data_write <= "11101110";
         end if;
       end if;
     end if;

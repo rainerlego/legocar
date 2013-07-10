@@ -21,8 +21,8 @@ pthread_mutex_t servo_mutex;
 
 struct timeval tservo1[8], tservo2[8];
 struct timeval t1,t2;
-static double wheelRadius=0.037; //outer wheel radius in m
-static double wheelCircumference=2*wheelRadius*M_PI;
+const double wheelRadius=0.037; //outer wheel radius in m
+const double wheelCircumference=2*wheelRadius*M_PI;
 
 double diff;
 

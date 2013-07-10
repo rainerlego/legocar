@@ -1,0 +1,15 @@
+\beamer@endinputifotherversion {3.26pt}
+\beamer@sectionintoc {1}{Recap}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{Motivation}{2}{0}{1}
+\beamer@sectionintoc {2}{Recap}{3}{0}{2}
+\beamer@subsectionintoc {2}{1}{Architecture}{3}{0}{2}
+\beamer@sectionintoc {3}{Status Update}{4}{0}{3}
+\beamer@subsectionintoc {3}{1}{Hardware}{4}{0}{3}
+\beamer@sectionintoc {4}{Status Update}{5}{0}{4}
+\beamer@subsectionintoc {4}{1}{FPGA}{5}{0}{4}
+\beamer@sectionintoc {5}{Status Update}{6}{0}{5}
+\beamer@subsectionintoc {5}{1}{FPGA}{6}{0}{5}
+\beamer@sectionintoc {6}{Status Update}{7}{0}{6}
+\beamer@subsectionintoc {6}{1}{RASPI}{7}{0}{6}
+\beamer@sectionintoc {7}{Next steps}{8}{0}{7}
+\beamer@sectionintoc {8}{Lessons learned}{9}{0}{8}

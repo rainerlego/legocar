@@ -107,8 +107,8 @@ void parse_stack ( struct cconn * cc )
 								)
             {
               servo_setspeedv ( speed, steering, 0, SERVO_PERM_TCP, ntohs(cc->sin.sin_port) );
-              retlen = snprintf ( ret, 200, "ok speedv set %d %d \n", vspeed, vsteering );
-							printf ( "N: tcpserver %d: speedv set %d, %d\n", tcpseq, vspeed, vsteering );
+              retlen = snprintf ( ret, 200, "ok speedv set %f %f \n", speed, steering );
+							printf ( "N: tcpserver %d: speedv set %f, %f\n", tcpseq, speed, steering );
 							tcpseq++;
             }
           }

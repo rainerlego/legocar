@@ -1,0 +1,39 @@
+# Copyright (C) 1991-2013 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+# Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+# File: /home/rainer/projects/legocar/fpga/i2ctest/hdl-src/i2ctest.csv
+# Generated on: Mon Jul  8 15:28:20 2013
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
+
+To,Direction,Location,I/O Bank,VREF Group,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair
+clk,Input,PIN_AF20,4,B4_N1,,,,,
+CLOCK_50,Input,PIN_Y2,2,B2_N0,,,,,
+cs,Input,PIN_AH26,4,B4_N0,,,,,
+KEY[3],Input,PIN_M23,6,B6_N2,,,,,
+KEY[2],Input,PIN_M21,6,B6_N1,,,,,
+KEY[1],Input,PIN_N21,6,B6_N2,,,,,
+KEY[0],Input,PIN_R24,5,B5_N0,,,,,
+LEDG[8],Output,PIN_E21,7,B7_N0,,,,,
+LEDG[7],Output,PIN_E22,7,B7_N0,,,,,
+LEDG[6],Output,PIN_E25,7,B7_N1,,,,,
+LEDG[5],Output,PIN_E24,7,B7_N1,,,,,
+LEDG[4],Output,PIN_H21,7,B7_N2,,,,,
+LEDG[3],Output,PIN_G20,7,B7_N1,,,,,
+LEDG[2],Output,PIN_G22,7,B7_N2,,,,,
+LEDG[1],Output,PIN_G21,7,B7_N1,,,,,
+LEDG[0],Output,PIN_F17,7,B7_N2,,,,,
+miso,Output,PIN_AE20,4,B4_N1,,,,,
+mosi,Input,PIN_AG23,4,B4_N1,,,,,

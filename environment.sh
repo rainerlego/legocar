@@ -6,19 +6,19 @@
 case `hostname` in
 	"e330" )
     ALTERADIR=/home/rainer/altera
-    ALTERAVERSION=12.1sp1
+    ALTERAVERSION=13.0sp1
 		;;
 	"victorique" )
     ALTERADIR=/home/xtremely/altera
-    ALTERAVERSION=12.1sp1
+    ALTERAVERSION=13.0sp1
 		;;
 	"idefix" )
     ALTERADIR=/home/dragon/altera
-    ALTERAVERSION=12.1sp1
+    ALTERAVERSION=13.0sp1
 		;;
 	"anton" )
     ALTERADIR=/home/dragon/altera
-    ALTERAVERSION=12.1sp1
+    ALTERAVERSION=13.0sp1
 		;;
 	* )
 		echo "unknown hostname please edit file"

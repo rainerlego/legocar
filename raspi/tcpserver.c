@@ -13,6 +13,24 @@
 
 unsigned int tcpseq;
 
+int parse_speed_value ( char * s, int l, int * v )
+{
+  if ( l <= 0 )
+    return 0;
+
+  *v = atoi ( s );
+  return 1;
+}
+
+int parse_double_value ( char * s, int l, double * v )
+{
+    if ( l <= 0 )
+        return 0;
+    
+    *v = atof( s );
+    return 1;
+}
+
 int parse_servo_value ( char * s, int l, int * v )
 {
   if ( l <= 0 )
@@ -74,6 +92,30 @@ void parse_stack ( struct cconn * cc )
       retlen = snprintf ( ret, 200, "Available commands:\n   servo set <channel> <value>\n   servo led <onoff> <mask>\n" );
     }
 
+    if ( 0==strncmp ( cc->s[0], "speedv", 6 ) )
+    {
+      if ( cc->curp>=2 )
+      {
+        if ( 0==strncmp(cc->s[1], "set", 3) )
+        {
+          if ( cc->curp>=4 )
+          {
+            double speed;
+            double steering;
+            if (    parse_double_value ( cc->s[2], cc->l[2], &speed  )
+                &&  parse_double_value ( cc->s[3], cc->l[3], &steering  )
+								)
+            {
+              servo_setspeedv ( speed, steering, 0, SERVO_PERM_TCP, ntohs(cc->sin.sin_port) );
+              retlen = snprintf ( ret, 200, "ok speedv set %f %f \n", speed, steering );
+							printf ( "N: tcpserver %d: speedv set %f, %f\n", tcpseq, speed, steering );
+							tcpseq++;
+            }
+          }
+        } //set
+			}
+    }
+
     if ( 0==strncmp ( cc->s[0], "servo", 5 ) )
     {
       if ( cc->curp>=2 )
@@ -102,7 +144,7 @@ void parse_stack ( struct cconn * cc )
 							tcpseq++;
             }
           }
-        } //servo
+        } //servo set
 
         if ( 0==strncmp(cc->s[1], "led", 3) )
         {

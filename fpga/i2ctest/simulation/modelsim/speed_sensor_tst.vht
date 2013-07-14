@@ -6,13 +6,15 @@ ENTITY speed_sensor_tst IS
 END speed_sensor_tst;
 
 ARCHITECTURE impl OF speed_sensor_tst IS
-  COMPONENT speed_sensor is
+  component speed_sensor is
+    generic (
+      pulses_per_revolution : integer;
+      clocks_per_second : integer);
     port (
-      clk_in: in std_logic;
-      pulse: in std_logic;
-      -- in rotations per second
-      speed: out unsigned);
-  END COMPONENT;
+      clk_in : in  std_logic;
+      pulse  : in  std_logic;
+      speed  : out unsigned(31 downto 0) := (others => '0'));
+  end component speed_sensor;
 
   SIGNAL CLOCK_50 : STD_LOGIC := '0';
   SIGNAL pulse: STD_LOGIC := '0';
@@ -20,6 +22,7 @@ ARCHITECTURE impl OF speed_sensor_tst IS
   
 BEGIN
   i1 : speed_sensor
+    generic map (pulses_per_revolution => 4, clocks_per_second => 50_000_000)
     PORT MAP (
       clk_in => CLOCK_50,
       pulse =>  pulse,
@@ -29,7 +32,7 @@ BEGIN
   PROCESS                                         
   BEGIN
     -- One tenth second simulation.
-    for i in 0 to 15_000_000 loop
+    for i in 0 to 25_000_000 loop
       CLOCK_50 <= '1';
       wait for 10 ns;
       CLOCK_50 <= not CLOCK_50;
@@ -41,17 +44,11 @@ BEGIN
   PROCESS                                              
   BEGIN
     -- Simulate  a speed of one rotation per tenth second.
-    for i in 0 to 7 loop
+    for i in 0 to 4 loop
       pulse <= '1';
-      wait for 6250 us;
+      wait for 100 ns;
       pulse <= '0';
-      wait for 6250 us;
-    end loop;
-    for i in 0 to 15 loop
-      pulse <= '1';
-      wait for 3125 us;
-      pulse <= '0';
-      wait for 3125 us;
+      wait for 100 ns;
     end loop;
     WAIT;
   END PROCESS;

@@ -9,7 +9,8 @@ entity speed_toplevel is
     pulse_back: in std_logic;
     i2c_scl: inout std_logic;
     i2c_sda: inout std_logic;
-    CLOCK_50: in std_logic);
+    CLOCK_50: in std_logic;
+    HEX: out std_logic_vector(27 downto 0));
 end speed_toplevel;
 
 
@@ -48,6 +49,12 @@ architecture synth of speed_toplevel is
       output_acceleration : out signed(31 downto 0) := (others => '0'));
   end component speed_control;
 
+  component seven_segment is
+    port (
+      number : in  unsigned(3 downto 0);
+      output : out std_logic_vector(6 downto 0));
+  end component seven_segment;
+
   signal start: std_logic := '0';
   signal running: std_logic := '0';
   signal motor: std_logic_vector(2 downto 0) := (others => '0');
@@ -60,6 +67,7 @@ architecture synth of speed_toplevel is
   signal output_acceleration: signed(31 downto 0) := (others => '0');
 
   signal current_speed: unsigned(15 downto 0) := (others => '0');
+  signal waitcycles: integer;
   
 begin
   mot_controller: motor_controller
@@ -82,13 +90,18 @@ begin
     port map (clk_in => CLOCK_50, pulse => pulse_back, speed => speed_back);
 
   speed_cont: speed_control
-    generic map (control_clock_divider => 4)
+    generic map (control_clock_divider => 22)
     port map (CLOCK_50 => CLOCK_50, speed_front => speed_back, speed_back => speed_front, desired_speed => desired_speed, output_acceleration => output_acceleration);
+
+  DEBUG_SEGMENTS: for i in 1 to 4 generate
+    SEG: seven_segment port map(number => current_speed((i * 4 - 1) downto (i - 1) * 4),
+                                output => HEX(i * 7 - 1 downto (i - 1) * 7));
+    end generate DEBUG_SEGMENTS;
 
   process(CLOCK_50)
   begin
     if rising_edge(CLOCK_50) then
-      current_speed <= to_unsigned(to_integer(current_speed) - to_integer(output_acceleration), 16);
+      current_speed <= to_unsigned(to_integer(current_speed) + to_integer(output_acceleration), 16);
       if (current_speed < 0) then
         current_speed <= to_unsigned(0,16);
       elsif (current_speed > to_unsigned(7999,32)) then
@@ -100,10 +113,15 @@ begin
   process(CLOCK_50)
   begin
     if rising_edge(CLOCK_50) then
-      if running = '0' then
-        start <= '1';
-        motor <= (others => '0');
+      if not (waitcycles > 0) then
+        -- TODO: Timeout einbauen
+        if running = '0' then
+          start <= '1';
+          motor <= (others => '0');
+          waitcycles <= 5_000_000;
+        end if;
       else
+        waitcycles <= waitcycles - 1;
         start <= '0';
       end if;
     end if;

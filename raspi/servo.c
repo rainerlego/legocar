@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <fcntl.h>
 #include <string.h>
 #include <sys/ioctl.h>
@@ -20,6 +21,9 @@ pthread_mutex_t servo_mutex;
 
 struct timeval tservo1[8], tservo2[8];
 struct timeval t1,t2;
+#define wheelRadius 0.037 
+#define wheelCircumference (2*wheelRadius*M_PI)
+
 double diff;
 
 int perm_src, perm_port;
@@ -134,18 +138,21 @@ int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force, int src, int
   return ret;
 }
 
-int tickForAngle(double angle){// angle is in radians
-    return 4000+(int)(angle*5092.95818152);    //max angle between 0.785398163 and -0.785398163 rad == +45 -45 degrees, positive yaw is to the left
-}
-
-int tickForSpeed(double speed){     //speed between 2600 and 8000 in 0-100%
+int tickForDegrees(double angle){
+    int ret=4000+(int)(angle*8000/90);    //max angle between 0.785398163 and -0.785398163 rad == +45 -45 degrees, positive yaw is to the left
     
-    return 2600+(int)(speed*54);
+    if (ret>8000)
+        ret=8000;
+    if (ret<0)
+        ret=0;
+    
+    return ret;
 }
 
 int servo_setspeedv ( double speed, double steering, int force, int src, int port )
 {
-    int ret, i_speed, i_steering;
+    int ret;
+    uint16_t i_speed, i_steering;
 
 	if ( servo_checkperm ( src, port ) )
 	{
@@ -153,9 +160,12 @@ int servo_setspeedv ( double speed, double steering, int force, int src, int por
 		return -1;
 	}
     
-    i_steering=tickForAngle(steering);
-    //i_speed=tickForSpeed(speed);//bis wir eine gscheides mappping speed->load haben
-    i_speed=(int)speed;
+    //convert the speed from m/s to time/revolution as the FPGA expects it
+    i_speed= (uint16_t) 1/(speed/wheelCircumference);
+    
+    //convert the steeringangle from degrees to servoticks
+    i_steering=(uint16_t) tickForDegrees(steering);
+    
 
 	//TODO check range
 	/*

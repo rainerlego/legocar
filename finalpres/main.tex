@@ -50,7 +50,7 @@
 \begin{exampleblock}{Build a high speed capable car}
 \begin{itemize}
   \item with flexible heterogenous user interfaces (Android, Wiimote, Laptop)
-  \item assist the user (traction control, obstacle avoidance, emergency break)
+  \item assist the user (traction control, obstacle avoidance, emergency brake)
   \item leverage the power of the FPGA where suitable
 \end{itemize}
 \end{exampleblock}
@@ -87,7 +87,7 @@
   \item Implemented reading out the encoders
   \item Implemented I2C protocol for motor control
   \item Implemented SPI protocol to communicate with top-level (RASPI)
-  \item Implemented preliminary Traction Control System (TCS) 
+  \item Implemented motor speed control
 \end{itemize}
 \end{exampleblock}
 \end{frame}
@@ -120,7 +120,8 @@
 \begin{itemize}
 \item Get the camera to work on FPGA 
 \item Implement laser scanning algorithm on FPGA
-\item Implement obstacle avoidance on RASPI 
+\item Implement obstacle avoidance on RASPI
+\item Implement communication between FPGA and RASPI
 \end{itemize}
 \end{exampleblock}
 \end{frame}
@@ -131,7 +132,7 @@
 \begin{exampleblock}{}
 \begin{itemize}
 \item Implementation on the FPGA extremely time-consuming
-\item Simuluated FPGA  != real FPGA
+\item Simuluated FPGA != real FPGA
 \item Debugging on the FPGA is tedious, memory oscilloscopes or logic analyzer are of great help  
 \item Watch out for endianness when connecting different systems
 \end{itemize}

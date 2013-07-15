@@ -65,6 +65,66 @@
   \end{center}
 \end{frame}
 
+\section{Recap}
+\subsection{Built an Android App}
+\begin{frame}
+\frametitle{Built an Android App}
+  \begin{center}
+  \includegraphics[width = 0.9\textwidth]{pics/android_controlling.png}
+  \end{center}
+\end{frame}
+
+\section{Recap}
+\subsection{Built a simulator}
+\begin{frame}
+\frametitle{Built a simulator}
+  \begin{center}
+  \includegraphics[width = 0.9\textwidth]{pics/sim.png}
+  \end{center}
+\end{frame}
+
+\section{Recap}
+\subsection{Made our own hardware}
+\begin{frame}
+\frametitle{Made our own hardware}
+\begin{itemize}
+  \item from design, routing, exposure, to etching and soldering
+\end{itemize}
+  \begin{center}
+  \includegraphics[width = 0.6\textwidth]{pics/serrvo_brd.png}
+  \end{center}
+\end{frame}
+
+
+\section{Recap}
+\subsection{Made our own hardware}
+\begin{frame}
+\frametitle{Made our own hardware}
+\begin{itemize}
+  \item 2 motor control boards with micro controller
+  \item power regulation board 
+  \item encoder level conversion board
+\end{itemize}
+  \begin{center}
+  \includegraphics[width = 0.6\textwidth]{pics/customhw.jpg}
+  \end{center}
+\end{frame}
+
+\section{Recap}
+\subsection{Made our own hardware}
+\begin{frame}
+\frametitle{Made our own hardware}
+\begin{itemize}
+  \item dual encoder setup to detect wheel slippage
+  \item custom machined, to connect directly to cardan joint 
+  \item encoder level conversion board
+\end{itemize}
+  \begin{center}
+  \includegraphics[width = 0.4\textwidth]{pics/encoders_scheiben.jpg}
+  \end{center}
+\end{frame}
+
+
 \section{Status Update}
 \subsection{Hardware}
 \begin{frame}
@@ -87,7 +147,7 @@
   \item Implemented reading out the encoders
   \item Implemented I2C protocol for motor control
   \item Implemented SPI protocol to communicate with top-level (RASPI)
-  \item Implemented motor speed control
+  \item Implemented PID motor speed control
 \end{itemize}
 \end{exampleblock}
 \end{frame}
@@ -97,7 +157,16 @@
 \begin{frame}
 \frametitle{FPGA}
   \begin{center}
-  \includegraphics[width = \textwidth]{pics/i2c_am_oszi.JPG}
+  \includegraphics[width = 0.8\textwidth]{pics/i2c_am_oszi.JPG}
+  \end{center}
+\end{frame}
+
+\section{Status Update}
+\subsection{FPGA}
+\begin{frame}
+\frametitle{FPGA}
+  \begin{center}
+  \includegraphics[width = 0.8\textwidth]{pics/all.jpg}
   \end{center}
 \end{frame}
 
@@ -118,12 +187,16 @@
 \frametitle{Next steps}
 \begin{exampleblock}{Plan}
 \begin{itemize}
+\item Implement toplevel communication protocol between FPGA and RASPI
+\end{itemize}
+\end{exampleblock}
+\begin{alertblock}{Abandoned due to time restrictions}
+\begin{itemize}
 \item Get the camera to work on FPGA 
 \item Implement laser scanning algorithm on FPGA
 \item Implement obstacle avoidance on RASPI
-\item Implement communication between FPGA and RASPI
 \end{itemize}
-\end{exampleblock}
+\end{alertblock}
 \end{frame}
 
 \section{Lessons learned}
@@ -131,12 +204,17 @@
 \frametitle{Lessons learned}
 \begin{exampleblock}{}
 \begin{itemize}
-\item Implementation on the FPGA extremely time-consuming
+\item Implementation in VHDL on the FPGA extremely time-consuming
 \item Simuluated FPGA != real FPGA
 \item Debugging on the FPGA is tedious, memory oscilloscopes or logic analyzer are of great help  
 \item Watch out for endianness when connecting different systems
 \end{itemize}
 \end{exampleblock}
+\end{frame}
+
+\section{Discussion}
+\begin{frame}
+\frametitle{Discussion}
 \end{frame}
 
 \end{document}

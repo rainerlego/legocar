@@ -3,13 +3,26 @@
 \beamer@subsectionintoc {1}{1}{Motivation}{2}{0}{1}
 \beamer@sectionintoc {2}{Recap}{3}{0}{2}
 \beamer@subsectionintoc {2}{1}{Architecture}{3}{0}{2}
-\beamer@sectionintoc {3}{Status Update}{4}{0}{3}
-\beamer@subsectionintoc {3}{1}{Hardware}{4}{0}{3}
-\beamer@sectionintoc {4}{Status Update}{5}{0}{4}
-\beamer@subsectionintoc {4}{1}{FPGA}{5}{0}{4}
-\beamer@sectionintoc {5}{Status Update}{6}{0}{5}
-\beamer@subsectionintoc {5}{1}{FPGA}{6}{0}{5}
-\beamer@sectionintoc {6}{Status Update}{7}{0}{6}
-\beamer@subsectionintoc {6}{1}{RASPI}{7}{0}{6}
-\beamer@sectionintoc {7}{Next steps}{8}{0}{7}
-\beamer@sectionintoc {8}{Lessons learned}{9}{0}{8}
+\beamer@sectionintoc {3}{Recap}{4}{0}{3}
+\beamer@subsectionintoc {3}{1}{Built an Android App}{4}{0}{3}
+\beamer@sectionintoc {4}{Recap}{5}{0}{4}
+\beamer@subsectionintoc {4}{1}{Built a simulator}{5}{0}{4}
+\beamer@sectionintoc {5}{Recap}{6}{0}{5}
+\beamer@subsectionintoc {5}{1}{Made our own hardware}{6}{0}{5}
+\beamer@sectionintoc {6}{Recap}{7}{0}{6}
+\beamer@subsectionintoc {6}{1}{Made our own hardware}{7}{0}{6}
+\beamer@sectionintoc {7}{Recap}{8}{0}{7}
+\beamer@subsectionintoc {7}{1}{Made our own hardware}{8}{0}{7}
+\beamer@sectionintoc {8}{Status Update}{9}{0}{8}
+\beamer@subsectionintoc {8}{1}{Hardware}{9}{0}{8}
+\beamer@sectionintoc {9}{Status Update}{10}{0}{9}
+\beamer@subsectionintoc {9}{1}{FPGA}{10}{0}{9}
+\beamer@sectionintoc {10}{Status Update}{11}{0}{10}
+\beamer@subsectionintoc {10}{1}{FPGA}{11}{0}{10}
+\beamer@sectionintoc {11}{Status Update}{12}{0}{11}
+\beamer@subsectionintoc {11}{1}{FPGA}{12}{0}{11}
+\beamer@sectionintoc {12}{Status Update}{13}{0}{12}
+\beamer@subsectionintoc {12}{1}{RASPI}{13}{0}{12}
+\beamer@sectionintoc {13}{Next steps}{14}{0}{13}
+\beamer@sectionintoc {14}{Lessons learned}{15}{0}{14}
+\beamer@sectionintoc {15}{Discussion}{16}{0}{15}

@@ -1,0 +1,72 @@
+\title{Ueberschrift}%%TODO
+\author{Wenwen Chen, Christian Dietz, \\
+	Jan Seeger, Rainer Schoenberger, Julian Tatsch
+}
+\date{\today}
+
+\documentclass[12pt]{article}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+%%TODO
+\end{abstract}
+
+\section{Introduction}
+This is time for all good men to come to the aid of their party!
+
+\paragraph{Outline}
+The remainder of this article is organized as follows.
+Section~\ref{previous work} gives account of previous work.
+Our new and exciting results are described in Section~\ref{results}.
+Finally, Section~\ref{conclusions} gives the conclusions.
+
+\section{Previous work}\label{previous work}
+A much longer \LaTeXe{} example was written by Gil~\cite{Gil:02}.
+
+\section{Results}\label{results}
+In this section we describe the results.
+
+\subsection{Servo controller board}
+\subsubsection{Schematics}
+\subsubsection{Board}
+After the schematics have been created, the PCB board layout was designed.
+The components are placed on the board connected with the corresponding copper tracks.
+This process is also called routing.
+Routing wasn't a big problem, as we had enough room on the board.
+Almost all track fitted on one layer and only a few vias and additional wires were needed.
+This made the PCB manufacturing process easier, as only a one-sided PCB could be used.
+Figure \ref{figboard} shows the finished board layout.
+
+\subsubsection{Communication protocol}
+The Servoboard is connected via the I2C or two-wire interface to a command unit.
+The command unit can either be the FPGA or the RaspberryPi.
+
+
+The I2C protocol is not implemented in software, but the hardware I2C capabilities of the AVR Atmega8 microcontroller is used.
+This gives us faster response time and less overhead.
+It also unburdens the AVR CPU, as only one hardware interrupt is needed, each time a complede byte is received via I2C.
+Implementing I2C via software would have required many timer interrupts.
+
+
+We implemented our own communication protocol ontop of I2C.
+In the microcontroller's firmware, we used a simple state machine to realize this.
+
+The communication protocol looks as follows:
+The Master first sends a preamble (0xff), which is used to syncronize both communication partners.
+This is necessary, because loosing packets or receiving corrupted data can lead to a situation, where the receiving unit ends up in an undefined or faulty state.
+Therefore, it might be that the communication gets stuck.
+
+By sending a preamble, that cannot be part of the normal communication, this problem is solved: everytime the microcontroller receives a preamble-byte, the commonication state machine goes back to its initial state, no matter what the current state is.
+This way, if a transmission error occurs, only the current command is lost, but further communication will still be possible.
+
+\section{Conclusions}\label{conclusions}
+We worked hard, and achieved very little.
+
+\section{Future work}
+
+\bibliographystyle{abbrv}
+\bibliography{doku}
+
+\end{document}

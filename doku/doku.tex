@@ -44,22 +44,29 @@ The Servoboard is connected via the I2C or two-wire interface to a command unit.
 The command unit can either be the FPGA or the RaspberryPi.
 
 
-The I2C protocol is not implemented in software, but the hardware I2C capabilities of the AVR Atmega8 microcontroller is used.
+The I2C protocol is not implemented in software, but the hardware I2C capabilities of the AVR Atmega8 microcontroller are used.
 This gives us faster response time and less overhead.
 It also unburdens the AVR CPU, as only one hardware interrupt is needed, each time a complede byte is received via I2C.
-Implementing I2C via software would have required many timer interrupts.
+Implementing I2C via software would have required many timer interrupts and might have turned out less stable.
 
 
 We implemented our own communication protocol ontop of I2C.
 In the microcontroller's firmware, we used a simple state machine to realize this.
 
 The communication protocol looks as follows:
-The Master first sends a preamble (0xff), which is used to syncronize both communication partners.
+The Master first sends a preamble (0xff), which is used to synchronize both communication partners.
 This is necessary, because loosing packets or receiving corrupted data can lead to a situation, where the receiving unit ends up in an undefined or faulty state.
 Therefore, it might be that the communication gets stuck.
 
 By sending a preamble, that cannot be part of the normal communication, this problem is solved: everytime the microcontroller receives a preamble-byte, the commonication state machine goes back to its initial state, no matter what the current state is.
 This way, if a transmission error occurs, only the current command is lost, but further communication will still be possible.
+
+
+Nevertheless, our communication protocoll makes it possible to transmit 0xff inside a command using the following method:
+If values greater or equal than 254 are sent, they are split into two bytes.
+The first byte is 254 and the next one is the difference to the desired number.
+On the receiver's side, both values are then combined and their sum determines the acual number. 
+For example if 255 needs to be sent, the two bytes 254 and 1 are sent.
 
 \section{Conclusions}\label{conclusions}
 We worked hard, and achieved very little.

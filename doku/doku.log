@@ -1,21 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Arch Linux) (format=pdflatex 2013.7.11)  2 AUG 2013 14:59
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Arch Linux) (format=pdflatex 2013.8.4)  4 AUG 2013 18:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **doku.tex
 (./doku.tex
 LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
-rman-x-2012-05-30, ngerman-x-2012-05-30, afrikaans, ancientgreek, ibycus, arabi
-c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
-h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
-h, french, friulan, galician, german, ngerman, swissgerman, monogreek, greek, h
-ungarian, icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, ma
-rathi, oriya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, 
-kurmanji, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk,
- polish, portuguese, romanian, romansh, russian, sanskrit, serbian, serbianc, s
-lovak, slovenian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, 
-welsh, loaded.
+Babel <3.9f> and hyphenation patterns for 78 languages loaded.
 (/usr/share/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texmf-dist/tex/latex/base/size12.clo
@@ -32,60 +22,272 @@ File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
+)
+(/usr/share/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
 ) (./doku.aux)
 \openout1 = `doku.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+
+(/usr/share/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count88
+\scratchdimen=\dimen105
+\scratchbox=\box26
+\nofMPsegments=\count89
+\nofMParguments=\count90
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count91
+\MPscratchDim=\dimen106
+\MPnumerator=\count92
+\makeMPintoPDFobject=\count93
+\everyMPtoPDFconversion=\toks16
+) (/usr/share/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/share/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/share/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/share/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/share/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 10.
+(Font)              <14.4> on input line 11.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 10.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 26.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 26.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 26.
+(Font)              <7> on input line 11.
+
+<pic/sim.png, id=1, 748.7975pt x 490.83376pt>
+File: pic/sim.png Graphic file (type png)
+ <use pic/sim.png>
+Package pdftex.def Info: pic/sim.png used on input line 38.
+(pdftex.def)             Requested size: 426.79134pt x 279.76317pt.
+
+Overfull \hbox (36.79134pt too wide) in paragraph at lines 38--39
+ [] 
+ []
 
 
-LaTeX Warning: Reference `figboard' on page 1 undefined on input line 40.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./doku.bbl)
-[3] (./doku.aux)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2 <./pic/sim.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 60.
 
-LaTeX Warning: There were undefined references.
+(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 78.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 78.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 78.
+ [3]
+<pic/servoboard.pdf, id=20, 845.1575pt x 598.235pt>
+File: pic/servoboard.pdf Graphic file (type pdf)
+ <use pic/servoboard.pdf>
+Package pdftex.def Info: pic/servoboard.pdf used on input line 92.
+(pdftex.def)             Requested size: 569.05511pt x 402.80534pt.
 
- ) 
+Overfull \hbox (12.80534pt too wide) in paragraph at lines 92--93
+ [] 
+ []
+
+
+LaTeX Warning: Float too large for page by 69.72174pt on input line 96.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<pic/servoboardbrd.png, id=21, 757.83125pt x 717.68124pt>
+File: pic/servoboardbrd.png Graphic file (type png)
+
+<use pic/servoboardbrd.png>
+Package pdftex.def Info: pic/servoboardbrd.png used on input line 110.
+(pdftex.def)             Requested size: 142.26378pt x 134.71822pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<pic/servoboard3d.png, id=22, 1026.83624pt x 778.91pt>
+File: pic/servoboard3d.png Graphic file (type png)
+
+<use pic/servoboard3d.png>
+Package pdftex.def Info: pic/servoboard3d.png used on input line 118.
+(pdftex.def)             Requested size: 142.26378pt x 107.90567pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<pic/servoboardr.jpg, id=23, 1927.2pt x 2569.6pt>
+File: pic/servoboardr.jpg Graphic file (type jpg)
+ <use pic/servoboardr.jpg>
+Package pdftex.def Info: pic/servoboardr.jpg used on input line 126.
+(pdftex.def)             Requested size: 142.26378pt x 189.6534pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4] <pic/powerboard.pdf, id=27, 845.1575pt x 598.235pt>
+File: pic/powerboard.pdf Graphic file (type pdf)
+
+<use pic/powerboard.pdf>
+Package pdftex.def Info: pic/powerboard.pdf used on input line 171.
+(pdftex.def)             Requested size: 569.05511pt x 402.80534pt.
+
+Overfull \hbox (12.80534pt too wide) in paragraph at lines 171--172
+ [] 
+ []
+
+
+LaTeX Warning: Float too large for page by 69.72174pt on input line 175.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<pic/powerboardr.jpg, id=28, 1927.2pt x 2569.6pt>
+File: pic/powerboardr.jpg Graphic file (type jpg)
+ <use pic/powerboardr.jpg>
+Package pdftex.def Info: pic/powerboardr.jpg used on input line 179.
+(pdftex.def)             Requested size: 227.62204pt x 303.47679pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5] <pic/sensorboardbrd.png, id=32, 838.13126pt x 500.87125pt>
+File: pic/sensorboardbrd.png Graphic file (type png)
+
+<use pic/sensorboardbrd.png>
+Package pdftex.def Info: pic/sensorboardbrd.png used on input line 201.
+(pdftex.def)             Requested size: 227.62204pt x 136.02423pt.
+
+<pic/sensorboard3d.png, id=33, 975.645pt x 529.98pt>
+File: pic/sensorboard3d.png Graphic file (type png)
+
+<use pic/sensorboard3d.png>
+Package pdftex.def Info: pic/sensorboard3d.png used on input line 209.
+(pdftex.def)             Requested size: 227.62204pt x 123.63959pt.
+
+<pic/sensorboard.pdf, id=34, 845.1575pt x 598.235pt>
+File: pic/sensorboard.pdf Graphic file (type pdf)
+ <use pic/sensorboard.pdf>
+Package pdftex.def Info: pic/sensorboard.pdf used on input line 217.
+(pdftex.def)             Requested size: 569.05511pt x 402.80534pt.
+
+Overfull \hbox (12.80534pt too wide) in paragraph at lines 217--218
+ [] 
+ []
+
+
+LaTeX Warning: Float too large for page by 69.72174pt on input line 221.
+
+(./doku.bbl) [6] [7 <./pic/servoboard.pdf>] [8 <./pic/servoboardbrd.png> <./pic
+/servoboard3d.png>] [9 <./pic/servoboardr.jpg>] [10 <./pic/powerboard.pdf>]
+[11 <./pic/powerboardr.jpg> <./pic/sensorboardbrd.png>] [12 <./pic/sensorboard3
+d.png>] [13 <./pic/sensorboard.pdf>] (./doku.aux) ) 
 Here is how much of TeX's memory you used:
- 245 strings out of 493488
- 2607 string characters out of 3146892
- 52432 words of memory out of 3000000
- 3624 multiletter control sequences out of 15000+200000
- 9416 words of font info for 33 fonts, out of 3000000 for 9000
+ 1579 strings out of 493315
+ 22487 string characters out of 6143705
+ 82348 words of memory out of 5000000
+ 5023 multiletter control sequences out of 15000+600000
+ 9763 words of font info for 34 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 22i,6n,19p,263b,199s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
-Output written on doku.pdf (3 pages, 71166 bytes).
+ 37i,7n,23p,677b,275s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
+share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmti12.pfb>
+Output written on doku.pdf (13 pages, 1899157 bytes).
 PDF statistics:
- 38 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
+ 108 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -10,18 +10,24 @@ entity spireader is
         spimiso: out std_logic;
         steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
         acc: out unsigned(15 downto 0)       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
-			);
+      );
 
-				--steering
-				--acc
-				--speed
-				--speed/acc-switch
+        --steering
+        --acc
+        --speed
+        --speed/acc-switch
 end spireader;
 
 architecture spireaderarch of spireader is
   signal spislave_event: std_logic := '0';
   signal spislave_data_write: std_logic_vector(7 downto 0) := "11111000";
   signal spislave_data_receive: std_logic_vector(7 downto 0);
+
+  signal servoid: std_logic_vector(3 downto 0);
+  signal servoval: std_logic_vector(15 downto 0);
+
+  type machine is (reset,cmd_servo,cmd_servo2);
+  signal state: machine := reset;
 
   component spislave is
     port (clk_50: in std_logic;
@@ -50,10 +56,34 @@ begin
   process(clk_50)
   begin
     if rising_edge(clk_50) then
-			if spislave_event = '1' then
-				--steering(7 downto 0) <= "11110000";
-				steering(7 downto 0) <= unsigned(spislave_data_receive);
-			end if;
+      if spislave_event = '1' then
+        case state is
+          when reset =>
+            case spislave_data_read(7 downto 4) is
+              when "0000" => --servo
+                state <= cmd_servo;
+                servoid <= spislave_data_read(3 downto 0);
+              when others =>
+                state <= reset;
+            end case;
+
+          when cmd_servo =>
+            state <= cmd_servo2;
+            servoval(15 downto 8) <= spislave_data_read;
+
+          when cmd_servo2 =>
+            state <= reset;
+            servoval(7 downto 0) <= spislave_data_read;
+            if servoid = "0000" then
+              acc <= unsigned(servoval);
+            elsif servoid = "0001" then
+              steering <= unsigned(servoval);
+            end if;
+          when others =>
+        end case;
+        --steering(7 downto 0) <= "11110000";
+        --steering(7 downto 0) <= unsigned(spislave_data_receive);
+      end if;
     end if;
 
   end process;

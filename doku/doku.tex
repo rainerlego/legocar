@@ -81,6 +81,40 @@ The \textit{raspi.exe} TCP server accepts the following commands:
 \item[speedv set $<$speed$>$ $<$steering$>$] This is a highlevel command, which is only accepted, if the Raspi is connected to the fpga. $<$speed$>$ and $<$steering$>$ are both double values.
 \end{description}
 
+\subsection{Remote control devices}
+The car can be controlled by any device that supports TCP/IP over wifi.
+So for example it is possible to control the car via a notebook that is connected to the car's wifi access point.
+To demonstrate the remote control capabilities of the car's software, we implemented an Android client. Screenshots of this client can be seen in Figures \ref{figand1} and \ref{figand2}.
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=5cm]{pic/figand1.png}
+\caption{Android remote control client}
+\end{center}
+\label{figand1}
+\end{figure}
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=5cm]{pic/figand2.png}
+\caption{Android remote control client}
+\end{center}
+\label{figand2}
+\end{figure}
+
+Another option is to use a Wiimote remote to control the car. If the WII\_ENABLED option is set in the \textit{raspi.exe} configuration, the RaspberryPi software will periodically try to connect to a Wiimote controller.
+Button 1 and 2 need to be pressed simultaneously on the Wiimote controller to enter the discovery procedure.
+Once the Wiimote remote is connected to the RaspberryPi, the car can be controlled.
+The Wiimote has the following key assignment:
+\begin{description}
+\item[+] Accquire control over the car (initiate handover mechanism)
+\item[A] Switch acceleration mode from \textit{button} to \textit{tilt} and vice-versa
+\item[1] Accelerate slowly
+\item[1+2] Accelerate
+\item[2] Accelerate fast
+\item[left] Accelerate backwards
+\item[tilt left/right] Steer left/right
+\item[tilt forward/backward] Accelerate forward/backward
+\end{description}
+
 \section{Servo controller board}
 %%TODO: bildchen
 
@@ -187,8 +221,49 @@ The schematics are very simple an can be seen in Figure \ref{figpowerboardscm}. 
 
 To measure speed, we built two rotary encoders into the car.
 They are based on a simple and cheap light barrier with an included Schmitt trigger and a rotary encoder disc.
-There are four 
+A picture and a schematic of the light barriers can be seen in Figure \ref{figls}.
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=8cm]{pic/ls.png}
+\caption{Light barrier}
+\end{center}
+\label{figls}
+\end{figure}
 
+There are four slots in each disc, so that we can measure the speed at the resolution of roughly a quater of a turn.
+The discs are mounted on shafts, which are directly connected to the differentials.
+We use two rotary encoders.
+One is connected to the front differential and one is connected to the back differential.
+The cardan shaft of the initial 4WD car design has been removed to make room for the rotary encoders.
+Because of the removed 4WD and the two rotary encoders, it is now possible to measure the speed of the front and the back wheels independently.
+This enables us to detect slippage, as only the back wheels are driven by the motor.
+
+Figure \ref{figencmount1} shows the aluminium component that has been manufactured to hold the front rotary encoder shaft in place.
+Figures \ref{figencmount2} and \ref{figencmount3} show, how the rotary encoder discs are mounted on the car.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=8cm]{pic/encoder_mount.png}
+\caption{Encoder mounting}
+\end{center}
+\label{figencmount1}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=8cm]{pic/encoders_scheiben.jpg}
+\caption{Encoder mounting}
+\end{center}
+\label{figencmount2}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=8cm]{pic/encoders_top.jpg}
+\caption{Encoder mounting}
+\end{center}
+\label{figencmount3}
+\end{figure}
 
 
 To connect the light barriers to the FPGA, we built a sensorboard. It has the task to supply the light barriers with power and to convert the output voltage of the light barriers to the right level.

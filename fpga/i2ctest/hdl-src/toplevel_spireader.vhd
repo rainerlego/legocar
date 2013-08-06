@@ -39,7 +39,7 @@ architecture synth of toplevel_spireader is
       output : out std_logic_vector(6 downto 0));
   end component seven_segment;
 
-  signal testval: unsigned(15 downto 0);
+  signal testval: unsigned(15 downto 0) := "1111000011110000";
   signal waitcycles: integer;
   
 begin
@@ -52,7 +52,7 @@ begin
     port map(
       clk_50 => CLOCK_50,
       spiclk => SPI_CLK,
-      spics => SPI_CLK,
+      spics => SPI_CS,
       spimosi => SPI_MOSI,
       spimiso => SPI_MISO,
       steering => testval );

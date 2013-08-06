@@ -23,14 +23,6 @@ architecture spireaderarch of spireader is
   signal spislave_data_write: std_logic_vector(7 downto 0) := "11111000";
   signal spislave_data_receive: std_logic_vector(7 downto 0);
 
-  component edge_detector is
-    port (
-      CLK  : in  std_logic;
-      A  : in  std_logic;
-      R : out std_logic;
-      F: out std_logic);
-  end component edge_detector;
-
   component spislave is
     port (clk_50: in std_logic;
           clk: in std_logic;
@@ -58,7 +50,8 @@ begin
   process(clk_50)
   begin
     if rising_edge(clk_50) then
-			if rising_edge(spislave_event) then
+			if spislave_event = '1' then
+				--steering(7 downto 0) <= "11110000";
 				steering(7 downto 0) <= unsigned(spislave_data_receive);
 			end if;
     end if;

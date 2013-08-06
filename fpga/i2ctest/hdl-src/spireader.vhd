@@ -19,8 +19,6 @@ entity spireader is
 end spireader;
 
 architecture spireaderarch of spireader is
-  signal spislave_event_r: std_logic := '0';
-  signal spislave_event_f: std_logic := '0';
   signal spislave_event: std_logic := '0';
   signal spislave_data_write: std_logic_vector(7 downto 0) := "11111000";
   signal spislave_data_receive: std_logic_vector(7 downto 0);
@@ -41,12 +39,10 @@ architecture spireaderarch of spireader is
           miso: out std_logic;
           ext_data_receive: out std_logic_vector(7 downto 0);
           ext_data_write: in std_logic_vector(7 downto 0);
-          ext_event: out std_logic :='0');
+          ext_event: out std_logic);
   end component;
 
 begin
-  spislave_event_detector: edge_detector
-    port map(CLK => clk_50, A => spislave_event, R => spislave_event_r, F => spislave_event_f);
 
   spi: spislave
     port map (
@@ -62,7 +58,7 @@ begin
   process(clk_50)
   begin
     if rising_edge(clk_50) then
-      if spislave_event_r = '1' then
+			if rising_edge(spislave_event) then
 				steering(7 downto 0) <= unsigned(spislave_data_receive);
 			end if;
     end if;

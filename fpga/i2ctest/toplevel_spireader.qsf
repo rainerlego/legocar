@@ -18,44 +18,6 @@
 #
 # Quartus II 32-bit
 # Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-# Date created = 17:53:02  August 06, 2013
-#
-# -------------------------------------------------------------------------- #
-#
-# Notes:
-#
-# 1) The default values for assignments are stored in the file:
-#		toplevel_spireader_assignment_defaults.qdf
-#    If this file doesn't exist, see file:
-#		assignment_defaults.qdf
-#
-# 2) Altera recommends that you do not modify this file. This
-#    file is updated automatically by the Quartus II software
-#    and any changes you make may be lost or overwritten.
-#
-# -------------------------------------------------------------------------- #
-
-
-# -------------------------------------------------------------------------- #
-#
-# Copyright (C) 1991-2013 Altera Corporation
-# Your use of Altera Corporation's design tools, logic functions 
-# and other software and tools, and its AMPP partner logic 
-# functions, and any output files from any of the foregoing 
-# (including device programming or simulation files), and any 
-# associated documentation or information are expressly subject 
-# to the terms and conditions of the Altera Program License 
-# Subscription Agreement, Altera MegaCore Function License 
-# Agreement, or other applicable license agreement, including, 
-# without limitation, that your use is for the sole purpose of 
-# programming logic devices manufactured by Altera and sold by 
-# Altera or its authorized distributors.  Please refer to the 
-# applicable agreement for further details.
-#
-# -------------------------------------------------------------------------- #
-#
-# Quartus II 32-bit
-# Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 # Date created = 16:50:49  August 06, 2013
 #
 # -------------------------------------------------------------------------- #
@@ -213,9 +175,37 @@ set_location_assignment PIN_AF20 -to SPI_CLK
 set_location_assignment PIN_AH26 -to SPI_CS
 set_location_assignment PIN_AE20 -to SPI_MISO
 set_location_assignment PIN_AG23 -to SPI_MOSI
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name VHDL_FILE "hdl-src/toplevel_spireader.vhd"
 set_global_assignment -name VHDL_FILE "hdl-src/spislave.vhd"
 set_global_assignment -name VHDL_FILE "hdl-src/spireader.vhd"
 set_global_assignment -name VHDL_FILE "hdl-src/seven_segment.vhd"
 set_global_assignment -name VHDL_FILE "hdl-src/edge_detector.vhd"
+set_location_assignment PIN_G18 -to HEX[0]
+set_location_assignment PIN_F22 -to HEX[1]
+set_location_assignment PIN_E17 -to HEX[2]
+set_location_assignment PIN_L26 -to HEX[3]
+set_location_assignment PIN_L25 -to HEX[4]
+set_location_assignment PIN_J22 -to HEX[5]
+set_location_assignment PIN_H22 -to HEX[6]
+set_location_assignment PIN_M24 -to HEX[7]
+set_location_assignment PIN_Y22 -to HEX[8]
+set_location_assignment PIN_W21 -to HEX[9]
+set_location_assignment PIN_W22 -to HEX[10]
+set_location_assignment PIN_W25 -to HEX[11]
+set_location_assignment PIN_U23 -to HEX[12]
+set_location_assignment PIN_U24 -to HEX[13]
+set_location_assignment PIN_AA25 -to HEX[14]
+set_location_assignment PIN_AA26 -to HEX[15]
+set_location_assignment PIN_Y25 -to HEX[16]
+set_location_assignment PIN_W26 -to HEX[17]
+set_location_assignment PIN_Y26 -to HEX[18]
+set_location_assignment PIN_W27 -to HEX[19]
+set_location_assignment PIN_W28 -to HEX[20]
+set_location_assignment PIN_V21 -to HEX[21]
+set_location_assignment PIN_U21 -to HEX[22]
+set_location_assignment PIN_AB20 -to HEX[23]
+set_location_assignment PIN_AA21 -to HEX[24]
+set_location_assignment PIN_AD24 -to HEX[25]
+set_location_assignment PIN_AF23 -to HEX[26]
+set_location_assignment PIN_Y19 -to HEX[27]
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

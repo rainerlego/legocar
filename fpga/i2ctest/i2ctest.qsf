@@ -18,7 +18,7 @@
 #
 # Quartus II 32-bit
 # Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
-# Date created = 12:36:35  June 20, 2013
+# Date created = 18:00:26  June 26, 2013
 #
 # -------------------------------------------------------------------------- #
 #
@@ -37,19 +37,43 @@
 
 
 set_global_assignment -name FAMILY "Cyclone IV E"
-set_global_assignment -name DEVICE Auto
-set_global_assignment -name TOP_LEVEL_ENTITY i2ctest
+set_global_assignment -name DEVICE EP4CE115F29C7
+set_global_assignment -name TOP_LEVEL_ENTITY toplevel_spitest
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "12.1 SP1"
-set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:36:35  JUNE 20, 2013"
-set_global_assignment -name LAST_QUARTUS_VERSION "12.1 SP1"
-set_global_assignment -name VHDL_FILE "hdl-src/speed_sensor.vhd"
-set_global_assignment -name VHDL_FILE "hdl-src/edge_detector.vhd"
-set_global_assignment -name VHDL_FILE "hdl-src/spi.vhd"
-set_global_assignment -name VHDL_FILE "hdl-src/i2ctest.vhd"
-set_global_assignment -name VHDL_FILE "hdl-src/i2c_master.vhd"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "18:00:26  JUNE 26, 2013"
+set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (VHDL)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (VHDL)"
-set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
+set_location_assignment PIN_Y2 -to CLOCK_50
+set_location_assignment PIN_F17 -to LEDG[0]
+set_location_assignment PIN_E21 -to LEDG[8]
+set_location_assignment PIN_E22 -to LEDG[7]
+set_location_assignment PIN_E25 -to LEDG[6]
+set_location_assignment PIN_E24 -to LEDG[5]
+set_location_assignment PIN_H21 -to LEDG[4]
+set_location_assignment PIN_G20 -to LEDG[3]
+set_location_assignment PIN_G22 -to LEDG[2]
+set_location_assignment PIN_G21 -to LEDG[1]
+set_location_assignment PIN_M23 -to KEY[3]
+set_location_assignment PIN_M21 -to KEY[2]
+set_location_assignment PIN_N21 -to KEY[1]
+set_location_assignment PIN_R24 -to KEY[0]
+set_location_assignment PIN_AF20 -to clk
+set_location_assignment PIN_AH26 -to cs
+set_location_assignment PIN_AE20 -to miso
+set_location_assignment PIN_AG23 -to mosi
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+
+set_global_assignment -name VHDL_FILE "hdl-src/seven_segment.vhd"
+set_global_assignment -name VHDL_FILE "hdl-src/edge_detector.vhd"
+set_global_assignment -name VHDL_FILE "hdl-src/spislave.vhd"
+set_global_assignment -name VHDL_FILE "hdl-src/toplevel_spitest.vhd"
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

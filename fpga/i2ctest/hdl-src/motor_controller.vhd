@@ -10,9 +10,9 @@ entity motor_controller is
         CLOCK_50: in std_logic;
         start: in std_logic;
         running: out std_logic;
-        motor: in std_logic_vector(2 downto 0);
+        motor: in std_logic_vector(2 downto 0); --which servo to control
         -- Only allow 2 byte arguments
-        speed: in unsigned(15 downto 0));
+        speed: in unsigned(15 downto 0));       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
 end motor_controller;
 
 

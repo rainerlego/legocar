@@ -8,7 +8,7 @@ entity toplevel_spitest is
     debounce_cycles: integer := 25_000_000);
   port (
     KEY: in std_logic_vector(3 downto 0);
-    LEDG: inout std_logic_vector(8 downto 0) := (others => '0');
+    --LEDG: inout std_logic_vector(8 downto 0) := (others => '0');
     CLOCK_50: in std_logic;
     HEX: out std_logic_vector(27 downto 0);
     clk: in std_logic;
@@ -47,6 +47,7 @@ architecture synth of toplevel_spitest is
   signal ext_event: std_logic :='0';
   signal ext_data_write: std_logic_vector(7 downto 0) := "11111000";
   signal ext_data_receive: std_logic_vector(7 downto 0);
+  --signal testhex: std_logic_vector(7 downto 0) := "11110000";
 
 begin
 
@@ -72,37 +73,17 @@ begin
   begin
     if rising_edge(CLOCK_50) then
       if rising_edge(ext_event) then
-        if LEDG(4) = '1' then
-          LEDG(4) <= '0';
-        else
-          LEDG(4) <= '1';
-        end if;
       end if;
       if waitcycles > 0 then
         waitcycles <= waitcycles - 1;
       else 
         if KEY(0) = '0' then
-          if LEDG(1) = '1' then
-            LEDG(1) <= '0';
-          else
-            LEDG(1) <= '1';
-          end if;
           waitcycles <= debounce_cycles;
           ext_data_write <= "00001111";
         elsif KEY(1) = '0' then
-            if LEDG(2) = '1' then
-            LEDG(2) <= '0';
-          else
-            LEDG(2) <= '1';
-          end if;
           waitcycles <= debounce_cycles;
           ext_data_write <= "10101010";
         elsif KEY(2) = '0' then
-          if LEDG(3) = '1' then
-            LEDG(3) <= '0';
-          else
-            LEDG(3) <= '1';
-          end if;
           waitcycles <= debounce_cycles;
           ext_data_write <= "11101110";
         end if;

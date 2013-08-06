@@ -69,9 +69,11 @@ set_location_assignment PIN_AF20 -to clk
 set_location_assignment PIN_AH26 -to cs
 set_location_assignment PIN_AE20 -to miso
 set_location_assignment PIN_AG23 -to mosi
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+
+set_global_assignment -name VHDL_FILE "hdl-src/seven_segment.vhd"
 set_global_assignment -name VHDL_FILE "hdl-src/edge_detector.vhd"
 set_global_assignment -name VHDL_FILE "hdl-src/spislave.vhd"
 set_global_assignment -name VHDL_FILE "hdl-src/toplevel_spitest.vhd"
-set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

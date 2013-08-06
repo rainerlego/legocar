@@ -10,7 +10,7 @@ entity toplevel_spitest is
     KEY: in std_logic_vector(3 downto 0);
     LEDG: inout std_logic_vector(8 downto 0) := (others => '0');
     CLOCK_50: in std_logic;
-
+    HEX: out std_logic_vector(27 downto 0);
     clk: in std_logic;
     cs: in std_logic;
     mosi: in std_logic;
@@ -33,6 +33,11 @@ architecture synth of toplevel_spitest is
           ext_event: out std_logic :='0');
   end component;
 
+  component seven_segment is
+    port (
+      number : in  unsigned(3 downto 0);
+      output : out std_logic_vector(6 downto 0));
+  end component seven_segment;
 
   signal start: std_logic := '0';
   signal running: std_logic;
@@ -41,6 +46,7 @@ architecture synth of toplevel_spitest is
   signal waitcycles: integer := 0;
   signal ext_event: std_logic :='0';
   signal ext_data_write: std_logic_vector(7 downto 0) := "11111000";
+  signal ext_data_receive: std_logic_vector(7 downto 0);
 
 begin
 
@@ -52,7 +58,15 @@ begin
       mosi => mosi,
       ext_event => ext_event,
       miso => miso,
-      ext_data_write => ext_data_write);
+      ext_data_write => ext_data_write,
+      ext_data_receive => ext_data_receive);
+
+  DEBUG_SEGMENTS: for i in 1 to 2 generate
+    SEG: seven_segment port map(number => unsigned(ext_data_receive((i * 4 - 1) downto (i - 1) * 4)),
+                                output => HEX(i * 7 - 1 downto (i - 1) * 7));
+    end generate DEBUG_SEGMENTS;
+
+
 
   process(CLOCK_50)
   begin

@@ -58,6 +58,7 @@ begin
               --read_buffer <= data(7 downto 0);
               --data(8 downto 1) <= write_buffer;
               complete <= '1';
+              ext_data_receive <= data(7 downto 0);
               count <= 0;
             when others =>
               complete <= '0';
@@ -71,7 +72,6 @@ begin
 
       if complete = '1' then
         complete <= '0';
-        ext_data_receive <= data(7 downto 0);
         data(8 downto 1) <= ext_data_write;
         --ext_data_receive <= read_buffer;
         --write_buffer <= ext_data_write;

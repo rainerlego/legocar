@@ -4,26 +4,27 @@
 # ". ./environment.sh"
 
 case `hostname` in
-	"e330" )
+  "e330" )
     ALTERADIR=/home/rainer/altera
     ALTERAVERSION=13.0sp1
-		;;
-	"victorique" )
+    ;;
+  "victorique" )
     ALTERADIR=/home/xtremely/altera
     ALTERAVERSION=13.0sp1
-		;;
-	"idefix" )
+    ;;
+  "idefix" )
     ALTERADIR=/home/dragon/altera
     ALTERAVERSION=13.0sp1
-		;;
-	"anton" )
+    ;;
+  "anton" )
     ALTERADIR=/home/dragon/altera
     ALTERAVERSION=13.0sp1
-		;;
-	* )
-		echo "unknown hostname please edit file"
-		exit 0
-		;;
+#ALTERAVERSION=12.1sp1
+    ;;
+  * )
+    echo "unknown hostname please edit file"
+    exit 0
+    ;;
 esac
 
 #quartos rootdir

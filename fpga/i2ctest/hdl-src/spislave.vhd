@@ -47,6 +47,7 @@ begin
 
       if cs_f = '1' then
         complete <= '1';
+        count <= 0;
       end if;
 
       if cs = '0' then -- we receive/send data

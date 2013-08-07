@@ -55,7 +55,7 @@ begin
           data(8 downto 1) <= data(7 downto 0);  -- shift left
           count <= count+1;
           case count is
-            when '7' => --beim 8. mal shiften: letztes bit wurde gesendet, empfangene daten wurden in read_buffer geschrieben
+            when 7 => --beim 8. mal shiften: letztes bit wurde gesendet, empfangene daten wurden in read_buffer geschrieben
               --read_buffer <= data(7 downto 0);
               --data(8 downto 1) <= write_buffer;
               data(8 downto 1) <= ext_data_write;

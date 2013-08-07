@@ -74,11 +74,11 @@ begin
 
 
       if complete = '1' then
-              if debugsig = '1' then
-                debugsig <= '0';
-              else
-                debugsig <= '1';
-              end if;
+              --if debugsig = '1' then
+              --  debugsig <= '0';
+              --else
+              --  debugsig <= '1';
+              --end if;
         complete <= '0';
         ext_data_receive <= data(7 downto 0);
         --ext_data_receive <= read_buffer;

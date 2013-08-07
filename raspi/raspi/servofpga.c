@@ -7,7 +7,7 @@
 #include <sys/ioctl.h>
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
-#include "fpga_spi.h"
+#include "servofpga.h"
 
 int fd;
 
@@ -84,7 +84,6 @@ int fpga_setservo ( uint8_t servoNr, uint16_t servoPos )
 {
   unsigned char wbuf[3];
   unsigned char rbuf[3];
-
 
   wbuf[0] = (CMD_SERVO<<4) | (servoNr & 0xf);
   wbuf[1] = HIGHBYTE(servoPos);

@@ -14,7 +14,7 @@
 #include "config.h"
 #include "servo.h"
 #include "servoboard.h"
-#include "fpga_spi.h"
+#include "servofpga.h"
 #include "servosim.h"
 
 pthread_mutex_t servo_mutex;

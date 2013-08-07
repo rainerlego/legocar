@@ -8,7 +8,7 @@ entity spireader is
         spics: in std_logic;
         spimosi: in std_logic;
         spimiso: out std_logic;
-        led: out std_logic_vector(15 downto 0);
+        led: out std_logic_vector(7 downto 0);
         steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
         acc: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
         speed_instead_acc: out std_logic;
@@ -69,7 +69,7 @@ begin
           when reset =>
             if spislave_data_receive = "11111111" then
               state <= afterpreamble;
-              led(15 downto 0) <= (others => '0');
+              led(7 downto 0) <= (others => '0');
               led(0) <= '1';
             end if;
 
@@ -82,12 +82,12 @@ begin
               when "1001" => --speed/acc switch
                 if spislave_data_receive(0) = '1' then
                   speed_instead_acc <= '1';
-                  led(7) <= '1';
+                  led(6) <= '1';
                 else
                   speed_instead_acc <= '0';
-                  led(7) <= '0';
+                  led(6) <= '0';
                 end if;
-                led(8) <= '1';
+                led(7) <= '1';
                 state <= reset;
               when others =>
                 state <= reset;

@@ -16,7 +16,8 @@ entity toplevel_all is
     KEY: in std_logic_vector(3 downto 0);
     HEX: out std_logic_vector(27 downto 0);
     DEBUGPIN: out std_logic;
-    LEDR: out std_logic_vector(15 downto 0)
+    LEDR: out std_logic_vector(17 downto 0);
+    LEDG: out std_logic_vector(7 downto 0)
     );
 end toplevel_all;
 
@@ -28,7 +29,7 @@ architecture synth of toplevel_all is
           spics: in std_logic;
           spimosi: in std_logic;
           spimiso: out std_logic;
-          led: out std_logic_vector(15 downto 0);
+          led: out std_logic_vector(7 downto 0);
           steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
           acc: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
           speed_instead_acc: out std_logic;
@@ -106,6 +107,8 @@ architecture synth of toplevel_all is
   signal speedc_acc_out: signed(15 downto 0) := (others => '0');
 
   signal waitcycles: integer;
+  signal ledi2ctransmission: std_logic := '0';
+  signal debugpins: std_logic := '0';
   
 begin
   mot_controller: servo_controller
@@ -126,11 +129,11 @@ begin
       spics => SPI_CS,
       spimosi => SPI_MOSI,
       spimiso => SPI_MISO,
-      led => LEDR,
+      led => LEDR(7 downto 0),
       steering => steering,
       acc => ss_acc_in,
       speed_instead_acc => ss_speed_instead_acc,
-      debugpin => DEBUGPIN );
+      debugpin => debugpins );
 
   sensor_front: speed_sensor
     generic map (pulses_per_revolution => 4, clocks_per_second => 50_000_000)
@@ -149,7 +152,7 @@ begin
         desired_speed => speedc_desired_speed,
         enable_antischlupf => speedc_enable_antischlupf,
         output_acceleration => speedc_acc_out);
-    --TODO: speedc_acc_out auf ss_speed_in legen
+    --TODO: speedc_acc_out auf ss_speed_in legen (wird derzeit noch über tasten gesteuert)
     --TODO: speed front und back sind noch vertauscht
 
   speed_acc_switchi: speed_acc_switch
@@ -175,6 +178,22 @@ begin
   servo0 <= ss_acc_out;
   servo1 <= steering;
 
+  DEBUGPIN <= debugpins;
+
+  LEDG(4) <= ledi2ctransmission;
+  LEDG(6) <= debugpins;
+
+  process(CLOCK_50)
+  begin
+    if rising_edge(CLOCK_50) then
+      if ss_speed_instead_acc = '1' then
+        LEDG(1 downto 0) <= "10";
+      else
+        LEDG(1 downto 0) <= "11";
+      end if;
+    end if;
+  end process;
+
   process(CLOCK_50)
   begin
     if rising_edge(CLOCK_50) then
@@ -183,6 +202,7 @@ begin
         if sc_running = '0' then
           sc_start <= '1';
           waitcycles <= 5_000_000;
+          ledi2ctransmission <= not ledi2ctransmission;
         end if;
       else
         waitcycles <= waitcycles - 1;

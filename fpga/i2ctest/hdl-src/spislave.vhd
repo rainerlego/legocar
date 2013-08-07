@@ -24,21 +24,21 @@ architecture spislavearch of spislave is
   signal clk_f: std_logic := '0';
   signal cs_r: std_logic := '0';
   signal cs_f: std_logic := '0';
-
-  component edge_detector is
+  signal debugsig: std_logic := '0';
+  component edge_detector2 is
     port (
       CLK  : in  std_logic;
       A  : in  std_logic;
       R : out std_logic;
       F: out std_logic);
-  end component edge_detector;
+  end component edge_detector2;
 
   
 
 begin
-  clk_edge: edge_detector
+  clk_edge: edge_detector2
     port map(CLK => clk_50, A => clk, R => clk_r, F => clk_f);
-  cs_edge: edge_detector
+  cs_edge: edge_detector2
     port map(CLK => clk_50, A => cs, R => cs_r,  F => cs_f);
     
   process(clk_50) --clock idle low -> write data on rising edge
@@ -74,6 +74,11 @@ begin
 
 
       if complete = '1' then
+              if debugsig = '1' then
+                debugsig <= '0';
+              else
+                debugsig <= '1';
+              end if;
         complete <= '0';
         ext_data_receive <= data(7 downto 0);
         --ext_data_receive <= read_buffer;
@@ -88,5 +93,5 @@ begin
 
   end process;
   miso <= data(8);
-  
+  debug <= debugsig;
 end spislavearch;

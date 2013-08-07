@@ -38,7 +38,8 @@ architecture spireaderarch of spireader is
           miso: out std_logic;
           ext_data_receive: out std_logic_vector(7 downto 0);
           ext_data_write: in std_logic_vector(7 downto 0);
-          ext_event: out std_logic);
+          ext_event: out std_logic;
+          debug: out std_logic);
   end component;
 
 begin
@@ -52,7 +53,8 @@ begin
       miso => spimiso,
       ext_event => spislave_event,
       ext_data_write => spislave_data_write,
-      ext_data_receive => spislave_data_receive);
+      ext_data_receive => spislave_data_receive,
+      debug => debugpin);
     
   process(clk_50)
   variable servoval: std_logic_vector(15 downto 0);
@@ -115,6 +117,6 @@ begin
 
   end process;
 
-  debugpin <= debugpins;
+  --debugpin <= debugpins;
 
 end spireaderarch;

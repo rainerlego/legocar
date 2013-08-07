@@ -97,6 +97,21 @@ int fpga_setservo ( uint8_t servoNr, uint16_t servoPos )
   return 0;
 }
 
+int fpga_setspeedacc (uint8_t speed_intead_acc )
+{
+  unsigned char wbuf[1];
+  unsigned char rbuf[1];
+
+  wbuf[0] = (CMD_SPEED_ACC_SWITCH<<4) | (speed_intead_acc & 0xf);
+  
+  if ((spisend(rbuf,wbuf, 1)) != 1) {
+    printf("E: fpga: Could not write specified amount of bytes to printf chardev\n");
+    return -1;
+  }
+
+  return 0;
+}
+
 int fpga_setleds ( uint8_t onoff, uint8_t leds )
 {
   unsigned char rbuf[1];

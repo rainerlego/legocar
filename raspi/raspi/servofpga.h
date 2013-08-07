@@ -19,5 +19,6 @@ void fpga_close();
 int fpga_setservo ( uint8_t servoNr, uint16_t servoPos );
 int fpga_setleds ( uint8_t onoff, uint8_t leds );
 int fpga_setspeedv (uint16_t vspeed, uint16_t vsteering );
+int fpga_setspeedacc (uint8_t speed_intead_acc );
 
 #endif

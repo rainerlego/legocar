@@ -149,6 +149,35 @@ int tickForDegrees(double angle){
     return ret;
 }
 
+int servo_setspeedacc ( uint8_t speed_intead_acc, int force, int src, int port )
+{
+  int ret;
+
+	if ( servo_checkperm ( src, port ) )
+	{
+		printf ( "W: Servo: noperm\n" );
+		return -1;
+	}
+
+  pthread_mutex_lock ( &servo_mutex );
+    
+    
+#if SERVO_M == SERVO_BOARD
+    printf ( "not implemented\n");
+		ret = -1;
+#elif SERVO_M == SERVO_FPGA
+    ret = fpga_setspeedacc (speed_intead_acc);
+#elif SERVO_M == SERVO_SIM
+    //ret = servosim_setservo(servoNr, servoPos);
+		printf ( "not implemented\n" );
+		ret = -1;
+#endif
+
+  pthread_mutex_unlock ( &servo_mutex );
+
+  return ret;
+}
+
 int servo_setspeedv ( double speed, double steering, int force, int src, int port )
 {
     int ret;

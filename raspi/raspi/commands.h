@@ -10,5 +10,6 @@
 #define CMD_GET_SERVOonoff 6
 #define CMD_PING 7
 #define CMD_SPEED 8
+#define CMD_SPEED_ACC_SWITCH 9
 
 #endif

@@ -12,5 +12,6 @@ int servo_getperm ( int src, int port );
 int servo_setservo ( uint8_t servoNr, uint16_t servoPos, int force, int src, int port );
 int servo_setspeedv ( double speed, double steering, int force, int src, int port );
 int servo_setleds ( uint8_t onoff, uint8_t leds, int force, int src, int port );
+int servo_setspeedacc ( uint8_t speed_intead_acc, int force, int src, int port );
 void servo_ping();
 void servo_testservos();

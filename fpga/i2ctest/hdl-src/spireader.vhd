@@ -8,6 +8,7 @@ entity spireader is
         spics: in std_logic;
         spimosi: in std_logic;
         spimiso: out std_logic;
+        led: out std_logic_vector(15 downto 0);
         steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
         acc: out unsigned(15 downto 0)       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
       );
@@ -23,10 +24,8 @@ architecture spireaderarch of spireader is
   signal spislave_data_write: std_logic_vector(7 downto 0) := "11111000";
   signal spislave_data_receive: std_logic_vector(7 downto 0);
 
-  signal servoid: std_logic_vector(3 downto 0);
-  signal servoval: std_logic_vector(15 downto 0);
 
-  type machine is (reset,cmd_servo,cmd_servo2);
+  type machine is (reset,afterpreamble,cmd_servo,cmd_servo2);
   signal state: machine := reset;
 
   component spislave is
@@ -54,30 +53,50 @@ begin
       ext_data_receive => spislave_data_receive);
     
   process(clk_50)
+  variable servoval: std_logic_vector(15 downto 0);
+  variable servoid: std_logic_vector(3 downto 0);
   begin
     if rising_edge(clk_50) then
       if spislave_event = '1' then
         case state is
           when reset =>
-            case spislave_data_read(7 downto 4) is
+            if spislave_data_receive = "11111111" then
+              state <= afterpreamble;
+              led(7 downto 0) <= "00000000";
+            end if;
+
+          when afterpreamble =>
+            case spislave_data_receive(7 downto 4) is
               when "0000" => --servo
                 state <= cmd_servo;
-                servoid <= spislave_data_read(3 downto 0);
+                servoid := spislave_data_receive(3 downto 0);
+                led(0) <= '1';
               when others =>
                 state <= reset;
             end case;
 
           when cmd_servo =>
-            state <= cmd_servo2;
-            servoval(15 downto 8) <= spislave_data_read;
+            if spislave_data_receive = "11111111" then
+              state <= reset;
+            else
+              state <= cmd_servo2;
+              servoval(15 downto 8) := spislave_data_receive;
+              led(1) <= '1';
+            end if;
 
           when cmd_servo2 =>
-            state <= reset;
-            servoval(7 downto 0) <= spislave_data_read;
-            if servoid = "0000" then
-              acc <= unsigned(servoval);
-            elsif servoid = "0001" then
-              steering <= unsigned(servoval);
+            if spislave_data_receive = "11111111" then
+              state <= reset;
+            else
+              state <= reset;
+              servoval(7 downto 0) := spislave_data_receive;
+              led(2) <= '1';
+              if servoid = "0000" then
+                acc <= unsigned(servoval);
+              elsif servoid = "0001" then
+                steering <= unsigned(servoval);
+                led(3) <= '1';
+              end if;
             end if;
           when others =>
         end case;

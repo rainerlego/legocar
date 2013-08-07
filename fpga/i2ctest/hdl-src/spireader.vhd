@@ -54,8 +54,9 @@ begin
       miso => spimiso,
       ext_event => spislave_event,
       ext_data_write => spislave_data_write,
-      ext_data_receive => spislave_data_receive,
-      debug => debugpin);
+      ext_data_receive => spislave_data_receive
+      --debug => debugpin);
+      );
     
   process(clk_50)
   variable servoval: std_logic_vector(15 downto 0);
@@ -74,6 +75,7 @@ begin
             if spislave_data_receive = "11111111" then
               state <= afterpreamble;
               led(15 downto 0) <= (others => '0');
+              led(0) <= '1';
             end if;
 
           when afterpreamble =>
@@ -81,7 +83,7 @@ begin
               when "0000" => --servo
                 state <= cmd_servo;
                 servoid := spislave_data_receive(3 downto 0);
-                led(0) <= '1';
+                led(1) <= '1';
               when "1001" => --speed/acc switch
                 if spislave_data_receive(0) = '1' then
                   speed_instead_acc <= '1';
@@ -102,7 +104,7 @@ begin
             else
               state <= cmd_servo2;
               servoval(15 downto 8) := spislave_data_receive;
-              led(1) <= '1';
+              led(2) <= '1';
             end if;
 
           when cmd_servo2 =>
@@ -111,12 +113,12 @@ begin
             else
               state <= reset;
               servoval(7 downto 0) := spislave_data_receive;
-              led(2) <= '1';
+              led(3) <= '1';
               if servoid = "0000" then
                 acc <= unsigned(servoval);
               elsif servoid = "0001" then
                 steering <= unsigned(servoval);
-                led(3) <= '1';
+                led(4) <= '1';
               end if;
             end if;
           when others =>
@@ -128,6 +130,6 @@ begin
 
   end process;
 
-  --debugpin <= debugpins;
+  debugpin <= debugpins;
 
 end spireaderarch;

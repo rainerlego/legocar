@@ -25,6 +25,7 @@ architecture spislavearch of spislave is
   signal cs_r: std_logic := '0';
   signal cs_f: std_logic := '0';
   signal debugsig: std_logic := '0';
+  signal swaprec: std_logic := '0';
   component edge_detector2 is
     port (
       CLK  : in  std_logic;
@@ -69,9 +70,16 @@ begin
           end case; 
         elsif clk_r = '1' then -- rising edge -> sample
           data(0) <= mosi;
+          if count = 7 then
+            swaprec <= '1';
+          end if;
         end if;
       end if;
 
+      if swaprec = '1' then
+        swaprec <= '0';
+        ext_data_receive <= data(7 downto 0);
+      end if;
 
       if complete = '1' then
         if debugsig = '1' then
@@ -80,7 +88,6 @@ begin
           debugsig <= '1';
         end if;
         complete <= '0';
-        ext_data_receive <= data(7 downto 0);
         --ext_data_receive <= read_buffer;
         --write_buffer <= ext_data_write;
         ext_event <= '1'; -- daten vorher im buffer werden jetzt verschickt

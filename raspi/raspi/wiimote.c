@@ -19,6 +19,9 @@ double diff;
 
 int accmode;
 
+int speedacc;
+int as;
+
 unsigned int wii_watchdog;
 pthread_t wiitping;
 
@@ -89,6 +92,24 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
 				{
 					printf ("wii: get perm\n" );
 					servo_getperm ( SERVO_PERM_WII, 0 );
+          wii_watchdog = 0;
+				}
+
+				if ( btn & CWIID_BTN_MINUS )
+				{
+					if (as==0)
+						as = 1;
+					printf ("wii: enable/disable schlupf to %d\n", as);
+					servo_as ( as, 0, SERVO_PERM_WII, 0 );
+          wii_watchdog = 0;
+				}
+
+				if ( btn & CWIID_BTN_HOME )
+				{
+					if (speedacc=0)
+						speedacc=1;
+					printf ("wii: switch speed/acc to %d\n", speedacc);
+					servo_setspeedacc ( speedacc, 0, SERVO_PERM_WII, 0 );
           wii_watchdog = 0;
 				}
 
@@ -177,6 +198,10 @@ int wii_open()
   bdaddr = *BDADDR_ANY;
 
   accmode = WII_ACCMODE_BTN;
+
+	as = 0;
+	speedacc = 0;
+
   gettimeofday(&t1,NULL);
 
   printf ( "N: wii: trying to find wiimote...\n" );

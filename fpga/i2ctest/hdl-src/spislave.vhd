@@ -10,7 +10,8 @@ entity spislave is
         miso: out std_logic;
         ext_data_receive: out std_logic_vector(7 downto 0);
         ext_data_write: in std_logic_vector(7 downto 0);
-        ext_event: out std_logic :='0');
+        ext_event: out std_logic :='0';
+        debug: out std_logic :='0');
 end spislave;
 
 architecture spislavearch of spislave is

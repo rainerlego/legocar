@@ -46,8 +46,8 @@ begin
     if rising_edge(clk_50) then
 
       if cs_f = '1' then
-        complete <= '1';
-        count <= '0';
+        --complete <= '1';
+        count <= 0;
       end if;
 
       if cs = '0' then -- we receive/send data
@@ -60,14 +60,14 @@ begin
               --data(8 downto 1) <= write_buffer;
               data(8 downto 1) <= ext_data_write;
               complete <= '1';
-              count <= '0';
+              count <= 0;
             when others =>
               complete <= '0';
           -- pass.
           end case; 
         elsif clk_r = '1' then -- rising edge -> sample
           data(0) <= mosi;
-          if count = '7' then
+          if count = 7 then
               ext_data_receive <= data(7 downto 0);
           end if;
         end if;

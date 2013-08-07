@@ -33,6 +33,7 @@ architecture synth of toplevel_all is
           steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
           acc: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
           speed_instead_acc: out std_logic;
+          enable_antischlupf: out std_logic;
           debugpin: out std_logic
           );
   end component spireader;
@@ -133,6 +134,7 @@ begin
       steering => steering,
       acc => ss_acc_in,
       speed_instead_acc => ss_speed_instead_acc,
+      enable_antischlupf => speedc_enable_antischlupf,
       debugpin => debugpins );
 
   sensor_front: speed_sensor

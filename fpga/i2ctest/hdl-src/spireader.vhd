@@ -9,9 +9,10 @@ entity spireader is
         spimosi: in std_logic;
         spimiso: out std_logic;
         led: out std_logic_vector(7 downto 0);
-        steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
-        acc: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
-        speed_instead_acc: out std_logic;
+        steering: out unsigned(15 downto 0) := to_unsigned(4000,16);  --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
+        acc: out unsigned(15 downto 0) := to_unsigned(4000,16);  --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
+        speed_instead_acc: out std_logic := '0';
+        enable_antischlupf: out std_logic := '0';
         debugpin: out std_logic
       );
 end spireader;
@@ -87,7 +88,15 @@ begin
                   speed_instead_acc <= '0';
                   led(6) <= '0';
                 end if;
-                led(7) <= '1';
+                state <= reset;
+              when "1010" => --antischlupf switch
+                if spislave_data_receive(0) = '1' then
+                  enable_antischlupf <= '1';
+                  led(7) <= '1';
+                else
+                  enable_antischlupf <= '0';
+                  led(7) <= '0';
+                end if;
                 state <= reset;
               when others =>
                 state <= reset;

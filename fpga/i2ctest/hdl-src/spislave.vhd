@@ -47,7 +47,7 @@ begin
 
       if cs_f = '1' then
         complete <= '1';
-        count <= 0;
+        count <= '0';
       end if;
 
       if cs = '0' then -- we receive/send data
@@ -55,28 +55,31 @@ begin
           data(8 downto 1) <= data(7 downto 0);  -- shift left
           count <= count+1;
           case count is
-            when 7 => --beim 8. mal shiften: letztes bit wurde gesendet, empfangene daten wurden in read_buffer geschrieben
+            when '7' => --beim 8. mal shiften: letztes bit wurde gesendet, empfangene daten wurden in read_buffer geschrieben
               --read_buffer <= data(7 downto 0);
               --data(8 downto 1) <= write_buffer;
+              data(8 downto 1) <= ext_data_write;
               complete <= '1';
-              ext_data_receive <= data(7 downto 0);
-              count <= 0;
+              count <= '0';
             when others =>
               complete <= '0';
           -- pass.
           end case; 
         elsif clk_r = '1' then -- rising edge -> sample
           data(0) <= mosi;
+          if count = '7' then
+              ext_data_receive <= data(7 downto 0);
+          end if;
         end if;
       end if;
 
 
       if complete = '1' then
         complete <= '0';
-        data(8 downto 1) <= ext_data_write;
         --ext_data_receive <= read_buffer;
         --write_buffer <= ext_data_write;
-        ext_event <= '1';
+        ext_event <= '1'; -- daten vorher im buffer werden jetzt verschickt
+                          -- empfangene daten liegen bereit
       else
         ext_event <= '0';
       end if;

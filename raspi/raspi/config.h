@@ -3,7 +3,7 @@
 #define SERVO_FPGA 2   //use i2c servoboard
 
 //change between simulation and i2c board
-#define SERVO_M SERVO_FPGA
+#define SERVO_M SERVO_SIM
 
 //TCP port for server to accept commands
 #define SERVER_PORT 5567

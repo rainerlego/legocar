@@ -111,6 +111,25 @@ void parse_stack ( struct cconn * cc )
       }
     }
 
+    if ( 0==strncmp ( cc->s[0], "as", 2 ) )
+    {
+      if ( cc->curp>=2 )
+      {
+        if ( 0==strncmp(cc->s[1], "off", 3) )
+        {
+          servo_as ( 0, 0, SERVO_PERM_TCP, ntohs(cc->sin.sin_port) );
+          printf ( "N: tcpserver %d: disable antischlupf\n", tcpseq);
+          retlen = snprintf ( ret, 200, "ok as off\n" );
+          tcpseq++;
+        } else if ( 0==strncmp(cc->s[1], "on", 2) ) {
+          servo_as ( 1, 0, SERVO_PERM_TCP, ntohs(cc->sin.sin_port) );
+          printf ( "N: tcpserver %d: enable antischlupf\n", tcpseq);
+          retlen = snprintf ( ret, 200, "ok as on\n" );
+          tcpseq++;
+        }
+      }
+    }
+
     if ( 0==strncmp ( cc->s[0], "speedv", 6 ) )
     {
       if ( cc->curp>=2 )

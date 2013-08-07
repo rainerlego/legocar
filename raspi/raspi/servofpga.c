@@ -114,6 +114,22 @@ int fpga_setspeedacc (uint8_t speed_intead_acc )
   return 0;
 }
 
+int fpga_as (uint8_t on )
+{
+  unsigned char wbuf[2];
+  unsigned char rbuf[2];
+
+  wbuf[0] = SPI_PREAMBLE;
+  wbuf[1] = (CMD_AS<<4) | (on & 0xf);
+  
+  if ((spisend(rbuf,wbuf, 2)) != 2) {
+    printf("E: fpga: Could not write specified amount of bytes to printf chardev\n");
+    return -1;
+  }
+
+  return 0;
+}
+
 int fpga_setleds ( uint8_t onoff, uint8_t leds )
 {
   unsigned char rbuf[2];

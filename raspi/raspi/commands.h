@@ -11,5 +11,6 @@
 #define CMD_PING 7
 #define CMD_SPEED 8
 #define CMD_SPEED_ACC_SWITCH 9
+#define CMD_AS 10
 
 #endif

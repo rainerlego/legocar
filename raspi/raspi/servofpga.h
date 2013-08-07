@@ -10,6 +10,7 @@
 #define SPI_DELAY 1 //könnte falsch sein
 #define SPI_SPEED_HZ 500000
 #define SPI_BITS_PER_WORD 8
+#define SPI_PREAMBLE 0xff
 
 #define LOWBYTE(v) ((unsigned char) (v))
 #define HIGHBYTE(v) ((unsigned char)(((unsigned int) (v)) >> 8))

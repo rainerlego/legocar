@@ -82,14 +82,15 @@ void fpga_close()
 
 int fpga_setservo ( uint8_t servoNr, uint16_t servoPos )
 {
-  unsigned char wbuf[3];
-  unsigned char rbuf[3];
+  unsigned char wbuf[4];
+  unsigned char rbuf[4];
 
-  wbuf[0] = (CMD_SERVO<<4) | (servoNr & 0xf);
-  wbuf[1] = HIGHBYTE(servoPos);
-  wbuf[2] = LOWBYTE(servoPos);
+  wbuf[0] = SPI_PREAMBLE;
+  wbuf[1] = (CMD_SERVO<<4) | (servoNr & 0xf);
+  wbuf[2] = HIGHBYTE(servoPos);
+  wbuf[3] = LOWBYTE(servoPos);
   
-  if ((spisend(rbuf,wbuf, 3)) != 3) {
+  if ((spisend(rbuf,wbuf, 4)) != 4) {
     printf("E: fpga: Could not write specified amount of bytes to printf chardev\n");
     return -1;
   }
@@ -99,12 +100,13 @@ int fpga_setservo ( uint8_t servoNr, uint16_t servoPos )
 
 int fpga_setspeedacc (uint8_t speed_intead_acc )
 {
-  unsigned char wbuf[1];
-  unsigned char rbuf[1];
+  unsigned char wbuf[2];
+  unsigned char rbuf[2];
 
-  wbuf[0] = (CMD_SPEED_ACC_SWITCH<<4) | (speed_intead_acc & 0xf);
+  wbuf[0] = SPI_PREAMBLE;
+  wbuf[1] = (CMD_SPEED_ACC_SWITCH<<4) | (speed_intead_acc & 0xf);
   
-  if ((spisend(rbuf,wbuf, 1)) != 1) {
+  if ((spisend(rbuf,wbuf, 2)) != 2) {
     printf("E: fpga: Could not write specified amount of bytes to printf chardev\n");
     return -1;
   }
@@ -114,14 +116,15 @@ int fpga_setspeedacc (uint8_t speed_intead_acc )
 
 int fpga_setleds ( uint8_t onoff, uint8_t leds )
 {
-  unsigned char rbuf[1];
-  unsigned char wbuf[1];
+  unsigned char rbuf[2];
+  unsigned char wbuf[2];
     
-  wbuf[0] = (CMD_LED<<4) | (leds & ((1<<2)|(1<<1)|(1<<0)));
+  wbuf[0] = SPI_PREAMBLE;
+  wbuf[1] = (CMD_LED<<4) | (leds & ((1<<2)|(1<<1)|(1<<0)));
   if ( onoff )
-    wbuf[0] |= (1<<3);
+    wbuf[1] |= (1<<3);
   
-  if ((spisend(rbuf,wbuf, 1)) != 1) {
+  if ((spisend(rbuf,wbuf, 2)) != 2) {
     printf("E: fpga: Could not write specified amount of bytes to printf chardev\n");
     return -1;
   }
@@ -131,17 +134,17 @@ int fpga_setleds ( uint8_t onoff, uint8_t leds )
 
 int fpga_setspeedv (uint16_t vspeed, uint16_t vsteering )
 {
-    unsigned char rbuf[5];
-    unsigned char wbuf[5];
+    unsigned char rbuf[6];
+    unsigned char wbuf[6];
 
+    wbuf[0] = SPI_PREAMBLE;
+    wbuf[1] = CMD_SPEED;
+    wbuf[2] = HIGHBYTE(vspeed);
+    wbuf[3] = LOWBYTE(vspeed);
+    wbuf[4] = HIGHBYTE(vsteering);
+    wbuf[5] = LOWBYTE(vsteering);
     
-    wbuf[0] = CMD_SPEED;
-    wbuf[1] = HIGHBYTE(vspeed);
-    wbuf[2] = LOWBYTE(vspeed);
-    wbuf[3] = HIGHBYTE(vsteering);
-    wbuf[4] = LOWBYTE(vsteering);
-    
-    if ((spisend(rbuf,wbuf, 5)) != 5) {
+    if ((spisend(rbuf,wbuf, 6)) != 6) {
         printf("E: fpga: Could not write specified amount of bytes to spi\n");
         return -1;
     }

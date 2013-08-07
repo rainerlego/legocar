@@ -102,7 +102,7 @@ void parse_stack ( struct cconn * cc )
           printf ( "N: tcpserver %d: set to acceleration mode\n", tcpseq);
           retlen = snprintf ( ret, 200, "ok speed acc set acc \n" );
           tcpseq++;
-        } else if ( 0==strncmp(cc->s[1], "acc", 3) ) {
+        } else if ( 0==strncmp(cc->s[1], "speed", 4) ) {
           servo_setspeedacc ( 1, 0, SERVO_PERM_TCP, ntohs(cc->sin.sin_port) );
           printf ( "N: tcpserver %d: set to speed mode\n", tcpseq);
           retlen = snprintf ( ret, 200, "ok speed acc set speed \n" );

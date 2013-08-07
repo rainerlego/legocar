@@ -11,6 +11,7 @@ entity spireader is
         led: out std_logic_vector(15 downto 0);
         steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
         acc: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
+        speed_instead_acc: out std_logic;
         debugpin: out std_logic
       );
 
@@ -70,7 +71,7 @@ begin
           when reset =>
             if spislave_data_receive = "11111111" then
               state <= afterpreamble;
-              led(7 downto 0) <= "00000000";
+              led(15 downto 0) <= (others => '0');
             end if;
 
           when afterpreamble =>
@@ -79,6 +80,16 @@ begin
                 state <= cmd_servo;
                 servoid := spislave_data_receive(3 downto 0);
                 led(0) <= '1';
+              when "1001" => --speed/acc switch
+                if spislave_data_receive(0) = '1' then
+                  speed_instead_acc <= '1';
+                  led(7) <= '1';
+                else
+                  speed_instead_acc <= '0';
+                  led(7) <= '0';
+                end if;
+                led(8) <= '1';
+                state <= reset;
               when others =>
                 state <= reset;
             end case;

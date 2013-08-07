@@ -11,6 +11,8 @@ entity toplevel_all is
     SPI_CS: in std_logic;
     SPI_MOSI: in std_logic;
     SPI_MISO: out std_logic;
+    SPEED_PULSE_FRONT: in std_logic;
+    SPEED_PULSE_BACK: in std_logic;
     KEY: in std_logic_vector(3 downto 0);
     HEX: out std_logic_vector(27 downto 0);
     DEBUGPIN: out std_logic;
@@ -33,6 +35,28 @@ architecture synth of toplevel_all is
           debugpin: out std_logic
           );
   end component spireader;
+
+  component speed_sensor is
+    generic (pulses_per_revolution: integer := 4;
+             clocks_per_second: integer := 50_000_000);
+    port (
+      clk_in: in std_logic;
+      pulse: in std_logic;
+      -- in rotations per second
+      speed: out unsigned(31 downto 0) := (others => '0'));
+  end component;
+
+  component speed_control is
+    generic (
+      control_clock_divider : integer);
+    port (
+      CLOCK_50            : in  std_logic;
+      enable_antischlupf  : in  std_logic;
+      speed_front         : in  unsigned(31 downto 0);
+      speed_back          : in  unsigned(31 downto 0);
+      desired_speed       : in  unsigned(31 downto 0);
+      output_acceleration : out signed(15 downto 0) := (others => '0'));
+  end component speed_control;
 
   component speed_acc_switch is
     port (clk_50: in std_logic;
@@ -75,6 +99,12 @@ architecture synth of toplevel_all is
   signal ss_speed_in: unsigned(15 downto 0) := to_unsigned(4000,16); -- 0 4000 8000
   signal ss_speed_instead_acc: std_logic := '0';
 
+  signal speedc_speed_front: unsigned(31 downto 0) := (others => '0');
+  signal speedc_speed_back: unsigned(31 downto 0) := (others => '0');
+  signal speedc_desired_speed: unsigned(31 downto 0) := (others => '0');
+  signal speedc_enable_antischlupf: std_logic := '0';
+  signal speedc_acc_out: signed(15 downto 0) := (others => '0');
+
   signal waitcycles: integer;
   
 begin
@@ -101,6 +131,26 @@ begin
       acc => ss_acc_in,
       speed_instead_acc => ss_speed_instead_acc,
       debugpin => DEBUGPIN );
+
+  sensor_front: speed_sensor
+    generic map (pulses_per_revolution => 4, clocks_per_second => 50_000_000)
+    port map (clk_in => CLOCK_50, pulse => SPEED_PULSE_FRONT, speed => speedc_speed_front);
+
+  sensor_back: speed_sensor
+    generic map (pulses_per_revolution => 4, clocks_per_second => 50_000_000)
+    port map (clk_in => CLOCK_50, pulse => SPEED_PULSE_BACK, speed => speedc_speed_back);
+
+  speed_cont: speed_control
+    generic map (control_clock_divider => 22)
+    port map (
+        CLOCK_50 => CLOCK_50,
+        speed_front => speedc_speed_back,
+        speed_back => speedc_speed_front,
+        desired_speed => speedc_desired_speed,
+        enable_antischlupf => speedc_enable_antischlupf,
+        output_acceleration => speedc_acc_out);
+    --TODO: speedc_acc_out auf ss_speed_in legen
+    --TODO: speed front und back sind noch vertauscht
 
   speed_acc_switchi: speed_acc_switch
     port map (

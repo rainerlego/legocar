@@ -8,7 +8,9 @@ entity speed_control is
         speed_front: in unsigned(31 downto 0);
         speed_back: in unsigned(31 downto 0);
         desired_speed: in unsigned(31 downto 0);
-        output_acceleration: out signed(31 downto 0) := (others => '0'));
+        enable_antischlupf: in std_logic;
+        output_acceleration: out signed(15 downto 0) := (others => '0')
+        );
 end speed_control;
 
 
@@ -45,7 +47,9 @@ begin
       delta := to_integer(desired_speed) - to_integer(speed_front);
       esum <= esum + delta;
       ediff <= delta - e;
-      output_acceleration <= shift_right(to_signed((c_prop * delta + c_int * esum + c_diff * ediff), 32),4);
+      --output_acceleration <= shift_right(to_signed((c_prop * delta + c_int * esum + c_diff * ediff), 32),4);
+      --fixme: output_acceleration war vorher 32 bit. wieso? ausgabe sollte eigtl 16 bit sein
+      output_acceleration <= (others => '0');
       e <= delta;
     end if;
   end process;

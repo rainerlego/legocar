@@ -10,7 +10,8 @@ entity spireader is
         spimiso: out std_logic;
         led: out std_logic_vector(15 downto 0);
         steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
-        acc: out unsigned(15 downto 0)       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
+        acc: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
+        debugpin: out std_logic
       );
 
         --steering
@@ -23,6 +24,7 @@ architecture spireaderarch of spireader is
   signal spislave_event: std_logic := '0';
   signal spislave_data_write: std_logic_vector(7 downto 0) := "11111000";
   signal spislave_data_receive: std_logic_vector(7 downto 0);
+  signal debugpins: std_logic := '0';
 
 
   type machine is (reset,afterpreamble,cmd_servo,cmd_servo2);
@@ -58,6 +60,12 @@ begin
   begin
     if rising_edge(clk_50) then
       if spislave_event = '1' then
+        if debugpins = '0' then
+          debugpins <= '1';
+        else
+          debugpins <= '0';
+        end if;
+
         case state is
           when reset =>
             if spislave_data_receive = "11111111" then
@@ -106,5 +114,7 @@ begin
     end if;
 
   end process;
-  
+
+  debugpin <= debugpins;
+
 end spireaderarch;

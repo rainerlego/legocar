@@ -4,10 +4,11 @@ use ieee.numeric_std.all;
 
 entity toplevel_spireader is
   port (
+    CLOCK_50: in std_logic;
     KEY: in std_logic_vector(3 downto 0);
     LEDR: out std_logic_vector(15 downto 0);
-    CLOCK_50: in std_logic;
     HEX: out std_logic_vector(27 downto 0);
+    DEBUGPIN: out std_logic;
     SPI_CLK: in std_logic;
     SPI_CS: in std_logic;
     SPI_MOSI: in std_logic;
@@ -26,7 +27,8 @@ architecture synth of toplevel_spireader is
           spimiso: out std_logic;
           led: out std_logic_vector(15 downto 0);
           steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
-          acc: out unsigned(15 downto 0)       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
+          acc: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
+          debugpin: out std_logic
 
           --steering
           --acc
@@ -58,6 +60,7 @@ begin
       spimosi => SPI_MOSI,
       spimiso => SPI_MISO,
       led => LEDR,
-      steering => testval );
+      steering => testval,
+      debugpin => DEBUGPIN );
 
 end synth;

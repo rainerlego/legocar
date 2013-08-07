@@ -47,6 +47,7 @@ begin
 
       if cs_f = '1' then
         --complete <= '1';
+        data(8 downto 1) <= ext_data_write;
         count <= 0;
       end if;
 
@@ -67,15 +68,13 @@ begin
           end case; 
         elsif clk_r = '1' then -- rising edge -> sample
           data(0) <= mosi;
-          if count = 7 then
-              ext_data_receive <= data(7 downto 0);
-          end if;
         end if;
       end if;
 
 
       if complete = '1' then
         complete <= '0';
+        ext_data_receive <= data(7 downto 0);
         --ext_data_receive <= read_buffer;
         --write_buffer <= ext_data_write;
         ext_event <= '1'; -- daten vorher im buffer werden jetzt verschickt

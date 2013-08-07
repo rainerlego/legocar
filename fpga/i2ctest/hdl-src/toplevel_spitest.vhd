@@ -47,7 +47,7 @@ architecture synth of toplevel_spitest is
   signal ext_event: std_logic :='0';
   signal ext_data_write: std_logic_vector(7 downto 0) := "11111000";
   signal ext_data_receive: std_logic_vector(7 downto 0);
-  --signal testhex: std_logic_vector(7 downto 0) := "11110000";
+  signal testhex: std_logic_vector(7 downto 0) := "11110000";
 
 begin
 
@@ -63,7 +63,7 @@ begin
       ext_data_receive => ext_data_receive);
 
   DEBUG_SEGMENTS: for i in 1 to 2 generate
-    SEG: seven_segment port map(number => unsigned(ext_data_receive((i * 4 - 1) downto (i - 1) * 4)),
+    SEG: seven_segment port map(number => unsigned(testhex((i * 4 - 1) downto (i - 1) * 4)),
                                 output => HEX(i * 7 - 1 downto (i - 1) * 7));
     end generate DEBUG_SEGMENTS;
 
@@ -72,7 +72,8 @@ begin
   process(CLOCK_50)
   begin
     if rising_edge(CLOCK_50) then
-      if rising_edge(ext_event) then
+      if ext_event = '1' then
+        testhex <= ext_data_receive;
       end if;
       if waitcycles > 0 then
         waitcycles <= waitcycles - 1;

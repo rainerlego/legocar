@@ -14,11 +14,6 @@ entity spireader is
         speed_instead_acc: out std_logic;
         debugpin: out std_logic
       );
-
-        --steering
-        --acc
-        --speed
-        --speed/acc-switch
 end spireader;
 
 architecture spireaderarch of spireader is

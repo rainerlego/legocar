@@ -30,11 +30,6 @@ architecture synth of toplevel_spireader is
           acc: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
           speed_instead_acc: out std_logic;
           debugpin: out std_logic
-
-          --steering
-          --acc
-          --speed
-          --speed/acc-switch
           );
   end component spireader;
 

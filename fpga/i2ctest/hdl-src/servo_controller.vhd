@@ -11,7 +11,8 @@ entity servo_controller is
         start: in std_logic;
         running: out std_logic;
         servo0: in unsigned(15 downto 0); --servo position
-        servo1: in unsigned(15 downto 0); --( 0 - 4000 - 8000 )
+        servo1: in unsigned(15 downto 0) --( 0 - 4000 - 8000 )
+      );
 end servo_controller;
 
 
@@ -46,6 +47,7 @@ architecture synth of servo_controller is
   type machine is (reset,started,preamble,command,arg1,arg2,finished);
   signal addr: std_logic_vector(6 downto 0) := slave_address;
   signal data_wr: std_logic_vector(7 downto 0) := (others => '0');
+  signal datawrbuf: std_logic_vector(15 downto 0) := (others => '0');
   signal reset_n: std_logic := '0';
   signal ena: std_logic := '0';
   signal rw: std_logic := '0';
@@ -53,6 +55,8 @@ architecture synth of servo_controller is
   signal ack_error: std_logic;
   signal state: machine := reset;
   signal busy_pulse: std_logic;
+
+  signal servoid: std_logic_vector(2 downto 0) := "000";
 
 begin
   i2c_servoboard: i2c_master
@@ -109,7 +113,7 @@ begin
   end process;
 
 
-  process(state,motor,speed)
+  process(state)
   begin
     -- TODO: Actually use ack_error.
     reset_n <= '1';
@@ -121,6 +125,13 @@ begin
     case state is
       when reset =>
         running <= '0';
+        if servoid = "000" then
+          servoid <= "001";
+          datawrbuf <= conv_std_logic_vector(servo1,16);
+        else
+          servoid <= "000";
+          datawrbuf <= conv_std_logic_vector(servo0,16);
+        end if;
       when started =>
         addr <= slave_address;
       when preamble =>
@@ -128,15 +139,25 @@ begin
         ena <= '1';
         addr <= slave_address;
       when command =>
-        data_wr <= "00000" & motor;
+        data_wr <= "00000" & servoid;
         ena <= '1';
         addr <= slave_address;
       when arg1 => 
-        data_wr <= conv_std_logic_vector(speed(15 downto 8), 8);
+        if (datawrbuf(15 downto 8) = "11111111") or
+           (datawrbuf(15 downto 8) = "11111110") then
+         data_wr <= "11111101";
+        else
+          data_wr <= datawrbuf(15 downto 8);
+        end if;
         ena <= '1';
         addr <= slave_address;
       when arg2 => 
-        data_wr <= conv_std_logic_vector(speed(7 downto 0), 8);
+        if (datawrbuf(7 downto 0) = "11111111") or
+           (datawrbuf(7 downto 0) = "11111110") then
+         data_wr <= "11111101";
+        else
+          data_wr <= datawrbuf(7 downto 0);
+        end if;
         addr <= slave_address;
         ena <= '1';
       when finished =>

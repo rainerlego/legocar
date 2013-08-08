@@ -25,7 +25,7 @@ architecture spireaderarch of spireader is
   signal debugpins: std_logic := '0';
 
 
-  type machine is (reset,afterpreamble,cmd_servo,cmd_servo2,cmd_speed);
+  type machine is (reset,afterpreamble,cmd_servo,cmd_servo2,cmd_speedraw);
   signal state: machine := reset;
 
   component spislave is
@@ -81,8 +81,8 @@ begin
                 state <= cmd_servo;
                 servoid := spislave_data_receive(3 downto 0);
                 led(1) <= '1';
-              when "1000" => --speed
-                state <= cmd_speed;
+              when "1011" => --speedraw
+                state <= cmd_speedraw;
                 led(1) <= '1';
               when "1001" => --speed/acc switch
                 if spislave_data_receive(0) = '1' then
@@ -132,7 +132,7 @@ begin
             end if;
 
       ------------------speed-----------------------------------------
-          when cmd_speed =>
+          when cmd_speedraw =>
             if spislave_data_receive = "11111111" then
               state <= reset;
             else

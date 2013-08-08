@@ -14,7 +14,15 @@ entity toplevel_all is
     SPEED_PULSE_FRONT: in std_logic;
     SPEED_PULSE_BACK: in std_logic;
     KEY: in std_logic_vector(3 downto 0);
-    HEX: out std_logic_vector(27 downto 0);
+    --HEX: out std_logic_vector(27 downto 0);
+    HEX0: out std_logic_vector(6 downto 0);
+    HEX1: out std_logic_vector(6 downto 0);
+    HEX2: out std_logic_vector(6 downto 0);
+    HEX3: out std_logic_vector(6 downto 0);
+    HEX4: out std_logic_vector(6 downto 0);
+    HEX5: out std_logic_vector(6 downto 0);
+    HEX6: out std_logic_vector(6 downto 0);
+    HEX7: out std_logic_vector(6 downto 0);
     DEBUGPIN: out std_logic;
     LEDR: out std_logic_vector(17 downto 0);
     LEDG: out std_logic_vector(7 downto 0)
@@ -166,16 +174,17 @@ begin
       speed_instead_acc => ss_speed_instead_acc
       );
 
-  DEBUG_SEGMENTS: for i in 1 to 2 generate
-    SEG: seven_segment port map(number => ss_acc_out((i * 4 - 1) downto (i - 1) * 4),
-                                output => HEX(i * 7 - 1 downto (i - 1) * 7));
-    end generate DEBUG_SEGMENTS;
 
-  DEBUG_SEGMENTS2: for i in 1 to 2 generate
-    SEG2: seven_segment port map(number => servo1((i * 4 - 1) downto (i - 1) * 4),
-                                output => HEX((i+2) * 7 - 1 downto ((i+2) - 1) * 7));
-    end generate DEBUG_SEGMENTS2;
+  SEG0: seven_segment port map ( number => ss_acc_out(3 downto 0), output => HEX0);
+  SEG1: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX1);
+  SEG2: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX2);
+  SEG3: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX3);
 
+  SEG4: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX4);
+  SEG5: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX5);
+
+  SEG6: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX6);
+  SEG7: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX7);
 
   servo0 <= ss_acc_out;
   servo1 <= steering;

@@ -11,7 +11,7 @@ entity spireader is
         led: out std_logic_vector(7 downto 0);
         steering: out unsigned(15 downto 0) := to_unsigned(4000,16);  --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
         acc: out unsigned(15 downto 0) := to_unsigned(4000,16);  --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
-        speed: out std_logic_vector(7 downto 0);
+        speed: out unsigned(7 downto 0);
         speed_instead_acc: out std_logic := '0';
         enable_antischlupf: out std_logic := '0';
         debugpin: out std_logic

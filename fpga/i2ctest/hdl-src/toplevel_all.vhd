@@ -40,7 +40,7 @@ architecture synth of toplevel_all is
           led: out std_logic_vector(7 downto 0);
           steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
           acc: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
-          speed: out std_logic_vector(7 downto 0);
+          speed: out unsigned(7 downto 0);
           speed_instead_acc: out std_logic;
           enable_antischlupf: out std_logic;
           debugpin: out std_logic

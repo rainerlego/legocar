@@ -3,7 +3,6 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity speed_control is
-  generic (clock_divider: integer := 5000000); --1/10 sec
   port (CLOCK_50: in std_logic;
         speed_front: in unsigned(7 downto 0);
         speed_back: in unsigned(7 downto 0);
@@ -27,6 +26,7 @@ architecture synth of speed_control is
   signal ediff: integer := 0;
 
   signal clockcount: integer := 0;
+  signal clock_divider: integer := 5000000; --1/10 sec
 begin
 
 

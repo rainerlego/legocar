@@ -47,8 +47,6 @@ architecture synth of toplevel_all is
   end component spireader;
 
   component speed_sensor2 is
-    generic (pulses_per_revolution: integer := 4;
-             clocks_per_second: integer := 50_000_000);
     port (
       clk_in: in std_logic;
       pulse: in std_logic;
@@ -57,8 +55,6 @@ architecture synth of toplevel_all is
   end component;
 
   component speed_control is
-    generic (
-      control_clock_divider : integer);
     port (
       CLOCK_50            : in  std_logic;
       enable_antischlupf  : in  std_logic;
@@ -146,15 +142,12 @@ begin
       debugpin => debugpins );
 
   sensor_front: speed_sensor2
-    generic map (pulses_per_revolution => 4, clocks_per_second => 50_000_000)
     port map (clk_in => CLOCK_50, pulse => SPEED_PULSE_FRONT, speed => speedc_speed_front);
 
   sensor_back: speed_sensor2
-    generic map (pulses_per_revolution => 4, clocks_per_second => 50_000_000)
     port map (clk_in => CLOCK_50, pulse => SPEED_PULSE_BACK, speed => speedc_speed_back);
 
   speed_cont: speed_control
-    generic map (control_clock_divider => 22)
     port map (
         CLOCK_50 => CLOCK_50,
         speed_front => speedc_speed_back,

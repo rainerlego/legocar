@@ -169,6 +169,23 @@ int fpga_setspeedv (uint16_t vspeed, uint16_t vsteering )
     return 0;
 }
 
+int fpga_setspeedraw (uint8_t speed)
+{
+    unsigned char rbuf[3];
+    unsigned char wbuf[3];
+
+    wbuf[0] = SPI_PREAMBLE;
+    wbuf[1] = CMD_SPEEDRAW;
+    wbuf[2] = speed;
+    
+    if ((spisend(rbuf,wbuf, 3)) != 3) {
+        printf("E: fpga: Could not write specified amount of bytes to spi\n");
+        return -1;
+    }
+    
+    return 0;
+}
+
 int spisend ( char*rbuf, char*wbuf, int len )
 {
 

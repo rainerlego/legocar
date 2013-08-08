@@ -130,6 +130,21 @@ void parse_stack ( struct cconn * cc )
       }
     }
 
+    if ( 0==strncmp ( cc->s[0], "speedraw", 8 ) )
+    {
+      if ( cc->curp>=2 )
+      {
+        int v;
+        if (    parse_servo_value ( cc->s[1], cc->l[1], &v  ) )
+        {
+          servo_setspeedraw ( v, 0, SERVO_PERM_TCP, ntohs(cc->sin.sin_port) );
+          retlen = snprintf ( ret, 200, "ok speedraw %d \n", v );
+          printf ( "N: tcpserver %d: speed raw set %d\n", tcpseq, v );
+          tcpseq++;
+        }
+      }
+    }
+
     if ( 0==strncmp ( cc->s[0], "speedv", 6 ) )
     {
       if ( cc->curp>=2 )

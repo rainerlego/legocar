@@ -22,5 +22,6 @@ int fpga_setleds ( uint8_t onoff, uint8_t leds );
 int fpga_setspeedv (uint16_t vspeed, uint16_t vsteering );
 int fpga_setspeedacc (uint8_t speed_intead_acc );
 int fpga_as (uint8_t on );
+int fpga_setspeedraw (uint8_t speed);
 
 #endif

@@ -127,10 +127,10 @@ begin
         running <= '0';
         if servoid = "000" then
           servoid <= "001";
-          datawrbuf <= conv_std_logic_vector(servo1,16);
+          datawrbuf <= conv_std_logic_vector(servo0,16); --sehr merkwürdig iwie is das invertiert
         else
           servoid <= "000";
-          datawrbuf <= conv_std_logic_vector(servo0,16);
+          datawrbuf <= conv_std_logic_vector(servo1,16);
         end if;
       when started =>
         addr <= slave_address;

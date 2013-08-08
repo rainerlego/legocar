@@ -38,14 +38,14 @@ architecture synth of toplevel_all is
           );
   end component spireader;
 
-  component speed_sensor is
+  component speed_sensor2 is
     generic (pulses_per_revolution: integer := 4;
              clocks_per_second: integer := 50_000_000);
     port (
       clk_in: in std_logic;
       pulse: in std_logic;
       -- in rotations per second
-      speed: out unsigned(31 downto 0) := (others => '0'));
+      speed: out unsigned(7 downto 0) := (others => '0'));
   end component;
 
   component speed_control is
@@ -54,9 +54,9 @@ architecture synth of toplevel_all is
     port (
       CLOCK_50            : in  std_logic;
       enable_antischlupf  : in  std_logic;
-      speed_front         : in  unsigned(31 downto 0);
-      speed_back          : in  unsigned(31 downto 0);
-      desired_speed       : in  unsigned(31 downto 0);
+      speed_front         : in  unsigned(7 downto 0);
+      speed_back          : in  unsigned(7 downto 0);
+      desired_speed       : in  unsigned(7 downto 0);
       output_acceleration : out signed(15 downto 0) := (others => '0'));
   end component speed_control;
 
@@ -101,9 +101,9 @@ architecture synth of toplevel_all is
   signal ss_speed_in: unsigned(15 downto 0) := to_unsigned(4000,16); -- 0 4000 8000
   signal ss_speed_instead_acc: std_logic := '0';
 
-  signal speedc_speed_front: unsigned(31 downto 0) := (others => '0');
-  signal speedc_speed_back: unsigned(31 downto 0) := (others => '0');
-  signal speedc_desired_speed: unsigned(31 downto 0) := (others => '0');
+  signal speedc_speed_front: unsigned(7 downto 0) := (others => '0');
+  signal speedc_speed_back: unsigned(7 downto 0) := (others => '0');
+  signal speedc_desired_speed: unsigned(7 downto 0) := (others => '0');
   signal speedc_enable_antischlupf: std_logic := '0';
   signal speedc_acc_out: signed(15 downto 0) := (others => '0');
 
@@ -137,11 +137,11 @@ begin
       enable_antischlupf => speedc_enable_antischlupf,
       debugpin => debugpins );
 
-  sensor_front: speed_sensor
+  sensor_front: speed_sensor2
     generic map (pulses_per_revolution => 4, clocks_per_second => 50_000_000)
     port map (clk_in => CLOCK_50, pulse => SPEED_PULSE_FRONT, speed => speedc_speed_front);
 
-  sensor_back: speed_sensor
+  sensor_back: speed_sensor2
     generic map (pulses_per_revolution => 4, clocks_per_second => 50_000_000)
     port map (clk_in => CLOCK_50, pulse => SPEED_PULSE_BACK, speed => speedc_speed_back);
 

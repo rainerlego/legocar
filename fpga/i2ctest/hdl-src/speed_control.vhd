@@ -3,11 +3,11 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity speed_control is
-  generic (control_clock_divider: integer := 4);
+  generic (clock_divider: integer := 5000000); --1/10 sec
   port (CLOCK_50: in std_logic;
-        speed_front: in unsigned(31 downto 0);
-        speed_back: in unsigned(31 downto 0);
-        desired_speed: in unsigned(31 downto 0);
+        speed_front: in unsigned(7 downto 0);
+        speed_back: in unsigned(7 downto 0);
+        desired_speed: in unsigned(7 downto 0);
         enable_antischlupf: in std_logic;
         output_acceleration: out signed(15 downto 0) := (others => '0')
         );
@@ -26,31 +26,37 @@ architecture synth of speed_control is
   signal esum: integer := 0;
   signal ediff: integer := 0;
 
+  signal clockcount: integer := 0;
   signal clockshifter: unsigned(control_clock_divider downto 0) := (others => '0');
   signal controlclock: std_logic := '0';
 begin
 
+
   process(CLOCK_50)
+    variable delta: integer := 0;
+    variable tmp: integer := 0;
   begin
     if rising_edge(CLOCK_50) then
-      clockshifter <= clockshifter + 1;
-    end if;
-  end process;
 
+      clockcount <= clockcount + 1;
+      if clockcount >= clock_divider then
+        clockcount <= 0;
+        edgecount <= 0;
+        
 
-  controlclock <= clockshifter(clockshifter'left);
+        delta := to_integer(desired_speed) - to_integer(speed_front);
+        esum <= esum + delta;
+        --ediff <= delta - e;
+      end if
 
-  process(controlclock)
-    variable delta: integer := 0;
-  begin
-    if rising_edge(controlclock) then
-      delta := to_integer(desired_speed) - to_integer(speed_front);
-      esum <= esum + delta;
-      ediff <= delta - e;
-      --output_acceleration <= shift_right(to_signed((c_prop * delta + c_int * esum + c_diff * ediff), 32),4);
-      --fixme: output_acceleration war vorher 32 bit. wieso? ausgabe sollte eigtl 16 bit sein
-      output_acceleration <= (others => '0');
-      e <= delta;
+      tmp = c_prop * delta + c_int * esum;
+      if tmp < 4000 then
+        output_acceleration <= 4000 + c_prop * delta + c_int * esum;
+      else
+        output_acceleration <= 4000;
+      end if;
+
+      
     end if;
   end process;
   

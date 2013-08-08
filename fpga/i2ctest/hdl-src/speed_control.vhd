@@ -16,8 +16,8 @@ end speed_control;
 
 architecture synth of speed_control is
   -- Parts of 16
-  constant c_prop: integer := 10;
-  constant c_int: integer := 1;
+  constant c_prop: integer := 55;
+  constant c_int: integer := 8;
   constant c_diff: integer := 1;
 
   

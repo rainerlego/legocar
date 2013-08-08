@@ -40,6 +40,7 @@ architecture synth of toplevel_all is
           led: out std_logic_vector(7 downto 0);
           steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
           acc: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
+          speed: out std_logic_vector(7 downto 0);
           speed_instead_acc: out std_logic;
           enable_antischlupf: out std_logic;
           debugpin: out std_logic
@@ -137,6 +138,7 @@ begin
       led => LEDR(7 downto 0),
       steering => steering,
       acc => ss_acc_in,
+      speed => speedc_desired_speed,
       speed_instead_acc => ss_speed_instead_acc,
       enable_antischlupf => speedc_enable_antischlupf,
       debugpin => debugpins );
@@ -166,7 +168,6 @@ begin
       speed_in => ss_speed_in,
       speed_instead_acc => ss_speed_instead_acc
       );
-
 
   SEG0: seven_segment port map ( number => speedc_acc_out(3 downto 0), output => HEX0);
   SEG1: seven_segment port map ( number => speedc_acc_out(7 downto 4), output => HEX1);

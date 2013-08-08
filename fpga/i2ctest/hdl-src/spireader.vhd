@@ -11,6 +11,7 @@ entity spireader is
         led: out std_logic_vector(7 downto 0);
         steering: out unsigned(15 downto 0) := to_unsigned(4000,16);  --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
         acc: out unsigned(15 downto 0) := to_unsigned(4000,16);  --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
+        speed: out std_logic_vector(7 downto 0);
         speed_instead_acc: out std_logic := '0';
         enable_antischlupf: out std_logic := '0';
         debugpin: out std_logic
@@ -24,7 +25,7 @@ architecture spireaderarch of spireader is
   signal debugpins: std_logic := '0';
 
 
-  type machine is (reset,afterpreamble,cmd_servo,cmd_servo2);
+  type machine is (reset,afterpreamble,cmd_servo,cmd_servo2,cmd_speed);
   signal state: machine := reset;
 
   component spislave is
@@ -80,6 +81,9 @@ begin
                 state <= cmd_servo;
                 servoid := spislave_data_receive(3 downto 0);
                 led(1) <= '1';
+              when "1000" => --speed
+                state <= cmd_speed;
+                led(1) <= '1';
               when "1001" => --speed/acc switch
                 if spislave_data_receive(0) = '1' then
                   speed_instead_acc <= '1';
@@ -102,6 +106,7 @@ begin
                 state <= reset;
             end case;
 
+      ------------------servo-----------------------------------------
           when cmd_servo =>
             if spislave_data_receive = "11111111" then
               state <= reset;
@@ -125,6 +130,17 @@ begin
                 led(4) <= '1';
               end if;
             end if;
+
+      ------------------speed-----------------------------------------
+          when cmd_speed =>
+            if spislave_data_receive = "11111111" then
+              state <= reset;
+            else
+              state <= reset;
+              speed <= spislave_data_receive;
+              led(2) <= '1';
+            end if;
+
           when others =>
         end case;
         --steering(7 downto 0) <= "11110000";

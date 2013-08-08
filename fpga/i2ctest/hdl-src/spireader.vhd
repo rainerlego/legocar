@@ -137,7 +137,7 @@ begin
               state <= reset;
             else
               state <= reset;
-              speed <= spislave_data_receive;
+              speed <= unsigned(spislave_data_receive);
               led(2) <= '1';
             end if;
 

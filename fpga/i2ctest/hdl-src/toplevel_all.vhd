@@ -65,7 +65,7 @@ architecture synth of toplevel_all is
       speed_front         : in  unsigned(7 downto 0);
       speed_back          : in  unsigned(7 downto 0);
       desired_speed       : in  unsigned(7 downto 0);
-      output_acceleration : out signed(15 downto 0) := (others => '0'));
+      output_acceleration : out unsigned(15 downto 0) := (others => '0'));
   end component speed_control;
 
   component speed_acc_switch is
@@ -113,7 +113,7 @@ architecture synth of toplevel_all is
   signal speedc_speed_back: unsigned(7 downto 0) := (others => '0');
   signal speedc_desired_speed: unsigned(7 downto 0) := (others => '0');
   signal speedc_enable_antischlupf: std_logic := '0';
-  signal speedc_acc_out: signed(15 downto 0) := (others => '0');
+  signal speedc_acc_out: unsigned(15 downto 0) := (others => '0');
 
   signal waitcycles: integer;
   signal ledi2ctransmission: std_logic := '0';

@@ -9,7 +9,7 @@ entity speed_control is
         speed_back: in unsigned(7 downto 0);
         desired_speed: in unsigned(7 downto 0);
         enable_antischlupf: in std_logic;
-        output_acceleration: out signed(15 downto 0) := (others => '0')
+        output_acceleration: out unsigned(15 downto 0) := (others => '0')
         );
 end speed_control;
 
@@ -27,8 +27,6 @@ architecture synth of speed_control is
   signal ediff: integer := 0;
 
   signal clockcount: integer := 0;
-  signal clockshifter: unsigned(control_clock_divider downto 0) := (others => '0');
-  signal controlclock: std_logic := '0';
 begin
 
 
@@ -41,19 +39,20 @@ begin
       clockcount <= clockcount + 1;
       if clockcount >= clock_divider then
         clockcount <= 0;
-        edgecount <= 0;
         
 
         delta := to_integer(desired_speed) - to_integer(speed_front);
         esum <= esum + delta;
         --ediff <= delta - e;
-      end if
+      end if;
 
-      tmp = c_prop * delta + c_int * esum;
-      if tmp < 4000 then
-        output_acceleration <= 4000 + c_prop * delta + c_int * esum;
+      tmp := c_prop * delta + c_int * esum;
+      if tmp < 4000 and tmp >= 0 then
+        output_acceleration <= to_unsigned(4000 + tmp, 16);
+      elsif tmp<0 then
+        output_acceleration <= to_unsigned(0,16);
       else
-        output_acceleration <= 4000;
+        output_acceleration <= to_unsigned(4000,16);
       end if;
 
       

@@ -218,19 +218,4 @@ begin
     end if;
   end process;
 
-  process(CLOCK_50)
-  begin
-    if rising_edge(CLOCK_50) then
-      if KEY(0) = '0' then
-        ss_speed_in <= to_unsigned(2000,16);
-      elsif KEY(1) = '0' then
-        ss_speed_in <= to_unsigned(3000,16);
-      elsif KEY(2) = '0' then
-        ss_speed_in <= to_unsigned(4000,16);
-      elsif KEY(3) = '0' then
-        ss_speed_in <= to_unsigned(6000,16);
-      end if;
-    end if;
-  end process;
-
 end synth;

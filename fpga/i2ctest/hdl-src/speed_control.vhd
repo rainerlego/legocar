@@ -22,7 +22,6 @@ architecture synth of speed_control is
   
   signal e: integer := 0;
   signal e_alt: integer := 0;
-  signal esum: integer := 0;
   signal ediff: integer := 0;
 
   signal clockcount: integer := 0;
@@ -33,6 +32,7 @@ begin
   process(CLOCK_50)
     variable delta: integer := 0;
     variable tmp: integer := 0;
+    variable esum: integer := 0;
   begin
     if rising_edge(CLOCK_50) then
 
@@ -42,7 +42,10 @@ begin
         
 
         delta := to_integer(desired_speed) - to_integer(speed_front);
-        esum <= esum + delta;
+        esum := esum + delta;
+        if esum > 500 then
+          esum := 500;
+        end if;
         --ediff <= delta - e;
       end if;
 
@@ -50,9 +53,9 @@ begin
       if tmp < 4000 and tmp >= 0 then
         output_acceleration <= to_unsigned(4000 + tmp, 16);
       elsif tmp<0 then
-        output_acceleration <= to_unsigned(0,16);
-      else
         output_acceleration <= to_unsigned(4000,16);
+      else
+        output_acceleration <= to_unsigned(8000,16);
       end if;
 
       

@@ -183,6 +183,8 @@ begin
   servo0 <= ss_acc_out;
   servo1 <= steering;
 
+  ss_speed_in <= speedc_acc_out;
+
   DEBUGPIN <= debugpins;
 
   LEDG(4) <= ledi2ctransmission;

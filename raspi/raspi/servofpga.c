@@ -18,6 +18,12 @@ static uint16_t spi_delay;
 int fpga_open()
 {
   int ret;
+
+  spi_mode = SPI_MODE;
+  spi_bits = SPI_BITS_PER_WORD;
+  spi_speed = SPI_SPEED_HZ;
+  spi_delay = SPI_DELAY;
+
   printf ( "Will use SPI to send commands to fpga\n" );
   printf("spi configuration: \n" );
   printf("    + dev: %s\n", FPGA_SPI_DEV );
@@ -25,11 +31,6 @@ int fpga_open()
   printf("    + bits per word: %d\n", spi_bits);
   printf("    + speed: %d Hz (%d KHz)\n", spi_speed, spi_speed/1000);
   printf("\n");
-
-  spi_mode = SPI_MODE;
-  spi_bits = SPI_BITS_PER_WORD;
-  spi_speed = SPI_SPEED_HZ;
-  spi_delay = SPI_DELAY;
 
   if ((fd = open(FPGA_SPI_DEV, O_RDWR)) < 0) {
     printf("E: fpga: spi: Failed to open dev\n");
@@ -188,12 +189,14 @@ int spisend ( char*rbuf, char*wbuf, int len )
         return -1;
     }
     
+	/*
   for (ret = 0; ret < len; ret++) {
     if (!(ret % 6))
       puts("");
     printf("%.2X ", wbuf[ret]);
   }
   puts("");
+	*/
 }
 
 void fpga_testservos()

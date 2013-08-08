@@ -89,7 +89,7 @@ void parse_stack ( struct cconn * cc )
   {
     if ( 0==strncmp ( cc->s[0], "help", 4 ) )
     {
-      retlen = snprintf ( ret, 200, "Available commands:\n   servo set <channel> <value>\n   servo led <onoff> <mask>\n" );
+      retlen = snprintf ( ret, 200, "Available commands:\n   servo set <channel> <value>\n   servo led <onoff> <mask>\nspeedacc <acc|speed>\nas <on|off>\nservo getperm\n" );
     }
 
     if ( 0==strncmp ( cc->s[0], "speedacc", 6 ) )

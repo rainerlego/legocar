@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE115F29C7
-set_global_assignment -name TOP_LEVEL_ENTITY toplevel_spireader
+set_global_assignment -name TOP_LEVEL_ENTITY toplevel_all
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "12.1 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "18:00:26  JUNE 26, 2013"
 set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
@@ -97,9 +97,6 @@ set_location_assignment PIN_AA21 -to HEX[24]
 set_location_assignment PIN_AD24 -to HEX[25]
 set_location_assignment PIN_AF23 -to HEX[26]
 set_location_assignment PIN_Y19 -to HEX[27]
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_location_assignment PIN_AG14 -to CLOCK2_50
 set_location_assignment PIN_AG15 -to CLOCK3_50
 set_location_assignment PIN_G19 -to LEDR[0]
@@ -209,6 +206,18 @@ set_global_assignment -name PARTITION_COLOR 16764057 -entity toplevel_spitest -s
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -entity toplevel_servo -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -entity toplevel_servo -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -entity toplevel_servo -section_id Top
+set_location_assignment PIN_AF26 -to SPEED_PULSE_BACK
+set_location_assignment PIN_AH22 -to SPEED_PULSE_FRONT
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VHDL_FILE "hdl-src/speed_acc_switch.vhd"
+set_global_assignment -name VHDL_FILE "hdl-src/speed_control.vhd"
+set_global_assignment -name VHDL_FILE "hdl-src/i2c_master.vhd"
+set_global_assignment -name VHDL_FILE "hdl-src/servo_controller.vhd"
+set_global_assignment -name VHDL_FILE "hdl-src/motor_controller.vhd"
+set_global_assignment -name VHDL_FILE "hdl-src/speedsensorv2.vhd"
+set_global_assignment -name VHDL_FILE "hdl-src/toplevel_all.vhd"
 set_global_assignment -name VHDL_FILE "hdl-src/edge_detector2.vhd"
 set_global_assignment -name VHDL_FILE "hdl-src/spireader.vhd"
 set_global_assignment -name VHDL_FILE "hdl-src/toplevel_spireader.vhd"

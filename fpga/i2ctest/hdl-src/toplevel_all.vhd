@@ -47,26 +47,22 @@ architecture synth of toplevel_all is
           );
   end component spireader;
 
-  component speed_sensor is
-    generic (pulses_per_revolution: integer := 4;
-             clocks_per_second: integer := 50_000_000);
+  component speed_sensor2 is
     port (
       clk_in: in std_logic;
       pulse: in std_logic;
       -- in rotations per second
-      speed: out unsigned(31 downto 0) := (others => '0'));
+      speed: out unsigned(7 downto 0) := (others => '0'));
   end component;
 
   component speed_control is
-    generic (
-      control_clock_divider : integer);
     port (
       CLOCK_50            : in  std_logic;
       enable_antischlupf  : in  std_logic;
-      speed_front         : in  unsigned(31 downto 0);
-      speed_back          : in  unsigned(31 downto 0);
-      desired_speed       : in  unsigned(31 downto 0);
-      output_acceleration : out signed(15 downto 0) := (others => '0'));
+      speed_front         : in  unsigned(7 downto 0);
+      speed_back          : in  unsigned(7 downto 0);
+      desired_speed       : in  unsigned(7 downto 0);
+      output_acceleration : out unsigned(15 downto 0) := (others => '0'));
   end component speed_control;
 
   component speed_acc_switch is
@@ -110,11 +106,11 @@ architecture synth of toplevel_all is
   signal ss_speed_in: unsigned(15 downto 0) := to_unsigned(4000,16); -- 0 4000 8000
   signal ss_speed_instead_acc: std_logic := '0';
 
-  signal speedc_speed_front: unsigned(31 downto 0) := (others => '0');
-  signal speedc_speed_back: unsigned(31 downto 0) := (others => '0');
-  signal speedc_desired_speed: unsigned(31 downto 0) := (others => '0');
+  signal speedc_speed_front: unsigned(7 downto 0) := (others => '0');
+  signal speedc_speed_back: unsigned(7 downto 0) := (others => '0');
+  signal speedc_desired_speed: unsigned(7 downto 0) := (others => '0');
   signal speedc_enable_antischlupf: std_logic := '0';
-  signal speedc_acc_out: signed(15 downto 0) := (others => '0');
+  signal speedc_acc_out: unsigned(15 downto 0) := (others => '0');
 
   signal waitcycles: integer;
   signal ledi2ctransmission: std_logic := '0';
@@ -147,16 +143,13 @@ begin
       enable_antischlupf => speedc_enable_antischlupf,
       debugpin => debugpins );
 
-  sensor_front: speed_sensor
-    generic map (pulses_per_revolution => 4, clocks_per_second => 50_000_000)
+  sensor_front: speed_sensor2
     port map (clk_in => CLOCK_50, pulse => SPEED_PULSE_FRONT, speed => speedc_speed_front);
 
-  sensor_back: speed_sensor
-    generic map (pulses_per_revolution => 4, clocks_per_second => 50_000_000)
+  sensor_back: speed_sensor2
     port map (clk_in => CLOCK_50, pulse => SPEED_PULSE_BACK, speed => speedc_speed_back);
 
   speed_cont: speed_control
-    generic map (control_clock_divider => 22)
     port map (
         CLOCK_50 => CLOCK_50,
         speed_front => speedc_speed_back,
@@ -176,16 +169,16 @@ begin
       speed_instead_acc => ss_speed_instead_acc
       );
 
-  SEG0: seven_segment port map ( number => ss_acc_out(3 downto 0), output => HEX0);
-  SEG1: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX1);
-  SEG2: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX2);
-  SEG3: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX3);
+  SEG0: seven_segment port map ( number => speedc_acc_out(3 downto 0), output => HEX0);
+  SEG1: seven_segment port map ( number => speedc_acc_out(7 downto 4), output => HEX1);
+  SEG2: seven_segment port map ( number => speedc_acc_out(11 downto 8), output => HEX2);
+  SEG3: seven_segment port map ( number => speedc_acc_out(15 downto 12), output => HEX3);
 
-  SEG4: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX4);
-  SEG5: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX5);
+  SEG4: seven_segment port map ( number => speedc_desired_speed(3 downto 0), output => HEX4);
+  SEG5: seven_segment port map ( number => speedc_desired_speed(7 downto 4), output => HEX5);
 
-  SEG6: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX6);
-  SEG7: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX7);
+  SEG6: seven_segment port map ( number => speedc_speed_back(3 downto 0), output => HEX6);
+  SEG7: seven_segment port map ( number => speedc_speed_back(7 downto 4), output => HEX7);
 
   servo0 <= ss_acc_out;
   servo1 <= steering;

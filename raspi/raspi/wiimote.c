@@ -69,12 +69,30 @@ int wii_to_servo ( double wii, int invert )
   return (int)ed;
 }
 
+int wii_to_speed ( double wii, int invert )
+{
+  double ed;
+
+  ed = (wii-106)*30.0/52.0;
+  printf ( "ed: %f\n", ed );
+
+  if ( ed < 0 )
+    ed = 0;
+  if ( ed > 30 )
+    ed = 30;
+
+  if (invert)
+    ed = 30 - ed;
+
+  return (int)ed;
+}
+
 //cwiid_mesg_callback_t cwiid_callback;
 void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg mesg[], struct timespec *timestamp)
 {
   int i, j;
   int valid_source;
-  int servo_steering, servo_accel;
+  int servo_steering, servo_accel, servo_speed;
   unsigned int btn;
 
   for (i=0; i < mesg_count; i++)
@@ -169,16 +187,32 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
         } else {
           //printf ( "N: servo: %010.0fus have passed since last write; OK\n", diff );
           gettimeofday(&t1,NULL);
-          servo_accel = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_X], 0 );
-          servo_steering = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_Y], 0 );
-          //printf ( "servo: accel: %d, steer: %d\n", servo_accel, servo_steering );
-          if ( accmode == WII_ACCMODE_TILT )
+
+          if (speedacc == 1 )
           {
-            servo_setservo ( 0, servo_accel, 0, SERVO_PERM_WII, 0 );
+            //speed mode
+            servo_speed = wii_to_speed ( mesg[i].acc_mesg.acc[CWIID_X], 0 );
+            servo_steering = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_Y], 0 );
+            if ( accmode == WII_ACCMODE_TILT )
+            {
+              servo_setspeedraw ( servo_speed, 0, SERVO_PERM_WII, 0 );
+              wii_watchdog = 0;
+            }
+            servo_setservo ( 1, servo_steering, 0, SERVO_PERM_WII, 0 );
+            wii_watchdog = 0;
+          } else {
+            //accell mode
+            servo_accel = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_X], 0 );
+            servo_steering = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_Y], 0 );
+            //printf ( "servo: accel: %d, steer: %d\n", servo_accel, servo_steering );
+            if ( accmode == WII_ACCMODE_TILT )
+            {
+              servo_setservo ( 0, servo_accel, 0, SERVO_PERM_WII, 0 );
+              wii_watchdog = 0;
+            }
+            servo_setservo ( 1, servo_steering, 0, SERVO_PERM_WII, 0 );
             wii_watchdog = 0;
           }
-          servo_setservo ( 1, servo_steering, 0, SERVO_PERM_WII, 0 );
-          wii_watchdog = 0;
         }
         break;
       case CWIID_MESG_ERROR:

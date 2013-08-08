@@ -175,7 +175,7 @@ int fpga_setspeedraw (uint8_t speed)
     unsigned char wbuf[3];
 
     wbuf[0] = SPI_PREAMBLE;
-    wbuf[1] = CMD_SPEEDRAW;
+    wbuf[1] = (CMD_SPEEDRAW<<4);
     wbuf[2] = speed;
     
     if ((spisend(rbuf,wbuf, 3)) != 3) {
@@ -206,14 +206,12 @@ int spisend ( char*rbuf, char*wbuf, int len )
         return -1;
     }
     
-	/*
   for (ret = 0; ret < len; ret++) {
     if (!(ret % 6))
       puts("");
     printf("%.2X ", wbuf[ret]);
   }
   puts("");
-	*/
 }
 
 void fpga_testservos()

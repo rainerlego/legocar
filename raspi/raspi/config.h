@@ -16,4 +16,4 @@
 #define SIM_PORT 8584
 
 
-#define WII_ENABLED 0
+#define WII_ENABLED 1

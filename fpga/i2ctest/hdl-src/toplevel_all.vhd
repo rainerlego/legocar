@@ -152,8 +152,8 @@ begin
   speed_cont: speed_control
     port map (
         CLOCK_50 => CLOCK_50,
-        speed_front => speedc_speed_back,
-        speed_back => speedc_speed_front,
+        speed_front => speedc_speed_front,
+        speed_back => speedc_speed_back,
         desired_speed => speedc_desired_speed,
         enable_antischlupf => speedc_enable_antischlupf,
         output_acceleration => speedc_acc_out);
@@ -169,16 +169,16 @@ begin
       speed_instead_acc => ss_speed_instead_acc
       );
 
-  SEG0: seven_segment port map ( number => speedc_acc_out(3 downto 0), output => HEX0);
+  SEG0: seven_segment port map ( number => speedc_desired_speed(3 downto 0), output => HEX0);
   SEG1: seven_segment port map ( number => speedc_acc_out(7 downto 4), output => HEX1);
   SEG2: seven_segment port map ( number => speedc_acc_out(11 downto 8), output => HEX2);
   SEG3: seven_segment port map ( number => speedc_acc_out(15 downto 12), output => HEX3);
 
-  SEG4: seven_segment port map ( number => speedc_desired_speed(3 downto 0), output => HEX4);
-  SEG5: seven_segment port map ( number => speedc_desired_speed(7 downto 4), output => HEX5);
+  SEG4: seven_segment port map ( number => speedc_speed_back(3 downto 0), output => HEX4);
+  SEG5: seven_segment port map ( number => speedc_speed_back(7 downto 4), output => HEX5);
 
-  SEG6: seven_segment port map ( number => speedc_speed_back(3 downto 0), output => HEX6);
-  SEG7: seven_segment port map ( number => speedc_speed_back(7 downto 4), output => HEX7);
+  SEG6: seven_segment port map ( number => speedc_speed_front(3 downto 0), output => HEX6);
+  SEG7: seven_segment port map ( number => speedc_speed_front(7 downto 4), output => HEX7);
 
   servo0 <= ss_acc_out;
   servo1 <= steering;

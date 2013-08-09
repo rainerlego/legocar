@@ -148,6 +148,7 @@ begin
           end if;
         when finished =>
           running <= '0';
+          ena <= '0';
           if busy = '0' then
             state <= reset;
           end if;

@@ -170,9 +170,9 @@ begin
       );
 
   SEG0: seven_segment port map ( number => speedc_desired_speed(3 downto 0), output => HEX0);
-  SEG1: seven_segment port map ( number => speedc_acc_out(7 downto 4), output => HEX1);
-  SEG2: seven_segment port map ( number => speedc_acc_out(11 downto 8), output => HEX2);
-  SEG3: seven_segment port map ( number => speedc_acc_out(15 downto 12), output => HEX3);
+  SEG1: seven_segment port map ( number => ss_acc_out(7 downto 4), output => HEX1);
+  SEG2: seven_segment port map ( number => ss_acc_out(11 downto 8), output => HEX2);
+  SEG3: seven_segment port map ( number => ss_acc_out(15 downto 12), output => HEX3);
 
   SEG4: seven_segment port map ( number => speedc_speed_back(3 downto 0), output => HEX4);
   SEG5: seven_segment port map ( number => speedc_speed_back(7 downto 4), output => HEX5);
@@ -189,6 +189,9 @@ begin
 
   LEDG(4) <= ledi2ctransmission;
   LEDG(6) <= debugpins;
+
+  LEDR(15) <= ss_speed_instead_acc;
+  LEDR(16) <= speedc_enable_antischlupf;
 
   process(CLOCK_50)
   begin
@@ -208,7 +211,7 @@ begin
         -- TODO: Timeout einbauen
         if sc_running = '0' then
           sc_start <= '1';
-          waitcycles <= 5_000_000;
+          waitcycles <= 2_000_000;
           ledi2ctransmission <= not ledi2ctransmission;
         end if;
       else

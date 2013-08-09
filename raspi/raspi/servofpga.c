@@ -15,9 +15,14 @@ static uint8_t spi_mode,spi_bits;
 static uint32_t spi_speed;
 static uint16_t spi_delay;
 
+
+pthread_mutex_t spi_mutex;
+
 int fpga_open()
 {
   int ret;
+
+  pthread_mutex_init ( &spi_mutex, NULL );
 
   spi_mode = SPI_MODE;
   spi_bits = SPI_BITS_PER_WORD;
@@ -73,12 +78,19 @@ int fpga_open()
     return -1;
   }
 
+  if (fpga_logopen() <0)
+  {
+    printf ( "e: fpga: could not open log\n" );
+    return -1;
+  }
+
   return 0;
 }
 
 void fpga_close()
 {
   close(fd);
+  fclose(logfd);
 }
 
 int fpga_setservo ( uint8_t servoNr, uint16_t servoPos )
@@ -173,6 +185,51 @@ int fpga_setspeedv (uint16_t vspeed, uint16_t vsteering )
     return 0;
 }
 
+int fpga_logopen()
+{
+  logfd = fopen("/tmp/ourlog", "a");
+  if ( !logfd )
+    return -1;
+  fprintf (logfd, "--------reopened--------\n");
+}
+
+int fpga_pollspeed()
+{
+    unsigned char rbuf[8];
+    unsigned char wbuf[8];
+    int acc,speedf,speedr,speedd;
+    int i;
+
+    wbuf[0] = SPI_PREAMBLE;
+    wbuf[1] = (CMD_SPEEDPOLL<<4);
+    wbuf[2] = 0x00;
+    wbuf[3] = 0x00;
+    wbuf[4] = 0x00;
+    wbuf[5] = 0x00;
+    wbuf[6] = 0x00;
+    wbuf[7] = 0x00;
+
+    if ((spisend(rbuf,wbuf, 8)) != 8) {
+        printf("E: fpga: Could not write specified amount of bytes to spi\n");
+        return -1;
+    }
+
+    for(i=0;i<8;i++)
+    {
+      printf ( "%x - ", rbuf[i]);
+    }
+    printf ( "\n");
+
+    speedf = rbuf[3];
+    speedr = rbuf[4];
+    speedd = rbuf[5];
+    acc = (rbuf[6]<<8) + rbuf[7];
+
+    fprintf ( logfd, "%d %d %d %d\n", speedf, speedr, speedd, acc );
+    
+    return 0;
+}
+
 int fpga_setspeedraw (uint8_t speed)
 {
     unsigned char rbuf[3];
@@ -195,6 +252,8 @@ int spisend ( char*rbuf, char*wbuf, int len )
 
   int ret;
 
+  pthread_mutex_lock ( &spi_mutex );
+
   struct spi_ioc_transfer tr = {
     .tx_buf = (unsigned long)wbuf,
     .rx_buf = (unsigned long)rbuf,
@@ -207,9 +266,12 @@ int spisend ( char*rbuf, char*wbuf, int len )
   ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
   if (ret < 1){
     printf("can't send spi message");
+    pthread_mutex_unlock ( &spi_mutex );
         return -1;
     }
     
+  pthread_mutex_unlock ( &spi_mutex );
+  return ret;
   /*
   for (ret = 0; ret < len; ret++) {
     if (!(ret % 6))

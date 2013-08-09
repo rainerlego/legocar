@@ -13,5 +13,6 @@
 #define CMD_SPEED_ACC_SWITCH 9
 #define CMD_AS 10
 #define CMD_SPEEDRAW 11
+#define CMD_SPEEDPOLL 12
 
 #endif

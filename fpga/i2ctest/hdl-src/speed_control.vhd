@@ -15,8 +15,8 @@ end speed_control;
 
 architecture synth of speed_control is
   -- Parts of 16
-  constant c_prop: integer := 10;
-  constant c_int: integer := 8;
+  constant c_prop: integer := 30;
+  constant c_int: integer := 10;
   constant c_diff: integer := 1;
 
   
@@ -42,20 +42,22 @@ begin
         clockcount <= 0;
         
         slip := to_integer(speed_front) - to_integer(speed_back);  -- hinten schneller als vorne -> negativ
-        if slip >= -3 then
+        if slip >= -2 then
           slip := 0;
         end if;
-        slip := slip*3;
+        slip := slip*4;
         if enable_antischlupf = '1' then
           delta := to_integer(desired_speed) - to_integer(speed_front) + slip;
         else
-          delta := to_integer(desired_speed) - to_integer(speed_front);
+          delta := to_integer(desired_speed) - to_integer(speed_back);
         end if;
-
-      else
+        --delta := to_integer(desired_speed) - to_integer(speed_back);
         esum := esum + delta;
-        if esum > 500 then
-          esum := 500;
+        if esum > 1000 then
+          esum := 1000;
+        end if;
+        if esum <0 then
+          esum := 0;
         end if;
         --ediff <= delta - e;
       end if;

@@ -7,6 +7,9 @@ entity spireader is
         spiclk: in std_logic;
         spics: in std_logic;
         spimosi: in std_logic;
+        speed_front: in unsigned(7 downto 0);
+        speed_back: in unsigned(7 downto 0);
+        output_acceleration: in unsigned(15 downto 0);
         spimiso: out std_logic;
         led: out std_logic_vector(7 downto 0);
         steering: out unsigned(15 downto 0) := to_unsigned(4000,16);  --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
@@ -23,9 +26,9 @@ architecture spireaderarch of spireader is
   signal spislave_data_write: std_logic_vector(7 downto 0) := "11111000";
   signal spislave_data_receive: std_logic_vector(7 downto 0);
   signal debugpins: std_logic := '0';
+  signal output_acceleration_tmp: unsigned(15 downto 0);
 
-
-  type machine is (reset,afterpreamble,cmd_servo,cmd_servo2,cmd_speedraw);
+  type machine is (reset,afterpreamble,cmd_servo,cmd_servo2,cmd_speedraw, get_speed_back, get_output_acceleration1, get_output_acceleration2, get_last_byte);
   signal state: machine := reset;
 
   component spislave is
@@ -74,6 +77,18 @@ begin
               led(7 downto 0) <= (others => '0');
               led(0) <= '1';
             end if;
+          when get_speed_back =>
+            spislave_data_write <= std_logic_vector(speed_back);
+            state <= get_output_acceleration1;
+            output_acceleration_tmp <= output_acceleration;
+          when get_output_acceleration1 =>
+            spislave_data_write <= std_logic_vector(output_acceleration_tmp(15 downto 8));
+            state <= get_output_acceleration2;
+          when get_output_acceleration2 =>
+            spislave_data_write <= std_logic_vector(output_acceleration_tmp(7 downto 0));
+            state <= get_last_byte;
+          when get_last_byte =>
+            state <= reset;
 
           when afterpreamble =>
             case spislave_data_receive(7 downto 4) is
@@ -102,6 +117,9 @@ begin
                   led(7) <= '0';
                 end if;
                 state <= reset;
+              when "1100" => --get speeds, has to be followed by 4 dummy bytes
+                spislave_data_write <= std_logic_vector(speed_front);
+                state <= get_speed_back;
               when others =>
                 state <= reset;
             end case;

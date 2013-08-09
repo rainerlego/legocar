@@ -36,6 +36,9 @@ architecture synth of toplevel_all is
           spiclk: in std_logic;
           spics: in std_logic;
           spimosi: in std_logic;
+          speed_front: in unsigned(7 downto 0);
+          speed_back: in unsigned(7 downto 0);
+          output_acceleration: in unsigned(15 downto 0);
           spimiso: out std_logic;
           led: out std_logic_vector(7 downto 0);
           steering: out unsigned(15 downto 0);       --desired servo-postition/motor-acceleration (0 - 4000 - 8000)
@@ -135,6 +138,9 @@ begin
       spics => SPI_CS,
       spimosi => SPI_MOSI,
       spimiso => SPI_MISO,
+      speed_front => speedc_speed_front,
+      speed_back => speedc_speed_back,
+      output_acceleration => speedc_acc_out,
       led => LEDR(7 downto 0),
       steering => steering,
       acc => ss_acc_in,

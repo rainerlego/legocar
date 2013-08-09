@@ -27,8 +27,9 @@ architecture spireaderarch of spireader is
   signal spislave_data_receive: std_logic_vector(7 downto 0);
   signal debugpins: std_logic := '0';
   signal output_acceleration_tmp: unsigned(15 downto 0);
+  signal speed_desired: unsigned(7 downto 0);
 
-  type machine is (reset,afterpreamble,cmd_servo,cmd_servo2,cmd_speedraw, get_speed_back, get_output_acceleration1, get_output_acceleration2, get_last_byte);
+  type machine is (reset,afterpreamble,cmd_servo,cmd_servo2,cmd_speedraw, get_speed_back, get_output_acceleration1, get_output_acceleration2, get_last_byte1, get_last_byte2, get_speed_desired);
   signal state: machine := reset;
 
   component spislave is
@@ -79,6 +80,10 @@ begin
             end if;
           when get_speed_back =>
             spislave_data_write <= std_logic_vector(speed_back);
+            state <= get_speed_desired;
+            output_acceleration_tmp <= output_acceleration;
+          when get_speed_desired =>
+            spislave_data_write <= std_logic_vector(speed_desired);
             state <= get_output_acceleration1;
             output_acceleration_tmp <= output_acceleration;
           when get_output_acceleration1 =>
@@ -86,8 +91,10 @@ begin
             state <= get_output_acceleration2;
           when get_output_acceleration2 =>
             spislave_data_write <= std_logic_vector(output_acceleration_tmp(7 downto 0));
-            state <= get_last_byte;
-          when get_last_byte =>
+            state <= get_last_byte1;
+          when get_last_byte1 =>
+            state <= get_last_byte2;
+          when get_last_byte2 =>
             state <= reset;
 
           when afterpreamble =>
@@ -155,7 +162,7 @@ begin
               state <= reset;
             else
               state <= reset;
-              speed <= unsigned(spislave_data_receive);
+              speed_desired <= unsigned(spislave_data_receive);
               led(2) <= '1';
             end if;
 
@@ -169,5 +176,6 @@ begin
   end process;
 
   debugpin <= debugpins;
+  speed <= speed_desired;
 
 end spireaderarch;

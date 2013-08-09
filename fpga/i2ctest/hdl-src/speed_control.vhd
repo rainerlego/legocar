@@ -50,7 +50,7 @@ begin
           delta := to_integer(desired_speed) - to_integer(speed_front) + slip;
         else
           delta := to_integer(desired_speed) - to_integer(speed_front);
-        end if
+        end if;
 
       else
         esum := esum + delta;

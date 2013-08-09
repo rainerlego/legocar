@@ -1,0 +1,25 @@
+#!/usr/bin/gnuplot
+
+set terminal push
+set terminal postscript eps enhanced color blacktext
+set output "eich.eps"
+set title "bla"
+set xlabel "time [s]"
+set ylabel "value"
+set grid mxtics x
+set grid mytics y
+#set logscale y
+#set logscale x
+eich = "ourlog"
+
+
+#set yrange [0.08:1]
+set xrange [12:27]
+set yrange [0:40]
+set samples 1000
+
+plot eich using ( $0/10 ):($1) title "front" with linespoints, eich using ($0/10):($2) title "back" with linespoints, eich using ($0/10):($3) title "desired" with linespoints,eich using  ($0/10):(($4-4000)/4000*10) title "engine current" with linespoints
+
+
+
+

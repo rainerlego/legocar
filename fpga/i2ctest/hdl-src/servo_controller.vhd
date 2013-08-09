@@ -78,33 +78,76 @@ begin
 
   process(CLOCK_50)
   begin
+    -- TODO: Actually use ack_error.
+    --reset_n <= '1';
+    --ena <= '0';
+    --running <= '1';
+    --addr <= (others => '0');
+    --rw <= '0';
+    --data_wr <= (others => '0');
+
     if rising_edge(CLOCK_50) then
       case state is
         when reset =>
           if start = '1' then
             state <= started;
+            reset_n <= '1';                --enable the i2c component
           end if;
         when started =>
+          --servoid <= "000";
+          --datawrbuf <= conv_std_logic_vector(servo0,16);
+          if servoid = "000" then
+            servoid <= "001";
+            datawrbuf <= conv_std_logic_vector(servo1,16);
+          else
+            servoid <= "000";
+            datawrbuf <= conv_std_logic_vector(servo0,16);
+          end if;
+          addr <= slave_address;
+          running <= '0';
           if busy = '0' then
             state <= preamble;
           end if;
         when preamble =>
+          data_wr <= "11111111";
+          ena <= '1';
+          addr <= slave_address;
           if busy_pulse = '1' then
             state <= command;
           end if;
         when command =>
+          data_wr <= "00000" & servoid;
+          ena <= '1';
+          addr <= slave_address;
           if busy_pulse = '1' then
             state <= arg1;
           end if;
         when arg1 =>
+          if (datawrbuf(15 downto 8) = "11111111") or
+             (datawrbuf(15 downto 8) = "11111110") then
+            data_wr <= "11111101";
+          else
+            data_wr <= datawrbuf(15 downto 8);
+          end if;
+          ena <= '1';
+          addr <= slave_address;
           if busy_pulse = '1' then
             state <= arg2;
           end if;
         when arg2 =>
+          if (datawrbuf(7 downto 0) = "11111111") or
+             (datawrbuf(7 downto 0) = "11111110") then
+            data_wr <= "11111101";
+          else
+            data_wr <= datawrbuf(7 downto 0);
+          end if;
+          addr <= slave_address;
+          ena <= '1';
           if busy_pulse = '1' then
             state <= finished;
           end if;
         when finished =>
+          running <= '0';
           if busy = '0' then
             state <= reset;
           end if;
@@ -112,58 +155,4 @@ begin
     end if;
   end process;
 
-
-  process(state)
-  begin
-    -- TODO: Actually use ack_error.
-    reset_n <= '1';
-    ena <= '0';
-    running <= '1';
-    addr <= (others => '0');
-    rw <= '0';
-    data_wr <= (others => '0');
-    case state is
-      when reset =>
-        running <= '0';
-        servoid <= "000";
-        datawrbuf <= conv_std_logic_vector(servo0,16);
-        --if servoid = "000" then
-        --  servoid <= "001";
-        --  datawrbuf <= conv_std_logic_vector(servo1,16); --sehr merkwürdig iwie is das invertiert
-        --else
-        --  servoid <= "000";
-        --  datawrbuf <= conv_std_logic_vector(servo0,16);
-        --end if;
-      when started =>
-        addr <= slave_address;
-      when preamble =>
-        data_wr <= "11111111";
-        ena <= '1';
-        addr <= slave_address;
-      when command =>
-        data_wr <= "00000" & servoid;
-        ena <= '1';
-        addr <= slave_address;
-      when arg1 => 
-        if (datawrbuf(15 downto 8) = "11111111") or
-           (datawrbuf(15 downto 8) = "11111110") then
-         data_wr <= "11111101";
-        else
-          data_wr <= datawrbuf(15 downto 8);
-        end if;
-        ena <= '1';
-        addr <= slave_address;
-      when arg2 => 
-        if (datawrbuf(7 downto 0) = "11111111") or
-           (datawrbuf(7 downto 0) = "11111110") then
-         data_wr <= "11111101";
-        else
-          data_wr <= datawrbuf(7 downto 0);
-        end if;
-        addr <= slave_address;
-        ena <= '1';
-      when finished =>
-        running <= '0';
-    end case;
-  end process;
 end synth;

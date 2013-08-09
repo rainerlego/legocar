@@ -28,20 +28,20 @@ pthread_t wiitping;
 void *wii_thread_ping(void * v)
 {
   struct cwiid_state s;
-	while(1)
-	{
-		wii_watchdog++;
-		if (wii_watchdog>400)
-		{
-			wii_watchdog = 0;
-			if (wii_connected)
+  while(1)
+  {
+    wii_watchdog++;
+    if (wii_watchdog>400)
+    {
+      wii_watchdog = 0;
+      if (wii_connected)
       {
         //r = cwiid_get_state(wiimote,&s);
           servo_ping();
       }
-		}
+    }
     usleep(1000);
-	}
+  }
 }
 
 void wii_start_ping_thread()
@@ -74,7 +74,6 @@ int wii_to_speed ( double wii, int invert )
   double ed;
 
   ed = (wii-106)*30.0/52.0;
-  printf ( "ed: %f\n", ed );
 
   if ( ed < 0 )
     ed = 0;
@@ -84,6 +83,7 @@ int wii_to_speed ( double wii, int invert )
   if (invert)
     ed = 30 - ed;
 
+  //printf ( "ed: %f\n", ed );
   return (int)ed;
 }
 
@@ -106,30 +106,34 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
         //printf("Button Report: %.4X\n", mesg[i].btn_mesg.buttons);
         btn = mesg[i].btn_mesg.buttons;
 
-				if ( btn & CWIID_BTN_PLUS )
-				{
-					printf ("wii: get perm\n" );
-					servo_getperm ( SERVO_PERM_WII, 0 );
+        if ( btn & CWIID_BTN_PLUS )
+        {
+          printf ("wii: get perm\n" );
+          servo_getperm ( SERVO_PERM_WII, 0 );
           wii_watchdog = 0;
-				}
+        }
 
-				if ( btn & CWIID_BTN_MINUS )
-				{
-					if (as==0)
-						as = 1;
-					printf ("wii: enable/disable schlupf to %d\n", as);
-					servo_as ( as, 0, SERVO_PERM_WII, 0 );
+        if ( btn & CWIID_BTN_MINUS )
+        {
+          if (as==0)
+            as = 1;
+          else
+            as = 0;
+          printf ("wii: enable/disable schlupf to %d\n", as);
+          servo_as ( as, 0, SERVO_PERM_WII, 0 );
           wii_watchdog = 0;
-				}
+        }
 
-				if ( btn & CWIID_BTN_HOME )
-				{
-					if (speedacc=0)
-						speedacc=1;
-					printf ("wii: switch speed/acc to %d\n", speedacc);
-					servo_setspeedacc ( speedacc, 0, SERVO_PERM_WII, 0 );
+        if ( btn & CWIID_BTN_HOME )
+        {
+          if (speedacc==0)
+            speedacc = 1;
+          else
+            speedacc = 0;
+          printf ("wii: switch speed/acc to %d\n", speedacc);
+          servo_setspeedacc ( speedacc, 0, SERVO_PERM_WII, 0 );
           wii_watchdog = 0;
-				}
+        }
 
         if ( btn & CWIID_BTN_A )
         {
@@ -193,11 +197,8 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count, union cwiid_mesg m
             //speed mode
             servo_speed = wii_to_speed ( mesg[i].acc_mesg.acc[CWIID_X], 0 );
             servo_steering = wii_to_servo ( mesg[i].acc_mesg.acc[CWIID_Y], 0 );
-            if ( accmode == WII_ACCMODE_TILT )
-            {
-              servo_setspeedraw ( servo_speed, 0, SERVO_PERM_WII, 0 );
-              wii_watchdog = 0;
-            }
+            servo_setspeedraw ( servo_speed, 0, SERVO_PERM_WII, 0 );
+            wii_watchdog = 0;
             servo_setservo ( 1, servo_steering, 0, SERVO_PERM_WII, 0 );
             wii_watchdog = 0;
           } else {
@@ -233,8 +234,8 @@ int wii_open()
 
   accmode = WII_ACCMODE_BTN;
 
-	as = 0;
-	speedacc = 0;
+  as = 0;
+  speedacc = 0;
 
   gettimeofday(&t1,NULL);
 

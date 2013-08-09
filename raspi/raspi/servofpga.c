@@ -106,6 +106,8 @@ int fpga_setspeedacc (uint8_t speed_intead_acc )
 
   wbuf[0] = SPI_PREAMBLE;
   wbuf[1] = (CMD_SPEED_ACC_SWITCH<<4) | (speed_intead_acc & 0xf);
+
+  printf ("writing speedacc %d\n", speed_intead_acc);
   
   if ((spisend(rbuf,wbuf, 2)) != 2) {
     printf("E: fpga: Could not write specified amount of bytes to printf chardev\n");
@@ -122,6 +124,8 @@ int fpga_as (uint8_t on )
 
   wbuf[0] = SPI_PREAMBLE;
   wbuf[1] = (CMD_AS<<4) | (on & 0xf);
+  
+  printf ("writing %d\n", on);
   
   if ((spisend(rbuf,wbuf, 2)) != 2) {
     printf("E: fpga: Could not write specified amount of bytes to printf chardev\n");
@@ -177,7 +181,7 @@ int fpga_setspeedraw (uint8_t speed)
     wbuf[0] = SPI_PREAMBLE;
     wbuf[1] = (CMD_SPEEDRAW<<4);
     wbuf[2] = speed;
-    
+
     if ((spisend(rbuf,wbuf, 3)) != 3) {
         printf("E: fpga: Could not write specified amount of bytes to spi\n");
         return -1;
@@ -206,12 +210,14 @@ int spisend ( char*rbuf, char*wbuf, int len )
         return -1;
     }
     
+  /*
   for (ret = 0; ret < len; ret++) {
     if (!(ret % 6))
       puts("");
     printf("%.2X ", wbuf[ret]);
   }
   puts("");
+  */
 }
 
 void fpga_testservos()

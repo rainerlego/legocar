@@ -2,19 +2,20 @@
 
 set terminal push
 set terminal postscript eps enhanced color blacktext
-set output "eich.eps"
-set title "bla"
+set output "eich31.eps"
+#set title "bla"
 set xlabel "time [s]"
 set ylabel "value"
 set grid mxtics x
 set grid mytics y
 #set logscale y
 #set logscale x
-eich = "ourlog"
+eich = "ourlog2"
 
 
 #set yrange [0.08:1]
-set xrange [12:27]
+#set xrange [62:66]
+set xrange [115:119]
 set yrange [0:40]
 set samples 1000
 

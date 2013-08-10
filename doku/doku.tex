@@ -165,7 +165,7 @@ A screenshot of the simulator can be seen in Figure \ref{figsim}.
 \section{RaspberryPi}
 The RaspberryPi is used for highlevel communication.
 It is connected to a wifi module via USB and opens up an access point.
-The RasPi is also equipped with a bluetooth module to commuticate with a Wiimote controller.
+The RasPi is also equipped with a bluetooth module to communicate with a Wiimote controller.
 
 \subsection{Software}
 On the RaspberryPi, there runs the raspi.exe program, which can be found in the \textit{raspi} folder.
@@ -197,7 +197,7 @@ Settings, which are more specific to one communication unit, can be configured i
 The \textit{raspi.exe} TCP server accepts the following commands:
 \begin{description}
 \item[servo set $<$channel$>$ $<$valve$>$] Sets the servo which is connected on PIN $<$channel$>$ to the corresponding value. $<$channel$>$ must be an integer between 0 and 7. $<$value$>$ is also an integer. It can have values from 0 to 8000, where 4000 would mean the zero position.
-\item[servo led $<$onoff$>$ $<$mask$>$] Sets the LEDs on the servoboard. $<$onoff$>$ decides, wether the LEDs should be switched on(1) or off(0). The the three LSBs of $<$mask$>$ decide, which LEDs should be switched. Only LEDs, where the bit in the mask is set to 1 will be switched on or off. For example, if one wants to enable the first and the third LED, one would send the command "servo led 1 5". Note that most of the LEDs are by default also used by the servoboard firmware to signal various events. Once a LED has been manually set to a certain state by setting a bit to one in $<$mask$>$, this LED will not be used by the firmware anymore.
+\item[servo led $<$onoff$>$ $<$mask$>$] Sets the LEDs on the servoboard. $<$onoff$>$ decides, whether the LEDs should be switched on(1) or off(0). The three LSBs of $<$mask$>$ decide, which LEDs should be switched. Only LEDs, where the bit in the mask is set to 1 will be switched on or off. For example, if one wants to enable the first and the third LED, one would send the command "servo led 1 5". Note that most of the LEDs are by default also used by the servoboard firmware to signal various events. Once a LED has been manually set to a certain state by setting a bit to one in $<$mask$>$, this LED will not be used by the firmware anymore.
 \item[servo getperm] This command initiates an control handover to the device, which is sending this command. From now on, \textit{raspi.exe} will only accept control commands from this device. All other currently connected devices will be ignored.
 \item[speedv set $<$speed$>$ $<$steering$>$] This is a highlevel command, which is only accepted, if the Raspi is connected to the fpga. $<$speed$>$ and $<$steering$>$ are both double values.
 \end{description}
@@ -291,7 +291,7 @@ The command unit can either be the FPGA or the RaspberryPi.
 
 The I2C protocol is not implemented in software, but the hardware I2C capabilities of the AVR Atmega8 microcontroller are used.
 This gives us faster response time and less overhead.
-It also unburdens the AVR CPU, as only one hardware interrupt is needed, each time a complede byte is received via I2C.
+It also unburdens the AVR CPU, as only one hardware interrupt is needed, each time a complete byte is received via I2C.
 Implementing I2C via software would have required many timer interrupts and might have turned out less stable.
 
 
@@ -303,14 +303,14 @@ The Master first sends a preamble (0xff), which is used to synchronize both comm
 This is necessary, because loosing packets or receiving corrupted data can lead to a situation, where the receiving unit ends up in an undefined or faulty state.
 Therefore, it might be that the communication gets stuck.
 
-By sending a preamble, that cannot be part of the normal communication, this problem is solved: Everytime the microcontroller receives a preamble-byte, the commonication state machine goes back to its initial state, no matter what the current state is.
+By sending a preamble, that cannot be part of the normal communication, this problem is solved: Every time the microcontroller receives a preamble-byte, the communication state machine goes back to its initial state, no matter what the current state is.
 This way, if a transmission error occurs, only the current command is lost, but further communication will still be possible.
 
 
 Nevertheless, our communication protocol makes it possible to transmit 0xff inside a command using the following method:
 If values greater or equal than 254 are sent, they are split into two bytes.
 The first byte is 254 and the next one is the difference to the desired number.
-On the receiver's side, both values are then combined and their sum determines the acual number. 
+On the receiver's side, both values are then combined and their sum determines the actual number. 
 For example if 255 needs to be sent, the two bytes 254 and 1 are sent.
 
 \subsection{Firmware}
@@ -351,7 +351,7 @@ A picture and a schematic of the light barriers can be seen in Figure \ref{figls
 \label{figls}
 \end{figure}
 
-There are four slots in each disc, so that we can measure the speed at the resolution of roughly a quater of a turn.
+There are four slots in each disc, so that we can measure the speed at the resolution of roughly a quarter of a turn.
 The discs are mounted on shafts, which are directly connected to the differentials.
 We use two rotary encoders.
 One is connected to the front differential and one is connected to the back differential.

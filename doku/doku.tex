@@ -123,7 +123,7 @@ hyperindex=true }
 
 \usepackage{float}
 
-\title{Ueberschrift}%%TODO
+\title{Hardware software co design: Legocar}%%TODO
 \author{Wenwen Chen, Christian Dietz, \\
 	Jan Seeger, Rainer Schoenberger, Julian Tatsch
 }
@@ -159,8 +159,8 @@ A screenshot of the simulator can be seen in Figure \ref{figsim}.
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=15cm]{pic/sim.png}
-\caption{Simulator}
 \end{center}
+\caption{Simulator}
 \label{figsim}
 \end{figure}
 
@@ -214,14 +214,15 @@ To demonstrate the remote control capabilities of the car's software, we impleme
     \centering
     \includegraphics[width=\textwidth]{pic/figand1.png}
     \caption{Control}
+		\label{figand1}
   \end{subfigure}~
   \begin{subfigure}[b]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{pic/figand2.png}
     \caption{Settings}
+		\label{figand2}
   \end{subfigure}
   \caption{Android remote control client}
-  \label{figservoboardbrd}
 \end{figure}
 
 Another option is to use a Wiimote remote to control the car. If the WII\_ENABLED option is set in the \textit{raspi.exe} configuration, the RaspberryPi software will periodically try to connect to a Wiimote controller.
@@ -230,6 +231,8 @@ Once the Wiimote remote is connected to the RaspberryPi, the car can be controll
 The Wiimote has the following key assignment:
 \begin{description}
 \item[+] Accquire control over the car (initiate handover mechanism)
+\item[-] Enable/disable traction control system (only active in speed control mode)
+\item[Home] Switch between speed control mode and acceleration mode
 \item[A] Switch acceleration mode from \textit{button} to \textit{tilt} and vice-versa
 \item[1] Accelerate slowly
 \item[1+2] Accelerate
@@ -249,8 +252,8 @@ The Wiimote has the following key assignment:
 \begin{center}
 \includegraphics[width=\linewidth]{pic/servoboard}
 \caption{Servoboard schematics}
-\end{center}
 \label{figservoboardscm}
+\end{center}
 \end{figure}
 
 \subsection{Board}
@@ -268,19 +271,21 @@ Figure \ref{figservoboardbrd} shows the finished board layout, Figure \ref{figse
     \centering
     \includegraphics[width=\textwidth]{pic/servoboardbrd.png}
     \caption{Layout}
+		\label{figservoboardbrd}
   \end{subfigure}~
   \begin{subfigure}[b]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{pic/servoboard3d.png}
     \caption{3D rendering}
+		\label{figservoboard3d}
   \end{subfigure}~
   \begin{subfigure}[b]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{pic/servoboardr.jpg}
     \caption{Final assembly}
+		\label{figservoboardr}
   \end{subfigure}
   \caption{Servoboard}
-  \label{figservoboardbrd}
 \end{figure}
 \subsection{Communication protocol}
 The Servoboard is connected via the I2C or two-wire interface to a command unit.
@@ -323,16 +328,16 @@ The schematics are very simple an can be seen in Figure \ref{figpowerboardscm}. 
 \begin{center}
 \includegraphics[width=0.7\linewidth]{pic/powerboard}
 \caption{Powerboard schematics}
-\end{center}
 \label{figpowerboardscm}
+\end{center}
 \end{figure}
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=8cm]{pic/powerboardr.jpg}
 \caption{Powerboard}
-\end{center}
 \label{figpowerboardr}
+\end{center}
 \end{figure}
 
 
@@ -345,8 +350,8 @@ A picture and a schematic of the light barriers can be seen in Figure \ref{figls
 \begin{center}
 \includegraphics[width=8cm]{pic/ls.png}
 \caption{Light barrier}
-\end{center}
 \label{figls}
+\end{center}
 \end{figure}
 
 There are four slots in each disc, so that we can measure the speed at the resolution of roughly a quarter of a turn.
@@ -381,7 +386,7 @@ Figures \ref{figencmount2} and \ref{figencmount3} show, how the rotary encoder d
   \label{figencmount3}
   \end{subfigure}
   \caption{Encoder mounting}
-  \label{figservoboardbrd}
+  \label{figenc}
 \end{figure}
 
 
@@ -396,13 +401,13 @@ The schematics of the sensorboard can be seen in Figure \ref{figsensorboardscm}.
   \centering
   \includegraphics[width=\textwidth]{pic/sensorboardbrd.png}
   \caption{Layout}
-  \label{figsensorboard3d}
+  \label{figsensorboardbrd}
   \end{subfigure}~
   \begin{subfigure}[b]{0.5\textwidth}
   \centering
   \includegraphics[width=\textwidth]{pic/sensorboard3d.png}
   \caption{3D render}
-  \label{figsensorboardscm}
+  \label{figsensorboard3d}
   \end{subfigure}
   \caption{Sensorboard}
   \label{figsensorboard}
@@ -413,8 +418,8 @@ The schematics of the sensorboard can be seen in Figure \ref{figsensorboardscm}.
 \begin{center}
 \includegraphics[width=0.7\textwidth]{pic/sensorboard}
 \caption{Sensorboard schematics}
-\end{center}
 \label{figsensorboardscm}
+\end{center}
 \end{figure}
 
 \section{Conclusions}\label{conclusions}

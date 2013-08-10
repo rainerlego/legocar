@@ -35,7 +35,7 @@
 
 \usepackage{caption}
 \usepackage{subcaption}
-
+\usepackage{wrapfig}
 \usepackage{hyperref}
 
 \usepackage{index}
@@ -488,14 +488,25 @@ A screenshot of the simulator can be seen in Figure \ref{figsim}.
 
 \section{Lessons learned}
 %%TODO
-
+\subsection{Electical systems}
+\begin{wrapfigure}{r}{0.5\textwidth}
+\includegraphics[width=0.48\textwidth]{pic/spi.png}
+\caption{Noise on clock causes state machine to fail}
+\label{figsim}
+\end{wrapfigure}
 clock kann rauschen/ungewollte peaks geben
-
 oszi unvermeidlich beim debuggen von kommunikationsprotokollen
-
 trick: debugpin rauslegen und mit dem oszi mitlesen
-
+\subsection{Debugging hardware}
 die 7-segmentanzeigen sind nützlich und einfach anzusteuern
+Endianness bei kommunikation verschiedener Systeme beachten
+\subsection{Safety}
+Robots are dangerous! If you make an error in motor control logic engines can start and stop unexpected. 
+\begin{wrapfigure}{r}{0.3\textwidth}
+\includegraphics[width=0.29\textwidth]{pic/finger.png}
+\caption{Injury due to car}
+\label{figsim}
+\end{wrapfigure}
 
 
 
@@ -504,8 +515,5 @@ die 7-segmentanzeigen sind nützlich und einfach anzusteuern
 We worked hard, and achieved very little.
 
 \section{Future work}
-
-\bibliographystyle{abbrv}
-\bibliography{doku}
 
 \end{document}

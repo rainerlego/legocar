@@ -1,11 +1,132 @@
+
+\documentclass[a4paper
+               ,10pt
+               ,DIV=10 % Satzspiegel berechnen
+               ,BCOR=0.3cm
+               ,pagesize % Papiergröße an DVI und PDF übergeben
+               %,oneside
+               ,headings=small
+               ,bibtotoc
+               ]
+               {scrreprt}
+
+%\parskip 0.3cm
+
+%\usepackage{epsfig,afterpage}
+%\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{dsfont}
+
+%\usepackage[utf8]{inputenc}
+
+%\usepackage{a4}
+%\usepackage{longtable}
+%\usepackage{indentfirst}
+%\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[pdftex]{graphicx}
+\usepackage[ngerman]{babel}
+%\usepackage[ngerman,english]{babel}
+%\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage{appendix}
+
+
+\usepackage{hyperref}
+
+\usepackage{index}
+\makeindex
+\hypersetup{%
+pdftitle = {Hardware software co design: Legocar}, pdfauthor = {},
+linkbordercolor = 0 0 0, pdfborder = 0 0 0, colorlinks = false,
+hyperindex=true }
+
+
+%\selectlanguage{ngerman}
+%\usepackage{mathptmx}
+%\usepackage[scaled=.90]{helvet}
+%\usepackage{courier}
+% Schrift
+\usepackage{lmodern}
+%\usepackage{mathpazo} % Palatino
+
+\usepackage{listings}
+\lstloadlanguages{Matlab}
+\lstset{language=Matlab,frame=single,numberstyle=\tiny,numbers=left,breaklines=true,tabsize=4,basicstyle=\tiny}
+
+\usepackage{setspace}
+\usepackage{psfrag}
+\usepackage{graphicx}
+%\usepackage[dvips]{graphicx,color}
+
+\usepackage{listings}
+\usepackage{color}
+
+\usepackage{placeins}
+ 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  language=C++,                % the language of the code
+  basicstyle=\scriptsize,           % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line 
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  %title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve},         % string literal style
+  escapeinside={\%*}{*)},            % if you want to add LaTeX within your code
+  morekeywords={*,...}               % if you want to add more keywords to the set
+}
+
+\onehalfspacing
+
+
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{exmp}{Example}
+\newtheorem{rem}{Remark}
+\newtheorem{cor}{Corollary}
+
+\graphicspath{{pic/}}
+
+%\usepackage{ifthen}
+
+
+
+
+%\usepackage{dsfont}
+
+%\usepackage{moreverb}
+\usepackage{epsfig}
+%\usepackage{setspace}
+
+\usepackage{float}
+
 \title{Ueberschrift}%%TODO
 \author{Wenwen Chen, Christian Dietz, \\
 	Jan Seeger, Rainer Schoenberger, Julian Tatsch
 }
 \date{\today}
 
-\documentclass[12pt]{article}
-\usepackage{graphicx}
 
 \begin{document}
 \maketitle
@@ -33,7 +154,7 @@ In addition to a very simple physical driving model, the simulator also simulate
 
 A screenshot of the simulator can be seen in Figure \ref{figsim}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=15cm]{pic/sim.png}
 \caption{Simulator}
@@ -85,14 +206,14 @@ The \textit{raspi.exe} TCP server accepts the following commands:
 The car can be controlled by any device that supports TCP/IP over wifi.
 So for example it is possible to control the car via a notebook that is connected to the car's wifi access point.
 To demonstrate the remote control capabilities of the car's software, we implemented an Android client. Screenshots of this client can be seen in Figures \ref{figand1} and \ref{figand2}.
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=5cm]{pic/figand1.png}
 \caption{Android remote control client}
 \end{center}
 \label{figand1}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=5cm]{pic/figand2.png}
 \caption{Android remote control client}
@@ -121,7 +242,7 @@ The Wiimote has the following key assignment:
 %%TODO: servo-parameter (0-4000-8000)
 \subsection{Schematics}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=20cm,angle=-90]{pic/servoboard}
 \caption{Servoboard schematics}
@@ -139,7 +260,7 @@ This made the PCB manufacturing process easier, as only a one-sided PCB could be
 Figure \ref{figservoboardbrd} shows the finished board layout, Figure \ref{figservoboard3d} shows a 3D rendering of the servoboard and the finished board can be seen in Figure \ref{figservoboardr}.
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=5cm]{pic/servoboardbrd.png}
 \caption{Servoboard}
@@ -147,7 +268,7 @@ Figure \ref{figservoboardbrd} shows the finished board layout, Figure \ref{figse
 \label{figservoboardbrd}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=5cm]{pic/servoboard3d.png}
 \caption{Servoboard}
@@ -155,7 +276,7 @@ Figure \ref{figservoboardbrd} shows the finished board layout, Figure \ref{figse
 \label{figservoboard3d}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=5cm]{pic/servoboardr.jpg}
 \caption{Servoboard}
@@ -200,7 +321,7 @@ This is why we designed a simple board to distribute the power among all compone
 The board also has a central on-off switch for all of the needed voltages.
 The schematics are very simple an can be seen in Figure \ref{figpowerboardscm}. Figure \ref{figpowerboardr} shows the finished board.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=20cm,angle=-90]{pic/powerboard}
 \caption{Powerboard schematics}
@@ -208,7 +329,7 @@ The schematics are very simple an can be seen in Figure \ref{figpowerboardscm}. 
 \label{figpowerboardscm}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=8cm]{pic/powerboardr.jpg}
 \caption{Powerboard}
@@ -222,7 +343,7 @@ The schematics are very simple an can be seen in Figure \ref{figpowerboardscm}. 
 To measure speed, we built two rotary encoders into the car.
 They are based on a simple and cheap light barrier with an included Schmitt trigger and a rotary encoder disc.
 A picture and a schematic of the light barriers can be seen in Figure \ref{figls}.
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=8cm]{pic/ls.png}
 \caption{Light barrier}
@@ -241,7 +362,7 @@ This enables us to detect slippage, as only the back wheels are driven by the mo
 Figure \ref{figencmount1} shows the aluminium component that has been manufactured to hold the front rotary encoder shaft in place.
 Figures \ref{figencmount2} and \ref{figencmount3} show, how the rotary encoder discs are mounted on the car.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=8cm]{pic/encoder_mount.png}
 \caption{Encoder mounting}
@@ -249,7 +370,7 @@ Figures \ref{figencmount2} and \ref{figencmount3} show, how the rotary encoder d
 \label{figencmount1}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=8cm]{pic/encoders_scheiben.jpg}
 \caption{Encoder mounting}
@@ -257,7 +378,7 @@ Figures \ref{figencmount2} and \ref{figencmount3} show, how the rotary encoder d
 \label{figencmount2}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=8cm]{pic/encoders_top.jpg}
 \caption{Encoder mounting}

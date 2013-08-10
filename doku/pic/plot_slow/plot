@@ -8,17 +8,16 @@ set xlabel "time [s]"
 set ylabel "speed [km/h] / Engine power [-10/max]"
 set grid mxtics x
 set grid mytics y
-#set key center right
-set key at 119,9.5
+set key top left
 #set logscale y
 #set logscale x
-eich = "ourlog2"
+eich = "ourlog3"
 
 
 set yrange [0.08:1]
 #set xrange [62:66]
-set xrange [115.5:119]
-set yrange [-10:15]
+set xrange [100:108]
+set yrange [-5:8]
 set samples 1000
 
 plot eich using ( $0/10 ):($1*10*3.6/80) title "front" with linespoints, eich using ($0/10):($2*10*3.6/80) title "rear" with linespoints, eich using ($0/10):($3*10*3.6/80) title "desired" with linespoints,eich using  ($0/10):(-($4-4000)/4000*10) title "engine power" with linespoints

@@ -8,8 +8,7 @@ set xlabel "time [s]"
 set ylabel "speed [km/h] / Engine power [-10/max]"
 set grid mxtics x
 set grid mytics y
-#set key center right
-set key at 119,9.5
+set key top right
 #set logscale y
 #set logscale x
 eich = "ourlog2"
@@ -17,7 +16,7 @@ eich = "ourlog2"
 
 set yrange [0.08:1]
 #set xrange [62:66]
-set xrange [115.5:119]
+set xrange [62.5:66]
 set yrange [-10:15]
 set samples 1000
 

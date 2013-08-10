@@ -33,6 +33,8 @@
 \usepackage[T1]{fontenc}
 %\usepackage{appendix}
 
+\usepackage{caption}
+\usepackage{subcaption}
 
 \usepackage{hyperref}
 
@@ -207,18 +209,19 @@ The car can be controlled by any device that supports TCP/IP over wifi.
 So for example it is possible to control the car via a notebook that is connected to the car's wifi access point.
 To demonstrate the remote control capabilities of the car's software, we implemented an Android client. Screenshots of this client can be seen in Figures \ref{figand1} and \ref{figand2}.
 \begin{figure}[H]
-\begin{center}
-\includegraphics[width=5cm]{pic/figand1.png}
-\caption{Android remote control client}
-\end{center}
-\label{figand1}
-\end{figure}
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=5cm]{pic/figand2.png}
-\caption{Android remote control client}
-\end{center}
-\label{figand2}
+  \centering
+  \begin{subfigure}[b]{0.7\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{pic/figand1.png}
+    \caption{Control}
+  \end{subfigure}~
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{pic/figand2.png}
+    \caption{Settings}
+  \end{subfigure}
+  \caption{Android remote control client}
+  \label{figservoboardbrd}
 \end{figure}
 
 Another option is to use a Wiimote remote to control the car. If the WII\_ENABLED option is set in the \textit{raspi.exe} configuration, the RaspberryPi software will periodically try to connect to a Wiimote controller.
@@ -244,7 +247,7 @@ The Wiimote has the following key assignment:
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=20cm,angle=-90]{pic/servoboard}
+\includegraphics[width=\linewidth]{pic/servoboard}
 \caption{Servoboard schematics}
 \end{center}
 \label{figservoboardscm}
@@ -259,31 +262,26 @@ Almost all tracks fitted on one layer and only a few vias and additional floatin
 This made the PCB manufacturing process easier, as only a one-sided PCB could be used.
 Figure \ref{figservoboardbrd} shows the finished board layout, Figure \ref{figservoboard3d} shows a 3D rendering of the servoboard and the finished board can be seen in Figure \ref{figservoboardr}.
 
-
 \begin{figure}[H]
-\begin{center}
-\includegraphics[width=5cm]{pic/servoboardbrd.png}
-\caption{Servoboard}
-\end{center}
-\label{figservoboardbrd}
+  \centering
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{pic/servoboardbrd.png}
+    \caption{Layout}
+  \end{subfigure}~
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{pic/servoboard3d.png}
+    \caption{3D rendering}
+  \end{subfigure}~
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{pic/servoboardr.jpg}
+    \caption{Final assembly}
+  \end{subfigure}
+  \caption{Servoboard}
+  \label{figservoboardbrd}
 \end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=5cm]{pic/servoboard3d.png}
-\caption{Servoboard}
-\end{center}
-\label{figservoboard3d}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=5cm]{pic/servoboardr.jpg}
-\caption{Servoboard}
-\end{center}
-\label{figservoboardr}
-\end{figure}
-
 \subsection{Communication protocol}
 The Servoboard is connected via the I2C or two-wire interface to a command unit.
 The command unit can either be the FPGA or the RaspberryPi.
@@ -323,7 +321,7 @@ The schematics are very simple an can be seen in Figure \ref{figpowerboardscm}. 
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=20cm,angle=-90]{pic/powerboard}
+\includegraphics[width=0.7\linewidth]{pic/powerboard}
 \caption{Powerboard schematics}
 \end{center}
 \label{figpowerboardscm}

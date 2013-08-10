@@ -361,27 +361,27 @@ Figure \ref{figencmount1} shows the aluminium component that has been manufactur
 Figures \ref{figencmount2} and \ref{figencmount3} show, how the rotary encoder discs are mounted on the car.
 
 \begin{figure}[H]
-\begin{center}
-\includegraphics[width=8cm]{pic/encoder_mount.png}
-\caption{Encoder mounting}
-\end{center}
-\label{figencmount1}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=8cm]{pic/encoders_scheiben.jpg}
-\caption{Encoder mounting}
-\end{center}
-\label{figencmount2}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=8cm]{pic/encoders_top.jpg}
-\caption{Encoder mounting}
-\end{center}
-\label{figencmount3}
+  \centering
+  \begin{subfigure}[b]{0.3\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{pic/encoder_mount.png}
+  \caption{Custom designed aluminium mounting block}
+  \label{figencmount1}
+  \end{subfigure}~
+  \begin{subfigure}[b]{0.3\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{pic/encoders_scheiben.jpg}
+  \caption{Encoders mounted in the car chassis}
+  \label{figencmount2}
+  \end{subfigure}~
+  \begin{subfigure}[b]{0.3\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{pic/encoders_top.jpg}
+  \caption{Encoders in the car}
+  \label{figencmount3}
+  \end{subfigure}
+  \caption{Encoder mounting}
+  \label{figservoboardbrd}
 \end{figure}
 
 
@@ -390,30 +390,32 @@ There are also two LEDs on the board, that show the current state of the light b
 This made it easier to debug the light barriers when moving the rotary encoder discs into position.
 The schematics of the sensorboard can be seen in Figure \ref{figsensorboardscm}. The board layout and a 3D rendering can be seen in Figures \ref{figsensorboardbrd} and \ref{figsensorboard3d}.
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[width=8cm]{pic/sensorboardbrd.png}
-\caption{Sensorboard}
-\end{center}
-\label{figsensorboardbrd}
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.5\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{pic/sensorboardbrd.png}
+  \caption{Layout}
+  \label{figsensorboard3d}
+  \end{subfigure}~
+  \begin{subfigure}[b]{0.5\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{pic/sensorboard3d.png}
+  \caption{3D render}
+  \label{figsensorboardscm}
+  \end{subfigure}
+  \caption{Sensorboard}
+  \label{figsensorboard}
 \end{figure}
+
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=8cm]{pic/sensorboard3d.png}
-\caption{Sensorboard}
-\end{center}
-\label{figsensorboard3d}
-\end{figure}
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[width=20cm,angle=-90]{pic/sensorboard}
+\includegraphics[width=0.7\textwidth]{pic/sensorboard}
 \caption{Sensorboard schematics}
 \end{center}
 \label{figsensorboardscm}
 \end{figure}
-
 
 \section{Conclusions}\label{conclusions}
 We worked hard, and achieved very little.

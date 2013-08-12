@@ -140,10 +140,25 @@ hyperindex=true }
 %----------------------------------------------------------------------------------------
 \section{Introduction}
 %----------------------------------------------------------------------------------------
+\subsection{Overview}
 
-overview
-architecture bild
+The general architecture of our project is shown in Figure~\ref{figarchitecture}.
+The FPGA plays the central role:
+It controls the Servo/Motor-controller board and reads the sensor inputs.
+In future it can also be connected to a camera.
+Due to the limited time we could not implement the camera interface.
+The FPGA is also responsible for calculating the current speed based on the sensor inputs and for controlling the motor acceleration.
 
+All the high-level communication is 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\linewidth]{pic/architecture}
+\caption{Architecture overview}
+\label{figarchitecture}
+\end{center}
+\end{figure}
+
+Figure~\ref{figcaroverview} shows, how the above mentioned architecture is realized on the car. All the components are mounted on a wooden plate on top of the car.
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=\linewidth]{pic/overview}

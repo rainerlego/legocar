@@ -156,6 +156,7 @@ This way, any Wifi and TCP/IP capable device as well as Wiimote controllers can 
 
 Besides the real hardware, there exists a software simulator for the car.
 It has the same interface as the RaspberryPi and can be used to simulate steering algorithms.
+It is possible for the Raspi software to send the control commands to the simulation program via TCP/IP instead of the real hardware.
 
 \begin{figure}[H]
 \begin{center}
@@ -181,6 +182,7 @@ Figure~\ref{figcaroverview} shows, how the above mentioned architecture is reali
 Very early in this project, we noticed, that supplying the various boards and modules on the car with power becomes a problem.
 This is why we designed a simple board to distribute the power among all components.
 The board also has a central on-off switch for all of the needed voltages.
+Two LEDs show, if the 5V and 12V voltages are supplied.
 The schematics are very simple an can be seen in Figure \ref{figpowerboardscm}. Figure \ref{figpowerboardr} shows the finished board.
 
 \begin{figure}[H]
@@ -215,13 +217,16 @@ A picture and a schematic of the light barriers can be seen in Figure \ref{figls
 \end{center}
 \end{figure}
 
-There are four slots in each disc, so that we can measure the speed at the resolution of roughly a quarter of a turn.
+
+The rotary encoders are built by having a rotating disc with alternating opaque and non-opaque slots in the light barrier's light sensing gap.
+There are four slots in each disc, so that we can measure the speed at the resolution of roughly eight edges per turn, because we measure the falling as well as the rising edges.
 The discs are mounted on shafts, which are directly connected to the differentials.
 We use two rotary encoders.
 One is connected to the front differential and one is connected to the back differential.
 The cardan shaft of the initial 4WD car design has been removed to make room for the rotary encoders.
 Because of the removed 4WD and the two rotary encoders, it is now possible to measure the speed of the front and the back wheels independently.
 This enables us to detect slippage, as only the back wheels are driven by the motor.
+A traction control system (TCS) is implemented in hardware in the FPGA with the help of this feature.
 
 Figure \ref{figencmount1} shows the aluminium component that has been manufactured to hold the front rotary encoder shaft in place.
 Figures \ref{figencmount2} and \ref{figencmount3} show, how the rotary encoder discs are mounted on the car.
@@ -252,6 +257,7 @@ Figures \ref{figencmount2} and \ref{figencmount3} show, how the rotary encoder d
 
 
 To connect the light barriers to the FPGA, we built a Sensorboard. It has the task to supply the light barriers with power and to convert the output voltage of the light barriers to the right level.
+One transistor for each light barrier was used for this task.
 There are also two LEDs on the board, that show the current state of the light barriers.
 This made it easier to debug the light barriers when moving the rotary encoder discs into position.
 The schematics of the Sensorboard can be seen in Figure \ref{figsensorboardscm}. The board layout and a 3D rendering can be seen in Figures \ref{figsensorboardbrd} and \ref{figsensorboard3d}.
@@ -282,6 +288,7 @@ The schematics of the Sensorboard can be seen in Figure \ref{figsensorboardscm}.
 \label{figsensorboardscm}
 \end{center}
 \end{figure}
+
 %----------------------------------------------------------------------------------------
 \section{Servo controller board}
 %----------------------------------------------------------------------------------------
@@ -297,6 +304,17 @@ The schematics of the Sensorboard can be seen in Figure \ref{figsensorboardscm}.
 \label{figservoboardscm}
 \end{center}
 \end{figure}
+
+Figure~\ref{figservoboardscm} shows the schematics of our Servoboard.
+There are three debug LEDs and one power LED.
+The board is powered via a standard 5V voltage regulator.
+We added a programming socket to the board, so that the microcontroller does not be removed while flashing, but can be programmed onboard.
+The 12Mhz crystal oszillator is needed, because the internal atmega8 oscillator only has 8Mhz and is not as precise as the external 12MHz oszillator.
+The servos are controlled via a signal similar to PWM, where the length of a pulse determines the actual position.
+Therefore accurate timing is necessary.
+
+The Servoboard can control up to 8 servos simultaneously.
+Each of them is directly connected to a ...
 
 \subsection{Board}
 After the schematics have been created, the PCB board layout was designed.
@@ -348,7 +366,7 @@ The Master first sends a preamble (0xff), which is used to synchronize both comm
 This is necessary, because loosing packets or receiving corrupted data can lead to a situation, where the receiving unit ends up in an undefined or faulty state.
 Therefore, it might be that the communication gets stuck.
 
-By sending a preamble, that cannot be part of the normal communication, this problem is solved: Every time the microcontroller receives a preamble-byte, the communication state machine goes back to its initial state, no matter what the current state is.
+By sending a preamble, which cannot be part of the normal communication, this problem is solved: Every time the microcontroller receives a preamble-byte, the communication state machine goes back to its initial state, no matter what the current state is.
 This way, if a transmission error occurs, only the current command is lost, but further communication will still be possible.
 
 

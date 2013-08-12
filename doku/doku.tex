@@ -149,7 +149,14 @@ In future it can also be connected to a camera.
 Due to the limited time we could not implement the camera interface.
 The FPGA is also responsible for calculating the current speed based on the sensor inputs and for controlling the motor acceleration.
 
-All the high-level communication is 
+All the high-level communication is done by the RaspberryPi, which is connected to the FPGA.
+It receives steering commands from mobile phones, notebooks or Wiimotes and passes them to the FPGA.
+The Raspi creates an Wifi access point and has a bluetooth interface.
+This way, any Wifi and TCP/IP capable device as well as Wiimote controllers can control the car.
+
+Besides the real hardware, there exists a software simulator for the car.
+It has the same interface as the RaspberryPi and can be used to simulate steering algorithms.
+
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=\linewidth]{pic/architecture}
@@ -531,6 +538,11 @@ Robots are dangerous! If you make an error in motor control logic engines can st
 \caption{Injury due to car}
 \label{figsim}
 \end{wrapfigure}
+
+
+
+
+lego-connectors sind gut um sachen zu mounten
 
 
 

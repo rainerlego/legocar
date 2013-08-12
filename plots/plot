@@ -1,23 +1,23 @@
 #!/usr/bin/gnuplot
 
-set terminal push
-set terminal postscript eps enhanced color blacktext
-set output "eicht1.eps"
+#set terminal push
+#set terminal postscript eps enhanced color blacktext
+#set output "eich.eps"
 #set title "bla"
 set xlabel "time [s]"
 set ylabel "speed [km/h] / Engine power [-10/max]"
 set grid mxtics x
 set grid mytics y
 #set key center right
-set key at 119,9.5
+#set key at 119,9.5
 #set logscale y
 #set logscale x
-eich = "ourlog2"
+eich = "ourlog_fast"
 
 
 set yrange [0.08:1]
 #set xrange [62:66]
-set xrange [115.5:119]
+#set xrange [115.5:119]
 set yrange [-10:15]
 set samples 1000
 

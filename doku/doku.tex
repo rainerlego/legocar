@@ -525,7 +525,7 @@ The Wiimote has the following key assignment:
 We designed the VHDL \emph{speed\_control} architecture to convert a desired speed received from the upper level logic into a supply current for the car's engine. To achieve best possible accuracy the meassured speed on each axis, as well as the desired speed are processed, depending on the operating mode. In the following the two operating modes \emph{Simple speed regulation} and \emph{traction control} are described and evaluated in detail.
 \subsubsection{Simple speed regulator} \label{simplepi}
 In this mode the \emph{speed\_control} unit tries to reach the desired speed $v_{dest}$ by directly regulating the rear wheel to the desired speed, assuming, that the speed of this wheel is the speed of the car.\\
-The speed segulating is done by implementing an PI-Regulator. The regulator interval is $\frac{1}{10}s$. Every timestep the difference between desired and current wheelsped is calculated:
+The speed regulation is done by implementing a PI-Regulator. The regulator interval is $\frac{1}{10}s$. Every timestep the difference between desired and current wheel speed is calculated:
 $$\Delta = v_{dest} - v_{rear}$$
 The calculated difference is then summed up to implement the integral part of the regulator:
 $$\Delta_{sum} += \Delta$$
@@ -550,7 +550,7 @@ The initial values for $c_P$ and $c_I$ were calculated to allow the speed to rea
 \end{figure}
 
 \subsubsection{Traction control}
-Traction control mode can be activated by applying a logic 1 level to the \emph{enable\_antischlupf} input. In this mode the regulator tries to prevent the rear wheels from slipping during the acceleration phase, which is especially useful for driving on surfaces with low friction or trying to accelerate as quick as possible. To achieve this, we used two speed sensors: One for the rear axis and one for the front axis, as described in chapter \ref{sensors}. The read out speeds $v_{front}$ and $v_{rear}$ from these sensors as well as the desired speed $v_{dest}$ are provided to \emph{speed\_control} and the output power to the engine is calculated by modifying the PI-regulator described in section \ref{simplepi} as follows.\\
+Traction control mode can be activated by applying a logic 1 level to the \emph{enable\_antischlupf} input. In this mode the regulator tries to prevent the rear wheels from slipping during the acceleration phase, which is especially useful for driving on surfaces with low friction or trying to accelerate as quickly as possible. To achieve this, we used two speed sensors: One for the rear axis and one for the front axis, as described in chapter \ref{sensors}. The read out speeds $v_{front}$ and $v_{rear}$ from these sensors as well as the desired speed $v_{dest}$ are provided to \emph{speed\_control} and the output power to the engine is calculated by modifying the PI-regulator described in section \ref{simplepi} as follows.\\
 In each regulating step the difference between the front and rear wheel is calculated:
 $$slip = c_S \cdot (v_{front} - v_{rear})$$
 where $c_S$ is a constant to configure the response to slipping. To allow a certain speed difference (about 8\% speed difference between front and rear wheel should be fine) $slip$ is modified:
@@ -613,12 +613,15 @@ A screenshot of the simulator can be seen in Figure \ref{figsim}.
   \item Using jumper wires is very useful for debugging electronics, because it is possible to frequently change the system and swap modules.
   \item Designing our boards with redundant connectors for connecting copper wires, as well as connecting jumper wires proved as very useful, because it was possible to easily connect additional debugging hardware, like an oscilloscope or a protocol analyzer in paralel to existing connections.
   \item For debugging communication protocols like i2c and spi a digital storage oscilloscope was extremely helpful.
-  \item When debugging timin critical logic, it is useful to connect additional signals from the logic to physical FPGA pins as debugging pins and also connect them to an additional oscilloscope channel.
-  \item It took us one week to find a bug in our spi protocol implementation, wich was caused by noise when switching vrom a high to a low level on the clock provided by the RasPi (see figure \ref{fignoise}). The debug pin method described above helped us to locate the problem. The green signal in the oscilloscope screenshot represents the debugging pin, which was connected to a signal which toggles it's valoe at each tetected falling clock edge.
+  \item When debugging timing critical logic, it is useful to connect additional signals from the logic to physical FPGA pins as debugging pins and also connect them to an additional oscilloscope channel.
+  \item It took us one week to find a bug in our spi protocol implementation, which was caused by noise when switching from a high to a low level on the clock provided by the RasPi (see figure \ref{fignoise}). The debug pin method described above helped us to locate the problem. The green signal in the oscilloscope screenshot represents the debugging pin, which was connected to a signal which toggles it's value at each detected falling clock edge.
+
+	\item The seven segment displays on the FPGA board proved very useful for debugging. Only few lines of code are needed to control them and it is very easy to display FPGA internal signal values on them.
 \end{itemize}
-\subsection{Debugging hardware}
-die 7-segmentanzeigen sind nützlich und einfach anzusteuern
-Endianness bei kommunikation verschiedener Systeme beachten
+
+
+
+
 \subsection{Safety}
 \begin{wrapfigure}{r}{0.3\textwidth}
 \includegraphics[width=0.29\textwidth]{pic/finger.png}
@@ -632,16 +635,6 @@ Robots are dangerous! If you make an error in motor control logic engines can st
   \item Do not test the robot alone. At least one person should always run along with the car to catch it if something goes wrong.
 \end{itemize}
 
-
-
-
-lego-connectors sind gut um sachen zu mounten
-
-
-
-
-\section{Conclusions}\label{conclusions}
-We worked hard, and achieved very little.
 
 \section{Future work}
 

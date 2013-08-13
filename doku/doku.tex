@@ -365,7 +365,7 @@ In the microcontroller's firmware, we used a simple state machine to realize thi
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=\linewidth]{pic/servoboardcmds}
+\includegraphics[width=0.7\linewidth]{pic/servoboardcmds}
 \caption{Servoboard communication protocol}
 \label{figservoboardcmds}
 \end{center}
@@ -518,11 +518,30 @@ The Wiimote has the following key assignment:
 \end{center}
 \end{figure}
 
-%%TODO
+Figure~\ref{figfpga} shows a simplified overview of the architecture, we implemented in the FPGA.
+The four SPI signals from the RaspberryPi are connected to the spislave unit, which implements a SPI slave reader/writer.
+If the chip select signal (spi\_cs) is pulled to ground, spislave will read one byte, send one byte back and trigger a short pulse, when the transmission is complete.
+The short pulse signals the spireader unit, that one byte has successfully transmitted and received.
+
+
+Spislave is part of spireader, which implements a state machine to interpret the commands sent via the SPI interface.
+According to the sent commands, spireader controls all the other units in the FPGA such as the speed\_control, speed-acceleration-mode-switch or servo controller.
+spireader is also able to send back data to the RasPi, if requested. This feature is used to send the current front and rear speed as well as target speed and current acceleration to the RasPi for data logging and evaluation purposes.
+
+The pulse signal lines from the light barriers are connected to a speed sensor unit which converts the falling and rising edges to a speed value.
+
+The speed control unit, which is described in more detail in Section~\ref{speed}, takes the speed measurements from the speed sensors as well as target speed and configuration signals from the spireader.
+The acceleration output of the speed control unit and the spireader unit are connected to the two inputs of the speed-acceleration-mode-switch.
+The speed-acceleration-mode-switch also has a switch input signal, which determines the output of the switch. This unit is used to select between acceleration based driving mode and speed based driving mode. Based on the switch input signal, either the acceleration output of the speed control unit or the direct acceleration value of the spireader is forwarded to the servo controller unit.
+
+The servo controller unit implements a state machine to send servo commands via I2C to our Servoboard.
+It takes care of sending the preambles, commands and parameters.
+To do this, it has to apply the right signals at the right time throughout the whole I2C transaction.
+After a transaction is complete, or an error occurs, the servo controller state machine will go back to its initial reset state.
 
 
 
-\subsection{Speed control}
+\subsection{Speed control} \label{speed}
 We designed the VHDL \emph{speed\_control} architecture to convert a desired speed received from the upper level logic into a supply current for the car's engine. To achieve best possible accuracy the meassured speed on each axis, as well as the desired speed are processed, depending on the operating mode. In the following the two operating modes \emph{Simple speed regulation} and \emph{traction control} are described and evaluated in detail.
 \subsubsection{Simple speed regulator} \label{simplepi}
 In this mode the \emph{speed\_control} unit tries to reach the desired speed $v_{dest}$ by directly regulating the rear wheel to the desired speed, assuming, that the speed of this wheel is the speed of the car.\\

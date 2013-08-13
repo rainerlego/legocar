@@ -577,24 +577,33 @@ A screenshot of the simulator can be seen in Figure \ref{figsim}.
 \section{Lessons learned}
 %%TODO
 \subsection{Electical systems}
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{wrapfigure}{hl}{0.5\textwidth}
 \includegraphics[width=0.48\textwidth]{pic/spi.png}
 \caption{Noise on clock causes state machine to fail}
-\label{figsim}
+\label{fignoise}
 \end{wrapfigure}
-clock kann rauschen/ungewollte peaks geben
-oszi unvermeidlich beim debuggen von kommunikationsprotokollen
-trick: debugpin rauslegen und mit dem oszi mitlesen
+\begin{itemize}
+  \item Using jumper wires is very useful for debugging electronics, because it is possible to frequently change the system and swap modules.
+  \item Designing our boards with redundant connectors for connecting copper wires, as well as connecting jumper wires proved as very useful, because it was possible to easily connect additional debugging hardware, like an oscilloscope or a protocol analyzer in paralel to existing connections.
+  \item For debugging communication protocols like i2c and spi a digital storage oscilloscope was extremely helpful.
+  \item When debugging timin critical logic, it is useful to connect additional signals from the logic to physical FPGA pins as debugging pins and also connect them to an additional oscilloscope channel.
+  \item It took us one week to find a bug in our spi protocol implementation, wich was caused by noise when switching vrom a high to a low level on the clock provided by the RasPi (see figure \ref{fignoise}). The debug pin method described above helped us to locate the problem. The green signal in the oscilloscope screenshot represents the debugging pin, which was connected to a signal which toggles it's valoe at each tetected falling clock edge.
+\end{itemize}
 \subsection{Debugging hardware}
 die 7-segmentanzeigen sind nützlich und einfach anzusteuern
 Endianness bei kommunikation verschiedener Systeme beachten
 \subsection{Safety}
-Robots are dangerous! If you make an error in motor control logic engines can start and stop unexpected. 
 \begin{wrapfigure}{r}{0.3\textwidth}
 \includegraphics[width=0.29\textwidth]{pic/finger.png}
 \caption{Injury due to car}
-\label{figsim}
+\label{figinjury}
 \end{wrapfigure}
+Robots are dangerous! If you make an error in motor control logic engines can start and stop unexpected. During the development and testing of the car we were injured several times, because the car drove by its own and we could not control it. One time our car almost fell of the 3rd story of the university building, which would possibly have caused serious health risk for people walking downstairs. This incident was caused by an interference of the wifi signal we used to control the car with the university wifi network. After the signal was lost our car tried to drive according to the last command which was sent: Full speed and steering in the left direction. After this incident we agreed on several rules when testing the robot:
+\begin{itemize}
+  \item Implement a timeout in the servoboard. This ensures a engine stop and steering reset as soon as no signal arrives for a period of 0.2 seconds. This effectively prevented the car from getting out of control due to a lost signal in the future.
+  \item Do not test the car in a dangerous environment like on a bridge or high grounds.
+  \item Do not test the robot alone. At least one person should always run along with the car to catch it if something goes wrong.
+\end{itemize}
 
 
 

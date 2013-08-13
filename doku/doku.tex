@@ -123,7 +123,7 @@ hyperindex=true }
 
 \usepackage{float}
 
-\title{Hardware software co design: Legocar}%%TODO
+\title{Hardware software co design: Lego racing car}
 \author{Wenwen Chen, Christian Dietz, \\
 	Jan Seeger, Rainer Schoenberger, Julian Tatsch
 }
@@ -133,9 +133,6 @@ hyperindex=true }
 \begin{document}
 \maketitle
 
-\begin{abstract}
-%%TODO
-\end{abstract}
 \tableofcontents
 %----------------------------------------------------------------------------------------
 \section{Introduction}
@@ -203,7 +200,7 @@ The schematics are very simple an can be seen in Figure \ref{figpowerboardscm}. 
 
 
 %----------------------------------------------------------------------------------------
-\section{Rotary Encoders} %%TODO: richtige bezeichnung???
+\section{Rotary Encoders}
 %----------------------------------------------------------------------------------------
 
 To measure speed, we built two rotary encoders into the car.
@@ -292,9 +289,6 @@ The schematics of the Sensorboard can be seen in Figure \ref{figsensorboardscm}.
 %----------------------------------------------------------------------------------------
 \section{Servo controller board}
 %----------------------------------------------------------------------------------------
-%%TODO: bildchen
-
-%%TODO: servo-parameter (0-4000-8000)
 \subsection{Schematics}
 
 \begin{figure}[H]
@@ -369,7 +363,15 @@ Implementing I2C via software would have required many timer interrupts and migh
 We implemented our own communication protocol on top of I2C.
 In the microcontroller's firmware, we used a simple state machine to realize this.
 
-The communication protocol looks as follows:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\linewidth]{pic/servoboardcmds}
+\caption{Servoboard communication protocol}
+\label{figservoboardcmds}
+\end{center}
+\end{figure}
+
+The communication protocol is illustrated in Figure~\ref{figservoboardcmds} looks as follows:
 The Master first sends a preamble (0xff), which is used to synchronize both communication partners.
 This is necessary, because loosing packets or receiving corrupted data can lead to a situation, where the receiving unit ends up in an undefined or faulty state.
 Therefore, it might be that the communication gets stuck.
@@ -384,6 +386,23 @@ The first byte is 254 and the next one is the difference to the desired number.
 On the receiver's side, both values are then combined and their sum determines the actual number. 
 For example if 255 needs to be sent, the two bytes 254 and 1 are sent.
 
+
+After the preamble has been sent, the controlling device sends the command byte to the Servoboard.
+The command byte is split into two sections:
+The four MSBs make up the command and the four LSBs can carry an additional parameter.
+This makes it possible to send only one byte for small commands.
+
+The following commands are the most important commands to control the Servoboard:
+\begin{description}
+\item[CMD\_SERVO] This command sets the position of a certain servo. The servo id (0-7) is sent in the 4 lower bits of the command byte. Then comes the high byte of the servo's target position followed by the lower byte of the target position. The servo position is passed via an unsigned value from 0 to 8000. 0 means complete left position, 4000 means zero position and 8000 means complete right position.
+
+\item[CMD\_SERVO10] This command enables or disable all of the servo's power supply by switching the power supply mosfet on the PCB on or off. The value off(0) or on(1) is given via the lower 4 bits of the command byte.
+
+\item[CMD\_LED] Sets the three LEDs on the Servoboard. The MSB of the command byte states, if the LEDs are switched on(1) or off(0). The lower three bits are a mask for the LEDs: Only the ones, where the bit is set to 1 in the mask are switched.
+
+\end{description}
+%%TODO: servo-parameter (0-4000-8000)
+
 \subsection{Firmware}
 Servos are controlled as follows: 
 In a 20ms time interval, the signal line is always low except one short pulse of 1ms to 2ms.
@@ -391,7 +410,7 @@ The length of the pulse determines the position of the servo:
 Left(1ms), zero position(1.5ms) or right(2ms).
 This pulse is repeated every 20ms.
 To drive those signals, the Servoboard firmware only uses one 16bit timer and a corresponding compare match interrupt.
-The pulses eight pulses for the eight servos are generated in series: The current servo's signal line is set to 1 and the 16bit timer is configured to give a compare match interrupt in the exact time of the pulse for this servo.
+The eight pulses for the eight servos are generated in series: The current servo's signal line is set to 1 and the 16bit timer is configured to give a compare match interrupt in the exact time of the pulse for this servo.
 When this compare match interrupt occurs, the line for the current servo is set back to zero and the pulse for the next servo is generated in the same way.
 After all 8 servo pulses are generated, the Seroboard will wait (with the help of timers of course) the rest of the 20ms and then start again to generate the 8 pulses.
 
@@ -399,7 +418,9 @@ Even if this method generates the pulses via software, it does not have much ove
 There is not much to calculate and all the work is done in compare match interrupts.
 The timing is generated by the hardware 16bit counter and not via software.
 
+%---------------------------------------------------------------------------
 \section{RaspberryPi}
+%---------------------------------------------------------------------------
 The RaspberryPi is used for highlevel communication.
 It is connected to a wifi module via USB and opens up an access point.
 The RasPi is also equipped with a bluetooth module to communicate with a Wiimote controller.
@@ -436,7 +457,13 @@ The \textit{raspi.exe} TCP server accepts the following commands:
 \item[servo set $<$channel$>$ $<$valve$>$] Sets the servo which is connected on PIN $<$channel$>$ to the corresponding value. $<$channel$>$ must be an integer between 0 and 7. $<$value$>$ is also an integer. It can have values from 0 to 8000, where 4000 would mean the zero position.
 \item[servo led $<$onoff$>$ $<$mask$>$] Sets the LEDs on the Servoboard. $<$onoff$>$ decides, whether the LEDs should be switched on(1) or off(0). The three LSBs of $<$mask$>$ decide, which LEDs should be switched. Only LEDs, where the bit in the mask is set to 1 will be switched on or off. For example, if one wants to enable the first and the third LED, one would send the command "servo led 1 5". Note that most of the LEDs are by default also used by the Servoboard firmware to signal various events. Once a LED has been manually set to a certain state by setting a bit to one in $<$mask$>$, this LED will not be used by the firmware anymore.
 \item[servo getperm] This command initiates an control handover to the device, which is sending this command. From now on, \textit{raspi.exe} will only accept control commands from this device. All other currently connected devices will be ignored.
-\item[speedv set $<$speed$>$ $<$steering$>$] This is a highlevel command, which is only accepted, if the RasPi is connected to the FPGA. $<$speed$>$ and $<$steering$>$ are both double values.
+
+\item[speedacc $<$acc|speed$>$] This command switches between speed and acceleration based driving mode. If the speed mode is activated, the speed\_controller in the FPGA takes over control over the motor acceleration and tries to hold the car's speed at a certain value.
+
+\item[as $<$on|off$>$] Enables/disables the traction control system (TCS). The TCS is built into the speed\_controller and tries to minimize the slipping of the drive wheels.
+
+\item[speedraw $<$speed$>$] Sets the target speed for the speed\_controller. If the speed driving mode in enabled, the speed\_controller will try to drive the car at this speed.
+
 \end{description}
 
 \subsection{Remote control devices}

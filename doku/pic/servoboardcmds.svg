@@ -1,0 +1,1424 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="320.99417"
+   height="161.06422"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="servoboardcmds.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="114.84641"
+     inkscape:cy="84.652433"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1676"
+     inkscape:window-height="1011"
+     inkscape:window-x="1680"
+     inkscape:window-y="18"
+     inkscape:window-maximized="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2987"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="-29.5px"
+       originy="-789.43579px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-29.5,-101.86218)">
+    <rect
+       style="fill:#ffaaaa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989"
+       width="80"
+       height="30"
+       x="30"
+       y="112.36218" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="50.714287"
+       y="130.57646"
+       id="text3759"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3761"
+         x="50.714287"
+         y="130.57646">preamble</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,112.36218 0,-10"
+       id="path3763"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50,112.36218 0,-10"
+       id="path3765"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 60,112.36218 0,-10"
+       id="path3767"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 30,112.36218 0,-10"
+       id="path3769"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 70,112.36218 0,-10"
+       id="path3771"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,112.36218 0,-10"
+       id="path3773"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 90,112.36218 0,-10"
+       id="path3775"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100,112.36218 0,-10"
+       id="path3777"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 110,112.36218 0,-10"
+       id="path3779"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="91.587318"
+       y="111.18732"
+       id="text3781-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3"
+         x="91.587318"
+         y="111.18732">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="101.52372"
+       y="111.14172"
+       id="text3781-1-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-1"
+         x="101.52372"
+         y="111.14172">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="81.434425"
+       y="111.14172"
+       id="text3781-1-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-6"
+         x="81.434425"
+         y="111.14172">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="71.52372"
+       y="111.231"
+       id="text3781-1-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-68"
+         x="71.52372"
+         y="111.231">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="61.434429"
+       y="111.231"
+       id="text3781-1-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-5"
+         x="61.434429"
+         y="111.231">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="51.70229"
+       y="111.40958"
+       id="text3781-1-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-54"
+         x="51.70229"
+         y="111.40958">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="41.345146"
+       y="111.32029"
+       id="text3781-1-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-11"
+         x="41.345146"
+         y="111.32029">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="31.70229"
+       y="111.40958"
+       id="text3781-1-17"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-4"
+         x="31.70229"
+         y="111.40958">7</tspan></text>
+    <rect
+       style="fill:#ffccaa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989-6"
+       width="40"
+       height="29.999992"
+       x="110"
+       y="112.47379" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="129.91547"
+       y="125.3979"
+       id="text3759-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3761-6"
+         x="129.91547"
+         y="125.3979"
+         style="text-align:center;text-anchor:middle">CMD</tspan><tspan
+         sodipodi:role="line"
+         x="129.91547"
+         y="136.7668"
+         id="tspan3992"
+         style="text-align:center;text-anchor:middle">SERVO</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 120,112.47378 0,-10"
+       id="path3763-0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 130,112.47378 0,-10"
+       id="path3765-9"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 140,112.47378 0,-10"
+       id="path3767-1"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 110,112.47378 0,-10"
+       id="path3769-0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 150,112.47378 0,-10"
+       id="path3771-1"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 160,112.47378 0,-10"
+       id="path3773-3"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 170,112.47378 0,-10"
+       id="path3775-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 180,112.47378 0,-10"
+       id="path3777-0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 190,112.47378 0,-10"
+       id="path3779-6"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="171.58731"
+       y="111.29892"
+       id="text3781-1-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-48"
+         x="171.58731"
+         y="111.29892">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="181.52371"
+       y="111.25333"
+       id="text3781-1-2-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-1-0"
+         x="181.52371"
+         y="111.25333">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="161.43442"
+       y="111.25333"
+       id="text3781-1-9-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-6-3"
+         x="161.43442"
+         y="111.25333">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="151.52371"
+       y="111.34261"
+       id="text3781-1-4-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-68-2"
+         x="151.52371"
+         y="111.34261">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="141.43443"
+       y="111.34261"
+       id="text3781-1-6-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-5-2"
+         x="141.43443"
+         y="111.34261">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="131.70229"
+       y="111.52118"
+       id="text3781-1-1-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-54-6"
+         x="131.70229"
+         y="111.52118">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="121.34515"
+       y="111.43189"
+       id="text3781-1-5-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-11-3"
+         x="121.34515"
+         y="111.43189">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="111.70229"
+       y="111.52118"
+       id="text3781-1-17-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-4-0"
+         x="111.70229"
+         y="111.52118">7</tspan></text>
+    <rect
+       style="fill:#ff9955;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989-6-0"
+       width="40"
+       height="29.999992"
+       x="149.97768"
+       y="112.47379" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="169.52428"
+       y="124.07919"
+       id="text3759-6-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="169.52428"
+         y="124.07919"
+         id="tspan3992-8"
+         style="text-align:center;text-anchor:middle">servo</tspan><tspan
+         sodipodi:role="line"
+         x="169.52428"
+         y="135.44809"
+         id="tspan4038"
+         style="text-align:center;text-anchor:middle">id</tspan></text>
+    <rect
+       style="fill:#ffe680;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989-9"
+       width="80"
+       height="30"
+       x="189.99413"
+       y="112.38622" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="229.90207"
+       y="124.53958"
+       id="text3759-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3761-0"
+         x="229.90207"
+         y="124.53958"
+         style="text-align:center;text-anchor:middle">servo value</tspan><tspan
+         sodipodi:role="line"
+         x="229.90207"
+         y="135.90848"
+         id="tspan4268"
+         style="text-align:center;text-anchor:middle">high byte</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 199.99414,112.38621 0,-9.99999"
+       id="path3763-4"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 209.99414,112.38621 0,-9.99999"
+       id="path3765-4"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 219.99414,112.38621 0,-9.99999"
+       id="path3767-180"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 189.99414,112.38621 0,-9.99999"
+       id="path3769-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 229.99414,112.38621 0,-9.99999"
+       id="path3771-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 239.99414,112.38621 0,-9.99999"
+       id="path3773-7"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 249.99414,112.38621 0,-9.99999"
+       id="path3775-6"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 259.99414,112.38621 0,-9.99999"
+       id="path3777-7"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 269.99414,112.38621 0,-9.99999"
+       id="path3779-18"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="251.58144"
+       y="111.21135"
+       id="text3781-1-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-3"
+         x="251.58144"
+         y="111.21135">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="261.51785"
+       y="111.16576"
+       id="text3781-1-2-38"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-1-1"
+         x="261.51785"
+         y="111.16576">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="241.42854"
+       y="111.16576"
+       id="text3781-1-9-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-6-7"
+         x="241.42854"
+         y="111.16576">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="231.51784"
+       y="111.25504"
+       id="text3781-1-4-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-68-8"
+         x="231.51784"
+         y="111.25504">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="221.42856"
+       y="111.25504"
+       id="text3781-1-6-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-5-6"
+         x="221.42856"
+         y="111.25504">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="211.69641"
+       y="111.43361"
+       id="text3781-1-1-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-54-4"
+         x="211.69641"
+         y="111.43361">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="201.33928"
+       y="111.34432"
+       id="text3781-1-5-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-11-36"
+         x="201.33928"
+         y="111.34432">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="191.69641"
+       y="111.43361"
+       id="text3781-1-17-27"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-4-7"
+         x="191.69641"
+         y="111.43361">7</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 269.99414,112.49781 0,-9.99999"
+       id="path3769-0-6"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:#ffe680;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989-2"
+       width="80"
+       height="30"
+       x="269.99417"
+       y="112.46658" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 279.99414,112.46658 0,-10"
+       id="path3763-08"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 289.99414,112.46658 0,-10"
+       id="path3765-18"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 299.99414,112.46658 0,-10"
+       id="path3767-8"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 269.99414,112.46658 0,-10"
+       id="path3769-49"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 309.99414,112.46658 0,-10"
+       id="path3771-6"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 319.99414,112.46658 0,-10"
+       id="path3773-0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 329.99414,112.46658 0,-10"
+       id="path3775-24"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 339.99414,112.46658 0,-10"
+       id="path3777-3"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 349.99414,112.46658 0,-10"
+       id="path3779-0"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="331.58145"
+       y="111.29171"
+       id="text3781-1-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-50"
+         x="331.58145"
+         y="111.29171">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="341.51785"
+       y="111.24612"
+       id="text3781-1-2-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-1-3"
+         x="341.51785"
+         y="111.24612">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="321.42856"
+       y="111.24612"
+       id="text3781-1-9-34"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-6-39"
+         x="321.42856"
+         y="111.24612">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="311.51785"
+       y="111.3354"
+       id="text3781-1-4-15"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-68-6"
+         x="311.51785"
+         y="111.3354">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="301.42859"
+       y="111.3354"
+       id="text3781-1-6-04"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-5-0"
+         x="301.42859"
+         y="111.3354">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="291.69644"
+       y="111.51397"
+       id="text3781-1-1-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-54-0"
+         x="291.69644"
+         y="111.51397">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="281.33932"
+       y="111.42469"
+       id="text3781-1-5-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-11-0"
+         x="281.33932"
+         y="111.42469">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="271.69644"
+       y="111.51397"
+       id="text3781-1-17-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-4-81"
+         x="271.69644"
+         y="111.51397">7</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 349.99414,112.57818 0,-10"
+       id="path3769-0-9"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="311.80151"
+       y="124.33781"
+       id="text3759-2-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3761-0-0"
+         x="311.80151"
+         y="124.33781"
+         style="text-align:center;text-anchor:middle">servo value</tspan><tspan
+         sodipodi:role="line"
+         x="311.80151"
+         y="135.70671"
+         id="tspan4268-7"
+         style="text-align:center;text-anchor:middle">low byte</tspan></text>
+    <rect
+       style="fill:#ffaaaa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989-4"
+       width="80"
+       height="30"
+       x="30.109118"
+       y="172.37633" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="50.823414"
+       y="190.59061"
+       id="text3759-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3761-1"
+         x="50.823414"
+         y="190.59061">preamble</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40.109118,172.37634 0,-10"
+       id="path3763-7"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50.109118,172.37634 0,-10"
+       id="path3765-45"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 60.109118,172.37634 0,-10"
+       id="path3767-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 30.109118,172.37634 0,-10"
+       id="path3769-7"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 70.109118,172.37634 0,-10"
+       id="path3771-5"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80.109118,172.37634 0,-10"
+       id="path3773-5"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 90.109118,172.37634 0,-10"
+       id="path3775-0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100.10912,172.37634 0,-10"
+       id="path3777-01"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 110.10912,172.37634 0,-10"
+       id="path3779-1"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="91.696426"
+       y="171.20146"
+       id="text3781-1-18"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-0"
+         x="91.696426"
+         y="171.20146">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="101.63283"
+       y="171.15587"
+       id="text3781-1-2-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-1-2"
+         x="101.63283"
+         y="171.15587">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="81.543533"
+       y="171.15587"
+       id="text3781-1-9-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-6-1"
+         x="81.543533"
+         y="171.15587">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="71.632828"
+       y="171.24515"
+       id="text3781-1-4-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-68-7"
+         x="71.632828"
+         y="171.24515">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="61.543552"
+       y="171.24515"
+       id="text3781-1-6-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-5-8"
+         x="61.543552"
+         y="171.24515">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="51.811405"
+       y="171.42372"
+       id="text3781-1-1-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-54-47"
+         x="51.811405"
+         y="171.42372">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="41.454273"
+       y="171.33444"
+       id="text3781-1-5-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-11-4"
+         x="41.454273"
+         y="171.33444">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="31.811411"
+       y="171.42372"
+       id="text3781-1-17-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-4-8"
+         x="31.811411"
+         y="171.42372">7</tspan></text>
+    <rect
+       style="fill:#ffccaa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989-6-1"
+       width="40"
+       height="29.999992"
+       x="110.10912"
+       y="172.48795" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="130.02458"
+       y="185.41205"
+       id="text3759-6-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3761-6-5"
+         x="130.02458"
+         y="185.41205"
+         style="text-align:center;text-anchor:middle">CMD</tspan><tspan
+         sodipodi:role="line"
+         x="130.02458"
+         y="196.78094"
+         id="tspan3992-7"
+         style="text-align:center;text-anchor:middle">LED</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 120.10912,172.48794 0,-10"
+       id="path3763-0-4"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 130.10912,172.48794 0,-10"
+       id="path3765-9-0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 140.10912,172.48794 0,-10"
+       id="path3767-1-4"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 110.10912,172.48794 0,-10"
+       id="path3769-0-0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 150.10912,172.48794 0,-10"
+       id="path3771-1-7"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 160.10912,172.48794 0,-10"
+       id="path3773-3-5"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 170.10912,172.48794 0,-10"
+       id="path3775-2-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 180.10912,172.48794 0,-10"
+       id="path3777-0-0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 190.10912,172.48794 0,-10"
+       id="path3779-6-8"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="171.69643"
+       y="171.31306"
+       id="text3781-1-7-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-48-9"
+         x="171.69643"
+         y="171.31306">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="181.63283"
+       y="171.26747"
+       id="text3781-1-2-7-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-1-0-6"
+         x="181.63283"
+         y="171.26747">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="161.54353"
+       y="171.26747"
+       id="text3781-1-9-4-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-6-3-9"
+         x="161.54353"
+         y="171.26747">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="151.63283"
+       y="171.35677"
+       id="text3781-1-4-1-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-68-2-0"
+         x="151.63283"
+         y="171.35677">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="141.54355"
+       y="171.35677"
+       id="text3781-1-6-0-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-5-2-2"
+         x="141.54355"
+         y="171.35677">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="131.81142"
+       y="171.53532"
+       id="text3781-1-1-9-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-54-6-7"
+         x="131.81142"
+         y="171.53532">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="121.45427"
+       y="171.44604"
+       id="text3781-1-5-7-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-11-3-7"
+         x="121.45427"
+         y="171.44604">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="111.81142"
+       y="171.53532"
+       id="text3781-1-17-9-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-4-0-5"
+         x="111.81142"
+         y="171.53532">7</tspan></text>
+    <rect
+       style="fill:#ff9955;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989-6-0-3"
+       width="9.913208"
+       height="29.874237"
+       x="150.08679"
+       y="172.48795" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 190.10326,172.40037 0,-9.99999"
+       id="path3769-2-8"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:#ff9955;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989-6-0-3-8"
+       width="29.877487"
+       height="30.01709"
+       x="160.12251"
+       y="172.34509" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="155.125"
+       y="184.23718"
+       id="text3759-6-3-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="155.125"
+         y="184.23718"
+         style="text-align:center;text-anchor:middle"
+         id="tspan4545">1</tspan><tspan
+         sodipodi:role="line"
+         x="155.125"
+         y="195.60608"
+         style="text-align:center;text-anchor:middle"
+         id="tspan4549">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="174.96429"
+       y="184.0229"
+       id="text3759-6-3-8-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="174.96429"
+         y="184.0229"
+         style="text-align:center;text-anchor:middle"
+         id="tspan4549-0">led</tspan><tspan
+         sodipodi:role="line"
+         x="174.96429"
+         y="195.3918"
+         style="text-align:center;text-anchor:middle"
+         id="tspan4577">mask</tspan></text>
+    <rect
+       style="fill:#ffaaaa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989-44"
+       width="80"
+       height="30"
+       x="30.26199"
+       y="232.31479" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="50.976284"
+       y="250.52907"
+       id="text3759-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3761-2"
+         x="50.976284"
+         y="250.52907">preamble</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40.26199,232.31477 0,-10"
+       id="path3763-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50.26199,232.31477 0,-10"
+       id="path3765-43"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 60.26199,232.31477 0,-10"
+       id="path3767-3"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 30.26199,232.31477 0,-10"
+       id="path3769-5"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 70.26199,232.31477 0,-10"
+       id="path3771-3"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80.26199,232.31477 0,-10"
+       id="path3773-6"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 90.26199,232.31477 0,-10"
+       id="path3775-5"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100.26199,232.31477 0,-10"
+       id="path3777-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 110.26199,232.31477 0,-10"
+       id="path3779-5"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="91.849297"
+       y="231.13992"
+       id="text3781-1-33"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-06"
+         x="91.849297"
+         y="231.13992">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="101.7857"
+       y="231.09433"
+       id="text3781-1-2-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-1-9"
+         x="101.7857"
+         y="231.09433">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="81.696404"
+       y="231.09433"
+       id="text3781-1-9-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-6-33"
+         x="81.696404"
+         y="231.09433">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="71.785698"
+       y="231.18361"
+       id="text3781-1-4-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-68-3"
+         x="71.785698"
+         y="231.18361">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="61.696423"
+       y="231.18361"
+       id="text3781-1-6-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-5-63"
+         x="61.696423"
+         y="231.18361">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="51.964275"
+       y="231.36218"
+       id="text3781-1-1-98"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-54-3"
+         x="51.964275"
+         y="231.36218">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="41.607143"
+       y="231.2729"
+       id="text3781-1-5-32"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-11-2"
+         x="41.607143"
+         y="231.2729">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="31.964283"
+       y="231.36218"
+       id="text3781-1-17-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-4-78"
+         x="31.964283"
+         y="231.36218">7</tspan></text>
+    <rect
+       style="fill:#ffccaa;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989-6-10"
+       width="40"
+       height="29.999992"
+       x="110.26199"
+       y="232.42641" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="130.17746"
+       y="245.35051"
+       id="text3759-6-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3761-6-4"
+         x="130.17746"
+         y="245.35051"
+         style="text-align:center;text-anchor:middle">CMD</tspan><tspan
+         sodipodi:role="line"
+         x="130.17746"
+         y="256.71942"
+         id="tspan3992-81"
+         style="text-align:center;text-anchor:middle">SERVO10</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 120.26199,232.42637 0,-10"
+       id="path3763-0-9"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 130.26199,232.42637 0,-10"
+       id="path3765-9-5"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 140.26199,232.42637 0,-10"
+       id="path3767-1-42"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 110.26199,232.42637 0,-10"
+       id="path3769-0-8"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 150.26199,232.42637 0,-10"
+       id="path3771-1-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 160.26199,232.42637 0,-10"
+       id="path3773-3-9"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 170.26199,232.42637 0,-10"
+       id="path3775-2-7"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 180.26199,232.42637 0,-10"
+       id="path3777-0-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 190.26199,232.42637 0,-10"
+       id="path3779-6-3"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="171.8493"
+       y="231.25153"
+       id="text3781-1-7-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-48-98"
+         x="171.8493"
+         y="231.25153">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="181.78571"
+       y="231.20593"
+       id="text3781-1-2-7-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-1-0-5"
+         x="181.78571"
+         y="231.20593">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="161.69641"
+       y="231.20593"
+       id="text3781-1-9-4-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-6-3-2"
+         x="161.69641"
+         y="231.20593">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="151.78571"
+       y="231.29523"
+       id="text3781-1-4-1-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-68-2-4"
+         x="151.78571"
+         y="231.29523">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="141.69643"
+       y="231.29523"
+       id="text3781-1-6-0-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-5-2-8"
+         x="141.69643"
+         y="231.29523">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="131.96429"
+       y="231.47379"
+       id="text3781-1-1-9-85"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-54-6-5"
+         x="131.96429"
+         y="231.47379">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="121.60714"
+       y="231.38451"
+       id="text3781-1-5-7-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-11-3-6"
+         x="121.60714"
+         y="231.38451">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.83214188px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="111.96429"
+       y="231.47379"
+       id="text3781-1-17-9-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3783-3-4-0-2"
+         x="111.96429"
+         y="231.47379">7</tspan></text>
+    <rect
+       style="fill:#ff9955;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2989-6-0-2"
+       width="40"
+       height="29.999992"
+       x="150.23967"
+       y="232.42641" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 190.25613,232.3388 0,-9.99999"
+       id="path3769-2-3"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.09512043px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine"
+       x="169.23856"
+       y="244.53477"
+       id="text3759-6-3-8-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="169.23856"
+         y="244.53477"
+         style="text-align:center;text-anchor:middle"
+         id="tspan4545-4">1</tspan><tspan
+         sodipodi:role="line"
+         x="169.23856"
+         y="255.90367"
+         style="text-align:center;text-anchor:middle"
+         id="tspan4549-5">0</tspan></text>
+  </g>
+</svg>

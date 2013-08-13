@@ -203,7 +203,7 @@ The schematics are very simple an can be seen in Figure \ref{figpowerboardscm}. 
 
 
 %----------------------------------------------------------------------------------------
-\section{Rotary Encoders} %%TODO: richtige bezeichnung???
+\section{Rotary Encoders} \label{sensors} %%TODO: richtige bezeichnung???
 %----------------------------------------------------------------------------------------
 
 To measure speed, we built two rotary encoders into the car.
@@ -496,53 +496,61 @@ The Wiimote has the following key assignment:
 
 \subsection{Speed control}
 We designed the VHDL \emph{speed\_control} architecture to convert a desired speed received from the upper level logic into a supply current for the car's engine. To achieve best possible accuracy the meassured speed on each axis, as well as the desired speed are processed, depending on the operating mode. In the following the two operating modes \emph{Simple speed regulation} and \emph{traction control} are described and evaluated in detail.
-\subsubsection{Simple speed regulator}
-In this mode the \emph{speed\_control} tries to reach the desired speed $v_{dest}$ by directly regulating the rear wheel to the desired speed, assuming, that the speed of this wheel is the speed of the car.\\
+\subsubsection{Simple speed regulator} \label{simplepi}
+In this mode the \emph{speed\_control} unit tries to reach the desired speed $v_{dest}$ by directly regulating the rear wheel to the desired speed, assuming, that the speed of this wheel is the speed of the car.\\
 The speed segulating is done by implementing an PI-Regulator. The regulator interval is $\frac{1}{10}s$. Every timestep the difference between desired and current wheelsped is calculated:
 $$\Delta = v_{dest} - v_{rear}$$
 The calculated difference is then summed up to implement the integral part of the regulator:
 $$\Delta_{sum} += \Delta$$
 The output power to the engine calculates as follows:
 $$power = c_P \cdot \Delta + c_I \cdot \Delta_{sum}$$
-Thereby $c_P$ and $c_I$ are constant parameters and need to be tuned to acheive optimum behaviour. $c_P$ configures the proportional part of the regulator. the higher the value, the faster the response of the regulator. But too high values make the system unstable. The $c_I$ is responsible for the integral part of the regulator, which stabilizes the regulator by allowing it to converge to a 
+Thereby $c_P$ and $c_I$ are constant parameters and need to be tuned to achieve optimum behaviour. $c_P$ configures the proportional part of the regulator. The higher the value, the faster the response of the regulator. But too high values make the system unstable. The constant $c_I$ is responsible for the integral part of the regulator, which stabilizes the regulator by allowing it to converge to a steady output power level.\\
+The initial values for $c_P$ and $c_I$ were calculated to allow the speed to reach a stable state within 1 to 2 seconds after a major change of the desired speed. These current values are far from optimum, because our calculations did not consider the complex reactions of the car. Hence for optimum performance, the regulator needs to be tuned by doing experimental measurements. In figure \ref{figand2} a typical regulator response to a change in desired speed can be seen.
 \begin{figure}[H]
   \centering
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \includegraphics[width=\textwidth]{pic/plot_slow/plot.pdf}
     \caption{Multiple runs}
-		\label{figand1}
   \end{subfigure}~
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \includegraphics[width=\textwidth]{pic/plot_slow2/plot.pdf}
     \caption{One run at a desired speed of $2 \frac{km}{h}$}
-		\label{figand2}
   \end{subfigure}
   \caption{Regulating to the desired speed at the low end of the possible speeds. The Peaks of the rear wheel speed are caused by lifting the car from the ground after the test.}
+  \label{figand2}
 \end{figure}
 
 \subsubsection{Traction control}
+Traction control mode can be activated by applying a logic 1 level to the \emph{enable\_antischlupf} input. In this mode the regulator tries to prevent the rear wheels from slipping during the acceleration phase, which is especially useful for driving on surfaces with low friction or trying to accelerate as quick as possible. To achieve this, we used two speed sensors: One for the rear axis and one for the front axis, as described in chapter \ref{sensors}. The read out speeds $v_{front}$ and $v_{rear}$ from these sensors as well as the desired speed $v_{dest}$ are provided to \emph{speed\_control} and the output power to the engine is calculated by modifying the PI-regulator described in section \ref{simplepi} as follows.\\
+In each regulating step the difference between the front and rear wheel is calculated:
+$$slip = c_S \cdot (v_{front} - v_{rear})$$
+where $c_S$ is a constant to configure the response to slipping. To allow a certain speed difference (about 8\% speed difference between front and rear wheel should be fine) $slip$ is modified:
+$$\text{if }slip>=-2\cdot c_S \text{ then }  slip = 0$$
+The $\Delta$ value for the modified PI regulator then results to
+$$\Delta = v_{dest} - v_{rear} + slip$$
+The rest of the regulator is implemented as described in section \ref{simplepi}. In figure \ref{figblub22} we compared the two regulators (traction control on and traction control off) when accelerating to top speed. It is clearly visible, that our traction control regulator improves rear wheel slipping behavior by closing the gap between rear and front wheel speed. We also experienced positive behavior when driving around corners at high speed. In this case the regulator prevents the rear wheels from breaking out by reducing the wheelspeed and hence increasing grip. Please note, that the regulator constants still need to be tuned to reach better performance. The current implementation should be seen as a proof of concept.
 \begin{figure}[H]
   \centering
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \includegraphics[width=\textwidth]{pic/plot_burnout/plot.pdf}
     \caption{Traction control turned off. Car was stopped by setting the desired speed to zero.}
-		\label{figand1}
+		\label{figand21}
   \end{subfigure}~
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \includegraphics[width=\textwidth]{pic/plot_burnout_asr/plot.pdf}
     \caption{Traction control turned on. Car was stopped by hand, while desired speed was still at $13 \frac{km}{h}$.}
-		\label{figand2}
+		\label{figand22}
   \end{subfigure}
   \caption{Acceleration phase during burnout test}
+  \label{figblub22}
 \end{figure}
 %----------------------------------------------------------------------------------------
 \section{Simulator}
 %----------------------------------------------------------------------------------------
-
 
 After staring up the simulator, the car can be driven via the arrow keys. When pressing \textit{C}, one can delegate the control to the built-in TCP server. The current state is shown in the upper left corner.
 When the control mode is switched to \textit{TCP}, the simulator accepts commands via TCP/IP.

@@ -139,6 +139,14 @@ hyperindex=true }
 %----------------------------------------------------------------------------------------
 \subsection{Overview}
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\linewidth]{pic/architecture}
+\caption{Architecture overview}
+\label{figarchitecture}
+\end{center}
+\end{figure}
+
 The general architecture of our project is shown in Figure~\ref{figarchitecture}.
 The FPGA plays the central role:
 It controls the Servo/Motor-controller board and reads the sensor inputs.
@@ -155,13 +163,6 @@ Besides the real hardware, there exists a software simulator for the car.
 It has the same interface as the RaspberryPi and can be used to simulate steering algorithms.
 It is possible for the Raspi software to send the control commands to the simulation program via TCP/IP instead of the real hardware.
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=\linewidth]{pic/architecture}
-\caption{Architecture overview}
-\label{figarchitecture}
-\end{center}
-\end{figure}
 
 Figure~\ref{figcaroverview} shows, how the above mentioned architecture is realized on the car. All the components are mounted on a wooden plate on top of the car.
 \begin{figure}[H]

@@ -575,10 +575,13 @@ The rest of the regulator is implemented as described in section \ref{simplepi}.
   \caption{Acceleration phase during burnout test}
   \label{figblub22}
 \end{figure}
+
+
 %----------------------------------------------------------------------------------------
 \section{Simulator}
 %----------------------------------------------------------------------------------------
 
+To debug steering algorithms and high level communication protocols, we implemented a simple car simulator.
 After staring up the simulator, the car can be driven via the arrow keys. When pressing \textit{C}, one can delegate the control to the built-in TCP server. The current state is shown in the upper left corner.
 When the control mode is switched to \textit{TCP}, the simulator accepts commands via TCP/IP.
 The TCP/IP interface accepts the same commands as the Servoboard.

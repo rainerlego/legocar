@@ -640,5 +640,23 @@ Robots are dangerous! If you make an error in motor control logic engines can st
 
 
 \section{Future work}
+We originally planned on building our own low cost laser scanner. We did some calculations and realized a complete laser scanner system could be achieved with a meassurement interval of up to 50 complete captures per second utilizing the FPGA for data analysis at an accuracy of better than $\pm10cm$ in a range of 6 meters (see figure \ref{figlaser2}). Figure \ref{figlaser} shows the general concept of the scanner: A line laser  is mountet on the car and projects a laserline parrallel to the ground onto possible obstacles. A camera is mounted on top of the car at a height of about $30cm$ and captures the reflected laserlight. The distance of all obstacles in front of the car can then be calculated by splitting the camera image into columns. The column number of a detected red pixel determines the angular position of the obstacle and the row number gives the distance.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{pic/laser}
+\caption{Cheap 2D laser-scanner concept}
+\label{figlaser}
+\end{center}
+\end{figure}
+The position x of the obstacle can be calculated using the camera pixel value y:
+$$x = tan(y\cdot a+b)\cdot h$$
+Due to the limited time we were not able to finish the scanner, but we already ordered a laser, built a mounting clamp on the car for the laser and made simple tests as a proof of concept.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{pic/scanner_aufloesung}
+\caption{Cheap 2D dynamic resolution. Horizontal axis: distance to the object (m). Vertical axis: Resolution in distance per pixel (m) (lower is better).\\The different lines represent different camera lenses. In all cases a camera mounting height of 30cm was assumed.}
+\label{figlaser2}
+\end{center}
+\end{figure}
 
 \end{document}
